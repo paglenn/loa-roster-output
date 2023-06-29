@@ -1,0 +1,40 @@
+.characterCard {
+  background-color:gray;
+  align-self: flex-start; 
+  flex-shrink: 1 ; 
+  margin-left: 10px ;
+  margin-top: 10px ;
+  border-radius: 10px ;
+  flex-basis: 15%;
+  font-size: x-large;
+}
+
+.gold {
+  border: 5px solid #d4af37;
+}
+
+.imgAndResourceContainer {
+  display: flex; 
+  flex-direction: row;
+}
+
+.imgContainer {
+  flex-basis: 60%;
+}
+
+.ilvlInput {
+  width: 20%;
+}
+
+.ilvl {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  font-size: large;
+  justify-content: space-between;
+  align-items: baseline;
+
+  span {
+    flex-grow: 2;
+  }  
+}

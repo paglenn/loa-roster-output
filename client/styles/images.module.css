@@ -1,0 +1,14 @@
+img {
+  width: 18px;
+  height: 18px;
+}
+
+
+.CharModel {
+  align-self: center;
+  width: 90%;
+  height: 90%;
+  border-radius: 2%;
+  background-color: #E0E0E0
+  /* filter: drop-shadow 5px 10px 2px black); */
+}

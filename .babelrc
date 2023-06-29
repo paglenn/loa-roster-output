@@ -1,0 +1,8 @@
+{
+  // preset-react is for react, presumably. 
+  // preset-env: takes any target environments you've specified and checks them against its mappings to compile a list of plugins and passes it to Babel.
+  "presets": ["@babel/preset-react", "@babel/preset-env"],
+  // what exactly does this one do? i've looked it up but... 
+  "plugins": ["@babel/plugin-proposal-class-properties"]
+ }
+ 
