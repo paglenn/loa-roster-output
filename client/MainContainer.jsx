@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import TotalsDisplay from './TotalsDisplay.jsx';
 import Roster from './RosterContainer.jsx';
 import CharacterInputDisplay from './CharacterInputDisplay.jsx';
+import mainStyles from './styles/common.module.css';
+import logo from '../assets/lostarkicon.png';
 
 // this needs to handle state to pass down  the roster. 
 const MainContainer = () => {
@@ -15,6 +17,8 @@ const MainContainer = () => {
 
   // state for updated character 
   const [updatedCharacter, updateCharacter ] = useState({}); 
+
+  const [goldEarnerCount, updateGoldEarners] = useState(0);
 
   const handleNewCharChange = (event) => {
     // console.log(event.target);
@@ -34,11 +38,18 @@ const MainContainer = () => {
 
     // convert gold-earning status to boolean
     copyCharacter.isGoldEarner  = (characterInfo.isGoldEarner==='yes') ? true : false ; 
-    console.log('request body: ', JSON.stringify(copyCharacter));
+    if(copyCharacter.isGoldEarner && goldEarnerCount === 6) {
+      alert("Nice try - but you can only have up to six gold earners!")
+      return ; 
+    }
+    // console.log('request body: ', JSON.stringify(copyCharacter));
     fetch('/character',{method:'POST',headers: {'content-type': 'application/json'}, body: JSON.stringify(copyCharacter)})
     .then(character => {
       updateNewCharacter(character);
       updateCharacterInfo({});
+    }).catch(err => {
+      alert('Invalid input!');
+      console.log(err);
     })
   };
   const handleDelete = (event) => {
@@ -65,22 +76,50 @@ const MainContainer = () => {
       body: JSON.stringify({name: name, ilvl: ilvl, isGoldEarner: isGoldEarner})
     })
     .then(character => updateCharacter(character));
+    event.target[0].value = "";
   }  
+
+  const handleGoldEarnerUpdate = (event ) => {
+    let [name,ilvl] = event.target.name.split('.');
+    ilvl = Number(ilvl);
+    let isGoldEarner = event.target.checked; 
+     /* If we already have six gold earners, can't add another one  */
+    if ( isGoldEarner && goldEarnerCount === 6 ) {
+      event.target.checked = !event.target.checked;
+      console.log("No more gold earners!") 
+      alert("Nice try - but you can only have up to six gold earners!")
+      return ; 
+    }
+   
+    fetch('/character',{
+      method: 'PATCH', 
+      headers: {'content-type' : 'application/json'}, 
+      body: JSON.stringify({name: name, ilvl: ilvl, isGoldEarner: isGoldEarner})
+    })
+    .then(character => {
+      updateCharacter(character);
+      updateGoldEarners(goldEarnerCount + (isGoldEarner ? 1 : -1 ))
+    })
+  }
   // effect hook to get changes to character list. we will want to run this on page load, but also on submission of forms or  deletion of a character  
   useEffect( () => {  
    fetch('/characters')
     .then(response => response.json() )
     .then(characters => {
       updateRoster(characters) ;
-      console.log(characters);
+      updateGoldEarners(characters.reduce( (sum, character) => sum + (character.isGoldEarner ? 1 : 0 ),0 ))
     })
     },[newCharacter,deletedCharacter,updatedCharacter]);
 
   return (
-    <div className='MainContainer'> 
+    <div className={`MainContainer ${mainStyles.app}`}> 
+      <h1> 
+        <div>Lost Ark Roster Production </div>
+         <img className={mainStyles.mainLogo} src={logo} alt="Lost Ark Logo" />  
+      </h1>
       <TotalsDisplay roster={roster} />
       <CharacterInputDisplay characterInfo={characterInfo} handleChange={handleNewCharChange} handleSubmit={handleNewCharSubmit} />
-      <Roster roster={roster} handleDelete={handleDelete} handleUpdate={handleItemLevelUpdate}/> 
+      <Roster roster={roster} handleDelete={handleDelete} handleLevelUpdate={handleItemLevelUpdate} handleGoldUpdate={handleGoldEarnerUpdate}/> 
     </div> 
 
   )

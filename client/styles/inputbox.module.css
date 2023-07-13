@@ -1,5 +1,6 @@
 .inputBox {
-  background-color: #d4af37;
+  background-color: #d4af47;
+  background-image: linear-gradient(#d4af37, #edc800, #e3b600, #f3cf00, #ffe800); 
   padding-bottom: 5px;
   border-radius: 2px;
 }

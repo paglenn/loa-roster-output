@@ -3,12 +3,30 @@ img {
   height: 18px;
 }
 
+.gem {
+  /* height: 36px;  */
+}
+
+img.gold {
+  background:conic-gradient(#edc800, #e3b600, #f3cf00, #ffe800,
+  #edc800, #e3b600, #f3cf00, #ffe800,
+  #edc800, #e3b600, #f3cf00, #ffe800,
+  #edc800, #e3b600, #f3cf00, #ffe800);
+}
 
 .CharModel {
   align-self: center;
   width: 90%;
   height: 90%;
   border-radius: 2%;
-  background-color: #E0E0E0
-  /* filter: drop-shadow 5px 10px 2px black); */
+  /* background-color: #E0E0E0; */
+  filter: drop-shadow(5px 10px 2px black);
+}
+
+.classIcon {
+  background-color: black;
+  border-radius: 30%;
+  height: 30px;
+  width: 30px; 
+  float: right ; 
 }

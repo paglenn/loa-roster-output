@@ -11,3 +11,8 @@ li img {
   height: 36px;
   width: 36px;
 }
+
+h1 > img {
+  height: 2rem; 
+  width: 2rem; 
+}

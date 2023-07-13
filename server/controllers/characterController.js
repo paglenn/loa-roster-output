@@ -77,13 +77,13 @@ characterController.updateCharacter = (req, res,next) => {
       {name: name},
       {
         ilvl: ilvl, 
+        isGoldEarner: isGoldEarner,
         resources: {
           // per week, we multiply the dailies by 14 
           silver: chaosDungeon.silver*14, 
           blueStones: {type: chaosDungeon.blue_stones.type, qty: ( chaosDungeon.blue_stones.qty + guardianRaid.blue_stones.qty) * 14}, 
           redStones:  {type: chaosDungeon.red_stones.type, qty: ( chaosDungeon.red_stones.qty + guardianRaid.red_stones.qty) * 14},
           leapstones:  {type: chaosDungeon.leapstones.type, qty: (guardianRaid.leapstones.qty) * 14},
-          isGoldEarner: isGoldEarner,
           gems: chaosDungeon.gems * 14 , 
           gold: (isGoldEarner) ? goldSources.reduce((sum, source) => sum + source.gold, 0 ) : 0 
         }
@@ -93,6 +93,7 @@ characterController.updateCharacter = (req, res,next) => {
   })
   .then(updatedChar => {
     res.locals.character = updatedChar; 
+    console.log(updatedChar);
     return next() ; 
   })
   .catch(error => {
