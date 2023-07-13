@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT ?? 8080;
 const path = require('path');
+const dotenv = require('dotenv');
+dotenv.config();
 // controller
 const characterController = require('./controllers/characterController');
 
