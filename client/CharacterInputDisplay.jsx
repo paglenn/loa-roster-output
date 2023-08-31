@@ -9,7 +9,7 @@ const CharacterInputDisplay = (props) => {
   if (!characterInfo._class) characterInfo._class = ''; 
   if (!characterInfo.isGoldEarner) characterInfo.isGoldEarner = ''; 
   return (
-    <div className={styles.inputBox}> 
+    <div className={styles.inputBox}l> 
       <h2> Add Character </h2>
       <form onSubmit={handleSubmit} onChange={handleChange}>
         <label> Name: <input type="text" value={characterInfo.name} name="name"/> </label>

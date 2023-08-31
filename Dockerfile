@@ -1,6 +1,6 @@
 FROM node:18
-
-WORKDIR /Users/nls.pglenn/github/Codesmith/solo-project
+# this directory could be anything 
+WORKDIR /Users/nls.pglenn/github/Codesmith/solo-project 
 
 COPY package*.json ./
 
@@ -12,4 +12,4 @@ ENV PORT=8080
 
 EXPOSE 8080
 
-CMD ["npm","run","dev"]
+CMD ["npm","start"]
