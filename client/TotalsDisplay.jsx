@@ -1,7 +1,8 @@
-const React = require('react');
-import icons from './icons.js';
-import imageStyles from './styles/images.module.css';
-import styles from './styles/totalsdisplay.module.css';
+const React = require("react");
+import icons from "./icons.js";
+import imageStyles from "./styles/images.module.css";
+import styles from "./styles/totalsdisplay.module.css";
+import { stoneConvert, calcValue } from "./helpers.js";
 // should contain total roster gold income , silver, gems , leapstones, reds, blues
 // eventually table format ?
 // stetch feature-  images!
@@ -21,35 +22,38 @@ const TotalsDisplay = (props) => {
       <h1> Total Weekly Output </h1>
       <ul className={styles.TotalsDisplay}>
         <li>
-          {' '}
-          <img src={icons.goldIcon} alt='roster gold' /> {gold}
+          {" "}
+          <img src={icons.goldIcon} alt="roster gold" /> {gold}
         </li>
         <li>
-          <img src={icons.silverIcon} alt='silver' /> {silver}
+          <img src={icons.silverIcon} alt="silver" /> {silver}
         </li>
         <li>
           <img
             src={icons.marvelous_honor_leapstone}
-            alt='marvelous honor leapstones'
-          />{' '}
+            alt="marvelous honor leapstones"
+          />{" "}
           {leapstones}
         </li>
         <li>
-          <img src={icons.gemIcon} alt='gem' />
+          <img src={icons.gemIcon} alt="gem" />
           {Math.round(gems)}
         </li>
         <li>
-          <img src={icons.obliterationIcon} alt='obliteration stones' />{' '}
+          <img
+            src={icons.refined_obliteration_stone}
+            alt="obliteration stones"
+          />{" "}
           {Math.round(redStones)}
         </li>
         <li>
-          <img src={icons.protectionIcon} alt='protection stones' />
+          <img src={icons.refined_protection_stone} alt="protection stones" />
           {Math.round(blueStones)}
         </li>
       </ul>
       <h1>
-        Total <img src={icons.goldIcon} alt='roster gold' /> Value :{' '}
-        {totalGoldValue}{' '}
+        Total <img src={icons.goldIcon} alt="roster gold" /> Value :{" "}
+        {totalGoldValue}{" "}
       </h1>
     </div>
   );
@@ -66,14 +70,15 @@ const sumCharacterOutput = (characterArray) => {
     (sum, char) => sum + char.resources.silver,
     0
   );
-  sumObj.leapstones = characterArray.reduce((sum, char) => {
-    return (
+  sumObj.leapstones = characterArray.reduce(
+    (sum, char) =>
       sum +
-      (char.resources.leapstones.type === 'marvelous_honor_leapstone'
-        ? char.resources.leapstones.qty
-        : char.resources.leapstones.qty / 5)
-    );
-  }, 0);
+      stoneConvert(
+        char.resources.leapstones.type,
+        char.resources.leapstones.qty
+      ),
+    0
+  );
   sumObj.leapstones = Math.round(sumObj.leapstones);
 
   sumObj.gems = characterArray.reduce(
@@ -81,32 +86,26 @@ const sumCharacterOutput = (characterArray) => {
     0
   );
   sumObj.gems = Math.round(sumObj.gems);
-  sumObj.redStones = characterArray.reduce((sum, char) => {
-    return (
+  sumObj.redStones = characterArray.reduce(
+    (sum, char) =>
       sum +
-      (char.resources.redStones.type === 'obliteration_stone'
-        ? char.resources.redStones.qty
-        : char.resources.redStones.qty / 5)
-    );
-  }, 0);
+      stoneConvert(char.resources.redStones.type, char.resources.redStones.qty),
+
+    0
+  );
   sumObj.redStones = Math.round(sumObj.redStones);
-  sumObj.blueStones = characterArray.reduce((sum, char) => {
-    return (
+  sumObj.blueStones = characterArray.reduce(
+    (sum, char) =>
       sum +
-      (char.resources.blueStones.type === 'protection_stone'
-        ? char.resources.blueStones.qty
-        : char.resources.blueStones.qty / 5)
-    );
-  }, 0);
+      stoneConvert(
+        char.resources.blueStones.type,
+        char.resources.blueStones.qty
+      ),
+    0
+  );
   sumObj.blueStones = Math.round(sumObj.blueStones);
 
-  sumObj.totalGoldValue = Math.round(
-    sumObj.gold +
-      sumObj.leapstones * 41 +
-      (sumObj.gems / 729) * 12000 +
-      sumObj.redStones * 1.9 +
-      sumObj.blueStones * 0.3
-  );
+  sumObj.totalGoldValue = calcValue(sumObj);
   return sumObj;
 };
 

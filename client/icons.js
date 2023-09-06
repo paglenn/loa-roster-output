@@ -26,6 +26,7 @@ import paladinIcon from "../assets/class_icons/paladin.png";
 import scouterIcon from "../assets/class_icons/scouter.png";
 import sorceressIcon from "../assets/class_icons/sorceress.png";
 import summonerIcon from "../assets/class_icons/summoner.png";
+import soulfistIcon from "../assets/class_icons/soulfist.png";
 
 export default {
   goldIcon: goldIcon,
@@ -39,6 +40,9 @@ export default {
   protection_stone: protectionIcon,
   crystallized_guardian_stone: crystalGuardianIcon,
   crystallized_destruction_stone: crystalDestructionIcon,
+  refined_protection_stone: rProtectionStoneIcon,
+  refined_obliteration_stone: rObliterationStoneIcon,
+  radiant_honor_leapstone: radiantHonorLeapstoneIcon,
 
   /// class icons
   aeromancerIcon: aeromancerIcon,
@@ -54,4 +58,5 @@ export default {
   scouterIcon: scouterIcon,
   sorceressIcon: sorceressIcon,
   summonerIcon: summonerIcon,
+  soulfistIcon: soulfistIcon,
 };
