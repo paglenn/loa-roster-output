@@ -16,15 +16,17 @@ const TotalsDisplay = (props) => {
     blueStones,
     totalGoldValue,
   } = sumCharacterOutput(props.roster);
+
   return (
     <div className="bg-slate-100 border-slate-800">
       <h1 className="capitalize"> Total Weekly Output </h1>
-      <ul className="flex flex-row list-none justify-evenly">
-        <li>
-          <img src={icons.goldIcon} alt="roster gold" /> {gold}
+      <ul className="text-6xl flex flex-row list-none list-inside justify-evenly">
+        <li className="flex-row">
+          <img className="h-18 w-18" src={icons.gold} alt="roster gold" />
+          <span> {gold} </span>
         </li>
         <li>
-          <img src={icons.silverIcon} alt="silver" /> {silver}
+          <img src={icons.silver} alt="silver" /> {silver}
         </li>
         <li>
           <img
@@ -34,7 +36,7 @@ const TotalsDisplay = (props) => {
           {leapstones}
         </li>
         <li>
-          <img src={icons.gemIcon} alt="gem" />
+          <img src={icons.gem} alt="gem" />
           {Math.round(gems)}
         </li>
         <li>
@@ -54,8 +56,9 @@ const TotalsDisplay = (props) => {
           {Math.round(blueStones)}
         </li>
       </ul>
+
       <h1>
-        Total <img src={icons.goldIcon} alt="roster gold" /> Value :{" "}
+        Total <img src={icons.gold} alt="roster gold" /> Value :{" "}
         {totalGoldValue}{" "}
       </h1>
     </div>
