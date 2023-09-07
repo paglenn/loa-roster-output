@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './styles/inputbox.module.css';
+import styles from '../styles/inputbox.module.css';
 // import styles from './styles/inputbox.module.css'
 // needs event handlers to submit fetch request to POST data to '/characters' 
 const CharacterInputDisplay = (props) => {

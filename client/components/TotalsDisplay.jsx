@@ -1,8 +1,7 @@
 const React = require("react");
-import icons from "./icons.js";
-import imageStyles from "./styles/images.module.css";
-import styles from "./styles/totalsdisplay.module.css";
-import { stoneConvert, calcValue } from "./helpers.js";
+import icons from "../icons.js";
+import styles from "../styles/totalsdisplay.module.css";
+import { stoneConvert, calcValue } from "../helpers.js";
 // should contain total roster gold income , silver, gems , leapstones, reds, blues
 // eventually table format ?
 // stetch feature-  images!
@@ -18,11 +17,10 @@ const TotalsDisplay = (props) => {
     totalGoldValue,
   } = sumCharacterOutput(props.roster);
   return (
-    <div className={styles.totalsDisplayContainer}>
-      <h1> Total Weekly Output </h1>
-      <ul className={styles.TotalsDisplay}>
+    <div className="bg-slate-100 border-slate-800">
+      <h1 className="capitalize"> Total Weekly Output </h1>
+      <ul className="flex flex-row list-none justify-evenly">
         <li>
-          {" "}
           <img src={icons.goldIcon} alt="roster gold" /> {gold}
         </li>
         <li>
@@ -41,13 +39,18 @@ const TotalsDisplay = (props) => {
         </li>
         <li>
           <img
+            className="rounded"
             src={icons.refined_obliteration_stone}
             alt="obliteration stones"
           />{" "}
           {Math.round(redStones)}
         </li>
         <li>
-          <img src={icons.refined_protection_stone} alt="protection stones" />
+          <img
+            className="rounded"
+            src={icons.refined_protection_stone}
+            alt="protection stones"
+          />
           {Math.round(blueStones)}
         </li>
       </ul>

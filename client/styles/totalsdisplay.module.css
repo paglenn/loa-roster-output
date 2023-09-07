@@ -1,11 +1,10 @@
-
-ul.TotalsDisplay {
+/* ul.TotalsDisplay {
   list-style: none ; 
   display: flex; 
   flex-direction: row; 
   font-size: xx-large;
   justify-content: space-evenly;
-}
+} */
 
 li img {
   height: 36px;
@@ -13,6 +12,6 @@ li img {
 }
 
 h1 > img {
-  height: 2rem; 
-  width: 2rem; 
+  height: 2rem;
+  width: 2rem;
 }

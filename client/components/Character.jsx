@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./styles/charactercard.module.css";
-import imageStyles from "./styles/images.module.css";
-import icons from "./icons.js";
-import classImages from "./classImages.js";
+import styles from "../styles/charactercard.module.css";
+import imageStyles from "../styles/images.module.css";
+import icons from "../icons.js";
+import classImages from "../classImages.js";
 
 // render character cards
 const Character = (props) => {
@@ -39,7 +39,11 @@ const Character = (props) => {
             name={`${name}.${isGoldEarner}`}
           />
           <span> </span>
-          <input type="submit" value="Update iLvL" />
+          <input
+            type="submit"
+            value="Update iLvL"
+            className=" rounded bg-slate-500"
+          />
         </form>
       </div>
 
