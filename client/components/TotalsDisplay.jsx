@@ -16,47 +16,51 @@ const TotalsDisplay = (props) => {
     blueStones,
     totalGoldValue,
   } = sumCharacterOutput(props.roster);
+
   return (
     <div className="bg-slate-100 border-slate-800">
       <h1 className="capitalize"> Total Weekly Output </h1>
-      <ul className="flex flex-row list-none justify-evenly">
-        <li>
-          <img src={icons.goldIcon} alt="roster gold" /> {gold}
+      <ul className="text-3xl flex flex-row list-none list-inside justify-around">
+        <li className="inline-flex">
+          <img className="h-12 w-12" src={icons.gold} alt="roster gold" />
+          <span> {gold} </span>
         </li>
-        <li>
-          <img src={icons.silverIcon} alt="silver" /> {silver}
+        <li className="inline-flex">
+          <img src={icons.silver} className="h-12 w-12" alt="silver" /> {silver}
         </li>
-        <li>
+        <li className="inline-flex">
           <img
+            className="h-12 w-12"
             src={icons.marvelous_honor_leapstone}
             alt="marvelous honor leapstones"
           />{" "}
           {leapstones}
         </li>
-        <li>
-          <img src={icons.gemIcon} alt="gem" />
+        <li className="inline-flex">
+          <img className="h-12 w-12" src={icons.gem} alt="gem" />
           {Math.round(gems)}
         </li>
-        <li>
+        <li className="inline-flex">
           <img
-            className="rounded"
+            className="rounded h-12 w-12"
             src={icons.refined_obliteration_stone}
             alt="obliteration stones"
           />{" "}
           {Math.round(redStones)}
         </li>
-        <li>
+        <li className="inline-flex">
           <img
-            className="rounded"
+            className="rounded h-12 w-12"
             src={icons.refined_protection_stone}
             alt="protection stones"
           />
           {Math.round(blueStones)}
         </li>
       </ul>
+
       <h1>
-        Total <img src={icons.goldIcon} alt="roster gold" /> Value :{" "}
-        {totalGoldValue}{" "}
+        Total <img className="inline-flex" src={icons.gold} alt="roster gold" />{" "}
+        Value : {totalGoldValue}{" "}
       </h1>
     </div>
   );

@@ -7,7 +7,7 @@ import classImages from "../classImages.js";
 // render character cards
 const Character = (props) => {
   const { name, _class, ilvl, resources, isGoldEarner } = props.character;
-  const classNameIcon = _class.toLowerCase() + "Icon";
+  const classLower = _class.toLowerCase();
   return (
     <div
       className={`${styles.characterCard} ${isGoldEarner ? styles.gold : ""}`}
@@ -16,10 +16,7 @@ const Character = (props) => {
       <div>
         {" "}
         Name: <span className="underline"> {name} </span>
-        <img
-          className={imageStyles.classIcon}
-          src={icons[classNameIcon]}
-        />{" "}
+        <img className={imageStyles.classIcon} src={icons[classLower]} />{" "}
       </div>
 
       {/* Character item level container  */}
@@ -61,10 +58,10 @@ const Character = (props) => {
 
         {/* list of resources-  should conver to unordered list  */}
         <div>
-          <div>
-            <img src={icons.goldIcon} alt={`${name} gold `} />
-            <span> </span>
-            {Math.round(resources.gold)}
+          <div className="flex flex-row">
+            <img src={icons.gold} alt={`${name} gold `} />
+            <span>{Math.round(resources.gold)} </span>
+
             <input
               type="checkbox"
               name={`${name}.${ilvl}`}
@@ -73,13 +70,13 @@ const Character = (props) => {
             />
           </div>
           <div>
-            <img src={icons.silverIcon} alt={`${name} silver`} />{" "}
+            <img src={icons.silver} alt={`${name} silver`} />{" "}
             {Math.round(resources.silver)}
           </div>
           <div>
             <img
               className={imageStyles.gem}
-              src={icons.gemIcon}
+              src={icons.gem}
               alt={`${name} gems `}
             />{" "}
             {Math.round(resources.gems)}
@@ -110,7 +107,7 @@ const Character = (props) => {
       </div>
 
       {/* Delete button  */}
-      <button id={name} onClick={props.handleDelete}>
+      <button id={name} onClick={props.handleDelete} className="bg-red-400">
         {" "}
         Delete Character{" "}
       </button>
