@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import TotalsDisplay from "./components/TotalsDisplay.jsx";
 import Roster from "./components/RosterContainer.jsx";
 import CharacterInputDisplay from "./components/CharacterInputDisplay.jsx";
-import mainStyles from "./styles/common.module.css";
-import logo from "../assets/lostarkicon.png";
+import { handleDelete } from "./features/delete/index.js";
+import logo from "./assets/lostarkicon.png";
 
 // this needs to handle state to pass down  the roster.
 const MainContainer = () => {
@@ -27,6 +27,7 @@ const MainContainer = () => {
     newState[fieldName] = fieldValue;
     updateCharacterInfo(newState);
   };
+
   const handleNewCharSubmit = (event) => {
     event.preventDefault();
     const copyCharacter = { ...characterInfo };
@@ -65,19 +66,18 @@ const MainContainer = () => {
         console.log(err);
       });
   };
-  const handleDelete = (event) => {
-    // send a fetch request to delete the character
-    // then use updateDeletedCharacter to update state
-    // will updateDeletedCharacter to trigger useEffect hook
-    fetch("/character", {
-      method: "DELETE",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ name: event.target.id }),
-    }).then((character) => {
-      updateDeletedCharacter(character);
-      console.log(deletedCharacter);
-    });
-  };
+  // const handleDelete = (event) => {
+  //   // send a fetch request to delete the character
+  //   // then use updateDeletedCharacter to update state
+  //   // will updateDeletedCharacter to trigger useEffect hook
+  //   fetch("/character", {
+  //     method: "DELETE",
+  //     headers: { "content-type": "application/json" },
+  //     body: JSON.stringify({ name: event.target.id }),
+  //   }).then((character) => {
+  //     updateDeletedCharacter(character);
+  //   });
+  // };
   const handleItemLevelUpdate = (event) => {
     event.preventDefault();
 
@@ -138,7 +138,7 @@ const MainContainer = () => {
   }, [newCharacter, deletedCharacter, updatedCharacter]);
 
   return (
-    <div className={`MainContainer ${mainStyles.app} bg-slate-800 h-100%`}>
+    <div className={`MainContainer bg-slate-800 h-100%`}>
       <h1 className="pb-2">
         <div className="uppercase text-center text-white text-3xl">
           <img
@@ -162,7 +162,7 @@ const MainContainer = () => {
       />
       <Roster
         roster={roster}
-        handleDelete={handleDelete}
+        handleDelete={(e) => handleDelete(e, updateDeletedCharacter)}
         handleLevelUpdate={handleItemLevelUpdate}
         handleGoldUpdate={handleGoldEarnerUpdate}
       />

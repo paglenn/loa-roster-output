@@ -1,25 +1,23 @@
 import React from "react";
 import styles from "../styles/charactercard.module.css";
 import imageStyles from "../styles/images.module.css";
-import icons from "../icons";
-import classImages from "../classImages";
+import icons from "../helpers/icons";
+import classImages from "../helpers/classImages";
 import { Resource } from "./Resource.jsx";
 import { resourceTypes, hasSubtype } from "../helpers/reference";
+import {DeleteButton} from "../features/delete/index";
 // render character cards
-const Character = (props) => {
-  const { name, _class, ilvl, resources, isGoldEarner } = props.character;
+const Character = ({
+  character,
+  handleDelete,
+  handleGoldUpdate,
+  handleLevelUpdate,
+}) => {
+  const { name, _class, ilvl, resources, isGoldEarner } = character;
   const classLower = _class.toLowerCase();
-  // define resource types
-
 
   // create components for resource types
   const resourceComponents = resourceTypes.map((el) => {
-    // console.log(
-    //   el,
-    //   resources[el],
-    //   hasSubtype[el] ? resources[el].type : el,
-    //   hasSubtype[el] ? resources[el].qty : resources[el]
-    // );
     return (
       <Resource
         type={hasSubtype[el] ? resources[el].type : el}
@@ -31,7 +29,7 @@ const Character = (props) => {
 
   return (
     <div
-      className={`bg-slate-300 p-2 ${styles.characterCard} ${
+      className={` basis-1/7 bg-slate-300 p-2 ${styles.characterCard} ${
         isGoldEarner ? styles.gold : ""
       }`}
     >
@@ -45,35 +43,33 @@ const Character = (props) => {
             type="checkbox"
             name={`${name}.${ilvl}`}
             checked={isGoldEarner}
-            onChange={props.handleGoldUpdate}
+            onChange={handleGoldUpdate}
           />
         </div>
         <img className={imageStyles.classIcon} src={icons[classLower]} />{" "}
       </div>
 
       {/* Character item level container  */}
-      <div className={`flex flex-col ${styles.ilvl}`}>
-        {/* Item level display and updating  */}
 
-        {/* Form to update item level  */}
-        <form
-          onSubmit={props.handleLevelUpdate}
+      {/* Form to update item level  */}
+      <form
+        onSubmit={handleLevelUpdate}
+        name={`${name}.${isGoldEarner}`}
+        className="flex flex-row justify-between"
+      >
+        <input
+          className="rounded w-28"
+          type="text"
+          placeholder="new iLvL"
           name={`${name}.${isGoldEarner}`}
-          className="flex flex-row justify-around"
-        >
-          <input
-            className={styles.ilvlInput}
-            type="text"
-            name={`${name}.${isGoldEarner}`}
-          />
+        />
 
-          <input
-            type="submit"
-            value="Update iLvL"
-            className=" p-1 rounded bg-slate-300 border-black border-2 "
-          />
-        </form>
-      </div>
+        <input
+          type="submit"
+          value="Update item level"
+          className=" text-sm p-1 rounded bg-slate-300 border-black border-2 "
+        />
+      </form>
 
       <div className={styles.imgAndResourceContainer}>
         {/* Class Picture  */}
@@ -92,13 +88,14 @@ const Character = (props) => {
       </div>
 
       {/* Delete button  */}
-      <button
+      <DeleteButton name={name} handleDelete={handleDelete} />
+      {/* <button
         id={name}
-        onClick={props.handleDelete}
+        onClick={handleDelete}
         className="bg-red-400 rounded border-solid border-black border-2 p-1"
       >
         Delete
-      </button>
+      </button> */}
     </div>
   );
 };

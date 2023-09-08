@@ -1,5 +1,5 @@
 const React = require("react");
-import icons from "../icons.js";
+import icons from "../helpers/icons";
 
 import { sumRosterOutput } from "../helpers/sums.js";
 import { Resource } from "./Resource.jsx";
@@ -19,15 +19,14 @@ const TotalsDisplay = (props) => {
     <Resource
       type={hasSubtype[el] ? highestSubtypes[el] : el}
       qty={rosterResources[el]}
-      imHeight={12}
+      imHeight={8}
       classProps="inline-flex"
     />
   ));
 
   return (
     <div className="bg-slate-800 border-black border-2 text-white">
-      <h1 className="capitalize text-4xl font-extrabold">
-        {" "}
+      <h1 className="capitalize text-4xl font-extrabold text-center">
         Total Weekly Output{" "}
       </h1>
       <ul className="text-3xl flex flex-row list-none list-inside justify-around">
