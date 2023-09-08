@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TotalsDisplay from "./components/TotalsDisplay.jsx";
-import Roster from "./RosterContainer.jsx";
+import Roster from "./components/RosterContainer.jsx";
 import CharacterInputDisplay from "./components/CharacterInputDisplay.jsx";
 import mainStyles from "./styles/common.module.css";
 import logo from "../assets/lostarkicon.png";

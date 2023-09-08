@@ -3,7 +3,7 @@ import icons from "../icons.js";
 import styles from "../styles/totalsdisplay.module.css";
 import { stoneConvert, calcValue } from "../helpers.js";
 // should contain total roster gold income , silver, gems , leapstones, reds, blues
-// eventually table format ?
+
 // stetch feature-  images!
 
 const TotalsDisplay = (props) => {
@@ -18,8 +18,11 @@ const TotalsDisplay = (props) => {
   } = sumCharacterOutput(props.roster);
 
   return (
-    <div className="bg-slate-100 border-slate-800">
-      <h1 className="capitalize"> Total Weekly Output </h1>
+    <div className="bg-slate-300 border-black border-2">
+      <h1 className="capitalize text-4xl font-extrabold">
+        {" "}
+        Total Weekly Output{" "}
+      </h1>
       <ul className="text-3xl flex flex-row list-none list-inside justify-around">
         <li className="inline-flex">
           <img className="h-12 w-12" src={icons.gold} alt="roster gold" />

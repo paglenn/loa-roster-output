@@ -8,6 +8,33 @@ import classImages from "../classImages.js";
 const Character = (props) => {
   const { name, _class, ilvl, resources, isGoldEarner } = props.character;
   const classLower = _class.toLowerCase();
+  // define resource types
+  const resourceTypes = [
+    "gold",
+    "silver",
+    "gems",
+    "leapstones",
+    "redStones",
+    "blueStones",
+  ];
+  const hasSubtype = { leapstones: true, redStones: true, blueStones: true };
+
+  // create components for resource types
+  const resourceComponents = resourceTypes.map((el) => {
+    // console.log(
+    //   el,
+    //   resources[el],
+    //   hasSubtype[el] ? resources[el].type : el,
+    //   hasSubtype[el] ? resources[el].qty : resources[el]
+    // );
+    return (
+      <Resource
+        type={hasSubtype[el] ? resources[el].type : el}
+        qty={hasSubtype[el] ? resources[el].qty : resources[el]}
+      />
+    );
+  });
+
   return (
     <div
       className={`${styles.characterCard} ${isGoldEarner ? styles.gold : ""}`}
@@ -15,7 +42,13 @@ const Character = (props) => {
       {/* Character Name  and class icon container  */}
       <div>
         {" "}
-        Name: <span className="underline"> {name} </span>
+        <span className=" font-bold float-left"> {name} </span>
+        <input
+          type="checkbox"
+          name={`${name}.${ilvl}`}
+          checked={isGoldEarner}
+          onChange={props.handleGoldUpdate}
+        />
         <img className={imageStyles.classIcon} src={icons[classLower]} />{" "}
       </div>
 
@@ -29,17 +62,18 @@ const Character = (props) => {
         <form
           onSubmit={props.handleLevelUpdate}
           name={`${name}.${isGoldEarner}`}
+          className="flex flex-row justify-around"
         >
           <input
             className={styles.ilvlInput}
             type="text"
             name={`${name}.${isGoldEarner}`}
           />
-          <span> </span>
+
           <input
             type="submit"
             value="Update iLvL"
-            className=" rounded bg-slate-500"
+            className=" rounded bg-slate-300 border-black border-2 "
           />
         </form>
       </div>
@@ -56,62 +90,31 @@ const Character = (props) => {
           />{" "}
         </div>
 
-        {/* list of resources-  should conver to unordered list  */}
-        <div>
-          <div className="flex flex-row">
-            <img src={icons.gold} alt={`${name} gold `} />
-            <span>{Math.round(resources.gold)} </span>
-
-            <input
-              type="checkbox"
-              name={`${name}.${ilvl}`}
-              checked={isGoldEarner}
-              onChange={props.handleGoldUpdate}
-            />
-          </div>
-          <div>
-            <img src={icons.silver} alt={`${name} silver`} />{" "}
-            {Math.round(resources.silver)}
-          </div>
-          <div>
-            <img
-              className={imageStyles.gem}
-              src={icons.gem}
-              alt={`${name} gems `}
-            />{" "}
-            {Math.round(resources.gems)}
-          </div>
-          <div>
-            <img
-              src={icons[resources.leapstones.type]}
-              alt={`${name} leapstones`}
-            />{" "}
-            {Math.round(resources.leapstones.qty)}{" "}
-          </div>
-          <div>
-            <img
-              src={icons[resources.redStones.type]}
-              alt={`${name} ${resources.redStones.type}`}
-            />{" "}
-            {Math.round(resources.redStones.qty)}{" "}
-          </div>
-          <div>
-            {" "}
-            <img
-              src={icons[resources.blueStones.type]}
-              alt={`${name} ${resources.blueStones.type}`}
-            />{" "}
-            {Math.round(resources.blueStones.qty)}{" "}
-          </div>
-        </div>
+        {/* list of resources  */}
+        <ul className="list-none"> {resourceComponents}</ul>
       </div>
 
       {/* Delete button  */}
-      <button id={name} onClick={props.handleDelete} className="bg-red-400">
-        {" "}
-        Delete Character{" "}
+      <button
+        id={name}
+        onClick={props.handleDelete}
+        className="bg-red-400 rounded border-solid border-black border-2"
+      >
+        Delete
       </button>
     </div>
+  );
+};
+
+const Resource = ({ type, qty }) => {
+  // guarantee type singular for gems
+  let iconName = type;
+  if (type[type.length - 1] === "s") iconName = iconName.slice(0, -1);
+  return (
+    <li className="flex flex-row justify-between">
+      <img src={icons[iconName]} className="h-12 w-12 rounded-md" />
+      <div> {Math.round(qty)} </div>
+    </li>
   );
 };
 

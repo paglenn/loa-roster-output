@@ -1,6 +1,6 @@
 import React from "react";
-import Character from "./components/Character.jsx";
-import styles from "./styles/rostercontainer.module.css";
+import Character from "./Character.jsx";
+import styles from "../styles/rostercontainer.module.css";
 // container for roster's character cards
 // must be passed down character array in props
 const Roster = (props) => {
