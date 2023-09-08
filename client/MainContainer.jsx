@@ -21,9 +21,6 @@ const MainContainer = () => {
   const [goldEarnerCount, updateGoldEarners] = useState(0);
 
   const handleNewCharChange = (event) => {
-    // console.log(event.target);
-    // console.log(event.target.name)
-    // console.log(event.target.value);
     const fieldName = event.target.name;
     const fieldValue = event.target.value;
     const newState = { ...characterInfo };
@@ -35,7 +32,17 @@ const MainContainer = () => {
     const copyCharacter = { ...characterInfo };
     // convert item level to number
     copyCharacter.ilvl = Number(copyCharacter.ilvl);
-
+    // assert that destructuring of character info produces all necessary properties
+    const { name, ilvl, isGoldEarner, _class } = characterInfo;
+    if (
+      name === "" ||
+      Number.isNaN(ilvl) ||
+      _class === "" ||
+      isGoldEarner === ""
+    ) {
+      alert("Character info incomplete!");
+      return;
+    }
     // convert gold-earning status to boolean
     copyCharacter.isGoldEarner =
       characterInfo.isGoldEarner === "yes" ? true : false;
@@ -131,12 +138,21 @@ const MainContainer = () => {
   }, [newCharacter, deletedCharacter, updatedCharacter]);
 
   return (
-    <div className={`MainContainer ${mainStyles.app}`}>
+    <div className={`MainContainer ${mainStyles.app} bg-cyan-400`}>
       <h1>
-        <div className="underline uppercase text-center">
+        <div className="underline uppercase text-center text-3xl">
+          <img
+            className="float-left h-fit w-8 align-top"
+            src={logo}
+            alt="Lost Ark Logo Left"
+          />
           Lost Ark Roster Production{" "}
+          <img
+            className="float-right h-fit w-8 align-top"
+            src={logo}
+            alt="Lost Ark Logo Right"
+          />
         </div>
-        <img className={mainStyles.mainLogo} src={logo} alt="Lost Ark Logo" />
       </h1>
       <TotalsDisplay roster={roster} />
       <CharacterInputDisplay

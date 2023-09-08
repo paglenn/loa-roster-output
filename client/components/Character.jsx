@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "../styles/charactercard.module.css";
 import imageStyles from "../styles/images.module.css";
-import icons from "../icons.js";
-import classImages from "../classImages.js";
-
+import icons from "../icons";
+import classImages from "../classImages";
+import { Resource } from "./Resource.jsx";
 // render character cards
 const Character = (props) => {
   const { name, _class, ilvl, resources, isGoldEarner } = props.character;
@@ -37,27 +37,30 @@ const Character = (props) => {
 
   return (
     <div
-      className={`${styles.characterCard} ${isGoldEarner ? styles.gold : ""}`}
+      className={`bg-slate-300 p-2 ${styles.characterCard} ${
+        isGoldEarner ? styles.gold : ""
+      }`}
     >
       {/* Character Name  and class icon container  */}
-      <div>
-        {" "}
-        <span className=" font-bold float-left"> {name} </span>
-        <input
-          type="checkbox"
-          name={`${name}.${ilvl}`}
-          checked={isGoldEarner}
-          onChange={props.handleGoldUpdate}
-        />
+      <div className="flex flex-row justify-between align-middle">
+        <span className=" font-bold"> {name} </span>
+        <span>{ilvl} </span>
+        <div className="flex flex-col">
+          <text className="text-sm"> Gold? </text>
+          <input
+            type="checkbox"
+            name={`${name}.${ilvl}`}
+            checked={isGoldEarner}
+            onChange={props.handleGoldUpdate}
+          />
+        </div>
         <img className={imageStyles.classIcon} src={icons[classLower]} />{" "}
       </div>
 
       {/* Character item level container  */}
-      <div className={styles.ilvl}>
+      <div className={`flex flex-col ${styles.ilvl}`}>
         {/* Item level display and updating  */}
-        <span>
-          Item Level: <b>{ilvl} </b>{" "}
-        </span>
+
         {/* Form to update item level  */}
         <form
           onSubmit={props.handleLevelUpdate}
@@ -73,7 +76,7 @@ const Character = (props) => {
           <input
             type="submit"
             value="Update iLvL"
-            className=" rounded bg-slate-300 border-black border-2 "
+            className=" p-1 rounded bg-slate-300 border-black border-2 "
           />
         </form>
       </div>
@@ -98,23 +101,11 @@ const Character = (props) => {
       <button
         id={name}
         onClick={props.handleDelete}
-        className="bg-red-400 rounded border-solid border-black border-2"
+        className="bg-red-400 rounded border-solid border-black border-2 p-1"
       >
         Delete
       </button>
     </div>
-  );
-};
-
-const Resource = ({ type, qty }) => {
-  // guarantee type singular for gems
-  let iconName = type;
-  if (type[type.length - 1] === "s") iconName = iconName.slice(0, -1);
-  return (
-    <li className="flex flex-row justify-between">
-      <img src={icons[iconName]} className="h-12 w-12 rounded-md" />
-      <div> {Math.round(qty)} </div>
-    </li>
   );
 };
 

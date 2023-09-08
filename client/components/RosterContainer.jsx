@@ -25,7 +25,11 @@ const Roster = (props) => {
       />
     )
   );
-  return <div className={styles.rosterContainer}>{characterCards}</div>;
+  return (
+    <div className="flex flex-row h-100% flex-wrap justify-start px-10 pb-10">
+      {characterCards}
+    </div>
+  );
 };
 
 export default Roster;

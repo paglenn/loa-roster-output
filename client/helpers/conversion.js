@@ -10,22 +10,8 @@ const stoneKey = {
   radiant_honor_leapstone: 1,
 };
 
+
 export const stoneConvert = (stoneType, stoneAmount) => {
   return stoneKey[stoneType] * stoneAmount ?? 0;
 };
 
-const prices = {
-  gold: 1,
-  gems: 13.7,
-  leapstones: 66,
-  redStones: 3.6,
-  blueStones: 0.6,
-  silver: 0,
-};
-
-export const calcValue = (materials) => {
-  return Object.keys(materials).reduce(
-    (sum, name) => sum + materials[name] * prices[name],
-    0
-  );
-};

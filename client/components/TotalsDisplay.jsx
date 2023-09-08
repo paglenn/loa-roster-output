@@ -1,7 +1,8 @@
 const React = require("react");
 import icons from "../icons.js";
-import styles from "../styles/totalsdisplay.module.css";
-import { stoneConvert, calcValue } from "../helpers.js";
+
+import { sumRosterOutput } from "../helpers/sums.js";
+import { Resource } from "./Resource.jsx";
 // should contain total roster gold income , silver, gems , leapstones, reds, blues
 
 // stetch feature-  images!
@@ -15,7 +16,7 @@ const TotalsDisplay = (props) => {
     redStones,
     blueStones,
     totalGoldValue,
-  } = sumCharacterOutput(props.roster);
+  } = sumRosterOutput(props.roster);
 
   return (
     <div className="bg-slate-300 border-black border-2">
@@ -26,10 +27,11 @@ const TotalsDisplay = (props) => {
       <ul className="text-3xl flex flex-row list-none list-inside justify-around">
         <li className="inline-flex">
           <img className="h-12 w-12" src={icons.gold} alt="roster gold" />
-          <span> {gold} </span>
+          <span> {gold.toLocaleString()} </span>
         </li>
         <li className="inline-flex">
-          <img src={icons.silver} className="h-12 w-12" alt="silver" /> {silver}
+          <img src={icons.silver} className="h-12 w-12" alt="silver" />{" "}
+          {silver.toLocaleString()}
         </li>
         <li className="inline-flex">
           <img
@@ -61,62 +63,12 @@ const TotalsDisplay = (props) => {
         </li>
       </ul>
 
-      <h1>
+      <h1 className="text-3xl">
         Total <img className="inline-flex" src={icons.gold} alt="roster gold" />{" "}
-        Value : {totalGoldValue}{" "}
+        Value : {totalGoldValue.toLocaleString()}{" "}
       </h1>
     </div>
   );
-};
-
-const sumCharacterOutput = (characterArray) => {
-  const sumObj = {};
-
-  sumObj.gold = characterArray.reduce(
-    (sum, char) => sum + char.resources.gold,
-    0
-  );
-  sumObj.silver = characterArray.reduce(
-    (sum, char) => sum + char.resources.silver,
-    0
-  );
-  sumObj.leapstones = characterArray.reduce(
-    (sum, char) =>
-      sum +
-      stoneConvert(
-        char.resources.leapstones.type,
-        char.resources.leapstones.qty
-      ),
-    0
-  );
-  sumObj.leapstones = Math.round(sumObj.leapstones);
-
-  sumObj.gems = characterArray.reduce(
-    (sum, char) => sum + char.resources.gems,
-    0
-  );
-  sumObj.gems = Math.round(sumObj.gems);
-  sumObj.redStones = characterArray.reduce(
-    (sum, char) =>
-      sum +
-      stoneConvert(char.resources.redStones.type, char.resources.redStones.qty),
-
-    0
-  );
-  sumObj.redStones = Math.round(sumObj.redStones);
-  sumObj.blueStones = characterArray.reduce(
-    (sum, char) =>
-      sum +
-      stoneConvert(
-        char.resources.blueStones.type,
-        char.resources.blueStones.qty
-      ),
-    0
-  );
-  sumObj.blueStones = Math.round(sumObj.blueStones);
-
-  sumObj.totalGoldValue = calcValue(sumObj);
-  return sumObj;
 };
 
 export default TotalsDisplay;

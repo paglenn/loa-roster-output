@@ -8,6 +8,10 @@ module.exports = {
     filename: "bundle.js",
   },
 
+  resolve: {
+    extensions: ['.js','.jsx','.ts','.tsx'],
+  },
+
   mode: process.env.NODE_ENV,
 
   plugins: [

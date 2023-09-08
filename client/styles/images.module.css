@@ -8,7 +8,7 @@ img {
 }
 
 img.gold {
-  background: conic-gradient(
+  /* background: conic-gradient(
     #edc800,
     #e3b600,
     #f3cf00,
@@ -25,7 +25,7 @@ img.gold {
     #e3b600,
     #f3cf00,
     #ffe800
-  );
+  ); */
 }
 
 .CharModel {
