@@ -1,27 +1,31 @@
-const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: './client/index.js',
+  entry: "./client/index.js",
   output: {
-    path: path.resolve(__dirname, './build'),
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, "./build"),
+    filename: "bundle.js",
+  },
+
+  resolve: {
+    extensions: ['.js','.jsx','.ts','.tsx'],
   },
 
   mode: process.env.NODE_ENV,
 
   plugins: [
     new HtmlWebPackPlugin({
-      template: path.resolve(__dirname, './client/index.html'),
+      template: path.resolve(__dirname, "./client/index.html"),
     }),
   ],
   devServer: {
     proxy: {
-      context: ['/character', '/characters'],
-      target: 'http://localhost:8080',
+      context: ["/character", "/characters"],
+      target: "http://localhost:8080",
     },
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      "Access-Control-Allow-Origin": "*",
     },
   },
   module: {
@@ -32,7 +36,7 @@ module.exports = {
         test: /\.jsx?/,
         exclude: /(node_modules)/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
         },
       },
 
@@ -46,15 +50,17 @@ module.exports = {
         test: /\.css$/i,
         use: [
           // creates 'style' nodes from JS strings
-          'style-loader',
+          "style-loader",
           // compiles CSS to commonJS
-          'css-loader',
+          "css-loader",
+          // transpile postcss to CSS
+          "postcss-loader",
         ],
       },
       // handle images using file-loader - source: https://v4.webpack.js.org/loaders/file-loader/
       {
-        test: /\.(png|jpe?g|gif)$/i,
-        use: [{ loader: 'file-loader' }],
+        test: /\.(png|jpe?g|gif|webp)$/i,
+        use: [{ loader: "file-loader" }],
       },
     ],
   },

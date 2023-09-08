@@ -1,11 +1,9 @@
-import ReactDOM from 'react-dom'; 
-import React from 'react'; 
-import MainContainer from './MainContainer.jsx';
-//import "./styles.css";
+import ReactDOM from "react-dom";
+import React from "react";
+import MainContainer from "./MainContainer.jsx";
+import "./index.css";
 const App = () => {
-  return (
-  <MainContainer/>
-  ); 
-}
+  return <MainContainer />;
+};
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById("app"));
