@@ -138,9 +138,9 @@ const MainContainer = () => {
   }, [newCharacter, deletedCharacter, updatedCharacter]);
 
   return (
-    <div className={`MainContainer ${mainStyles.app} bg-cyan-400`}>
-      <h1>
-        <div className="underline uppercase text-center text-3xl">
+    <div className={`MainContainer ${mainStyles.app} bg-slate-800 h-100%`}>
+      <h1 className="pb-2">
+        <div className="uppercase text-center text-white text-3xl">
           <img
             className="float-left h-fit w-8 align-top"
             src={logo}

@@ -4,20 +4,13 @@ import imageStyles from "../styles/images.module.css";
 import icons from "../icons";
 import classImages from "../classImages";
 import { Resource } from "./Resource.jsx";
+import { resourceTypes, hasSubtype } from "../helpers/reference";
 // render character cards
 const Character = (props) => {
   const { name, _class, ilvl, resources, isGoldEarner } = props.character;
   const classLower = _class.toLowerCase();
   // define resource types
-  const resourceTypes = [
-    "gold",
-    "silver",
-    "gems",
-    "leapstones",
-    "redStones",
-    "blueStones",
-  ];
-  const hasSubtype = { leapstones: true, redStones: true, blueStones: true };
+
 
   // create components for resource types
   const resourceComponents = resourceTypes.map((el) => {
@@ -31,6 +24,7 @@ const Character = (props) => {
       <Resource
         type={hasSubtype[el] ? resources[el].type : el}
         qty={hasSubtype[el] ? resources[el].qty : resources[el]}
+        imHeight={8}
       />
     );
   });

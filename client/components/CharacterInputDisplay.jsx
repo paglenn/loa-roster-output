@@ -1,7 +1,5 @@
 import React from "react";
-import styles from "../styles/inputbox.module.css";
-// import styles from './styles/inputbox.module.css'
-// needs event handlers to submit fetch request to POST data to '/characters'
+
 const CharacterInputDisplay = (props) => {
   const { characterInfo, handleChange, handleSubmit } = props;
   if (!characterInfo.name) characterInfo.name = "";
@@ -10,21 +8,17 @@ const CharacterInputDisplay = (props) => {
   if (!characterInfo.isGoldEarner) characterInfo.isGoldEarner = "";
 
   return (
-    <div className={styles.inputBox}>
-      <h2 className="text-xl"> Add Character </h2>
+    <div className="text-xl bg-slate-300 p-5">
+      <h2 className="text-2xl"> Add Character </h2>
       <form
         onSubmit={handleSubmit}
         onChange={handleChange}
         className="flex justify-around"
       >
-        <label >
+        <label>
           {" "}
-          <text className="text-md">  Name: </text>
-          <input
-            type="text"
-            value={characterInfo.name}
-            name="name"
-          />{" "}
+          <text className="text-md"> Name: </text>
+          <input type="text" value={characterInfo.name} name="name" />{" "}
         </label>
         <label>
           {" "}

@@ -1,32 +1,4 @@
-img {
-  width: 18px;
-  height: 18px;
-}
 
-.gem {
-  /* height: 36px;  */
-}
-
-img.gold {
-  /* background: conic-gradient(
-    #edc800,
-    #e3b600,
-    #f3cf00,
-    #ffe800,
-    #edc800,
-    #e3b600,
-    #f3cf00,
-    #ffe800,
-    #edc800,
-    #e3b600,
-    #f3cf00,
-    #ffe800,
-    #edc800,
-    #e3b600,
-    #f3cf00,
-    #ffe800
-  ); */
-}
 
 .CharModel {
   align-self: center;
