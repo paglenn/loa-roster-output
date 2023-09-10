@@ -8,10 +8,6 @@ module.exports = {
     filename: "bundle.js",
   },
 
-  resolve: {
-    extensions: ['.js','.jsx','.ts','.tsx'],
-  },
-
   mode: process.env.NODE_ENV,
 
   plugins: [
@@ -22,7 +18,7 @@ module.exports = {
   devServer: {
     proxy: {
       context: ["/character", "/characters"],
-      target: "http://localhost:8080",
+      target: "http://localhost:3000",
     },
     headers: {
       "Access-Control-Allow-Origin": "*",
@@ -35,6 +31,9 @@ module.exports = {
         //? matches the preceding item 0 or 1 times (could be .js or .jsx)
         test: /\.jsx?/,
         exclude: /(node_modules)/,
+        resolve: {
+          extensions: [".js", ".jsx"],
+        },
         use: {
           loader: "babel-loader",
         },

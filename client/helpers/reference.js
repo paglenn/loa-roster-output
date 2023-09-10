@@ -25,3 +25,10 @@ export const highestSubtypes = {
   redStones: "refined_obliteration_stones",
   blueStones: "refined_protection_stones",
 };
+
+export const charPropLabels = {
+  name: "Name",
+  ilvl: "Item Level",
+  isGoldEarner: "Gold Earner (yes / no)",
+  _class: "Class",
+};
