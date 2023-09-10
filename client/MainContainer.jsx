@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import TotalsDisplay from "./components/TotalsDisplay.jsx";
 import Roster from "./components/RosterContainer.jsx";
 import CharacterInputDisplay from "./components/CharacterInputDisplay.jsx";
-import { handleDelete } from "./features/delete/index.js";
+import { handleDelete } from "./features/delete";
+import { updateGold } from "./features/goldEarningStatus";
 import logo from "./assets/lostarkicon.png";
 
 // this needs to handle state to pass down  the roster.
@@ -86,31 +87,6 @@ const MainContainer = () => {
     event.target[0].value = "";
   };
 
-  const handleGoldEarnerUpdate = (event) => {
-    let [name, ilvl] = event.target.name.split(".");
-    ilvl = Number(ilvl);
-    let isGoldEarner = event.target.checked;
-    /* If we already have six gold earners, can't add another one  */
-    if (isGoldEarner && goldEarnerCount === 6) {
-      event.target.checked = !event.target.checked;
-      console.log("No more gold earners!");
-      alert("Nice try - but you can only have up to six gold earners!");
-      return;
-    }
-
-    fetch("/character", {
-      method: "PATCH",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        name: name,
-        ilvl: ilvl,
-        isGoldEarner: isGoldEarner,
-      }),
-    }).then((character) => {
-      updateCharacter(character);
-      updateGoldEarners(goldEarnerCount + (isGoldEarner ? 1 : -1));
-    });
-  };
   // effect hook to get changes to character list. we will want to run this on page load, but also on submission of forms or  deletion of a character
   useEffect(() => {
     fetch("/character/characters")
@@ -153,7 +129,9 @@ const MainContainer = () => {
         roster={roster}
         handleDelete={(e) => handleDelete(e, updateDeletedCharacter)}
         handleLevelUpdate={handleItemLevelUpdate}
-        handleGoldUpdate={handleGoldEarnerUpdate}
+        handleGoldUpdate={(e) =>
+          updateGold(e, updateCharacter, updateGoldEarners, goldEarnerCount)
+        }
       />
     </div>
   );

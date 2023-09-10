@@ -5,7 +5,8 @@ import icons from "../helpers/icons";
 import classImages from "../helpers/classImages";
 import { Resource } from "./Resource.jsx";
 import { resourceTypes, hasSubtype } from "../helpers/reference";
-import {DeleteButton} from "../features/delete/index";
+import { DeleteButton } from "../features/delete";
+import { GoldStatusBox } from "../features/goldEarningStatus";
 // render character cards
 const Character = ({
   character,
@@ -37,7 +38,13 @@ const Character = ({
       <div className="flex flex-row justify-between align-middle">
         <span className=" font-bold"> {name} </span>
         <span>{ilvl} </span>
-        <div className="flex flex-col">
+        <GoldStatusBox
+          name={name}
+          ilvl={ilvl}
+          isGoldEarner={isGoldEarner}
+          handleGoldUpdate={handleGoldUpdate}
+        />
+        {/* <div className="flex flex-col">
           <text className="text-sm"> Gold? </text>
           <input
             type="checkbox"
@@ -45,7 +52,7 @@ const Character = ({
             checked={isGoldEarner}
             onChange={handleGoldUpdate}
           />
-        </div>
+        </div> */}
         <img className={imageStyles.classIcon} src={icons[classLower]} />{" "}
       </div>
 

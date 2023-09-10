@@ -11,10 +11,8 @@ const characterController = {};
 // add to database using database schema
 
 characterController.createCharacter = (req, res, next) => {
-  const { name, _class, ilvl, isGoldEarner } = req.body;
+  const { name, _class, ilvl, isGoldEarner, restedOnly } = req.body;
   console.log("request body: ", req.body);
-  // error handling in inputs  could be here
-  // if ( !name || !class || !ilvl ) return next({message: "error in character creation "})
 
   const chaosDungeonP = findBestContent(ilvl, "chaos_dungeons"); // object with chaos data
   const guardianRaidP = findBestContent(ilvl, "guardian_raids"); // object with guardian data

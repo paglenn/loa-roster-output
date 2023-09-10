@@ -12,7 +12,8 @@ const charSchema = new Schema({
   _class: { type: String, required: true },
   isGoldEarner: { type: Boolean, required: true },
   resources: { type: Object, required: true },
-  user: { type: String }, // character's owner
+  user: { type: String, default: "test" }, // character's owner
+  restedOnly: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model("Characters", charSchema);

@@ -18,7 +18,7 @@ module.exports = {
   devServer: {
     proxy: {
       context: ["/character", "/characters"],
-      target: "http://localhost:8080",
+      target: "http://localhost:3000",
     },
     headers: {
       "Access-Control-Allow-Origin": "*",
