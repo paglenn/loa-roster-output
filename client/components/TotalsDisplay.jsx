@@ -12,8 +12,8 @@ import {
 
 // stetch feature-  images!
 
-const TotalsDisplay = (props) => {
-  const rosterResources = sumRosterOutput(props.roster);
+const TotalsDisplay = ({ roster }) => {
+  const rosterResources = sumRosterOutput(roster);
 
   const resourceComponents = resourceTypes.map((el) => (
     <Resource
@@ -27,7 +27,7 @@ const TotalsDisplay = (props) => {
   return (
     <div className="bg-slate-800 border-black border-2 text-white">
       <h1 className="capitalize text-4xl font-extrabold text-center">
-        Total Weekly Output{" "}
+        Total Weekly Output
       </h1>
       <ul className="text-3xl flex flex-row list-none list-inside justify-around">
         {resourceComponents}
@@ -36,12 +36,12 @@ const TotalsDisplay = (props) => {
       {/* Render total gold output separately in gold background */}
       <h1 className="text-3xl flex justify-center">
         <div className=" border-yellow-500 border-4 rounded px-2">
-          Total{" "}
+          Total
           <img
             className="inline-flex h-8 w-8"
             src={icons.gold}
             alt="roster gold"
-          />{" "}
+          />
           Value : {rosterResources.totalGoldValue.toLocaleString()}{" "}
         </div>
       </h1>

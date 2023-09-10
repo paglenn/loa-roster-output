@@ -66,18 +66,7 @@ const MainContainer = () => {
         console.log(err);
       });
   };
-  // const handleDelete = (event) => {
-  //   // send a fetch request to delete the character
-  //   // then use updateDeletedCharacter to update state
-  //   // will updateDeletedCharacter to trigger useEffect hook
-  //   fetch("/character", {
-  //     method: "DELETE",
-  //     headers: { "content-type": "application/json" },
-  //     body: JSON.stringify({ name: event.target.id }),
-  //   }).then((character) => {
-  //     updateDeletedCharacter(character);
-  //   });
-  // };
+
   const handleItemLevelUpdate = (event) => {
     event.preventDefault();
 
@@ -124,7 +113,7 @@ const MainContainer = () => {
   };
   // effect hook to get changes to character list. we will want to run this on page load, but also on submission of forms or  deletion of a character
   useEffect(() => {
-    fetch("/characters")
+    fetch("/character/characters")
       .then((response) => response.json())
       .then((characters) => {
         updateRoster(characters);

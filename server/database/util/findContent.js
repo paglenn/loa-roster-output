@@ -2,7 +2,7 @@
 // testing
 //const mongoose = require('mongoose');
 const { MongoClient } = require("mongodb");
-const URI = require("./mongo");
+const URI = require("../mongo");
 //mongoose.connect(uri);
 
 async function findBestContent(ilvl, contentType) {
