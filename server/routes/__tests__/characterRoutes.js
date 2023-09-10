@@ -14,4 +14,3 @@ describe("General character retrieval", () => {
       });
   });
 });
-

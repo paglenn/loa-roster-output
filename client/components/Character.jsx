@@ -14,6 +14,7 @@ const Character = ({
   handleGoldUpdate,
   handleLevelUpdate,
 }) => {
+  //console.log(character);
   const { name, _class, ilvl, resources, isGoldEarner } = character;
   const classLower = _class.toLowerCase();
 

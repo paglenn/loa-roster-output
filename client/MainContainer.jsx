@@ -10,7 +10,13 @@ import logo from "./assets/lostarkicon.png";
 const MainContainer = () => {
   // state for roster array
   const [roster, updateRoster] = useState([]);
-  const [characterInfo, updateCharacterInfo] = useState({});
+  const [characterInfo, updateCharacterInfo] = useState({
+    name: "",
+    ilvl: "",
+    _class: "",
+    isGoldEarner: false,
+    restedOnly: false,
+  });
   // state for character once input field is complete
   const [newCharacter, updateNewCharacter] = useState({});
   // state for deleted character (to trigger effect hook)
@@ -63,7 +69,7 @@ const MainContainer = () => {
         updateCharacterInfo({});
       })
       .catch((err) => {
-        alert("Invalid input!");
+        alert("Character could not be created");
         console.log(err);
       });
   };
