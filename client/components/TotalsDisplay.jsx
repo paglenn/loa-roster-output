@@ -15,8 +15,9 @@ import {
 const TotalsDisplay = ({ roster }) => {
   const rosterResources = sumRosterOutput(roster);
 
-  const resourceComponents = resourceTypes.map((el) => (
+  const resourceComponents = resourceTypes.map((el, index) => (
     <Resource
+      key={index}
       type={hasSubtype[el] ? highestSubtypes[el] : el}
       qty={rosterResources[el]}
       imHeight={8}

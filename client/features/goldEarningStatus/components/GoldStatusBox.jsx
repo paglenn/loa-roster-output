@@ -1,12 +1,11 @@
 import React from "react";
 
-const GoldStatusBox = ({ name, ilvl, isGoldEarner, handleGoldUpdate }) => {
+const GoldStatusBox = ({ isGoldEarner, handleGoldUpdate }) => {
   return (
     <div className="flex flex-col">
-      <text className="text-sm"> Gold? </text>
+      <span className="text-sm"> Gold? </span>
       <input
         type="checkbox"
-        name={`${name}.${ilvl}`}
         checked={isGoldEarner}
         onChange={handleGoldUpdate}
       />

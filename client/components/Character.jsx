@@ -7,20 +7,24 @@ import { Resource } from "./Resource.jsx";
 import { resourceTypes, hasSubtype } from "../helpers/reference";
 import { DeleteButton } from "../features/delete";
 import { GoldStatusBox } from "../features/goldEarningStatus";
+import { RestedStatusBox } from "../features/restBonus";
 // render character cards
 const Character = ({
   character,
   handleDelete,
   handleGoldUpdate,
   handleLevelUpdate,
+  handleRestedUpdate,
 }) => {
-  const { name, _class, ilvl, resources, isGoldEarner } = character;
+  //console.log(character);
+  const { name, _class, ilvl, resources, isGoldEarner, restedOnly } = character;
   const classLower = _class.toLowerCase();
 
   // create components for resource types
-  const resourceComponents = resourceTypes.map((el) => {
+  const resourceComponents = resourceTypes.map((el, index) => {
     return (
       <Resource
+        key={index}
         type={hasSubtype[el] ? resources[el].type : el}
         qty={hasSubtype[el] ? resources[el].qty : resources[el]}
         imHeight={8}
@@ -39,24 +43,15 @@ const Character = ({
         <span className=" font-bold"> {name} </span>
         <span>{ilvl} </span>
         <GoldStatusBox
-          name={name}
-          ilvl={ilvl}
           isGoldEarner={isGoldEarner}
-          handleGoldUpdate={handleGoldUpdate}
+          handleGoldUpdate={(e) => handleGoldUpdate(e, character)}
         />
-        {/* <div className="flex flex-col">
-          <text className="text-sm"> Gold? </text>
-          <input
-            type="checkbox"
-            name={`${name}.${ilvl}`}
-            checked={isGoldEarner}
-            onChange={handleGoldUpdate}
-          />
-        </div> */}
+        <RestedStatusBox
+          restedOnly={restedOnly}
+          handleClick={(e) => handleRestedUpdate(e, character)}
+        />
         <img className={imageStyles.classIcon} src={icons[classLower]} />{" "}
       </div>
-
-      {/* Character item level container  */}
 
       {/* Form to update item level  */}
       <form

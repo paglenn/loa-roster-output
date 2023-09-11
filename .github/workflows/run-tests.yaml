@@ -1,0 +1,22 @@
+name: run-tests
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    environment: development
+    steps:
+      - uses: actions/checkout@v3
+      - name: create env file
+        run: |
+          touch .env 
+          echo MONGO_URI=${{ vars.MONGO_URI }} >> .env
+          echo TEST_PORT=5050 >> .env
+          echo PORT=3000 >> .env
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+      - run: npm ci
+      - run: npm test

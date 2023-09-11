@@ -1,9 +1,15 @@
 import React from "react";
 import Character from "./Character.jsx";
-import styles from "../styles/rostercontainer.module.css";
+
 // container for roster's character cards
 // must be passed down character array in props
-const Roster = ({roster, handleLevelUpdate, handleDelete, handleGoldUpdate}) => {
+const Roster = ({
+  roster,
+  handleLevelUpdate,
+  handleDelete,
+  handleGoldUpdate,
+  handleRestedUpdate,
+}) => {
   const characterCards = [];
 
   // sort roster by item level
@@ -22,6 +28,7 @@ const Roster = ({roster, handleLevelUpdate, handleDelete, handleGoldUpdate}) => 
         handleDelete={handleDelete}
         handleLevelUpdate={handleLevelUpdate}
         handleGoldUpdate={handleGoldUpdate}
+        handleRestedUpdate={handleRestedUpdate}
       />
     )
   );
