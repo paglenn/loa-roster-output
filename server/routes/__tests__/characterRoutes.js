@@ -10,7 +10,6 @@ describe("General character retrieval", () => {
       .then((response) => response.body)
       .then((data) => {
         expect(Array.isArray(data)).toBeTruthy();
-        console.log(data.length);
       });
   });
 });
