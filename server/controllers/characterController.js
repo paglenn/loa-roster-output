@@ -82,7 +82,7 @@ characterController.updateCharacter = async (req, res, next) => {
   // updating gold means ... updating gold
   const chaosDungeonP = findBestContent(ilvl, "chaos_dungeons"); // object with chaos data
   const guardianRaidP = findBestContent(ilvl, "guardian_raids"); // object with guardian data
-  const goldSourcesP =  findBestContent(ilvl, "gold_earning_content"); // legion raid / abyssal  data
+  const goldSourcesP = findBestContent(ilvl, "gold_earning_content"); // legion raid / abyssal  data
 
   // to start we can update all
   Promise.all([chaosDungeonP, guardianRaidP, goldSourcesP])
@@ -171,7 +171,7 @@ characterController.getCharacters = (req, res, next) => {
       return next();
     })
     .catch((error) => {
-      next({
+      return next({
         error: error,
         message: { err: "an error occured: see console for more details" },
         status: 400,
