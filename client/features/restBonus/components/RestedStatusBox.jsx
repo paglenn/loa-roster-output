@@ -1,14 +1,13 @@
 import React from "react";
 
-export const RestedStatusBox = ({ name, ilvl, isRestedOnly, handleRestedUpdate }) => {
+export const RestedStatusBox = ({ restedOnly, handleClick}) => {
   return (
     <div className="flex flex-col">
-      <text className="text-sm"> Rest? </text>
+      <text className="text-sm"> Rested? </text>
       <input
         type="checkbox"
-        name={`${name}.${ilvl}`}
-        checked={isRestedOnly}
-        onChange={handleRestedUpdate}
+        checked={restedOnly}
+        onChange={handleClick}
       />
     </div>
   );

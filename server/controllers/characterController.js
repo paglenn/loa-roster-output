@@ -4,16 +4,21 @@ const findBestContent = require("../database/util/findContent");
 const characterController = {};
 
 /// methods :
+// createCharacter
+// deleteCharacter
+// updateCharacter
+// getCharacters
 
 // create character for POST request
 // request body must contain character name, class, and item level
+// feature updates -- gold earning status, rested only
 // create character using model - from mongoose
 // add to database using database schema
 
 characterController.createCharacter = (req, res, next) => {
   const { name, _class, ilvl, isGoldEarner, restedOnly } = req.body;
   console.log("request body: ", req.body);
-
+  const restedModifier = restedOnly ? 2 / 3 : 1;
   const chaosDungeonP = findBestContent(ilvl, "chaos_dungeons"); // object with chaos data
   const guardianRaidP = findBestContent(ilvl, "guardian_raids"); // object with guardian data
   const goldSourcesP = findBestContent(ilvl, "gold_earning_content"); // legion raid / abyssal  data
@@ -26,25 +31,29 @@ characterController.createCharacter = (req, res, next) => {
         _class: _class,
         ilvl: ilvl,
         isGoldEarner: isGoldEarner,
+        restedOnly: restedOnly ?? false,
         resources: {
           // per week, we multiply the dailies by 14
-          silver: chaosDungeon.silver * 14,
+          silver: chaosDungeon.silver * 14 * restedModifier,
           leapstones: {
             type: chaosDungeon.leapstones.type,
-            qty: guardianRaid.leapstones.qty * 14,
+            qty: guardianRaid.leapstones.qty * 14 * restedModifier,
           },
           blueStones: {
             type: chaosDungeon.blue_stones.type,
             qty:
               (chaosDungeon.blue_stones.qty + guardianRaid.blue_stones.qty) *
-              14,
+              14 *
+              restedModifier,
           },
           redStones: {
             type: chaosDungeon.red_stones.type,
             qty:
-              (chaosDungeon.red_stones.qty + guardianRaid.red_stones.qty) * 14,
+              (chaosDungeon.red_stones.qty + guardianRaid.red_stones.qty) *
+              14 *
+              restedModifier,
           },
-          gems: chaosDungeon.gems * 14,
+          gems: chaosDungeon.gems * 14 * restedModifier,
           gold: isGoldEarner
             ? goldSources.reduce((sum, source) => sum + source.gold, 0)
             : 0,
@@ -66,14 +75,14 @@ characterController.createCharacter = (req, res, next) => {
 };
 // method: update a character
 // request body should contain name and item level (the only thing that should really be updated )
-characterController.updateCharacter = (req, res, next) => {
-  const { name, ilvl, isGoldEarner } = req.body;
-
+characterController.updateCharacter = async (req, res, next) => {
+  const { name, ilvl, isGoldEarner, restedOnly } = req.body;
+  const restedModifier = restedOnly ? 2 / 3 : 1;
   // updating item level means updating production
   // updating gold means ... updating gold
   const chaosDungeonP = findBestContent(ilvl, "chaos_dungeons"); // object with chaos data
   const guardianRaidP = findBestContent(ilvl, "guardian_raids"); // object with guardian data
-  const goldSourcesP = findBestContent(ilvl, "gold_earning_content"); // legion raid / abyssal  data
+  const goldSourcesP =  findBestContent(ilvl, "gold_earning_content"); // legion raid / abyssal  data
 
   // to start we can update all
   Promise.all([chaosDungeonP, guardianRaidP, goldSourcesP])
@@ -83,26 +92,29 @@ characterController.updateCharacter = (req, res, next) => {
         {
           ilvl: ilvl,
           isGoldEarner: isGoldEarner,
+          restedOnly: restedOnly ?? false,
           resources: {
             // per week, we multiply the dailies by 14
-            silver: chaosDungeon.silver * 14,
+            silver: chaosDungeon.silver * 14 * restedModifier,
             blueStones: {
               type: chaosDungeon.blue_stones.type,
               qty:
                 (chaosDungeon.blue_stones.qty + guardianRaid.blue_stones.qty) *
-                14,
+                14 *
+                restedModifier,
             },
             redStones: {
               type: chaosDungeon.red_stones.type,
               qty:
                 (chaosDungeon.red_stones.qty + guardianRaid.red_stones.qty) *
-                14,
+                14 *
+                restedModifier,
             },
             leapstones: {
               type: chaosDungeon.leapstones.type,
-              qty: guardianRaid.leapstones.qty * 14,
+              qty: guardianRaid.leapstones.qty * 14 * restedModifier,
             },
-            gems: chaosDungeon.gems * 14,
+            gems: chaosDungeon.gems * 14 * restedModifier,
             gold: isGoldEarner
               ? goldSources.reduce((sum, source) => sum + source.gold, 0)
               : 0,

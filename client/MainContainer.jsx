@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import TotalsDisplay from "./components/TotalsDisplay.jsx";
 import Roster from "./components/RosterContainer.jsx";
 import CharacterInputDisplay from "./components/CharacterInputDisplay.jsx";
 import { handleDelete } from "./features/delete";
 import { updateGold } from "./features/goldEarningStatus";
+import { toggleRestedOnly } from "./features/restBonus/index.js";
 import logo from "./assets/lostarkicon.png";
 
 // this needs to handle state to pass down  the roster.
 const MainContainer = () => {
   // state for roster array
   const [roster, updateRoster] = useState([]);
-  const [characterInfo, updateCharacterInfo] = useState({
-    name: "",
-    ilvl: "",
-    _class: "",
-    isGoldEarner: false,
-    restedOnly: false,
-  });
+  // const [characterInfo, updateCharacterInfo] = useState({
+  //   name: "",
+  //   ilvl: "",
+  //   _class: "",
+  //   isGoldEarner: false,
+  //   restedOnly: false,
+  // });
   // state for character once input field is complete
   const [newCharacter, updateNewCharacter] = useState({});
   // state for deleted character (to trigger effect hook)
@@ -27,33 +28,27 @@ const MainContainer = () => {
 
   const [goldEarnerCount, updateGoldEarners] = useState(0);
 
-  const handleNewCharChange = (event) => {
-    const fieldName = event.target.name;
-    const fieldValue = event.target.value;
-    const newState = { ...characterInfo };
-    newState[fieldName] = fieldValue;
-    updateCharacterInfo(newState);
-  };
+  // const handleNewCharChange = (event) => {
+  //   const fieldName = event.target.name;
+  //   const fieldValue = event.target.value;
+  //   //console.log(fieldName, fieldValue);
+  //   const newState = { ...characterInfo };
+  //   newState[fieldName] = fieldValue;
+  //   updateCharacterInfo(newState);
+  // };
 
-  const handleNewCharSubmit = (event) => {
+  const handleNewCharSubmit = (event, characterInfo) => {
     event.preventDefault();
     const copyCharacter = { ...characterInfo };
     // convert item level to number
     copyCharacter.ilvl = Number(copyCharacter.ilvl);
     // assert that destructuring of character info produces all necessary properties
-    const { name, ilvl, isGoldEarner, _class } = characterInfo;
-    if (
-      name === "" ||
-      Number.isNaN(ilvl) ||
-      _class === "" ||
-      isGoldEarner === ""
-    ) {
+    const { name, ilvl, isGoldEarner, _class, restedOnly } = characterInfo;
+    if (name === "" || Number.isNaN(ilvl) || _class === "") {
       alert("Character info incomplete!");
       return;
     }
-    // convert gold-earning status to boolean
-    copyCharacter.isGoldEarner =
-      characterInfo.isGoldEarner === "yes" ? true : false;
+
     if (copyCharacter.isGoldEarner && goldEarnerCount === 6) {
       alert("Nice try - but you can only have up to six gold earners!");
       return;
@@ -66,7 +61,7 @@ const MainContainer = () => {
     })
       .then((character) => {
         updateNewCharacter(character);
-        updateCharacterInfo({});
+        //updateCharacterInfo({});
       })
       .catch((err) => {
         alert("Character could not be created");
@@ -127,16 +122,25 @@ const MainContainer = () => {
       </h1>
       <TotalsDisplay roster={roster} />
       <CharacterInputDisplay
-        characterInfo={characterInfo}
-        handleChange={handleNewCharChange}
+        // handleChange={handleNewCharChange}
         handleSubmit={handleNewCharSubmit}
       />
       <Roster
         roster={roster}
         handleDelete={(e) => handleDelete(e, updateDeletedCharacter)}
         handleLevelUpdate={handleItemLevelUpdate}
-        handleGoldUpdate={(e) =>
-          updateGold(e, updateCharacter, updateGoldEarners, goldEarnerCount)
+        handleGoldUpdate={(e, character) =>
+          updateGold(
+            e,
+            character,
+            updateCharacter,
+            updateGoldEarners,
+            goldEarnerCount
+          )
+        }
+        updateCharacter={updateCharacter}
+        handleRestedUpdate={(e, character) =>
+          toggleRestedOnly(e, character, updateCharacter)
         }
       />
     </div>

@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useRef } from "react";
 import { charPropLabels } from "../helpers/reference";
-const CharacterInputDisplay = (props) => {
-  const { characterInfo, handleChange, handleSubmit } = props;
-
-  const charProps = Object.keys(characterInfo).map((prop) => {
-    return <InputLabel charPropName={prop} charPropVal={characterInfo[prop]} />;
+const CharacterInputDisplay = ({ handleSubmit }) => {
+  // const { handleSubmit } = props;
+  const character = useRef({
+    name: "",
+    ilvl: "",
+    _class: "",
+    isGoldEarner: false,
+    restedOnly: false,
+  });
+  const charProps = Object.keys(character.current).map((prop) => {
+    return (
+      <InputLabel
+        key={prop}
+        charPropName={prop}
+        charPropVal={character[prop]}
+        character={character}
+      />
+    );
   });
 
   return (
@@ -14,8 +27,7 @@ const CharacterInputDisplay = (props) => {
         Add New Character{" "}
       </h2>
       <form
-        onSubmit={handleSubmit}
-        onChange={handleChange}
+        onSubmit={(e) => handleSubmit(e, character.current)}
         className="flex justify-around"
       >
         {charProps}
@@ -30,15 +42,23 @@ const CharacterInputDisplay = (props) => {
   );
 };
 
-const InputLabel = ({ charPropVal, charPropName }) => {
+const InputLabel = ({ charPropVal, charPropName, character }) => {
   return charPropLabels[charPropName].type === "checkbox" ? (
-    <CheckboxInput charPropVal={charPropVal} charPropName={charPropName} />
+    <CheckboxInput
+      charPropVal={charPropVal}
+      charPropName={charPropName}
+      character={character}
+    />
   ) : (
-    <TextInput charPropVal={charPropVal} charPropName={charPropName} />
+    <TextInput
+      charPropVal={charPropVal}
+      charPropName={charPropName}
+      character={character}
+    />
   );
 };
 
-const TextInput = ({ charPropVal, charPropName }) => {
+const TextInput = ({ charPropVal, charPropName, character }) => {
   return (
     <label className="inline-flex flex-col align-middle">
       <span className="text-xl"> {charPropLabels[charPropName].label}: </span>
@@ -47,20 +67,28 @@ const TextInput = ({ charPropVal, charPropName }) => {
         type="text"
         name={charPropName}
         className="rounded-2xl"
+        onChange={(e) => {
+          character.current[charPropName] = e.target.value;
+          console.log(character.current);
+        }}
       />
     </label>
   );
 };
 
-const CheckboxInput = ({ charPropVal, charPropName }) => {
+const CheckboxInput = ({ charPropVal, charPropName, character }) => {
   return (
     <label className="inline-flex flex-col align-middle">
-      <span className="text-xl"> {charPropLabels[charPropName].label}: </span>
+      <span className="text-xl"> {charPropLabels[charPropName].label}? </span>
       <input
         type="checkbox"
         className="w-4 h-4"
         value={charPropVal}
         name={charPropName}
+        onChange={(e) => {
+          character.current[charPropName] = e.target.checked;
+          console.log("character: ", character.current);
+        }}
       />
     </label>
   );

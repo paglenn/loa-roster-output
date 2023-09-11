@@ -21,7 +21,7 @@ router.patch("/", characterController.updateCharacter, (req, res) => {
 });
 
 // handle delete requests to delete an existing character
-router.delete("/character", characterController.deleteCharacter, (req, res) => {
+router.delete("/", characterController.deleteCharacter, (req, res) => {
   res.status(200).json(res.locals.character);
 });
 

@@ -1,11 +1,11 @@
 const updateGold = (
   event,
+  character,
   updateCharacter,
   updateGoldEarners,
   goldEarnerCount
 ) => {
-  let [name, ilvl] = event.target.name.split(".");
-  ilvl = Number(ilvl);
+  // let { name, ilvl, restedOnly } = character;
   let isGoldEarner = event.target.checked;
   /* If we already have six gold earners, can't add another one  */
   if (isGoldEarner && goldEarnerCount === 6) {
@@ -19,13 +19,12 @@ const updateGold = (
     method: "PATCH",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({
-      name: name,
-      ilvl: ilvl,
+      ...character,
       isGoldEarner: isGoldEarner,
     }),
-  }).then((character) => {
-    updateCharacter(character);
-    updateGoldEarners(goldEarnerCount + (isGoldEarner ? 1 : -1));
+  }).then((updatedCharacter) => {
+    updateCharacter(updatedCharacter);
+    updateGoldEarners(goldEarnerCount + (isGoldEarner ? 1 : -1)); // does not need to be state
   });
 };
 

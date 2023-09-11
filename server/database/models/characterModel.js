@@ -10,7 +10,7 @@ const charSchema = new Schema({
   ilvl: { type: Number, required: true },
   name: { type: String, required: true, unique: true },
   _class: { type: String, required: true },
-  isGoldEarner: { type: Boolean, required: true },
+  isGoldEarner: { type: Boolean, default: false },
   resources: { type: Object, required: true },
   user: { type: String, default: "test" }, // character's owner
   restedOnly: { type: Boolean, default: false },

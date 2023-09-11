@@ -29,7 +29,7 @@ export const highestSubtypes = {
 export const charPropLabels = {
   name: { label: "Name", type: "text" },
   ilvl: { label: "Item Level", type: "text" },
-  isGoldEarner: { label: "Gold Earner (yes / no)", type: "checkbox" },
+  isGoldEarner: { label: "Is Gold Earner", type: "checkbox" },
   _class: { label: "Class", type: "text" },
-  restedOnly: { label: "Rested Only", type: "checkbox" },
+  restedOnly: { label: "Playing Rested Only", type: "checkbox" },
 };
