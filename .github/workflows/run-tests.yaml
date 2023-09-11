@@ -10,12 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: create env file
-        env:
-          MONGO_URI: ${{ env.MONGO_URI }}
-          TEST_PORT: ${{ secrets.TEST_PORT }}
         run: |
           touch .env 
-          echo MONGO_URI=$MONGO_URI >> .env
+          echo MONGO_URI=${{ vars.MONGO_URI }} >> .env
           echo TEST_PORT=5050 >> .env
           echo PORT=3000 >> .env
       - uses: actions/setup-node@v3
