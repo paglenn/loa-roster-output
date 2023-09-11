@@ -1,20 +1,23 @@
 const request = require("supertest");
 const dotenv = require("dotenv");
 const app = require("../../index");
+const mongoose = require("mongoose");
 let listener;
-dotenv.config();
+
 // const PORT = process.env.TEST_PORT;
 //const app = require("../../server");
+beforeAll(() => {
+  listener = app.listen(process.env.TEST_PORT);
+  dotenv.config();
+  console.log(`listening on port ${process.env.TEST_PORT}`);
+});
+afterAll((done) => {
+  listener.close();
+  mongoose.connection.close();
+  done();
+});
+
 describe("General character retrieval", () => {
-  beforeAll(() => {
-    listener = app.listen(process.env.TEST_PORT);
-    console.log(`listening on port ${process.env.TEST_PORT}`);
-  });
-
-  afterAll(() => {
-    listener.close();
-  });
-
   test("get request to character/characters should return all characters with a get request to /character/characters", () => {
     return request(app)
       .get("/character/characters")
@@ -26,15 +29,6 @@ describe("General character retrieval", () => {
 });
 
 describe("Character creation", () => {
-  beforeAll(() => {
-    listener = app.listen(process.env.TEST_PORT);
-    console.log(`listening on port ${process.env.TEST_PORT}`);
-  });
-
-  afterAll(() => {
-    listener.close();
-  });
-
   const testChar = {
     name: "Aethersaint",
     ilvl: "1340",
