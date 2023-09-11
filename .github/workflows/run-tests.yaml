@@ -12,7 +12,7 @@ jobs:
       - name: create env file
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
-          TEST_PORT: ${{ secrets.MONGO_URI }}
+          TEST_PORT: ${{ secrets.TEST_PORT }}
         run: |
           touch .env 
           echo MONGO_URI=$MONGO_URI >> .env
