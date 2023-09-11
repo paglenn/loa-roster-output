@@ -6,10 +6,11 @@ on:
 jobs:
   run-tests:
     runs-on: ubuntu-latest
+    environment: development
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
       - run: npm ci
-      - run: npm test
+      - run: MONGO_URI=$MONGO_URI PORT=$PORT npm test
