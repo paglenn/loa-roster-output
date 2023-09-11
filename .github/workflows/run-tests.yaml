@@ -13,4 +13,7 @@ jobs:
         with:
           node-version: "lts/*"
       - run: npm ci
-      - run: MONGO_URI=$MONGO_URI PORT=$PORT npm test
+      - run: touch .env
+      - run: echo MONGO_URI=$MONGO_URI >> .env
+      - run: echo PORT=$PORT >> .env
+      - run: npm test
