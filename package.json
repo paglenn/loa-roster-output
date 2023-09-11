@@ -19,7 +19,7 @@
     "start": "NODE_ENV=production node server/server.js",
     "build": " NODE_ENV=production webpack",
     "dev": "concurrently \"nodemon server/server.js\"  \"NODE_ENV=development webpack serve --open\" ",
-    "test": "jest --collect-coverage"
+    "test": "jest --collect-coverage --forceExit"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
