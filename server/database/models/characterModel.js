@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const URI = require("../mongo");
+console.log("URI: ", URI);
 mongoose.connect(URI, { dbName: "test" });
 
 const Schema = mongoose.Schema;
