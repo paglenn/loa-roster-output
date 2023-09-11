@@ -21,6 +21,19 @@
     "dev": "concurrently \"nodemon server/server.js\"  \"NODE_ENV=development webpack serve --open\" ",
     "test": "jest --collect-coverage"
   },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "html",
+      "text"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "lines": 70
+      }
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.22.5",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
