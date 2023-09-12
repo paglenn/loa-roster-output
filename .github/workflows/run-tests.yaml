@@ -9,11 +9,14 @@ jobs:
     environment: development
     steps:
       - uses: actions/checkout@v3
+      - name: create env file
+        run: |
+          touch .env 
+          echo MONGO_URI=${{ vars.MONGO_URI }} >> .env
+          echo TEST_PORT=5050 >> .env
+          echo PORT=3000 >> .env
       - uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
       - run: npm ci
-      - run: touch .env
-      - run: echo MONGO_URI=${{ secrets.MONGO_URI }} >> .env
-      - run: echo TEST_PORT=${{ secrets.TEST_PORT }} >> .env
       - run: npm test
