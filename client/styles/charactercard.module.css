@@ -8,21 +8,8 @@
   font-size: x-large;
 }
 
-.gold {
-  border: 5px solid #ffe800;
-}
-
-.imgAndResourceContainer {
-  display: flex;
-  flex-direction: row;
-}
-
 .imgAndResourceContainer > div {
   text-align: left;
-}
-
-.imgContainer {
-  flex-basis: 60%;
 }
 
 .ilvlInput {

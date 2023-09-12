@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../styles/charactercard.module.css";
-import imageStyles from "../styles/images.module.css";
 import icons from "../helpers/icons";
 import classImages from "../helpers/classImages";
 import { Resource } from "./Resource.jsx";
@@ -31,17 +30,17 @@ const Character = ({
       />
     );
   });
-
+  const cardColor = isGoldEarner ? "bg-[#d4af37]" : "bg-slate-300";
   return (
     <div
-      className={` basis-1/7 bg-slate-300 p-2 ${styles.characterCard} ${
+      className={` basis-1/6 ${cardColor} p-2 ${styles.characterCard} ${
         isGoldEarner ? styles.gold : ""
       }`}
     >
       {/* Character Name  and class icon container  */}
-      <div className="flex flex-row justify-between align-middle">
-        <span className=" font-bold"> {name} </span>
-        <span>{ilvl} </span>
+      <div className="flex flex-row justify-between content-center items-start">
+        <span className="text-lg font-bold mb-2"> {name} </span>
+        <span className="text-lg">{ilvl} </span>
         <GoldStatusBox
           isGoldEarner={isGoldEarner}
           handleGoldUpdate={(e) => handleGoldUpdate(e, character)}
@@ -50,7 +49,12 @@ const Character = ({
           restedOnly={restedOnly}
           handleClick={(e) => handleRestedUpdate(e, character)}
         />
-        <img className={imageStyles.classIcon} src={icons[classLower]} />{" "}
+        <div className="basis-1/8 grow-0 self-center">
+          <img
+            className="bg-black max-w-8 max-h-8 rounded"
+            src={icons[classLower]}
+          />
+        </div>
       </div>
 
       {/* Form to update item level  */}
@@ -60,7 +64,7 @@ const Character = ({
         className="flex flex-row justify-between"
       >
         <input
-          className="rounded w-28"
+          className="rounded w-28 text-sm"
           type="text"
           placeholder="new iLvL"
           name={`${name}.${isGoldEarner}`}
@@ -73,31 +77,19 @@ const Character = ({
         />
       </form>
 
-      <div className={styles.imgAndResourceContainer}>
-        {/* Class Picture  */}
-        <div className={styles.imgContainer}>
-          {" "}
-          <img
-            className={`${imageStyles.CharModel}  ${
-              isGoldEarner ? imageStyles.gold : ""
-            }`}
-            src={classImages[_class.toLowerCase()]}
-          />{" "}
-        </div>
-
+      {/* Class Picture  */}
+      <div className={styles.imgContainer}>
+        {" "}
+        <img
+          className={"rounded border-black border-2 mb-1"}
+          src={classImages[_class.toLowerCase()]}
+        />{" "}
         {/* list of resources  */}
         <ul className="list-none"> {resourceComponents}</ul>
       </div>
 
       {/* Delete button  */}
       <DeleteButton name={name} handleDelete={handleDelete} />
-      {/* <button
-        id={name}
-        onClick={handleDelete}
-        className="bg-red-400 rounded border-solid border-black border-2 p-1"
-      >
-        Delete
-      </button> */}
     </div>
   );
 };
