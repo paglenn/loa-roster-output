@@ -20,6 +20,7 @@ import artillerist from "../assets/class_icons/artillerist.png";
 import bard from "../assets/class_icons/bard.png";
 import berserker from "../assets/class_icons/berserker.png";
 import deathblade from "../assets/class_icons/deathblade.png";
+import gunslinger from "../assets/class_icons/gunslinger.png";
 import gunlancer from "../assets/class_icons/gunlancer.png";
 import slayer from "../assets/class_icons/slayer.png";
 import paladin from "../assets/class_icons/paladin.png";
@@ -52,6 +53,7 @@ export default {
   bard: bard,
   berserker: berserker,
   deathblade: deathblade,
+  gunslinger: gunslinger,
   gunlancer: gunlancer,
   slayer: slayer,
   paladin: paladin,
