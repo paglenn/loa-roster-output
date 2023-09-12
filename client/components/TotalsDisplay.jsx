@@ -35,7 +35,7 @@ const TotalsDisplay = ({ roster }) => {
       </ul>
 
       {/* Render total gold output separately in gold background */}
-      <h1 className="text-3xl flex justify-center">
+      <h1 className="text-3xl flex justify-center font-bold">
         <div className=" border-yellow-500 border-4 rounded px-2">
           Total
           <img
@@ -43,7 +43,11 @@ const TotalsDisplay = ({ roster }) => {
             src={icons.gold}
             alt="roster gold"
           />
-          Value : {rosterResources.totalGoldValue.toLocaleString()}{" "}
+          Value :{" "}
+          <span className="italic">
+            {" "}
+            {rosterResources.totalGoldValue.toLocaleString()}{" "}
+          </span>
         </div>
       </h1>
     </div>

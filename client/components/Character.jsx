@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "../styles/charactercard.module.css";
 import icons from "../helpers/icons";
 import classImages from "../helpers/classImages";
 import { Resource } from "./Resource.jsx";
@@ -33,9 +32,7 @@ const Character = ({
   const cardColor = isGoldEarner ? "bg-[#d4af37]" : "bg-slate-300";
   return (
     <div
-      className={` basis-1/6 ${cardColor} p-2 ${styles.characterCard} ${
-        isGoldEarner ? styles.gold : ""
-      }`}
+      className={` basis-1/6 ${cardColor} p-2 shrink-1 items-start m-3 rounded`}
     >
       {/* Character Name  and class icon container  */}
       <div className="flex flex-row justify-between content-center items-start">
@@ -61,10 +58,11 @@ const Character = ({
       <form
         onSubmit={handleLevelUpdate}
         name={`${name}.${isGoldEarner}`}
-        className="flex flex-row justify-between"
+        className="flex flex-row justify-between items-center"
       >
+        <span className="italic">{_class} </span>
         <input
-          className="rounded w-28 text-sm"
+          className="rounded w-16 text-sm"
           type="text"
           placeholder="new iLvL"
           name={`${name}.${isGoldEarner}`}
@@ -73,21 +71,20 @@ const Character = ({
         <input
           type="submit"
           value="Update item level"
-          className=" text-sm p-1 rounded bg-slate-300 border-black border-2 "
+          className=" text-xs p-1 rounded bg-slate-300 border-black border-2 "
         />
       </form>
 
       {/* Class Picture  */}
-      <div className={styles.imgContainer}>
-        {" "}
+      <div className="">
         <img
-          className={"rounded border-black border-2 mb-1"}
+          className={"rounded border-black border-2 mb-1 w-100%"}
           src={classImages[_class.toLowerCase()]}
         />{" "}
-        {/* list of resources  */}
-        <ul className="list-none"> {resourceComponents}</ul>
       </div>
 
+      {/* list of resources  */}
+      <ul className="list-none"> {resourceComponents}</ul>
       {/* Delete button  */}
       <DeleteButton name={name} handleDelete={handleDelete} />
     </div>
