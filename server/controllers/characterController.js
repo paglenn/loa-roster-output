@@ -125,7 +125,7 @@ characterController.updateCharacter = async (req, res, next) => {
     })
     .then((updatedChar) => {
       res.locals.character = updatedChar;
-      console.log(updatedChar);
+      //console.log(updatedChar);
       return next();
     })
     .catch((error) => {

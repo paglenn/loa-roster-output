@@ -69,7 +69,6 @@ const TextInput = ({ charPropVal, charPropName, character }) => {
         className="rounded-2xl"
         onChange={(e) => {
           character.current[charPropName] = e.target.value;
-          console.log(character.current);
         }}
       />
     </label>
@@ -78,7 +77,7 @@ const TextInput = ({ charPropVal, charPropName, character }) => {
 
 const CheckboxInput = ({ charPropVal, charPropName, character }) => {
   return (
-    <label className="inline-flex flex-col align-middle">
+    <label className="inline-flex flex-col items-center">
       <span className="text-xl"> {charPropLabels[charPropName].label}? </span>
       <input
         type="checkbox"
