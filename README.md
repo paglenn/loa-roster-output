@@ -15,15 +15,17 @@
 
 ## Features
 
-| Feature                                                      | Status |
-| ------------------------------------------------------------ | ------ |
-| Roster resource tracking                                     | ✅     |
-| Character addition and deletion                              | ✅     |
-| Testing (React Testing Library front-end, Supertest backend) | ⏳     |
-| Fully intergrated OAuth/User authentication                  | ⏳     |
-| Typescript conversion                                        | 🙏🏻     |
-| Rested-only designation                                      | 🙏🏻     |
-| User specificity                                             | 🙏🏻     |
+| Feature                                     | Status |
+| ------------------------------------------- | ------ |
+| Roster resource tracking                    | ✅     |
+| Character addition and deletion             | ✅     |
+| Character Item Level Updates                | ✅     |
+| Rested-only designation                     | ✅     |
+| Backend Testing                             | ⏳     |
+| Fully intergrated OAuth/User authentication | ⏳     |
+| Typescript conversion                       | 🙏🏾     |
+| User specificity                            | 🙏🏾     |
+| Frontend testing coverage                   | 🙏🏾     |
 
 ### Feature Status Key
 
@@ -31,5 +33,4 @@ Done = ✅
 <br>
 In Progress = ⏳
 <br>
-Soon<sup>TM</sup> = 🙏🏻
-
+Soon<sup>TM</sup> = 🙏🏾
