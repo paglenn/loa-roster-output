@@ -12,8 +12,9 @@ userController.createUser = async (req, res, next) => {
     // then user already exists -  return error
     return next({
       ...authError,
-      log: "user already exists",
+      log: "Error occurred in createUser middleware",
       status: 409,
+      error: "user already exists",
     });
   }
 

@@ -38,4 +38,28 @@ describe("create user middleware", () => {
     // cleanup by deleting user from test dB
     await User.deleteOne({ email: mReq.body.email });
   });
+
+  it("hashes the original password", async () => {
+    // generate unique email
+    mReq.body.email = `test${Date.now()}`;
+    // invoke createUser
+    await createUser(mReq, mRes, mNext);
+    // use model.findOne to check for created user based on email
+    const foundUser = await User.findOne({ email: mReq.body.email });
+
+    // expect password to be hashed
+    expect(foundUser.password).not.toEqual(mReq.body.password);
+    // cleanup by deleting user from test dB
+    await User.deleteOne({ email: mReq.body.email });
+  });
+
+  it("should not allow creation of a duplicate user and instead invoke error handler", async () => {
+    mReq.body.email = "test";
+    await createUser(mReq, mRes, mNext);
+    // should call the next function to invoke global error handler
+    expect(mNext).toHaveBeenCalled();
+    expect(mNext.mock.lastCall[0]).toHaveProperty("error");
+
+    //expect(mNext.lastCall).toBeInstanceOf(Object);
+  });
 });
