@@ -17,7 +17,7 @@ const characterController = {};
 
 characterController.createCharacter = (req, res, next) => {
   const { name, _class, ilvl, isGoldEarner, restedOnly } = req.body;
-  console.log("request body: ", req.body);
+
   const restedModifier = restedOnly ? 2 / 3 : 1;
   const chaosDungeonP = findBestContent(ilvl, "chaos_dungeons"); // object with chaos data
   const guardianRaidP = findBestContent(ilvl, "guardian_raids"); // object with guardian data

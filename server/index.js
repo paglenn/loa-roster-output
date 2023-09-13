@@ -12,8 +12,17 @@ app.use((req, res) => {
 
 // global error handler
 app.use((err, req, res, next) => {
-  console.log(err);
-  res.status(500).send({ error: err });
+  const defaultError = {
+    log: "error occured in unknown middleware",
+    message: "an error occured",
+    status: 500,
+  };
+  const error = {
+    ...defaultError,
+    ...err,
+  };
+  console.log(error.log);
+  res.status(500).json({ error: error.message });
 });
 
 module.exports = app;
