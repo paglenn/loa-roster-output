@@ -1,14 +1,13 @@
 // user controller unit tests
 
 // need character model to test if creation and deletion has worked
-const mongoose = require("mongoose");
+const { connection } = require("../../database").mongoose;
 const User = require("../../database/models/userModel");
 const { createUser } = require("../userController");
 
 // To tie up any test we'll want to close the connection to the database so Jest can exit
-afterAll(() => {
-  mongoose.connection.close();
-  console.log("closed database connection");
+afterAll( () => {
+  connection.close();
 });
 
 const mReq = { body: { email: "test", username: "test", password: "test" } };

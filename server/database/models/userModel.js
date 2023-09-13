@@ -1,7 +1,6 @@
-const mongoose = require("mongoose");
-const URI = require("../mongo");
+const { MONGO_URI, mongoose } = require("..");
 const bcrypt = require("bcrypt");
-mongoose.connect(URI, { dbName: "test" });
+mongoose.connect(MONGO_URI, { dbName: "test" });
 
 const Schema = mongoose.Schema;
 

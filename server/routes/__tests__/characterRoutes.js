@@ -1,7 +1,7 @@
 const request = require("supertest");
 const dotenv = require("dotenv");
 const app = require("../../index");
-const mongoose = require("mongoose");
+const { connection } = require("../../database").mongoose;
 let listener;
 
 // const PORT = process.env.TEST_PORT;
@@ -9,12 +9,11 @@ let listener;
 beforeAll(() => {
   listener = app.listen(process.env.TEST_PORT);
   dotenv.config();
-  console.log(`listening on port ${process.env.TEST_PORT}`);
 });
 
 afterAll((done) => {
   listener.close();
-  mongoose.connection.close();
+  connection.close();
   done();
 });
 
@@ -51,7 +50,6 @@ describe("Character creation", () => {
       .expect("Content-Type", /json/)
       .then((response) => response.body)
       .then((returnedChar) => {
-        console.log(returnedChar);
         expect(returnedChar.name).toBe(testChar.name);
         expect(returnedChar.isGoldEarner).toBe(false);
         expect(returnedChar.user).toBe("test");

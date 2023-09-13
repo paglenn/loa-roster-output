@@ -17,7 +17,7 @@ const characterController = {};
 
 characterController.createCharacter = (req, res, next) => {
   const { name, _class, ilvl, isGoldEarner, restedOnly } = req.body;
-
+  const user = req.params.user;
   const restedModifier = restedOnly ? 2 / 3 : 1;
   const chaosDungeonP = findBestContent(ilvl, "chaos_dungeons"); // object with chaos data
   const guardianRaidP = findBestContent(ilvl, "guardian_raids"); // object with guardian data
@@ -77,65 +77,58 @@ characterController.createCharacter = (req, res, next) => {
 // request body should contain name and item level (the only thing that should really be updated )
 characterController.updateCharacter = async (req, res, next) => {
   const { name, ilvl, isGoldEarner, restedOnly } = req.body;
+
   const restedModifier = restedOnly ? 2 / 3 : 1;
   // updating item level means updating production
   // updating gold means ... updating gold
-  const chaosDungeonP = findBestContent(ilvl, "chaos_dungeons"); // object with chaos data
-  const guardianRaidP = findBestContent(ilvl, "guardian_raids"); // object with guardian data
-  const goldSourcesP = findBestContent(ilvl, "gold_earning_content"); // legion raid / abyssal  data
-
-  // to start we can update all
-  Promise.all([chaosDungeonP, guardianRaidP, goldSourcesP])
-    .then(([chaosDungeon, guardianRaid, goldSources]) => {
-      return Character.findOneAndUpdate(
-        { name: name },
-        {
-          ilvl: ilvl,
-          isGoldEarner: isGoldEarner,
-          restedOnly: restedOnly ?? false,
-          resources: {
-            // per week, we multiply the dailies by 14
-            silver: chaosDungeon.silver * 14 * restedModifier,
-            blueStones: {
-              type: chaosDungeon.blue_stones.type,
-              qty:
-                (chaosDungeon.blue_stones.qty + guardianRaid.blue_stones.qty) *
-                14 *
-                restedModifier,
-            },
-            redStones: {
-              type: chaosDungeon.red_stones.type,
-              qty:
-                (chaosDungeon.red_stones.qty + guardianRaid.red_stones.qty) *
-                14 *
-                restedModifier,
-            },
-            leapstones: {
-              type: chaosDungeon.leapstones.type,
-              qty: guardianRaid.leapstones.qty * 14 * restedModifier,
-            },
-            gems: chaosDungeon.gems * 14 * restedModifier,
-            gold: isGoldEarner
-              ? goldSources.reduce((sum, source) => sum + source.gold, 0)
-              : 0,
+  const chaosDungeon = await findBestContent(ilvl, "chaos_dungeons"); // object with chaos data
+  const guardianRaid = await findBestContent(ilvl, "guardian_raids"); // object with guardian data
+  const goldSources = await findBestContent(ilvl, "gold_earning_content"); // legion raid / abyssal  data
+  try {
+    res.locals.character = await Character.findOneAndUpdate(
+      { name: name },
+      {
+        ilvl: ilvl,
+        isGoldEarner: isGoldEarner,
+        restedOnly: restedOnly ?? false,
+        resources: {
+          // per week, we multiply the dailies by 14
+          silver: chaosDungeon.silver * 14 * restedModifier,
+          blueStones: {
+            type: chaosDungeon.blue_stones.type,
+            qty:
+              (chaosDungeon.blue_stones.qty + guardianRaid.blue_stones.qty) *
+              14 *
+              restedModifier,
           },
+          redStones: {
+            type: chaosDungeon.red_stones.type,
+            qty:
+              (chaosDungeon.red_stones.qty + guardianRaid.red_stones.qty) *
+              14 *
+              restedModifier,
+          },
+          leapstones: {
+            type: chaosDungeon.leapstones.type,
+            qty: guardianRaid.leapstones.qty * 14 * restedModifier,
+          },
+          gems: chaosDungeon.gems * 14 * restedModifier,
+          gold: isGoldEarner
+            ? goldSources.reduce((sum, source) => sum + source.gold, 0)
+            : 0,
         },
-        { returnDocument: "after" }
-      );
-    })
-    .then((updatedChar) => {
-      res.locals.character = updatedChar;
-      //console.log(updatedChar);
-      return next();
-    })
-    .catch((error) => {
-      next({
-        error: error,
-        message: { err: "an error occured: see console for more details" },
-        status: 400,
-        log: "error occurred in deleteCharacter middleware",
-      });
+      },
+      { returnDocument: "after" }
+    );
+    return next();
+  } catch (err) {
+    return next({
+      error: error,
+      message: { err: "an error occured: see console for more details" },
+      status: 400,
+      log: "error occurred in updateCharacter middleware",
     });
+  }
 };
 
 // method: Delete a character
@@ -182,23 +175,23 @@ characterController.getCharacters = (req, res, next) => {
 
 // method: get one character
 // parameter needed: name
-characterController.getCharacter = (req, res, next) => {
-  // this is where we could start to make the database user specific
-  const { name } = req.body;
-  // get all characters
-  Character.findOne({ name })
-    .then((character) => {
-      res.locals.character = character;
-      return next();
-    })
-    .catch((error) => {
-      next({
-        error: error,
-        message: { err: "an error occured: see console for more details" },
-        status: 400,
-        log: "error occurred in getCharacter middleware",
-      });
-    });
-};
+// characterController.getCharacter = (req, res, next) => {
+//   // this is where we could start to make the database user specific
+//   const { name } = req.body;
+//   // get all characters
+//   Character.findOne({ name })
+//     .then((character) => {
+//       res.locals.character = character;
+//       return next();
+//     })
+//     .catch((error) => {
+//       next({
+//         error: error,
+//         message: { err: "an error occured: see console for more details" },
+//         status: 400,
+//         log: "error occurred in getCharacter middleware",
+//       });
+//     });
+// };
 
 module.exports = characterController;

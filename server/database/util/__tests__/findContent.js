@@ -1,4 +1,4 @@
-const findBestContent = require("../util/findContent");
+const findBestContent = require("../findContent");
 
 describe("content lookup tester", () => {
   const ilvl = 1580;

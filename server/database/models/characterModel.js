@@ -1,6 +1,5 @@
-const mongoose = require("mongoose");
-const URI = require("../mongo");
-mongoose.connect(URI, { dbName: "test" });
+const { MONGO_URI, mongoose } = require("..");
+mongoose.connect(MONGO_URI, { dbName: "test" });
 
 const Schema = mongoose.Schema;
 

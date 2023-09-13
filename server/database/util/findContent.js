@@ -2,11 +2,11 @@
 // testing
 //const mongoose = require('mongoose');
 const { MongoClient } = require("mongodb");
-const URI = require("../mongo");
+const { MONGO_URI } = require("..");
 //mongoose.connect(uri);
 
 async function findBestContent(ilvl, contentType) {
-  const client = new MongoClient(URI);
+  const client = new MongoClient(MONGO_URI);
   try {
     // connect to mongoDB
 
@@ -42,7 +42,7 @@ async function findBestContent(ilvl, contentType) {
   } catch (e) {
     console.error(e);
   } finally {
-    client.close();
+    await client.close();
   }
 }
 
