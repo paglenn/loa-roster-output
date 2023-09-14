@@ -85,7 +85,6 @@ characterController.updateCharacter = async (req, res, next) => {
   const guardianRaid = await findBestContent(ilvl, "guardian_raids"); // object with guardian data
   const goldSources = await findBestContent(ilvl, "gold_earning_content"); // legion raid / abyssal  data
   try {
-    console.log("character: ", req.body);
     res.locals.character = await Character.findOneAndUpdate(
       { name: name },
       {
@@ -121,7 +120,6 @@ characterController.updateCharacter = async (req, res, next) => {
       },
       { returnDocument: "after" }
     );
-    console.log(res.locals.character);
     return next();
   } catch (err) {
     return next({
