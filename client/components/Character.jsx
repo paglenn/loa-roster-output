@@ -56,7 +56,7 @@ const Character = ({
 
       {/* Form to update item level  */}
       <form
-        onSubmit={handleLevelUpdate}
+        onSubmit={(e) => handleLevelUpdate(e,character)}
         name={`${name}.${isGoldEarner}`}
         className="flex flex-row justify-between items-center"
       >

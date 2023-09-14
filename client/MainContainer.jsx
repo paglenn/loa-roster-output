@@ -6,36 +6,19 @@ import { handleDelete } from "./features/delete";
 import { updateGold } from "./features/goldEarningStatus";
 import { toggleRestedOnly } from "./features/restBonus/index.js";
 import logo from "./assets/lostarkicon.png";
-
+import axios from "axios";
 // this needs to handle state to pass down  the roster.
 const MainContainer = () => {
   // state for roster array
   const [roster, updateRoster] = useState([]);
-  // const [characterInfo, updateCharacterInfo] = useState({
-  //   name: "",
-  //   ilvl: "",
-  //   _class: "",
-  //   isGoldEarner: false,
-  //   restedOnly: false,
-  // });
-  // state for character once input field is complete
-  const [newCharacter, updateNewCharacter] = useState({});
+
   // state for deleted character (to trigger effect hook)
-  const [deletedCharacter, updateDeletedCharacter] = useState({});
+  //const [deletedCharacter, updateDeletedCharacter] = useState({});
 
   // state for updated character
   const [updatedCharacter, updateCharacter] = useState({});
 
   const [goldEarnerCount, updateGoldEarners] = useState(0);
-
-  // const handleNewCharChange = (event) => {
-  //   const fieldName = event.target.name;
-  //   const fieldValue = event.target.value;
-  //   //console.log(fieldName, fieldValue);
-  //   const newState = { ...characterInfo };
-  //   newState[fieldName] = fieldValue;
-  //   updateCharacterInfo(newState);
-  // };
 
   const handleNewCharSubmit = (event, characterInfo) => {
     event.preventDefault();
@@ -59,8 +42,8 @@ const MainContainer = () => {
       headers: { "content-type": "application/json" },
       body: JSON.stringify(copyCharacter),
     })
-      .then((character) => {
-        updateNewCharacter(character);
+      .then((char) => {
+        updateCharacter(char);
         //updateCharacterInfo({});
       })
       .catch((err) => {
@@ -69,29 +52,28 @@ const MainContainer = () => {
       });
   };
 
-  const handleItemLevelUpdate = (event) => {
+  const handleItemLevelUpdate = (event, character) => {
     event.preventDefault();
 
     const [name, goldString] = event.target.name.split(".");
     const ilvl = event.target[0].value;
     const isGoldEarner = goldString === "true";
 
-    fetch("/character", {
-      method: "PATCH",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        name: name,
-        ilvl: ilvl,
-        isGoldEarner: isGoldEarner,
-      }),
-    }).then((character) => updateCharacter(character));
+    axios
+      .patch("/character", {
+        ...character,
+        ilvl,
+      })
+      .then(({ data }) => updateCharacter(data));
     event.target[0].value = "";
   };
 
   // effect hook to get changes to character list. we will want to run this on page load, but also on submission of forms or  deletion of a character
   useEffect(() => {
-    fetch("/character/characters")
-      .then((response) => response.json())
+    // axios conversion
+    axios
+      .get("/character/characters")
+      .then((response) => response.data)
       .then((characters) => {
         updateRoster(characters);
         updateGoldEarners(
@@ -101,7 +83,7 @@ const MainContainer = () => {
           )
         );
       });
-  }, [newCharacter, deletedCharacter, updatedCharacter]);
+  }, [updatedCharacter]);
 
   return (
     <div className={`MainContainer bg-slate-800 h-100%`}>
@@ -121,13 +103,10 @@ const MainContainer = () => {
         </div>
       </h1>
       <TotalsDisplay roster={roster} />
-      <CharacterInputDisplay
-        // handleChange={handleNewCharChange}
-        handleSubmit={handleNewCharSubmit}
-      />
+      <CharacterInputDisplay handleSubmit={handleNewCharSubmit} />
       <Roster
         roster={roster}
-        handleDelete={(e) => handleDelete(e, updateDeletedCharacter)}
+        handleDelete={(e) => handleDelete(e, updateCharacter)}
         handleLevelUpdate={handleItemLevelUpdate}
         handleGoldUpdate={(e, character) =>
           updateGold(

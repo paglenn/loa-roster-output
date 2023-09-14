@@ -1,3 +1,4 @@
+import axios from "axios";
 const updateGold = (
   event,
   character,
@@ -14,17 +15,17 @@ const updateGold = (
     alert("Nice try - but you can only have up to six gold earners!");
     return;
   }
-
-  fetch("/character", {
-    method: "PATCH",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({
+  // fetch request
+  axios({
+    method: "patch",
+    url: "/character",
+    data: {
       ...character,
       isGoldEarner: isGoldEarner,
-    }),
-  }).then((updatedCharacter) => {
+    },
+  }).then(({ data: updatedCharacter }) => {
     updateCharacter(updatedCharacter);
-    updateGoldEarners(goldEarnerCount + (isGoldEarner ? 1 : -1)); // does not need to be state
+    updateGoldEarners(goldEarnerCount + (isGoldEarner ? 1 : -1));
   });
 };
 
