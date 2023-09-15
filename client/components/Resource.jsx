@@ -9,6 +9,7 @@ export const Resource = ({ type, qty, imHeight, classProps }) => {
     <li className={`flex flex-row justify-between ${classProps}`}>
       <img
         src={icons[iconName]}
+        alt={iconName}
         className={`h-${imHeight} aspect-square rounded-md`}
       />
 

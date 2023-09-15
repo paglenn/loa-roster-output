@@ -49,6 +49,7 @@ const Character = ({
         <div className="basis-1/8 grow-0 self-center">
           <img
             className="bg-black max-w-8 max-h-8 rounded"
+            alt={`${classLower} class icon`}
             src={icons[classLower]}
           />
         </div>
@@ -56,7 +57,7 @@ const Character = ({
 
       {/* Form to update item level  */}
       <form
-        onSubmit={(e) => handleLevelUpdate(e,character)}
+        onSubmit={(e) => handleLevelUpdate(e, character)}
         name={`${name}.${isGoldEarner}`}
         className="flex flex-row justify-between items-center"
       >
@@ -79,7 +80,8 @@ const Character = ({
       <div className="">
         <img
           className={"rounded border-black border-2 mb-1 w-100%"}
-          src={classImages[_class.toLowerCase()]}
+          src={classImages[classLower]}
+          alt={`${classLower} class image`}
         />{" "}
       </div>
 

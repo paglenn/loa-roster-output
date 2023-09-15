@@ -5,7 +5,7 @@ import CharacterInputDisplay from "./CharacterInputDisplay.jsx";
 import { handleDelete } from "../features/delete/index.js";
 import { updateGold } from "../features/goldEarningStatus/index.js";
 import { toggleRestedOnly } from "../features/restBonus/index.js";
-import logo from "./assets/lostarkicon.png";
+import logo from "../assets/lostarkicon.png";
 import axios from "axios";
 // this needs to handle state to pass down  the roster.
 const MainContainer = () => {

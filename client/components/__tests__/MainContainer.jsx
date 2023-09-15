@@ -11,7 +11,6 @@ import MainContainer from "../MainContainer";
 describe("Main Page", () => {
   it("renders Total Display", () => {
     render(<MainContainer />);
-    //screen.debug();
     expect(screen.getByText("Total Weekly Output")).toBeInTheDocument();
   });
 });
