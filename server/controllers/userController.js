@@ -28,6 +28,21 @@ userController.createUser = async (req, res, next) => {
   return next();
 };
 
-userController.authUser = (req, res, next) => {};
+userController.authUser = async (req, res, next) => {
+  const { email, username, password } = req.body;
+  try {
+    const user = await User.findOne({ email: email });
+    res.locals.auth = await user.matchPassword(password);
+  } catch (err) {
+    return next({
+      ...authError,
+      log: "Error in authUser Middleware",
+      status: 401,
+      error: err,
+    });
+  } finally {
+    return next();
+  }
+};
 
 module.exports = userController;

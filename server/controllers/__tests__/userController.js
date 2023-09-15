@@ -3,14 +3,15 @@
 // need character model to test if creation and deletion has worked
 const { connection } = require("../../database").mongoose;
 const User = require("../../database/models/userModel");
-const { createUser } = require("../userController");
+const { createUser, authUser } = require("../userController");
 
 // To tie up any test we'll want to close the connection to the database so Jest can exit
-afterAll( () => {
+afterAll(() => {
   connection.close();
 });
 
-const mReq = { body: { email: "test", username: "test", password: "test" } };
+const testUser = { email: "test", username: "test", password: "test" };
+const mReq = { body: testUser };
 const mRes = { locals: {} };
 const mNext = jest.fn();
 
@@ -60,5 +61,12 @@ describe("create user middleware", () => {
     expect(mNext.mock.lastCall[0]).toHaveProperty("error");
 
     //expect(mNext.lastCall).toBeInstanceOf(Object);
+  });
+});
+
+describe("user authentication middleware", () => {
+  it("checks user password", async () => {
+    await authUser(mReq, mRes, mNext);
+    expect(mRes.locals.auth).toEqual(true);
   });
 });
