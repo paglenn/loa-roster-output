@@ -87,21 +87,7 @@ const MainContainer = () => {
 
   return (
     <div className={`MainContainer bg-slate-800 h-100%`}>
-      <h1 className="pb-2">
-        <div className="uppercase text-center text-white text-3xl">
-          <img
-            className="float-left h-fit w-8 align-top"
-            src={logo}
-            alt="Lost Ark Logo Left"
-          />
-          Lost Ark Roster Production{" "}
-          <img
-            className="float-right h-fit w-8 align-top"
-            src={logo}
-            alt="Lost Ark Logo Right"
-          />
-        </div>
-      </h1>
+    
       <TotalsDisplay roster={roster} />
       <CharacterInputDisplay handleSubmit={handleNewCharSubmit} />
       <Roster
