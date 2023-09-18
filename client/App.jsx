@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div className=" bg-slate-800 flex flex-col h-screen">
       <Header />
-      <div className="h-5/6 flex flex-col">
+      <div className="h-5/6 flex flex-col justify-center">
         <HashRouter basename="">
           <Routes>
             {/* Login Route Here */}
