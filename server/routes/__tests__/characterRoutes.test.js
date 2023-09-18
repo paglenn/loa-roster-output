@@ -1,6 +1,6 @@
 const request = require("supertest");
 const dotenv = require("dotenv");
-const app = require("../../index");
+const app = require("../../server");
 const { connection } = require("../../database").mongoose;
 let listener;
 
@@ -17,7 +17,7 @@ afterAll((done) => {
   done();
 });
 
-describe("General character retrieval", () => {
+describe("Character retrieval", () => {
   test("get request to character/characters should return all characters with a get request to /character/characters", () => {
     return request(app)
       .get("/character/characters")
@@ -34,10 +34,6 @@ describe("Character creation", () => {
     ilvl: "1340",
     _class: "Sorceress",
   };
-
-  beforeEach(async () => {
-    await request(app).delete("/character").send({ name: testChar.name });
-  });
 
   afterEach(async () => {
     await request(app).delete("/character").send({ name: testChar.name });

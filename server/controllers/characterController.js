@@ -22,7 +22,6 @@ characterController.createCharacter = (req, res, next) => {
   const chaosDungeonP = findBestContent(ilvl, "chaos_dungeons"); // object with chaos data
   const guardianRaidP = findBestContent(ilvl, "guardian_raids"); // object with guardian data
   const goldSourcesP = findBestContent(ilvl, "gold_earning_content"); // legion raid / abyssal  data
-
   Promise.all([chaosDungeonP, guardianRaidP, goldSourcesP])
     .then(([chaosDungeon, guardianRaid, goldSources]) => {
       //console.log([chaosDungeon, guardianRaid, goldSources]);

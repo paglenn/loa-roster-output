@@ -1,4 +1,4 @@
-const app = require("..");
+const app = require("../server");
 const request = require("supertest");
 const dotenv = require("dotenv");
 dotenv.config();

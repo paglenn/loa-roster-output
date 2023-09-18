@@ -5,7 +5,6 @@ import CharacterInputDisplay from "./CharacterInputDisplay.jsx";
 import { handleDelete } from "../features/delete/index.js";
 import { updateGold } from "../features/goldEarningStatus/index.js";
 import { toggleRestedOnly } from "../features/restBonus/index.js";
-import logo from "../assets/lostarkicon.png";
 import axios from "axios";
 // this needs to handle state to pass down  the roster.
 const MainContainer = () => {
@@ -36,29 +35,30 @@ const MainContainer = () => {
       alert("Nice try - but you can only have up to six gold earners!");
       return;
     }
-    // console.log('request body: ', JSON.stringify(copyCharacter));
-    fetch("/character", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(copyCharacter),
-    })
-      .then((char) => {
-        updateCharacter(char);
-        //updateCharacterInfo({});
-      })
+    axios
+      .post("/character", { ...copyCharacter })
+      .then(({ data }) => updateCharacter(data))
       .catch((err) => {
         alert("Character could not be created");
         console.log(err);
       });
+    // fetch("/character", {
+    //   method: "POST",
+    //   headers: { "content-type": "application/json" },
+    //   body: JSON.stringify(copyCharacter),
+    // })
+    //   .then((char) => {
+    //     updateCharacter(char);
+    //   })
+    //   .catch((err) => {
+    //     alert("Character could not be created");
+    //     console.log(err);
+    //   });
   };
 
   const handleItemLevelUpdate = (event, character) => {
     event.preventDefault();
-
-    const [name, goldString] = event.target.name.split(".");
     const ilvl = event.target[0].value;
-    const isGoldEarner = goldString === "true";
-
     axios
       .patch("/character", {
         ...character,
@@ -87,7 +87,6 @@ const MainContainer = () => {
 
   return (
     <div className={`MainContainer bg-slate-800 h-100%`}>
-    
       <TotalsDisplay roster={roster} />
       <CharacterInputDisplay handleSubmit={handleNewCharSubmit} />
       <Roster

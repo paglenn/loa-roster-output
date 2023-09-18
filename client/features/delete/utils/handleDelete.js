@@ -1,13 +1,16 @@
 import axios from "axios";
-export const handleDelete = (event, updateCharacter) => {
+export const handleDelete = async (event, updateCharacter) => {
   // send a fetch request to delete the character
   // then use updateDeletedCharacter to update state
   // will updateDeletedCharacter to trigger useEffect hook
-  axios
+  await axios
     .delete("/character", {
       data: {
         name: event.target.id,
       },
     })
-    .then(({ data }) => updateCharacter(data));
+    .then(({ data }) => updateCharacter(data))
+    .catch((err) => {
+      console.log(err);
+    });
 };
