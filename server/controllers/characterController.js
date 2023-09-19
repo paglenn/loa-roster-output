@@ -88,9 +88,6 @@ characterController.updateCharacter = async (req, res, next) => {
   const restedModifier = restedOnly ? 2 / 3 : 1;
   // updating item level means updating production
   // updating gold means ... updating gold
-  const chaosDungeon = await findBestContent(ilvl, "chaos_dungeons"); // object with chaos data
-  const guardianRaid = await findBestContent(ilvl, "guardian_raids"); // object with guardian data
-  const goldSources = await findBestContent(ilvl, "gold_earning_content"); // legion raid / abyssal  data
   try {
     const resources = await genResources(ilvl, isGoldEarner, restedOnly);
     res.locals.character = await Character.findOneAndUpdate(
