@@ -15,63 +15,71 @@ const characterController = {};
 // create character using model - from mongoose
 // add to database using database schema
 
-characterController.createCharacter = (req, res, next) => {
+const genResources = async (ilvl, isGoldEarner, restedOnly) => {
+  const restedModifier = restedOnly ? 2 / 3 : 1;
+  const chaosDungeon = await findBestContent(ilvl, "chaos_dungeons");
+  const guardianRaid = await findBestContent(ilvl, "guardian_raids");
+  const cube = await findBestContent(ilvl, "cubes");
+
+  const goldSources = isGoldEarner
+    ? await findBestContent(ilvl, "gold_earning_content")
+    : [];
+
+  const silver = chaosDungeon.silver * 14 * restedModifier + cube.silver;
+  const gems = restedModifier * (chaosDungeon.gems * 14) + cube.gems;
+
+  // generate resource object
+  const resourceObject = {
+    silver: silver,
+    leapstones: {
+      type: chaosDungeon.leapstones.type,
+      qty: guardianRaid.leapstones.qty * 14 * restedModifier,
+    },
+    blueStones: {
+      type: chaosDungeon.blue_stones.type,
+      qty:
+        (chaosDungeon.blue_stones.qty + guardianRaid.blue_stones.qty) *
+        14 *
+        restedModifier,
+    },
+    redStones: {
+      type: chaosDungeon.red_stones.type,
+      qty:
+        (chaosDungeon.red_stones.qty + guardianRaid.red_stones.qty) *
+        14 *
+        restedModifier,
+    },
+    gems: gems,
+    gold: goldSources.reduce((sum, source) => sum + source.gold, 0),
+  };
+  return resourceObject;
+};
+characterController.createCharacter = async (req, res, next) => {
   const { name, _class, ilvl, isGoldEarner, restedOnly } = req.body;
   const user = req.params.user;
   const restedModifier = restedOnly ? 2 / 3 : 1;
-  const chaosDungeonP = findBestContent(ilvl, "chaos_dungeons"); // object with chaos data
-  const guardianRaidP = findBestContent(ilvl, "guardian_raids"); // object with guardian data
-  const goldSourcesP = findBestContent(ilvl, "gold_earning_content"); // legion raid / abyssal  data
-  Promise.all([chaosDungeonP, guardianRaidP, goldSourcesP])
-    .then(([chaosDungeon, guardianRaid, goldSources]) => {
-      //console.log([chaosDungeon, guardianRaid, goldSources]);
-      return Character.create({
-        name: name,
-        _class: _class,
-        ilvl: ilvl,
-        isGoldEarner: isGoldEarner,
-        restedOnly: restedOnly ?? false,
-        resources: {
-          // per week, we multiply the dailies by 14
-          silver: chaosDungeon.silver * 14 * restedModifier,
-          leapstones: {
-            type: chaosDungeon.leapstones.type,
-            qty: guardianRaid.leapstones.qty * 14 * restedModifier,
-          },
-          blueStones: {
-            type: chaosDungeon.blue_stones.type,
-            qty:
-              (chaosDungeon.blue_stones.qty + guardianRaid.blue_stones.qty) *
-              14 *
-              restedModifier,
-          },
-          redStones: {
-            type: chaosDungeon.red_stones.type,
-            qty:
-              (chaosDungeon.red_stones.qty + guardianRaid.red_stones.qty) *
-              14 *
-              restedModifier,
-          },
-          gems: chaosDungeon.gems * 14 * restedModifier,
-          gold: isGoldEarner
-            ? goldSources.reduce((sum, source) => sum + source.gold, 0)
-            : 0,
-        },
-      });
-    })
-    .then((character) => {
-      res.locals.character = character;
-      return next();
-    })
-    .catch((error) =>
-      next({
-        error: error,
-        message: { err: "an error occured: see console for more details" },
-        status: 400,
-        log: "error occurred in createCharacter middleware",
-      })
-    );
+
+  try {
+    const resources = await genResources(ilvl, isGoldEarner, restedOnly);
+    res.locals.character = await Character.create({
+      name: name,
+      _class: _class,
+      ilvl: ilvl,
+      isGoldEarner: isGoldEarner,
+      restedOnly: restedOnly ?? false,
+      resources: resources,
+    });
+    return next();
+  } catch (err) {
+    return next({
+      error: err,
+      message: { err: "an error occured: see console for more details" },
+      status: 400,
+      log: "error occurred in createCharacter middleware" + err.message,
+    });
+  }
 };
+
 // method: update a character
 // request body should contain name and item level (the only thing that should really be updated )
 characterController.updateCharacter = async (req, res, next) => {
@@ -84,38 +92,14 @@ characterController.updateCharacter = async (req, res, next) => {
   const guardianRaid = await findBestContent(ilvl, "guardian_raids"); // object with guardian data
   const goldSources = await findBestContent(ilvl, "gold_earning_content"); // legion raid / abyssal  data
   try {
+    const resources = await genResources(ilvl, isGoldEarner, restedOnly);
     res.locals.character = await Character.findOneAndUpdate(
       { name: name },
       {
         ilvl: ilvl,
         isGoldEarner: isGoldEarner,
         restedOnly: restedOnly ?? false,
-        resources: {
-          // per week, we multiply the dailies by 14
-          silver: chaosDungeon.silver * 14 * restedModifier,
-          blueStones: {
-            type: chaosDungeon.blue_stones.type,
-            qty:
-              (chaosDungeon.blue_stones.qty + guardianRaid.blue_stones.qty) *
-              14 *
-              restedModifier,
-          },
-          redStones: {
-            type: chaosDungeon.red_stones.type,
-            qty:
-              (chaosDungeon.red_stones.qty + guardianRaid.red_stones.qty) *
-              14 *
-              restedModifier,
-          },
-          leapstones: {
-            type: chaosDungeon.leapstones.type,
-            qty: guardianRaid.leapstones.qty * 14 * restedModifier,
-          },
-          gems: chaosDungeon.gems * 14 * restedModifier,
-          gold: isGoldEarner
-            ? goldSources.reduce((sum, source) => sum + source.gold, 0)
-            : 0,
-        },
+        resources: resources,
       },
       { returnDocument: "after" }
     );
@@ -125,7 +109,7 @@ characterController.updateCharacter = async (req, res, next) => {
       error: error,
       message: { err: "an error occured: see console for more details" },
       status: 400,
-      log: "error occurred in updateCharacter middleware",
+      log: "error occurred in updateCharacter middleware" + err.message,
     });
   }
 };

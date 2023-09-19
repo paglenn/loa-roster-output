@@ -21,7 +21,7 @@ export const Login = ({ submitHandler }) => {
   };
 
   return (
-    <div className="rounded-lg bg-slate-700 text-slate-50 flex flex-col self-center h-1/2 w-1/5 justify-around text-3xl">
+    <div className="rounded-lg bg-slate-700 text-slate-50 flex flex-col self-center h-1/2 w-1/5 justify-around text-2xl">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col justify-around grow items-center"

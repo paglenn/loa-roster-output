@@ -77,9 +77,9 @@ const Character = ({
       </form>
 
       {/* Class Picture  */}
-      <div className="">
+      <div className="grow">
         <img
-          className={"rounded border-black border-2 mb-1 w-100%"}
+          className={"rounded border-black border-2 mb-1 grow object-fill"}
           src={classImages[classLower]}
           alt={`${classLower} class image`}
         />{" "}

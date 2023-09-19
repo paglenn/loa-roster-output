@@ -86,7 +86,7 @@ const MainContainer = () => {
   }, [updatedCharacter]);
 
   return (
-    <div className={`MainContainer bg-slate-800 h-100%`}>
+    <div className={`bg-slate-800 max-h-full flex flex-col grow`}>
       <TotalsDisplay roster={roster} />
       <CharacterInputDisplay handleSubmit={handleNewCharSubmit} />
       <Roster

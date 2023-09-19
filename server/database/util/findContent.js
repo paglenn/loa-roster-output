@@ -20,7 +20,7 @@ async function findBestContent(ilvl, contentType) {
       .sort("ilvl")
       .toArray();
 
-    if (contentType === "chaos_dungeons" || contentType === "guardian_raids") {
+    if (contentType === "chaos_dungeons" || contentType === "guardian_raids" || contentType === "cubes") {
       return contentList.reduce((best, content) => {
         return ilvl >= content.ilvl ? content : best;
       });

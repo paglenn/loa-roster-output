@@ -12,6 +12,12 @@ describe("content lookup tester", () => {
     expect(content.ilvl).toBe(1580);
   });
 
+  it("finds the best cubes", async () => {
+    const content = await findBestContent(ilvl, "cubes");
+    console.log(content);
+    expect(content.ilvl).toBe(1580);
+  });
+
   it("finds the best three gold earning contents and returns them in an array", async () => {
     const content = await findBestContent(ilvl, "gold_earning_content");
     expect(content.length).toEqual(3);
