@@ -1,24 +1,29 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { handleLogin } from "../utils/handleLogin";
-export const Login = ({ setUser }) => {
+import { handleSignup } from "../utils/handleSignup";
+export const Signup = ({ setUser }) => {
   const emailAddress = useRef();
+  const username = useRef();
   const password = useRef();
+  const password2 = useRef();
+
   const navigate = useNavigate();
   const [incorrect, setIncorrect] = useState(false); // used to display message for incorrect login credentials
-
+  const [passwordMisMatch, setPasswordMisMatch] = useState(false);
   // the submit handler at this level willuse the reference values to set whether the user is authenticated and navigate.
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!emailAddress.current || !password.current) {
       setIncorrect(true);
-      console.log("incomplete login information");
       return;
+    } else if (password.current !== password2.current) {
+      setPasswordMisMatch(true);
     }
 
-    let auth = await handleLogin({
+    let auth = await handleSignup({
       email: emailAddress.current,
+      username: username.current,
       password: password.current,
     });
     if (auth.auth) {
@@ -33,47 +38,66 @@ export const Login = ({ setUser }) => {
         onSubmit={handleSubmit}
         className="flex flex-col justify-around grow items-center"
       >
-        <h2> Log In</h2>
+        <h2> Sign Up </h2>
         <input
           type="text"
           placeholder="Email Address"
           className="rounded text-black"
           onChange={(e) => (emailAddress.current = e.target.value)}
         />
-
         <input
-          type="password"
+          type="text"
+          placeholder="Username (Optional)"
+          className="rounded text-black"
+          onChange={(e) => (username.current = e.target.value)}
+        />
+        <input
+          type="text"
           className="rounded text-black"
           placeholder="Password"
           onChange={(e) => (password.current = e.target.value)}
         />
-        {incorrect ? (
-          <p className="text-red-600 bg-white">
-            {" "}
-            Incorrect username or password!{" "}
-          </p>
-        ) : null}
+        <input
+          type="text"
+          className="rounded text-black"
+          placeholder="Re-Enter Password"
+          onChange={(e) => (password2.current = e.target.value)}
+        />
+        {incorrect ? <incompleteMessage /> : null}
+        {passwordMisMatch ? <mismatchMessage /> : null}
         <button type="submit" className="rounded bg-teal-500">
           {" "}
-          Log In{" "}
+          Sign Up{" "}
         </button>
       </form>
       <button
         className="bg-cyan-600 rounded"
-        role="reroute-signup"
-        onClick={() => navigate("/signup")}
+        role="reroute-login"
+        onClick={() => navigate("/")}
       >
-        First time here? Sign up!
+        Have an account? Log In!
       </button>
-
       <button
         className="bg-red-600 rounded"
         role="backdoor"
         onClick={() => navigate("/app")}
       >
         {" "}
-        Take me to the app!{" "}
+        Test out the app!{" "}
       </button>
     </div>
+  );
+};
+
+const incompleteMessage = () => {
+  return (
+    <p className="text-red-600 bg-white">
+      Must enter both username and password!
+    </p>
+  );
+};
+const mismatchMessage = () => {
+  return (
+    <p className="text-red-600 bg-white"> Entered passwords must match! </p>
   );
 };

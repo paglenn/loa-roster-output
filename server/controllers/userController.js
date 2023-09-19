@@ -19,20 +19,29 @@ userController.createUser = async (req, res, next) => {
   }
 
   // if user doesn't exist create them \o/
-  res.locals.user = await User.create({
+  const user = await User.create({
     email: email,
     username: username ?? email,
     password: password,
   });
+
+  res.locals.user = { username: user.username, auth: true };
 
   return next();
 };
 
 userController.authUser = async (req, res, next) => {
   const { email, username, password } = req.body;
+  console.log(email, username, password);
   try {
     const user = await User.findOne({ email: email });
-    res.locals.auth = await user.matchPassword(password);
+    const username = user.username;
+    const auth = await user.matchPassword(password);
+    res.locals.auth = { auth: auth };
+    res.locals.user = {
+      username: username,
+      ...res.locals.auth,
+    };
   } catch (err) {
     return next({
       ...authError,

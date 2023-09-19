@@ -7,8 +7,9 @@ import { updateGold } from "../features/goldEarningStatus/index.js";
 import { toggleRestedOnly } from "../features/restBonus/index.js";
 import axios from "axios";
 // this needs to handle state to pass down  the roster.
-const MainContainer = () => {
+const MainContainer = ({ user }) => {
   // state for roster array
+  console.log("user: ", user);
   const [roster, updateRoster] = useState([]);
 
   // state for deleted character (to trigger effect hook)
@@ -36,24 +37,13 @@ const MainContainer = () => {
       return;
     }
     axios
-      .post("/character", { ...copyCharacter })
+      .post(`/character?user=${user}`, { ...copyCharacter })
       .then(({ data }) => updateCharacter(data))
       .catch((err) => {
         alert("Character could not be created");
         console.log(err);
       });
-    // fetch("/character", {
-    //   method: "POST",
-    //   headers: { "content-type": "application/json" },
-    //   body: JSON.stringify(copyCharacter),
-    // })
-    //   .then((char) => {
-    //     updateCharacter(char);
-    //   })
-    //   .catch((err) => {
-    //     alert("Character could not be created");
-    //     console.log(err);
-    //   });
+
   };
 
   const handleItemLevelUpdate = (event, character) => {
@@ -72,7 +62,7 @@ const MainContainer = () => {
   useEffect(() => {
     // axios conversion
     axios
-      .get("/character/characters")
+      .get(`/character/characters?user=${user}`)
       .then((response) => response.data)
       .then((characters) => {
         updateRoster(characters);
@@ -87,8 +77,8 @@ const MainContainer = () => {
 
   return (
     <div className={`bg-slate-800 max-h-full flex flex-col grow`}>
-      <TotalsDisplay roster={roster} />
-      <CharacterInputDisplay handleSubmit={handleNewCharSubmit} />
+      <TotalsDisplay user={user} roster={roster} />
+      <CharacterInputDisplay handleSubmit={handleNewCharSubmit} user={user} />
       <Roster
         roster={roster}
         handleDelete={(e) => handleDelete(e, updateCharacter)}

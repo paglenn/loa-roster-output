@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { charPropLabels } from "../helpers/reference";
-const CharacterInputDisplay = ({ handleSubmit }) => {
+const CharacterInputDisplay = ({ handleSubmit, user }) => {
   // const { handleSubmit } = props;
   const character = useRef({
     name: "",
@@ -8,17 +8,20 @@ const CharacterInputDisplay = ({ handleSubmit }) => {
     _class: "",
     isGoldEarner: false,
     restedOnly: false,
+    user: user,
   });
-  const charProps = Object.keys(character.current).map((prop) => {
-    return (
-      <InputLabel
-        key={prop}
-        charPropName={prop}
-        charPropVal={character[prop]}
-        character={character}
-      />
-    );
-  });
+  const charProps = Object.keys(character.current)
+    .filter((prop) => prop !== "user")
+    .map((prop) => {
+      return (
+        <InputLabel
+          key={prop}
+          charPropName={prop}
+          charPropVal={character[prop]}
+          character={character}
+        />
+      );
+    });
 
   return (
     <div className="text-xl bg-slate-300 p-5">

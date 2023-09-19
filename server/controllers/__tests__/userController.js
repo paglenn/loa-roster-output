@@ -10,7 +10,7 @@ afterAll(() => {
   connection.close();
 });
 
-const testUser = { email: "test", username: "test", password: "test" };
+const testUser = { email: "test", password: "test" };
 const mReq = { body: testUser };
 const mRes = { locals: {} };
 const mNext = jest.fn();
@@ -66,7 +66,14 @@ describe("create user middleware", () => {
 
 describe("user authentication middleware", () => {
   it("checks user password", async () => {
+    mReq.body.email = "test";
     await authUser(mReq, mRes, mNext);
-    expect(mRes.locals.auth).toEqual(true);
+    expect(mRes.locals.auth.auth).toEqual(true);
+  });
+
+  it("returns username when user password is correct, even if not provided", async () => {
+    mReq.body.email = "test";
+    await authUser(mReq, mRes, mNext);
+    expect(mRes.locals.user.username).toEqual(testUser.email);
   });
 });

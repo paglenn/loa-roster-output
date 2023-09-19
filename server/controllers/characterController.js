@@ -55,20 +55,21 @@ const genResources = async (ilvl, isGoldEarner, restedOnly) => {
   return resourceObject;
 };
 characterController.createCharacter = async (req, res, next) => {
-  const { name, _class, ilvl, isGoldEarner, restedOnly } = req.body;
-  const user = req.params.user;
+  const { name, _class, ilvl, isGoldEarner, restedOnly, user } = req.body;
   const restedModifier = restedOnly ? 2 / 3 : 1;
 
   try {
     const resources = await genResources(ilvl, isGoldEarner, restedOnly);
-    res.locals.character = await Character.create({
+    const character = {
       name: name,
       _class: _class,
       ilvl: ilvl,
       isGoldEarner: isGoldEarner,
       restedOnly: restedOnly ?? false,
       resources: resources,
-    });
+    };
+    if (user) character.user = user;
+    res.locals.character = await Character.create(character);
     return next();
   } catch (err) {
     return next({
@@ -136,9 +137,10 @@ characterController.deleteCharacter = (req, res, next) => {
 // this is where we will get the array of characters whose properties we want to render.
 characterController.getCharacters = (req, res, next) => {
   // this is where we could start to make the database user specific
-
+  const { user } = req.query.user ? req.query : { user: "test" };
+  console.log("getting characters for user: ", user);
   // get all characters
-  Character.find()
+  Character.find({ user: user })
     .then((characterArray) => {
       res.locals.characters = characterArray;
       return next();

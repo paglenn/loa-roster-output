@@ -1,7 +1,9 @@
 import axios from "axios";
-export const handleLogin = async ({ username, password }) => {
+export const handleLogin = async ({ email, password }) => {
   const auth = await axios
-    .post(`/users/login`, { username, password })
-    .then((res) => res.data);
+    .post("/user/login", { email, password })
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
+
   return auth;
 };

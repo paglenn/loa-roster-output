@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import { Routes, Route, BrowserRouter, HashRouter } from "react-router-dom";
 import MainContainer from "./components/MainContainer";
-import { Login } from "./features/auth/components/Login";
+import { Login, Signup } from "./features/auth";
 import Header from "./components/Header";
 const App = () => {
-  const [user, updateUser] = useState(null);
+  const [user, setUser] = useState("");
   return (
     <div className=" bg-slate-800 flex flex-col h-screen">
       <Header />
       <div className="flex flex-col justify-center grow">
         <HashRouter basename="">
           <Routes>
-            {/* Login Route Here */}
-            <Route path="/" element={<Login />} />
-            <Route path="/app" element={<MainContainer />} />
+            {/* Authentication Routes */}
+            <Route path="/" element={<Login setUser={setUser} />} />
+            <Route path="/signup" element={<Signup setUser={setUser} />} />
+            {/* Main Application Page */}
+            <Route path="/app" element={<MainContainer user={user} />} />
           </Routes>
         </HashRouter>
       </div>

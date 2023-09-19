@@ -10,6 +10,7 @@ const testChar = {
   isGoldEarner: false,
   restedOnly: true,
   _class: "Scouter",
+  user: "test",
 };
 
 const mReq = { body: testChar };
@@ -32,8 +33,9 @@ describe("character updates", () => {
     const charFromDB = await Character.findOne({ name: testChar.name });
 
     expect(charFromDB.ilvl).toEqual(testChar.ilvl);
+    testChar.ilvl = originalIlvl;
+    await updateCharacter(mReq, mRes, mNext);
+
     // testChar.ilvl = originalIlvl;
   });
 });
-
-
