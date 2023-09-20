@@ -1,3 +1,3 @@
 import GoldStatusBox from "./components/goldStatusBox";
-import updateGold from "./hooks/updateGold";
+import updateGold from "./utils/updateGold";
 export { GoldStatusBox, updateGold };

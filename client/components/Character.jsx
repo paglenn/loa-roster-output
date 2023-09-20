@@ -3,6 +3,7 @@ import icons from "../helpers/icons";
 import classImages from "../helpers/classImages";
 import { Resource } from "./Resource.jsx";
 import { resourceTypes, hasSubtype } from "../helpers/reference";
+import { getCharValue } from "../helpers/sums";
 import { DeleteButton } from "../features/delete";
 import { GoldStatusBox } from "../features/goldEarningStatus";
 import { RestedStatusBox } from "../features/restBonus";
@@ -17,7 +18,7 @@ const Character = ({
   //console.log(character);
   const { name, _class, ilvl, resources, isGoldEarner, restedOnly } = character;
   const classLower = _class.toLowerCase();
-
+  const charGoldValue = getCharValue({ resources }).toLocaleString();
   // create components for resource types
   const resourceComponents = resourceTypes.map((el, index) => {
     return (
@@ -26,6 +27,8 @@ const Character = ({
         type={hasSubtype[el] ? resources[el].type : el}
         qty={hasSubtype[el] ? resources[el].qty : resources[el]}
         imHeight={8}
+        goldValue={charGoldValue}
+        showGoldValue={true}
       />
     );
   });
