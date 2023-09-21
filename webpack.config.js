@@ -17,7 +17,7 @@ module.exports = {
   ],
   devServer: {
     proxy: {
-      context: ["/character", "/characters"],
+      context: ["/character", "/user"],
       target: "http://localhost:3000",
     },
     headers: {

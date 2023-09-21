@@ -1,4 +1,4 @@
-import { prices } from "./reference.js";
+import { prices, hasSubtype } from "./reference.js";
 import { stoneConvert } from "./conversion.js";
 
 const calcTotalGoldValue = (materials) => {
@@ -9,7 +9,7 @@ const calcTotalGoldValue = (materials) => {
   return Math.round(value);
 };
 
-
+export const sumCharacterOutput = (character) => {};
 export const sumRosterOutput = (characterArray) => {
   const sumObj = {};
 

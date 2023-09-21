@@ -1,13 +1,13 @@
-const mongoose = require("mongoose");
-const URI = require("../mongo");
+const { MONGO_URI, mongoose } = require("..");
 const bcrypt = require("bcrypt");
-mongoose.connect(URI, { dbName: "test" });
+mongoose.connect(MONGO_URI, { dbName: "test" });
 
 const Schema = mongoose.Schema;
 
 // initialize schema for character
 const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
+  username: { type: String },
   password: { type: String, required: true },
 });
 

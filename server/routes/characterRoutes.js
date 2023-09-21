@@ -7,9 +7,9 @@ router.get("/characters", characterController.getCharacters, (req, res) => {
   res.status(200).json(res.locals.characters);
 });
 
-router.get("/", characterController.getCharacter, (req, res) => {
-  res.status(200).json(res.locals.character);
-});
+// router.get("/", characterController.getCharacter, (req, res) => {
+//   res.status(200).json(res.locals.character);
+// });
 
 router.post("/", characterController.createCharacter, (req, res) => {
   res.status(200).json(res.locals.character);

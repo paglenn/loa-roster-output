@@ -1,7 +1,7 @@
 const request = require("supertest");
 const dotenv = require("dotenv");
-const app = require("../../index");
-const mongoose = require("mongoose");
+const app = require("../../server");
+const { connection } = require("../../database").mongoose;
 let listener;
 
 // const PORT = process.env.TEST_PORT;
@@ -9,16 +9,15 @@ let listener;
 beforeAll(() => {
   listener = app.listen(process.env.TEST_PORT);
   dotenv.config();
-  console.log(`listening on port ${process.env.TEST_PORT}`);
 });
 
 afterAll((done) => {
   listener.close();
-  mongoose.connection.close();
+  connection.close();
   done();
 });
 
-describe("General character retrieval", () => {
+describe("Character retrieval", () => {
   test("get request to character/characters should return all characters with a get request to /character/characters", () => {
     return request(app)
       .get("/character/characters")
@@ -36,10 +35,6 @@ describe("Character creation", () => {
     _class: "Sorceress",
   };
 
-  beforeEach(async () => {
-    await request(app).delete("/character").send({ name: testChar.name });
-  });
-
   afterEach(async () => {
     await request(app).delete("/character").send({ name: testChar.name });
   });
@@ -51,7 +46,6 @@ describe("Character creation", () => {
       .expect("Content-Type", /json/)
       .then((response) => response.body)
       .then((returnedChar) => {
-        console.log(returnedChar);
         expect(returnedChar.name).toBe(testChar.name);
         expect(returnedChar.isGoldEarner).toBe(false);
         expect(returnedChar.user).toBe("test");
