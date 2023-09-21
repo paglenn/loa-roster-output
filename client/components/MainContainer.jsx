@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import TotalsDisplay from "./TotalsDisplay.jsx";
 import Roster from "./RosterContainer.jsx";
 import CharacterInputDisplay from "./CharacterInputDisplay.jsx";
@@ -43,7 +43,6 @@ const MainContainer = ({ user }) => {
         alert("Character could not be created");
         console.log(err);
       });
-
   };
 
   const handleItemLevelUpdate = (event, character) => {
