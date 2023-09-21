@@ -80,8 +80,7 @@ describe("Character card components", () => {
     //console.log("in second test: ");
 
     charResources.forEach((resource) => {
-      screen.debug();
-      if (resource !== '0')
+      if (resource !== "0")
         expect(screen.getByText(resource)).toBeInTheDocument();
     });
   });
