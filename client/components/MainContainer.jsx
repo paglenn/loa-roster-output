@@ -22,6 +22,7 @@ const MainContainer = ({ user }) => {
 
   const handleNewCharSubmit = (event, characterInfo) => {
     event.preventDefault();
+    console.log(event.target.value);
     const copyCharacter = { ...characterInfo };
     // convert item level to number
     copyCharacter.ilvl = Number(copyCharacter.ilvl);
@@ -43,7 +44,6 @@ const MainContainer = ({ user }) => {
         alert("Character could not be created");
         console.log(err);
       });
-
   };
 
   const handleItemLevelUpdate = (event, character) => {
