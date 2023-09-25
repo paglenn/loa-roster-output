@@ -1,5 +1,5 @@
-import { prices, hasSubtype } from "./reference.js";
-import { stoneConvert } from "./conversion.js";
+import { prices, hasSubtype } from "./reference";
+import { stoneConvert } from "./conversion";
 
 const calcTotalGoldValue = (materials) => {
   const value = Object.keys(materials).reduce(
@@ -17,9 +17,8 @@ const getQty = (resourceName, resource) => {
   return resource;
 };
 
-const getResourceValue = (resourceName, resource) => {
-  return getQty(resourceName, resource) * prices[resource.type ?? resourceName];
-};
+const getResourceValue = (resourceName, resource) =>
+  getQty(resourceName, resource) * prices[resource.type ?? resourceName];
 
 export const getCharValue = ({ resources }) => {
   // for each item in character resources add price of item * quantity

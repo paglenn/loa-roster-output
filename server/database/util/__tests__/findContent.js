@@ -1,5 +1,7 @@
+const { describe, expect, it } = require("@jest/globals");
 const findBestContent = require("../findContent");
 
+// import {describe, expect} from ''
 describe("content lookup tester", () => {
   const ilvl = 1580;
   it(" finds best chaos dungeon ", async () => {
@@ -22,6 +24,6 @@ describe("content lookup tester", () => {
     expect(content.length).toEqual(3);
     expect(content[0].ilvl).toEqual(1580); // akkan NM
     expect(content[1].ilvl).toEqual(1580); // kayangel HM
-    expect(content[2].ilvl).toEqual(1560); // since the brelshaza legion raid is 1560 and should be the lowest one for a 1580
+    expect(content[2].ilvl).toEqual(1560);
   });
 });

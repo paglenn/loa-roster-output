@@ -20,10 +20,14 @@ async function findBestContent(ilvl, contentType) {
       .sort("ilvl")
       .toArray();
 
-    if (contentType === "chaos_dungeons" || contentType === "guardian_raids" || contentType === "cubes") {
-      return contentList.reduce((best, content) => {
-        return ilvl >= content.ilvl ? content : best;
-      });
+    if (
+      contentType === "chaos_dungeons" ||
+      contentType === "guardian_raids" ||
+      contentType === "cubes"
+    ) {
+      return contentList.reduce((best, content) =>
+        ilvl >= content.ilvl ? content : best
+      );
     } else if (contentType === "gold_earning_content") {
       // gold earning content is diff because it should be an array of 3 items
       const bestContent = [];

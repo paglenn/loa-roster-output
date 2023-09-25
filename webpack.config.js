@@ -25,10 +25,10 @@ module.exports = {
     },
   },
   module: {
-    //rules array is executed in reverse order
+    // rules array is executed in reverse order
     rules: [
       {
-        //? matches the preceding item 0 or 1 times (could be .js or .jsx)
+        //  matches the preceding item 0 or 1 times (could be .js or .jsx)
         test: /\.jsx?/,
         exclude: /(node_modules)/,
         resolve: {
@@ -41,11 +41,11 @@ module.exports = {
 
       {
         // for CSS
-        //this is a regexp
-        //\. escapes the period
-        //[] or
-        //$ end of string
-        //i not case sensitive
+        // this is a regexp
+        // \. escapes the period
+        // [] or
+        // $ end of string
+        // i not case sensitive
         test: /\.css$/i,
         use: [
           // creates 'style' nodes from JS strings

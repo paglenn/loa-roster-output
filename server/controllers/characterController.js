@@ -56,17 +56,16 @@ const genResources = async (ilvl, isGoldEarner, restedOnly) => {
 };
 characterController.createCharacter = async (req, res, next) => {
   const { name, _class, ilvl, isGoldEarner, restedOnly, user } = req.body;
-  const restedModifier = restedOnly ? 2 / 3 : 1;
 
   try {
     const resources = await genResources(ilvl, isGoldEarner, restedOnly);
     const character = {
-      name: name,
-      _class: _class,
-      ilvl: ilvl,
+      name,
+      _class,
+      ilvl,
       isGoldEarner: isGoldEarner,
       restedOnly: restedOnly ?? false,
-      resources: resources,
+      resources,
     };
     if (user) character.user = user;
     res.locals.character = await Character.create(character);
@@ -76,7 +75,7 @@ characterController.createCharacter = async (req, res, next) => {
       error: err,
       message: { err: "an error occured: see console for more details" },
       status: 400,
-      log: "error occurred in createCharacter middleware" + err.message,
+      log: `error occurred in createCharacter middleware${err.message}`,
     });
   }
 };
@@ -86,28 +85,27 @@ characterController.createCharacter = async (req, res, next) => {
 characterController.updateCharacter = async (req, res, next) => {
   const { name, ilvl, isGoldEarner, restedOnly } = req.body;
 
-  const restedModifier = restedOnly ? 2 / 3 : 1;
   // updating item level means updating production
   // updating gold means ... updating gold
   try {
     const resources = await genResources(ilvl, isGoldEarner, restedOnly);
     res.locals.character = await Character.findOneAndUpdate(
-      { name: name },
+      { name },
       {
-        ilvl: ilvl,
-        isGoldEarner: isGoldEarner,
+        ilvl,
+        isGoldEarner,
         restedOnly: restedOnly ?? false,
-        resources: resources,
+        resources,
       },
       { returnDocument: "after" }
     );
     return next();
   } catch (err) {
     return next({
-      error: error,
+      error: err,
       message: { err: "an error occured: see console for more details" },
       status: 400,
-      log: "error occurred in updateCharacter middleware" + err.message,
+      log: `error occurred in updateCharacter middleware ${err.message}`,
     });
   }
 };
@@ -117,14 +115,14 @@ characterController.updateCharacter = async (req, res, next) => {
 characterController.deleteCharacter = (req, res, next) => {
   const { name } = req.body;
 
-  Character.findOneAndDelete({ name: name })
+  Character.findOneAndDelete({ name })
     .then((deletedChar) => {
       res.locals.character = deletedChar;
       return next();
     })
     .catch((error) => {
       next({
-        error: error,
+        error,
         message: { err: "an error occured: see console for more details" },
         status: 400,
         log: "error occurred in deleteCharacter middleware",
