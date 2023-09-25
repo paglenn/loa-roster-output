@@ -8,8 +8,28 @@ const calcTotalGoldValue = (materials) => {
   );
   return Math.round(value);
 };
+// const getResourceType = (resourceName, resource) => {
+//   if (hasSubtype[resourceName]) return resource.type;
+//   return resource;
+// };
+const getQty = (resourceName, resource) => {
+  if (hasSubtype[resourceName]) return resource.qty;
+  return resource;
+};
 
-export const sumCharacterOutput = (character) => {};
+const getResourceValue = (resourceName, resource) => {
+  return getQty(resourceName, resource) * prices[resource.type ?? resourceName];
+};
+
+export const getCharValue = ({ resources }) => {
+  // for each item in character resources add price of item * quantity
+  const value = Object.keys(resources).reduce(
+    (sum, resourceName) =>
+      sum + getResourceValue(resourceName, resources[resourceName]),
+    0
+  );
+  return Math.round(value);
+};
 export const sumRosterOutput = (characterArray) => {
   const sumObj = {};
 

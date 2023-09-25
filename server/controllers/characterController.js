@@ -138,7 +138,7 @@ characterController.deleteCharacter = (req, res, next) => {
 characterController.getCharacters = (req, res, next) => {
   // this is where we could start to make the database user specific
   const { user } = req.query.user ? req.query : { user: "test" };
-  console.log("getting characters for user: ", user);
+
   // get all characters
   Character.find({ user: user })
     .then((characterArray) => {

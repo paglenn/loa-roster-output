@@ -10,7 +10,8 @@ const stoneKey = {
   radiant_honor_leapstone: 1,
 };
 
-
+// stones convert to higher tier ones at a 5:1 ratio. we're really using this as a proxy for price here , which isn't totally accurate - 
+//  but it is - oveer sometimes and under sometimes, so overall enough until we do a more careful price calculation.  
 export const stoneConvert = (stoneType, stoneAmount) => {
   return stoneKey[stoneType] * stoneAmount ?? 0;
 };

@@ -1,10 +1,20 @@
+const level7GemPrice = 12500;
 export const prices = {
   gold: 1,
-  gems: 13.7,
+  gems: level7GemPrice / 729,
   leapstones: 81,
-  redStones: 4,
-  blueStones: 0.6,
+  redStones: 40 / 10,
+  blueStones: 6 / 10,
   silver: 0,
+  marvelous_honor_leapstone: 20,
+  greater_honor_leapstone: 5,
+  obliteration_stone: 7 / 10,
+  protection_stone: 1 / 10,
+  crystallized_guardian_stone: 1 / 10,
+  crystallized_destruction_stone: 1 / 10,
+  refined_protection_stone: 6 / 10,
+  refined_obliteration_stone: 42 / 10,
+  radiant_honor_leapstone: 82,
 };
 
 export const hasSubtype = {

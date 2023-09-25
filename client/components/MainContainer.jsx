@@ -9,7 +9,7 @@ import axios from "axios";
 // this needs to handle state to pass down  the roster.
 const MainContainer = ({ user }) => {
   // state for roster array
-  console.log("user: ", user);
+
   const [roster, updateRoster] = useState([]);
 
   // state for deleted character (to trigger effect hook)
@@ -43,7 +43,6 @@ const MainContainer = ({ user }) => {
         alert("Character could not be created");
         console.log(err);
       });
-
   };
 
   const handleItemLevelUpdate = (event, character) => {
@@ -78,7 +77,11 @@ const MainContainer = ({ user }) => {
   return (
     <div className={`bg-slate-800 max-h-full flex flex-col grow`}>
       <TotalsDisplay user={user} roster={roster} />
-      <CharacterInputDisplay handleSubmit={handleNewCharSubmit} user={user} />
+      <CharacterInputDisplay
+        handleSubmit={handleNewCharSubmit}
+        user={user}
+        character={updatedCharacter}
+      />
       <Roster
         roster={roster}
         handleDelete={(e) => handleDelete(e, updateCharacter)}

@@ -32,7 +32,7 @@ userController.createUser = async (req, res, next) => {
 
 userController.authUser = async (req, res, next) => {
   const { email, username, password } = req.body;
-  console.log(email, username, password);
+
   try {
     const user = await User.findOne({ email: email });
     const username = user.username;

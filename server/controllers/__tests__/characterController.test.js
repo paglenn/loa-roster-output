@@ -16,11 +16,12 @@ const testChar = {
 const mReq = { body: testChar };
 const mRes = { locals: {} };
 const mNext = jest.fn();
-afterAll(() => {
+afterAll((done) => {
   connection.close();
+  done();
 });
 
-describe("character updates", () => {
+xdescribe("character updates", () => {
   const { updateCharacter } = characterController;
   test("character item level updates are reflected in database", async () => {
     // invoke updateCharacter

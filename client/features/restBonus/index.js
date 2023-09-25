@@ -1,3 +1,3 @@
 import { RestedStatusBox } from "./components/RestedStatusBox";
-import { toggleRestedOnly } from "./hooks/toggleRestedOnly";
+import { toggleRestedOnly } from "./utils/toggleRestedOnly";
 export {  RestedStatusBox, toggleRestedOnly };

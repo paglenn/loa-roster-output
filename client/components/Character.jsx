@@ -3,6 +3,7 @@ import icons from "../helpers/icons";
 import classImages from "../helpers/classImages";
 import { Resource } from "./Resource.jsx";
 import { resourceTypes, hasSubtype } from "../helpers/reference";
+import { getCharValue } from "../helpers/sums";
 import { DeleteButton } from "../features/delete";
 import { GoldStatusBox } from "../features/goldEarningStatus";
 import { RestedStatusBox } from "../features/restBonus";
@@ -14,10 +15,9 @@ const Character = ({
   handleLevelUpdate,
   handleRestedUpdate,
 }) => {
-  //console.log(character);
   const { name, _class, ilvl, resources, isGoldEarner, restedOnly } = character;
   const classLower = _class.toLowerCase();
-
+  const charGoldValue = getCharValue({ resources }).toLocaleString();
   // create components for resource types
   const resourceComponents = resourceTypes.map((el, index) => {
     return (
@@ -26,13 +26,15 @@ const Character = ({
         type={hasSubtype[el] ? resources[el].type : el}
         qty={hasSubtype[el] ? resources[el].qty : resources[el]}
         imHeight={8}
+        goldValue={charGoldValue}
+        showGoldValue={true}
       />
     );
   });
   const cardColor = isGoldEarner ? "bg-[#d4af37]" : "bg-slate-300";
   return (
     <div
-      className={` basis-1/6 ${cardColor} p-2 shrink-1 items-start m-3 rounded`}
+      className={`basis-1/6 ${cardColor} p-2 shrink-1 items-start m-3 rounded`}
     >
       {/* Character Name  and class icon container  */}
       <div className="flex flex-row justify-between content-center items-start">
@@ -77,9 +79,9 @@ const Character = ({
       </form>
 
       {/* Class Picture  */}
-      <div className="grow">
+      <div className="mb-1 border-black border-2">
         <img
-          className={"rounded border-black border-2 mb-1 grow object-fill"}
+          className={"rounded w-fit"}
           src={classImages[classLower]}
           alt={`${classLower} class image`}
         />{" "}

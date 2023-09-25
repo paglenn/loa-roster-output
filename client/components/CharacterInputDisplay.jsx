@@ -89,7 +89,6 @@ const CheckboxInput = ({ charPropVal, charPropName, character }) => {
         name={charPropName}
         onChange={(e) => {
           character.current[charPropName] = e.target.checked;
-          console.log("character: ", character.current);
         }}
       />
     </label>

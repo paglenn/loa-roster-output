@@ -1,6 +1,6 @@
 import React from "react";
 import icons from "../helpers/icons";
-export const Resource = ({ type, qty, imHeight, classProps }) => {
+export const Resource = ({ type, qty, imHeight, classProps, goldValue }) => {
   // guarantee type singular for gems
   let iconName = type;
 
@@ -13,7 +13,11 @@ export const Resource = ({ type, qty, imHeight, classProps }) => {
         className={`h-${imHeight} aspect-square rounded-md`}
       />
 
-      <div> {Math.round(qty).toLocaleString()} </div>
+      <div>
+        {" "}
+        {Math.round(qty).toLocaleString()}{" "}
+        {type === "gold" && goldValue ? `(${goldValue})` : null}
+      </div>
     </li>
   );
 };
