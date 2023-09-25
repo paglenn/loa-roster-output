@@ -3,6 +3,7 @@ const path = require("path");
 const cors = require("cors");
 const characterRouter = require("./routes/characterRoutes");
 const userRouter = require("./routes/userRoutes");
+
 const app = express();
 
 app.use(express.json());
@@ -11,7 +12,7 @@ app.use("/character", characterRouter);
 app.use("/user", userRouter);
 // 404 error for unrecognized route
 
-//in production mode, serve the html
+// in production mode, serve the html
 if (process.env.NODE_ENV === "production") {
   app.get("/", (req, res) => {
     res.status(200).sendFile(path.join(__dirname, "../build/index.html"));
@@ -21,7 +22,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.use((req, res) => {
-  console.log("unknown route", req.originalUrl);
   res.status(404).send("Not found");
 });
 
