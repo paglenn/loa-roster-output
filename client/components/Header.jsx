@@ -10,7 +10,7 @@ const Header = () => {
           src={logo}
           alt="Lost Ark Logo Left"
         />
-         Lost Ark Roster Production{" "}
+        Lost Ark Roster Production{" "}
         <img
           className="float-right h-fit w-8 align-top"
           src={logo}
