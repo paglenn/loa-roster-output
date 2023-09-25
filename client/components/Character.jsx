@@ -15,7 +15,6 @@ const Character = ({
   handleLevelUpdate,
   handleRestedUpdate,
 }) => {
-  //console.log(character);
   const { name, _class, ilvl, resources, isGoldEarner, restedOnly } = character;
   const classLower = _class.toLowerCase();
   const charGoldValue = getCharValue({ resources }).toLocaleString();

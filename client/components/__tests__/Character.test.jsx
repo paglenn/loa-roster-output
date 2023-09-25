@@ -61,8 +61,6 @@ beforeEach(() => {
 describe("Character card components", () => {
   it("renders the character name", () => {
     expect(screen.getByText(testChar.name)).toBeInTheDocument();
-    console.log("in first test: ");
-    //screen.debug();
   });
 
   it("renders images for class", () => {
@@ -77,8 +75,6 @@ describe("Character card components", () => {
   });
 
   it("renders amounts for character properties", () => {
-    //console.log("in second test: ");
-
     charResources.forEach((resource) => {
       if (resource !== "0")
         expect(screen.getByText(resource)).toBeInTheDocument();

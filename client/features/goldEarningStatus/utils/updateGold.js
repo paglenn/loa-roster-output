@@ -11,7 +11,6 @@ const updateGold = (
   /* If we already have six gold earners, can't add another one  */
   if (isGoldEarner && goldEarnerCount === 6) {
     event.target.checked = !event.target.checked;
-    console.log("No more gold earners!");
     alert("Nice try - but you can only have up to six gold earners!");
     return;
   }

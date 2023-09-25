@@ -14,7 +14,6 @@ describe("content lookup tester", () => {
 
   it("finds the best cubes", async () => {
     const content = await findBestContent(ilvl, "cubes");
-    console.log(content);
     expect(content.ilvl).toBe(1580);
   });
 

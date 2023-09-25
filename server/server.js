@@ -22,7 +22,6 @@ if (process.env.NODE_ENV === "production") {
 
 app.use((req, res) => {
   console.log("unknown route", req.originalUrl);
-  console.log(process.env.NODE_ENV);
   res.status(404).send("Not found");
 });
 
