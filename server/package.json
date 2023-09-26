@@ -1,5 +1,5 @@
 {
-  "name": "solo_project",
+  "name": "solo_project-server",
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {

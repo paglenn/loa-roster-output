@@ -1,13 +1,12 @@
 /**
  * @jest-environment jsdom
  */
-// import { fetch } from "whatwg-fetch";
+
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { resourceTypes, hasSubtype } from "../../../helpers/reference";
+import { resourceTypes, hasSubtype } from "../../helpers/reference";
 import Character from "../Character";
-//import { handleDelete } from "../../features/delete";
 
 const testChar = {
   name: "Technosaint",

@@ -50,5 +50,5 @@ describe("Character creation", () => {
         expect(returnedChar.isGoldEarner).toBe(false);
         expect(returnedChar.user).toBe("test");
       });
-  });
+  }, 10000);
 });

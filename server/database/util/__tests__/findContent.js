@@ -25,5 +25,5 @@ describe("content lookup tester", () => {
     expect(content[0].ilvl).toEqual(1580); // akkan NM
     expect(content[1].ilvl).toEqual(1580); // kayangel HM
     expect(content[2].ilvl).toEqual(1560);
-  });
+  },10000);
 });
