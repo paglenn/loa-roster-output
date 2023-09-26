@@ -3,3 +3,4 @@ server/database_helpers/mongo.js
 build
 .env
 coverage
+Dockerfile
