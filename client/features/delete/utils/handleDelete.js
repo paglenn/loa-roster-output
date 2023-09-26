@@ -4,7 +4,7 @@ export const handleDelete = async (event, updateCharacter) => {
   // then use updateDeletedCharacter to update state
   // will updateDeletedCharacter to trigger useEffect hook
   await axios
-    .delete("/character", {
+    .delete("/api/character", {
       data: {
         name: event.target.id,
       },

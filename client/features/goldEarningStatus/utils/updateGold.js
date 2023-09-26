@@ -17,7 +17,7 @@ const updateGold = (
   // fetch request
   axios({
     method: "patch",
-    url: "/character",
+    url: "/api/character",
     data: {
       ...character,
       isGoldEarner: isGoldEarner,

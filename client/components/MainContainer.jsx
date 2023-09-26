@@ -37,7 +37,7 @@ const MainContainer = ({ user }) => {
       return;
     }
     axios
-      .post(`/character?user=${user}`, { ...copyCharacter })
+      .post(`/api/character?user=${user}`, { ...copyCharacter })
       .then(({ data }) => updateCharacter(data))
       .catch((err) => {
         alert("Character could not be created");
@@ -49,7 +49,7 @@ const MainContainer = ({ user }) => {
     event.preventDefault();
     const ilvl = event.target[0].value;
     axios
-      .patch("/character", {
+      .patch("/api/character", {
         ...character,
         ilvl,
       })
@@ -61,7 +61,7 @@ const MainContainer = ({ user }) => {
   useEffect(() => {
     // axios conversion
     axios
-      .get(`/character/characters?user=${user}`)
+      .get(`/api/character/characters?user=${user}`)
       .then((response) => response.data)
       .then((characters) => {
         updateRoster(characters);

@@ -35,6 +35,10 @@ userController.authUser = async (req, res, next) => {
 
   try {
     const user = await User.findOne({ email: email });
+    if (!user) {
+      res.locals.auth = { auth: false };
+      return next();
+    }
     const username = user.username;
     const auth = await user.matchPassword(password);
     res.locals.auth = { auth: auth };
