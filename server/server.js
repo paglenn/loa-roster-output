@@ -8,8 +8,8 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use("/character", characterRouter);
-app.use("/user", userRouter);
+app.use("/api/character", characterRouter);
+app.use("/api/user", userRouter);
 // 404 error for unrecognized route
 
 // in production mode, serve the html

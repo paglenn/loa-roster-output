@@ -20,7 +20,7 @@ afterAll((done) => {
 describe("Character retrieval", () => {
   test("get request to character/characters should return all characters with a get request to /character/characters", () => {
     return request(app)
-      .get("/character/characters")
+      .get("/api/character/characters")
       .then((response) => response.body)
       .then((data) => {
         expect(Array.isArray(data)).toBeTruthy();
@@ -36,12 +36,12 @@ describe("Character creation", () => {
   };
 
   afterEach(async () => {
-    await request(app).delete("/character").send({ name: testChar.name });
+    await request(app).delete("/api/character").send({ name: testChar.name });
   });
 
   test("created character comes back on response body hydrated with defaults", () => {
     return request(app)
-      .post("/character")
+      .post("/api/character")
       .send(testChar)
       .expect("Content-Type", /json/)
       .then((response) => response.body)
