@@ -1,12 +1,12 @@
 import React from "react";
 import icons from "../helpers/icons";
-import classImages from "../helpers/classImages";
 import { Resource } from "./Resource.jsx";
 import { resourceTypes, hasSubtype } from "../helpers/reference";
 import { getCharValue } from "../helpers/sums";
 import { DeleteButton } from "../features/delete";
 import { GoldStatusBox } from "../features/goldEarningStatus";
 import { RestedStatusBox } from "../features/restBonus";
+const CharPortrait = React.lazy(() => import("./CharPortrait"));
 // render character cards
 const Character = ({
   character,
@@ -80,11 +80,7 @@ const Character = ({
 
       {/* Class Picture  */}
       <div className="mb-1 border-black border-2">
-        <img
-          className={"rounded w-fit"}
-          src={classImages[classLower]}
-          alt={`${classLower} class image`}
-        />{" "}
+        <CharPortrait classLower={classLower} />
       </div>
 
       {/* list of resources  */}

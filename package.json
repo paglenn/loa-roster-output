@@ -21,8 +21,9 @@
     "build": " NODE_ENV=production webpack",
     "server-dev": "cd server && npm run dev",
     "client": "cd client && npm start",
-    "dev": "concurrently \"npm run server-dev\"  \"npm run client\" ",
-    "test-client": "cd client && npm test", 
+    "client-dev": "cd client && npm run dev",
+    "dev": "concurrently \"npm run server-dev\"  \"npm run client-dev\" ",
+    "test-client": "cd client && npm test",
     "test-server": "cd server && npm test",
     "test": "concurrently \" npm run test-client\" \" npm run test-server\" "
   },
