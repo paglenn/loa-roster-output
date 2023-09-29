@@ -79,7 +79,7 @@ const Character = ({
       </form>
 
       {/* Class Picture  */}
-      <div className="mb-1 border-black border-2">
+      <div className="mb-1 rounded flex flex-row">
         <CharPortrait classLower={classLower} />
       </div>
 
