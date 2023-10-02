@@ -17,7 +17,7 @@ afterAll((done) => {
   done();
 });
 
-xdescribe("Character retrieval", () => {
+describe("Character retrieval", () => {
   test("get request to character/characters should return all characters with a get request to /character/characters", () => {
     return request(app)
       .get("/api/character/characters")
