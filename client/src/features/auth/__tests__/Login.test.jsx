@@ -39,7 +39,7 @@ describe("Buttons", () => {
     expect(screen.getByRole("reroute-signup")).toBeInTheDocument();
   });
 
-  test("backdoor rendering", async () => {
+  test("backdoor button rendering", async () => {
     expect(screen.getByRole("backdoor")).toBeInTheDocument();
   });
 });
