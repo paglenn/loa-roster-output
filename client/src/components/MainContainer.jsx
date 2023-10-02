@@ -6,6 +6,7 @@ import { handleDelete } from "../features/delete/index.js";
 import { updateGold } from "../features/goldEarningStatus/index.js";
 import { toggleRestedOnly } from "../features/restBonus/index.js";
 import axios from "axios";
+import { vercelPrefix } from "../helpers/vercel.js";
 // this needs to handle state to pass down  the roster.
 const MainContainer = ({ user }) => {
   // state for roster array
@@ -37,7 +38,7 @@ const MainContainer = ({ user }) => {
       return;
     }
     axios
-      .post(`/api/character?user=${user}`, { ...copyCharacter })
+      .post(`${vercelPrefix}/api/character?user=${user}`, { ...copyCharacter })
       .then(({ data }) => updateCharacter(data))
       .catch((err) => {
         alert("Character could not be created");
@@ -49,7 +50,7 @@ const MainContainer = ({ user }) => {
     event.preventDefault();
     const ilvl = event.target[0].value;
     axios
-      .patch("/api/character", {
+      .patch(`${vercelPrefix}/api/character`, {
         ...character,
         ilvl,
       })
@@ -61,7 +62,7 @@ const MainContainer = ({ user }) => {
   useEffect(() => {
     // axios conversion
     axios
-      .get(`/api/character/characters?user=${user}`)
+      .get(`${vercelPrefix}/api/character/characters?user=${user}`)
       .then((response) => response.data)
       .then((characters) => {
         updateRoster(characters);

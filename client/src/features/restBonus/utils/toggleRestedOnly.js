@@ -1,8 +1,9 @@
+import { vercelPrefix } from "../../../helpers/vercel";
 export const toggleRestedOnly = (event, character, updateCharacter) => {
   // get name and ilvl of character
   const restedOnly = event.target.checked;
   // send fetch request ot update character with checked status of checkbox
-  fetch("/api/character", {
+  fetch(`${vercelPrefix}/api/character`, {
     method: "PATCH",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({
