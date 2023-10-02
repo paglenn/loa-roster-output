@@ -17,7 +17,7 @@
     "sass": "^1.63.6"
   },
   "scripts": {
-    "start": "cs server && npm start",
+    "start": "cd server && npm start",
     "build": " NODE_ENV=production webpack",
     "server-dev": "cd server && npm run dev",
     "client": "cd client && npm start",
