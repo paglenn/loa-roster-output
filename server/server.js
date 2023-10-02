@@ -22,7 +22,10 @@ if (process.env.NODE_ENV === "production") {
 
   app.use("/", express.static(path.join(__dirname, "../client/public")));
 } else {
-  app.get("/", (req, res) => res.send("ready to serve"));
+  app.get("/api/", (req, res) => {
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    res.send("ready to serve");
+  });
 }
 app.use((req, res) => {
   res.status(404).send("Not found");
