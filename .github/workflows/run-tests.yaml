@@ -12,7 +12,6 @@ jobs:
       - name: create env file
         run: |
           cd server
-          npm ci
           touch .env 
           echo MONGO_URI=${{ vars.MONGO_URI }} >> .env
           echo TEST_PORT=5050 >> .env
