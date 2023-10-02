@@ -1,7 +1,8 @@
 import axios from "axios";
+import { vercelPrefix } from "../../../helpers/vercel";
 export const handleSignup = async ({ email, username, password }) => {
   const auth = await axios
-    .post("/api/user/signup", { email, username, password })
+    .post(`${vercelPrefix}/api/user/signup`, { email, username, password })
     .then((res) => res.data)
     .catch((err) => console.log(err));
   console.log("auth object: ", auth);

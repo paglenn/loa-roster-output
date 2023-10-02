@@ -1,4 +1,5 @@
 import axios from "axios";
+import { vercelPrefix } from "../../../helpers/vercel";
 const updateGold = (
   event,
   character,
@@ -17,7 +18,7 @@ const updateGold = (
   // fetch request
   axios({
     method: "patch",
-    url: "/api/character",
+    url: `${vercelPrefix}/api/character`,
     data: {
       ...character,
       isGoldEarner: isGoldEarner,
