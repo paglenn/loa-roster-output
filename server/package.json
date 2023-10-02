@@ -12,6 +12,7 @@
   },
   "scripts": {
     "start": "NODE_ENV=production node index.js",
+    "server": "node index.js",
     "dev": "nodemon index.js",
     "test": "jest --collect-coverage --forceExit"
   },
