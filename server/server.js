@@ -15,10 +15,12 @@ app.use("/api/user", userRouter);
 // in production mode, serve the html
 if (process.env.NODE_ENV === "production") {
   app.get("/", (req, res) => {
-    res.status(200).sendFile(path.join(__dirname, "../dist/index.html"));
+    res
+      .status(200)
+      .sendFile(path.join(__dirname, "../client/public/index.html"));
   });
 
-  app.use("/", express.static(path.join(__dirname, "../dist")));
+  app.use("/", express.static(path.join(__dirname, "../client/public")));
 }
 
 app.use((req, res) => {
