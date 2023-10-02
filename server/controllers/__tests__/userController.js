@@ -6,8 +6,8 @@ const User = require("../../database/models/userModel");
 const { createUser, authUser } = require("../userController");
 
 // To tie up any test we'll want to close the connection to the database so Jest can exit
-afterAll(() => {
-  connection.close();
+afterAll(async () => {
+  await connection.close();
 });
 
 const testUser = { email: "test", password: "test" };

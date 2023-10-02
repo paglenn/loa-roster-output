@@ -1,13 +1,13 @@
 /**
  * @jest-environment jsdom
  */
-// import { fetch } from "whatwg-fetch";
+
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { resourceTypes, hasSubtype } from "../../helpers/reference";
 import Character from "../Character";
-//import { handleDelete } from "../../features/delete";
+import { act } from "react-dom/test-utils";
 
 const testChar = {
   name: "Technosaint",
@@ -47,25 +47,20 @@ const charResources = resourceTypes.map((resource) =>
 
 //console.log(resourceList, charResources);
 
-beforeEach(() => {
-  render(
-    <Character
-      character={testChar}
-      handleDelete={jest.fn()}
-      handleGoldUpdate={jest.fn()}
-      handleLevelUpdate={jest.fn()}
-      handleRestedUpdate={jest.fn()}
-    />
-  );
-});
 describe("Character card components", () => {
-  it("renders the character name", () => {
-    expect(screen.getByText(testChar.name)).toBeInTheDocument();
+  it("renders the character name", async () => {
+    render(<Character character={testChar} />);
+
+    expect(await screen.findByText(testChar.name)).toBeInTheDocument();
+    // screen.debug();
   });
 
-  it("renders images for class", () => {
+  it("renders images for class", async () => {
+    act(() => {
+      render(<Character character={testChar} />);
+    });
     expect(screen.getByAltText(/class icon/)).toBeInTheDocument();
-    expect(screen.getByAltText(/class image/)).toBeInTheDocument();
+    expect(await screen.findByAltText(/class image/)).toBeInTheDocument();
     // iterate over resource types
     // an image with that alt text should be in the document
     resourceList.forEach((resource) => {
@@ -75,6 +70,9 @@ describe("Character card components", () => {
   });
 
   it("renders amounts for character properties", () => {
+    act(() => {
+      render(<Character character={testChar} />);
+    });
     charResources.forEach((resource) => {
       if (resource !== "0")
         expect(screen.getByText(resource)).toBeInTheDocument();

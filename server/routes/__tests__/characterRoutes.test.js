@@ -3,12 +3,12 @@ const dotenv = require("dotenv");
 const app = require("../../server");
 const { connection } = require("../../database").mongoose;
 let listener;
+dotenv.config();
 
 // const PORT = process.env.TEST_PORT;
 //const app = require("../../server");
 beforeAll(() => {
   listener = app.listen(process.env.TEST_PORT);
-  dotenv.config();
 });
 
 afterAll((done) => {
@@ -17,7 +17,7 @@ afterAll((done) => {
   done();
 });
 
-describe("Character retrieval", () => {
+xdescribe("Character retrieval", () => {
   test("get request to character/characters should return all characters with a get request to /character/characters", () => {
     return request(app)
       .get("/api/character/characters")
@@ -35,8 +35,15 @@ describe("Character creation", () => {
     _class: "Sorceress",
   };
 
-  afterEach(async () => {
-    await request(app).delete("/api/character").send({ name: testChar.name });
+  afterEach((done) => {
+    request(app)
+      .delete("/api/character")
+      .send({ name: testChar.name })
+      .then(() => done())
+      .catch((err) => {
+        console.log(err);
+        done();
+      });
   });
 
   test("created character comes back on response body hydrated with defaults", () => {

@@ -15,17 +15,18 @@
 
 ## Features
 
-| Feature                          | Status |
-| -------------------------------- | ------ |
-| Roster resource tracking         | ✅     |
-| Character addition and deletion  | ✅     |
-| Character Item Level Updates     | ✅     |
-| Rested-only designation          | ✅     |
-| User specificity /authentication | ✅     |
-| Frontend testing coverage        | ⏳     |
-| Backend Testing                  | ⏳     |
-| Google OAuth                     | 🙏🏾     |
-| Typescript conversion            | 🙏🏾     |
+| Feature                             | Status |
+| ----------------------------------- | ------ |
+| Roster resource tracking            | ✅     |
+| Character addition and deletion     | ✅     |
+| Character Item Level Updates        | ✅     |
+| Rested-only designation             | ✅     |
+| User specificity /authentication    | ✅     |
+| Frontend testing coverage           | ⏳     |
+| Backend Testing                     | ⏳     |
+| Public access via Vercel deployment | ⏳     |
+| Google OAuth                        | 🙏🏾     |
+| Typescript conversion               | 🙏🏾     |
 
 ### Feature Status Key
 
