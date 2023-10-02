@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://loa-roster-output-server.vercel.app/api"
+    }
+  ]
+}
