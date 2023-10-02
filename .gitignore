@@ -5,3 +5,4 @@ build
 coverage
 Dockerfile
 dist
+package copy.json

@@ -2,7 +2,7 @@ const { connection } = require("../../database").mongoose;
 const characterController = require("../characterController");
 const Character = require("../../database/models/characterModel");
 
-const originalIlvl = 1415;
+const originalIlvl = 1430;
 
 const testChar = {
   name: "Technosaint",

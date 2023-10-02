@@ -19,12 +19,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
-      - name: test server
+      - name: test
         run: |
           npm ci
-          npm test
-      - name: test client
-        run: |
-          cd ../server
-          npm ci 
+          npm run ci-all
           npm test
