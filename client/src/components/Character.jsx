@@ -34,7 +34,7 @@ const Character = ({
   const cardColor = isGoldEarner ? "bg-[#d4af37]" : "bg-slate-300";
   return (
     <div
-      className={`basis-1/6 ${cardColor} p-2 shrink-1 items-start m-3 rounded`}
+      className={`lg:basis-1 justify-evenly grow ${cardColor} shrink items-start rounded m-2 p-1`}
     >
       {/* Character Name  and class icon container  */}
       <div className="flex flex-row justify-between content-center items-start">
