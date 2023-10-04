@@ -34,11 +34,11 @@ const Character = ({
   const cardColor = isGoldEarner ? "bg-[#d4af37]" : "bg-slate-300";
   return (
     <div
-      className={`lg:basis-1 justify-evenly grow ${cardColor} shrink items-start rounded m-2 p-1`}
+      className={`lg:basis-1 grow-0 ${cardColor} shrink items-start rounded p-1 m-2`}
     >
       {/* Character Name  and class icon container  */}
       <div className="flex flex-row justify-between content-center items-start">
-        <span className="text-lg font-bold mb-2"> {name} </span>
+        <span className="text-lg font-bold mb-2 mr-1"> {name} </span>
         <span className="text-lg">{ilvl} </span>
         <GoldStatusBox
           isGoldEarner={isGoldEarner}
