@@ -1,8 +1,8 @@
 import React from "react";
-import icons from "../helpers/icons";
+import icons from "../utils/assets/icons";
 import { Resource } from "./Resource.jsx";
-import { resourceTypes, hasSubtype } from "../helpers/reference";
-import { getCharValue } from "../helpers/sums";
+import { resourceTypes, hasSubtype } from "../utils/reference";
+import { getCharValue } from "../utils/sums";
 import { DeleteButton } from "../features/delete";
 import { GoldStatusBox } from "../features/goldEarningStatus";
 import { RestedStatusBox } from "../features/restBonus";

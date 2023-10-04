@@ -1,4 +1,4 @@
-import { vercelPrefix } from "../../../helpers/vercel";
+import { vercelPrefix } from "../../../utils/vercel";
 export const toggleRestedOnly = (event, character, updateCharacter) => {
   // get name and ilvl of character
   const restedOnly = event.target.checked;

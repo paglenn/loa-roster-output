@@ -66,14 +66,15 @@ export const Login = ({ setUser }) => {
         First time here? Sign up!
       </button>
 
-      <button
+      {/* Backdoor is commented out  */}
+      {/* <button
         className="bg-red-600 rounded"
         role="backdoor"
         onClick={() => navigate("/app")}
       >
         {" "}
         Take me to the app!{" "}
-      </button>
+      </button> */}
     </div>
   );
 };

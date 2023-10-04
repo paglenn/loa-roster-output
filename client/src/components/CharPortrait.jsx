@@ -1,4 +1,4 @@
-import classImages from "../helpers/classImages";
+import classImages from "../utils/assets/classImages";
 import React from "react";
 
 export default ({ classLower }) => {

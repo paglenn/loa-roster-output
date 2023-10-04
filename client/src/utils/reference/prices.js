@@ -54,7 +54,7 @@ const apiMap = {
   leapstones: "radiant-honor-leapstone-3",
 };
 
-const updatedPrices = async () => {
+const updatePrices = async () => {
   const apiPrices = await axios
     .get(
       "https://www.lostarkmarket.online/api/export-market-live/North America East?category=Enhancement Material&subcategory=Honing Materials&tier=Tier 3"
@@ -67,10 +67,13 @@ const updatedPrices = async () => {
   console.log(apiPriceObj);
   Object.keys(prices).forEach((item) => {
     if (apiMap[item] in apiPriceObj) {
-      prices[item] = apiPriceObj[apiMap[item]] * priceModifiers[item];
+      const unitPrice = apiPriceObj[apiMap[item]] * priceModifiers[item];
+      prices[item] = unitPrice;
     }
   });
+  // store in local storage
+  localStorage.setItem("prices", JSON.stringify(prices));
   return prices; // will auto-resolve into a promise
 };
 
-export { prices, updatedPrices };
+export { prices, updatePrices };

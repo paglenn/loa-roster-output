@@ -1,5 +1,5 @@
 import axios from "axios";
-import { vercelPrefix } from "../../../helpers/vercel";
+import { vercelPrefix } from "../../../utils/vercel";
 const updateGold = (
   event,
   character,

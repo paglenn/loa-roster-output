@@ -6,7 +6,7 @@ import { handleDelete } from "../features/delete/index.js";
 import { updateGold } from "../features/goldEarningStatus/index.js";
 import { toggleRestedOnly } from "../features/restBonus/index.js";
 import axios from "axios";
-import { vercelPrefix } from "../helpers/vercel.js";
+import { vercelPrefix } from "../utils/vercel";
 // this needs to handle state to pass down  the roster.
 const MainContainer = ({ user }) => {
   // state for roster array

@@ -1,5 +1,10 @@
-import { updatedPrices, hasSubtype, stoneConvert } from "./reference";
-const prices = await updatedPrices();
+import { updatePrices, hasSubtype, stoneConvert } from "./reference";
+console.log("local storage: ", localStorage.getItem("prices"));
+let prices = JSON.parse(localStorage.getItem("prices"));
+(async function ensurePriceUpdate() {
+  if (!prices) prices = await updatePrices();
+})();
+
 // console.log("prices in sums file: ", prices);
 const calcTotalGoldValue = (materials) => {
   const value = Object.keys(materials).reduce(
@@ -29,6 +34,7 @@ export const getCharValue = ({ resources }) => {
   );
   return Math.round(value);
 };
+
 export const sumRosterOutput = (characterArray) => {
   const sumObj = {};
 

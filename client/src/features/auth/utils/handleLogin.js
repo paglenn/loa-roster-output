@@ -1,5 +1,5 @@
 import axios from "axios";
-import { vercelPrefix } from "../../../helpers/vercel";
+import { vercelPrefix } from "../../../utils/vercel";
 export const handleLogin = async ({ email, password }) => {
   const auth = await axios
     .post(`${vercelPrefix}/api/user/login`, { email, password })

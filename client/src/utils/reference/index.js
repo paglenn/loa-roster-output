@@ -1,5 +1,5 @@
 import { stoneConvert } from "./conversion";
-import { updatedPrices } from "./prices";
+import { prices, updatePrices } from "./prices";
 import {
   hasSubtype,
   resourceTypes,
@@ -8,8 +8,9 @@ import {
 } from "./labels";
 
 export {
+  prices,
   stoneConvert,
-  updatedPrices,
+  updatePrices,
   hasSubtype,
   resourceTypes,
   highestSubtypes,

@@ -1,5 +1,3 @@
-import { prices, updatedPrices } from "./prices";
-export { updatedPrices };
 export const hasSubtype = {
   leapstones: true,
   redStones: true,
