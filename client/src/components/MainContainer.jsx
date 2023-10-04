@@ -7,6 +7,7 @@ import { updateGold } from "../features/goldEarningStatus/index.js";
 import { toggleRestedOnly } from "../features/restBonus/index.js";
 import axios from "axios";
 import { vercelPrefix } from "../utils/vercel";
+import { updatePrices } from "../utils/reference";
 // this needs to handle state to pass down  the roster.
 const MainContainer = ({ user }) => {
   // state for roster array
@@ -58,6 +59,8 @@ const MainContainer = ({ user }) => {
     event.target[0].value = "";
   };
 
+  // effect hook to update prices
+  useEffect(updatePrices, []);
   // effect hook to get changes to character list. we will want to run this on page load, but also on submission of forms or  deletion of a character
   useEffect(() => {
     // axios conversion

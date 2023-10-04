@@ -1,9 +1,11 @@
-import { updatePrices, hasSubtype, stoneConvert } from "./reference";
-console.log("local storage: ", localStorage.getItem("prices"));
-let prices = JSON.parse(localStorage.getItem("prices"));
-(async function ensurePriceUpdate() {
-  if (!prices) prices = await updatePrices();
-})();
+import {
+  prices as oldPrices,
+  updatePrices,
+  hasSubtype,
+  stoneConvert,
+} from "./reference";
+
+const prices = JSON.parse(localStorage.getItem("prices")) ?? oldPrices;
 
 // console.log("prices in sums file: ", prices);
 const calcTotalGoldValue = (materials) => {

@@ -55,6 +55,15 @@ const apiMap = {
 };
 
 const updatePrices = async () => {
+  // if we already have prices stored, no need to retrieve
+  // update once every 12 hours
+  // if (localStorage.getItem("prices")) {
+  //   const currentTime = Date.now();
+  //   const updatedTime = localStorage.getItem("prices-updated");
+  //   if (currentTime - updatedTime < 1000 * 60 * 60 * 12)
+  //     return JSON.parse(localStorage.getItem("prices"));
+  // }
+
   const apiPrices = await axios
     .get(
       "https://www.lostarkmarket.online/api/export-market-live/North America East?category=Enhancement Material&subcategory=Honing Materials&tier=Tier 3"
@@ -64,7 +73,7 @@ const updatePrices = async () => {
   apiPrices.forEach((item) => {
     apiPriceObj[item.id] = item.recentPrice;
   });
-  console.log(apiPriceObj);
+
   Object.keys(prices).forEach((item) => {
     if (apiMap[item] in apiPriceObj) {
       const unitPrice = apiPriceObj[apiMap[item]] * priceModifiers[item];
@@ -73,6 +82,7 @@ const updatePrices = async () => {
   });
   // store in local storage
   localStorage.setItem("prices", JSON.stringify(prices));
+  //localStorage.setItem("prices-updated", `${Date.now()}`);
   return prices; // will auto-resolve into a promise
 };
 
