@@ -1,6 +1,7 @@
-import { prices, hasSubtype } from "./reference";
+import { updatedPrices, hasSubtype } from "./reference";
 import { stoneConvert } from "./conversion";
-
+const prices = await updatedPrices();
+console.log("prices in sums file: ", prices);
 const calcTotalGoldValue = (materials) => {
   const value = Object.keys(materials).reduce(
     (sum, name) => sum + materials[name] * prices[name],
