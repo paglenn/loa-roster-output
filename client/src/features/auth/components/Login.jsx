@@ -1,5 +1,5 @@
 // Login Component
-import React, { useRef, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleLogin } from "../utils/handleLogin";
 import { BackDoorButton } from "./Backdoor";
@@ -9,6 +9,13 @@ export const Login = ({ setUser }) => {
   const navigate = useNavigate();
   const [incorrect, setIncorrect] = useState(false); // used to display message for incorrect login credentials
   const user = localStorage.getItem("user");
+  // if there is already a user, just navigate to the app
+  useEffect(() => {
+    if (user && user !== "test") {
+      setUser(user);
+      navigate("/app");
+    }
+  }, []);
   // the submit handler at this level willuse the reference values to set whether the user is authenticated and navigate.
   const handleSubmit = async (e) => {
     e.preventDefault();
