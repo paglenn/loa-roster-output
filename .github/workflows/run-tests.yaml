@@ -25,3 +25,4 @@ jobs:
           npm run ci-all
           npm run test-client
           npm run test-server
+
