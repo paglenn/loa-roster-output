@@ -5,9 +5,10 @@
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { resourceTypes, hasSubtype } from "../../helpers/reference";
+import { resourceTypes, hasSubtype } from "../../utils/reference";
 import Character from "../Character";
 import { act } from "react-dom/test-utils";
+import { prices } from "../../utils/reference";
 
 const testChar = {
   name: "Technosaint",
@@ -48,6 +49,10 @@ const charResources = resourceTypes.map((resource) =>
 //console.log(resourceList, charResources);
 
 describe("Character card components", () => {
+  beforeEach(async () => {
+    localStorage.setItem("prices", JSON.stringify(prices));
+  });
+
   it("renders the character name", async () => {
     render(<Character character={testChar} />);
 
@@ -69,7 +74,7 @@ describe("Character card components", () => {
     });
   });
 
-  it("renders amounts for character properties", () => {
+  it("renders amounts for character properties", async () => {
     act(() => {
       render(<Character character={testChar} />);
     });

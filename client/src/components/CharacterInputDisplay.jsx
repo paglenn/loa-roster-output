@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { charPropLabels } from "../helpers/reference";
+import { charPropLabels } from "../utils/reference";
 const CharacterInputDisplay = ({ handleSubmit, user }) => {
   // const { handleSubmit } = props;
   const character = useRef({

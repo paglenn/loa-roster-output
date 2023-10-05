@@ -1,6 +1,13 @@
-import { prices, hasSubtype } from "./reference";
-import { stoneConvert } from "./conversion";
+import {
+  prices as oldPrices,
+  updatePrices,
+  hasSubtype,
+  stoneConvert,
+} from "./reference";
 
+const prices = JSON.parse(localStorage.getItem("prices")) ?? oldPrices;
+
+// console.log("prices in sums file: ", prices);
 const calcTotalGoldValue = (materials) => {
   const value = Object.keys(materials).reduce(
     (sum, name) => sum + materials[name] * prices[name],
@@ -29,6 +36,7 @@ export const getCharValue = ({ resources }) => {
   );
   return Math.round(value);
 };
+
 export const sumRosterOutput = (characterArray) => {
   const sumObj = {};
 

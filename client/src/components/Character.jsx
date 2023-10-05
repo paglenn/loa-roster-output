@@ -1,10 +1,10 @@
 import React from "react";
-import icons from "../helpers/icons";
+import icons from "../utils/assets/icons";
 import { Resource } from "./Resource.jsx";
-import { resourceTypes, hasSubtype } from "../helpers/reference";
-import { getCharValue } from "../helpers/sums";
+import { resourceTypes, hasSubtype } from "../utils/reference";
+import { getCharValue } from "../utils/sums";
 import { DeleteButton } from "../features/delete";
-import { GoldStatusBox } from "../features/goldEarningStatus";
+import { GoldStatusBox } from "../features/goldUpdate";
 import { RestedStatusBox } from "../features/restBonus";
 const CharPortrait = React.lazy(() => import("./CharPortrait"));
 // render character cards
@@ -34,11 +34,11 @@ const Character = ({
   const cardColor = isGoldEarner ? "bg-[#d4af37]" : "bg-slate-300";
   return (
     <div
-      className={`basis-1/6 ${cardColor} p-2 shrink-1 items-start m-3 rounded`}
+      className={`lg:basis-1/5 grow lg:grow-0  ${cardColor} shrink items-start rounded p-1 m-2`}
     >
       {/* Character Name  and class icon container  */}
       <div className="flex flex-row justify-between content-center items-start">
-        <span className="text-lg font-bold mb-2"> {name} </span>
+        <span className="text-lg font-bold mb-2 mr-1"> {name} </span>
         <span className="text-lg">{ilvl} </span>
         <GoldStatusBox
           isGoldEarner={isGoldEarner}
