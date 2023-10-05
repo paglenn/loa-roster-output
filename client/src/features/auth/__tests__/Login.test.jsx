@@ -7,11 +7,14 @@ import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import { Login } from "../components/Login";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+import axios from "axios";
+
 //login component should be the default when app is rendered (i.e. is the main page)
 
 let mockHook = jest.fn();
-// login component should have username and password fields
-beforeEach(() => {
+jest.mock("axios");
+
+const renderComponent = () => {
   render(
     <BrowserRouter>
       <Routes>
@@ -19,27 +22,46 @@ beforeEach(() => {
       </Routes>
     </BrowserRouter>
   );
-});
+};
+// login component should have username and password fields
+beforeEach(renderComponent);
 // click handler shoould be invoked with username and password when login button is pressed
 describe("Login fields", () => {
   test("Email address & password fields render", () => {
     expect(screen.getByPlaceholderText("Email Address")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Password")).toBeInTheDocument();
   });
-});
-
-describe("Buttons", () => {
-  xtest("Login button should call submit handler when button is clicked", async () => {
-    const user = userEvent.setup();
-    await user.click(screen.getByRole("button"));
-    expect(mockHandler).toHaveBeenCalled();
-  });
 
   test("renders button to route to signup", async () => {
     expect(screen.getByRole("reroute-signup")).toBeInTheDocument();
   });
+});
 
-  test("backdoor button rendering", async () => {
-    expect(screen.getByRole("backdoor")).toBeInTheDocument();
+describe("Button functionality ", () => {
+  test("incorrect username/password causes warning to render", async () => {
+    // first check that the text doesn't render by default
+    expect(
+      screen.queryByText("Incorrect username or password!")
+    ).not.toBeInTheDocument();
+    // mock axios call
+    axios.post.mockImplementation(() =>
+      Promise.resolve({ data: { auth: false } })
+    );
+    // generate user event
+    const user = userEvent.setup();
+    await user.click(screen.getByRole("login"));
+
+    // expect incorrect text to render
+    expect(
+      screen.getByText("Incorrect username or password!")
+    ).toBeInTheDocument();
+  });
+
+  test("backdoor button only renders if test user", async () => {
+    expect(screen.queryByRole("backdoor")).not.toBeInTheDocument();
+    // set local storage and rerender so backdoor should now render
+    localStorage.setItem("user", "test");
+    renderComponent();
+    expect(screen.queryByRole("backdoor")).toBeInTheDocument();
   });
 });

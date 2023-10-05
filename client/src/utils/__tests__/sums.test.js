@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import { getCharValue } from "../sums";
 import { it, test, expect } from "@jest/globals";
 const testChar = {

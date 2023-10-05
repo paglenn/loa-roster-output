@@ -20,13 +20,16 @@ const genResources = async (ilvl, isGoldEarner, restedOnly) => {
   const chaosDungeon = await findBestContent(ilvl, "chaos_dungeons");
   const guardianRaid = await findBestContent(ilvl, "guardian_raids");
   const cube = await findBestContent(ilvl, "cubes");
+  const cubesPerWeek = restedOnly ? 1 : 2;
 
   const goldSources = isGoldEarner
     ? await findBestContent(ilvl, "gold_earning_content")
     : [];
 
-  const silver = chaosDungeon.silver * 14 * restedModifier + cube.silver;
-  const gems = restedModifier * (chaosDungeon.gems * 14) + cube.gems;
+  const silver =
+    chaosDungeon.silver * 14 * restedModifier + cube.silver * cubesPerWeek;
+  const gems =
+    restedModifier * (chaosDungeon.gems * 14) + cube.gems * cubesPerWeek;
 
   // generate resource object
   const resourceObject = {
@@ -152,26 +155,5 @@ characterController.getCharacters = (req, res, next) => {
       });
     });
 };
-
-// method: get one character
-// parameter needed: name
-// characterController.getCharacter = (req, res, next) => {
-//   // this is where we could start to make the database user specific
-//   const { name } = req.body;
-//   // get all characters
-//   Character.findOne({ name })
-//     .then((character) => {
-//       res.locals.character = character;
-//       return next();
-//     })
-//     .catch((error) => {
-//       next({
-//         error: error,
-//         message: { err: "an error occured: see console for more details" },
-//         status: 400,
-//         log: "error occurred in getCharacter middleware",
-//       });
-//     });
-// };
 
 module.exports = characterController;

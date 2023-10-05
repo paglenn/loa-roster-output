@@ -11,4 +11,7 @@ module.exports = {
       lines: 60,
     },
   },
+  testEnvironmentOptions: {
+    url: "http://localhost:3000",
+  },
 };

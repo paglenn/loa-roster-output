@@ -58,4 +58,10 @@ userController.authUser = async (req, res, next) => {
   }
 };
 
+userController.checkAdmin = async (req, res, next) => {
+  const { secret } = req.body;
+  res.locals.auth = { isAdmin: process.env.ADMIN_SECRET === secret };
+  return next();
+};
+
 module.exports = userController;

@@ -1,13 +1,9 @@
 const React = require("react");
-import icons from "../helpers/icons";
+import icons from "../utils/assets/icons";
 
-import { sumRosterOutput } from "../helpers/sums.js";
-import { Resource } from "./Resource.jsx";
-import {
-  resourceTypes,
-  hasSubtype,
-  highestSubtypes,
-} from "../helpers/reference";
+import { sumRosterOutput } from "../utils/sums";
+import { Resource } from "./Resource";
+import { resourceTypes, hasSubtype, highestSubtypes } from "../utils/reference";
 // should contain total roster gold income , silver, gems , leapstones, reds, blues
 
 // stetch feature-  images!

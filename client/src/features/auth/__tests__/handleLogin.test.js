@@ -10,12 +10,12 @@ const mUser = { username: "test", password: "test" };
 // Promise.resolve({ data: { message: "hello" } })
 // );
 describe("Login handler ", () => {
-  it("should make a get request with username and password in req body", async () => {
+  test("makes appropriate axios call", async () => {
     axios.post.mockImplementation(() =>
       Promise.resolve({ data: { auth: true } })
     );
-
-    expect(handleLogin(mUser)).toBeTruthy();
+    const response = await handleLogin(mUser);
+    expect(response.auth).toEqual(true);
   });
 });
 //
