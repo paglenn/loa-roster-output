@@ -16,14 +16,6 @@ export const Signup = ({ setUser }) => {
   // the submit handler at this level willuse the reference values to set whether the user is authenticated and navigate.
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(
-      "email address: ",
-      emailAddress.current,
-      "password1: ",
-      password.current,
-      "password2",
-      password2.current
-    );
 
     if (!emailAddress.current || !password.current) {
       setIncorrect(true);
