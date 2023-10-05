@@ -2,26 +2,23 @@ import React, { useState, useEffect, useRef } from "react";
 import TotalsDisplay from "./TotalsDisplay.jsx";
 import Roster from "./RosterContainer.jsx";
 import CharacterInputDisplay from "./CharacterInputDisplay.jsx";
-import { handleDelete } from "../features/delete/index.js";
-import { updateGold } from "../features/goldEarningStatus/index.js";
-import { toggleRestedOnly } from "../features/restBonus/index.js";
+import { handleDelete } from "../features/delete";
+import { updateGold } from "../features/goldUpdate";
+import { toggleRestedOnly } from "../features/restBonus";
 import axios from "axios";
 import { vercelPrefix } from "../utils/api/vercel.js";
 import { updatePrices } from "../utils/reference";
-import { getRoster } from "../utils/api";
+import { getRoster, createNewCharacter } from "../utils/api";
 // this needs to handle state to pass down  the roster.
 const MainContainer = ({ user }) => {
   // state for roster array
-
   const [roster, updateRoster] = useState([]);
-
-  // state for deleted character (to trigger effect hook)
-  //const [deletedCharacter, updateDeletedCharacter] = useState({});
 
   // state for updated character
   const [updatedCharacter, updateCharacter] = useState({});
-
+  // ref hook for gold earner count - it does not need to trigger re-render
   const goldEarners = useRef(0);
+
   const handleNewCharSubmit = (event, characterInfo) => {
     event.preventDefault();
     const copyCharacter = { ...characterInfo };
@@ -36,15 +33,16 @@ const MainContainer = ({ user }) => {
 
     if (copyCharacter.isGoldEarner && goldEarners.current === 6) {
       alert("Nice try - but you can only have up to six gold earners!");
-      return;
+    } else {
+      createNewCharacter(user, copyCharacter, updateCharacter);
     }
-    axios
-      .post(`${vercelPrefix}/api/character?user=${user}`, { ...copyCharacter })
-      .then(({ data }) => updateCharacter(data))
-      .catch((err) => {
-        alert("Character could not be created");
-        console.log(err);
-      });
+    // axios
+    //   .post(`${vercelPrefix}/api/character?user=${user}`, { ...copyCharacter })
+    //   .then(({ data }) => updateCharacter(data))
+    //   .catch((err) => {
+    //     alert("Character could not be created");
+    //     console.log(err);
+    //   });
   };
 
   const handleItemLevelUpdate = (event, character) => {

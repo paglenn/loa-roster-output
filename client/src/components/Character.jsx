@@ -4,7 +4,7 @@ import { Resource } from "./Resource.jsx";
 import { resourceTypes, hasSubtype } from "../utils/reference";
 import { getCharValue } from "../utils/sums";
 import { DeleteButton } from "../features/delete";
-import { GoldStatusBox } from "../features/goldEarningStatus";
+import { GoldStatusBox } from "../features/goldUpdate";
 import { RestedStatusBox } from "../features/restBonus";
 const CharPortrait = React.lazy(() => import("./CharPortrait"));
 // render character cards

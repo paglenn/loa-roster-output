@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleSignup } from "../utils/handleSignup";
+import { BackDoorButton } from "./Backdoor";
 export const Signup = ({ setUser }) => {
   const emailAddress = useRef();
   const username = useRef();
@@ -10,24 +11,36 @@ export const Signup = ({ setUser }) => {
   const navigate = useNavigate();
   const [incorrect, setIncorrect] = useState(false); // used to display message for incorrect login credentials
   const [passwordMisMatch, setPasswordMisMatch] = useState(false);
+
+  const user = localStorage.getItem("user");
   // the submit handler at this level willuse the reference values to set whether the user is authenticated and navigate.
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(
+      "email address: ",
+      emailAddress.current,
+      "password1: ",
+      password.current,
+      "password2",
+      password2.current
+    );
 
     if (!emailAddress.current || !password.current) {
       setIncorrect(true);
       return;
     } else if (password.current !== password2.current) {
       setPasswordMisMatch(true);
+      return;
     }
 
-    let auth = await handleSignup({
+    const auth = await handleSignup({
       email: emailAddress.current,
       username: username.current,
       password: password.current,
     });
     if (auth.auth) {
       setUser(auth.username);
+      localStorage.setItem("user", auth.username);
       navigate("/app");
     } else setIncorrect(true);
   };
@@ -63,9 +76,9 @@ export const Signup = ({ setUser }) => {
           placeholder="Re-Enter Password"
           onChange={(e) => (password2.current = e.target.value)}
         />
-        {incorrect ? <incompleteMessage /> : null}
-        {passwordMisMatch ? <mismatchMessage /> : null}
-        <button type="submit" className="rounded bg-teal-500">
+        {incorrect ? <IncompleteMessage /> : null}
+        {passwordMisMatch ? <MismatchMessage /> : null}
+        <button role="signup" type="submit" className="rounded bg-teal-500">
           {" "}
           Sign Up{" "}
         </button>
@@ -77,27 +90,21 @@ export const Signup = ({ setUser }) => {
       >
         Have an account? Log In!
       </button>
-      {/* Backdoor is commented out */}
-      {/* <button
-        className="bg-red-600 rounded"
-        role="backdoor"
-        onClick={() => navigate("/app")}
-      >
-        {" "}
-        Test out the app!{" "}
-      </button> */}
+      {user === "test" ? (
+        <BackDoorButton setUser={setUser} navigate={navigate} />
+      ) : null}
     </div>
   );
 };
 
-const incompleteMessage = () => {
+const IncompleteMessage = () => {
   return (
     <p className="text-red-600 bg-white">
       Must enter both username and password!
     </p>
   );
 };
-const mismatchMessage = () => {
+const MismatchMessage = () => {
   return (
     <p className="text-red-600 bg-white"> Entered passwords must match! </p>
   );

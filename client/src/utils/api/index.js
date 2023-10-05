@@ -1,3 +1,3 @@
 import { getRoster } from "./getRoster";
-
-export { getRoster };
+import { createNewCharacter } from "./createNewCharacter";
+export { getRoster, createNewCharacter };

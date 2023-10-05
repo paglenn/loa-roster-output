@@ -1,16 +1,17 @@
+// Login Component
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleLogin } from "../utils/handleLogin";
+import { BackDoorButton } from "./Backdoor";
 export const Login = ({ setUser }) => {
   const emailAddress = useRef();
   const password = useRef();
   const navigate = useNavigate();
   const [incorrect, setIncorrect] = useState(false); // used to display message for incorrect login credentials
-
+  const user = localStorage.getItem("user");
   // the submit handler at this level willuse the reference values to set whether the user is authenticated and navigate.
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!emailAddress.current || !password.current) {
       setIncorrect(true);
       console.log("incomplete login information");
@@ -23,6 +24,7 @@ export const Login = ({ setUser }) => {
     });
     if (auth.auth) {
       setUser(auth.username);
+      localStorage.setItem("user", auth.username);
       navigate("/app");
     } else setIncorrect(true);
   };
@@ -53,7 +55,7 @@ export const Login = ({ setUser }) => {
             Incorrect username or password!{" "}
           </p>
         ) : null}
-        <button type="submit" className="rounded bg-teal-500">
+        <button type="submit" role="login" className="rounded bg-teal-500">
           {" "}
           Log In{" "}
         </button>
@@ -67,14 +69,9 @@ export const Login = ({ setUser }) => {
       </button>
 
       {/* Backdoor is commented out  */}
-      {/* <button
-        className="bg-red-600 rounded"
-        role="backdoor"
-        onClick={() => navigate("/app")}
-      >
-        {" "}
-        Take me to the app!{" "}
-      </button> */}
+      {user === "test" ? (
+        <BackDoorButton setUser={setUser} navigate={navigate} />
+      ) : null}
     </div>
   );
 };
