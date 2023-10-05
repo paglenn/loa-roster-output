@@ -21,7 +21,6 @@ export const Login = ({ setUser }) => {
     e.preventDefault();
     if (!emailAddress.current || !password.current) {
       setIncorrect(true);
-      console.log("incomplete login information");
       return;
     }
 

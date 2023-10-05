@@ -156,25 +156,4 @@ characterController.getCharacters = (req, res, next) => {
     });
 };
 
-// method: get one character
-// parameter needed: name
-// characterController.getCharacter = (req, res, next) => {
-//   // this is where we could start to make the database user specific
-//   const { name } = req.body;
-//   // get all characters
-//   Character.findOne({ name })
-//     .then((character) => {
-//       res.locals.character = character;
-//       return next();
-//     })
-//     .catch((error) => {
-//       next({
-//         error: error,
-//         message: { err: "an error occured: see console for more details" },
-//         status: 400,
-//         log: "error occurred in getCharacter middleware",
-//       });
-//     });
-// };
-
 module.exports = characterController;

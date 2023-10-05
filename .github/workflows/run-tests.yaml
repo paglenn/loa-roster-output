@@ -23,4 +23,5 @@ jobs:
         run: |
           npm ci
           npm run ci-all
-          npm test
+          npm run test-client
+          npm run test-server
