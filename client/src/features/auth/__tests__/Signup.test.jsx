@@ -84,6 +84,5 @@ describe("Signup validation", () => {
     expect(
       screen.getByText("Entered passwords must match!")
     ).toBeInTheDocument();
-    screen.debug();
   });
 });
