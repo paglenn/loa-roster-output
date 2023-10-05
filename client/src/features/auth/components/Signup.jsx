@@ -10,6 +10,7 @@ export const Signup = ({ setUser }) => {
 
   const navigate = useNavigate();
   const [incorrect, setIncorrect] = useState(false); // used to display message for incorrect login credentials
+  const [taken, setTaken] = useState(false); // used to display message for incorrect login credentials
   const [passwordMisMatch, setPasswordMisMatch] = useState(false);
 
   const user = localStorage.getItem("user");
@@ -34,7 +35,7 @@ export const Signup = ({ setUser }) => {
       setUser(auth.username);
       localStorage.setItem("user", auth.username);
       navigate("/app");
-    } else setIncorrect(true);
+    } else setTaken(true);
   };
 
   return (
@@ -57,19 +58,20 @@ export const Signup = ({ setUser }) => {
           onChange={(e) => (username.current = e.target.value)}
         />
         <input
-          type="text"
+          type="password"
           className="rounded text-black"
           placeholder="Password"
           onChange={(e) => (password.current = e.target.value)}
         />
         <input
-          type="text"
+          type="password"
           className="rounded text-black"
           placeholder="Re-Enter Password"
           onChange={(e) => (password2.current = e.target.value)}
         />
         {incorrect ? <IncompleteMessage /> : null}
         {passwordMisMatch ? <MismatchMessage /> : null}
+        {taken ? <TakenMessage /> : null}
         <button role="signup" type="submit" className="rounded bg-teal-500">
           {" "}
           Sign Up{" "}
@@ -91,9 +93,12 @@ export const Signup = ({ setUser }) => {
 
 const IncompleteMessage = () => {
   return (
-    <p className="text-red-600 bg-white">
-      Must enter both username and password!
-    </p>
+    <p className="text-red-600 bg-white">Must enter both email and password!</p>
+  );
+};
+const TakenMessage = () => {
+  return (
+    <p className="text-red-600 bg-white">Email or username already exists</p>
   );
 };
 const MismatchMessage = () => {

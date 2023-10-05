@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Routes, Route, BrowserRouter, HashRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import MainContainer from "./components/MainContainer";
 import { Login, Signup } from "./features/auth";
 import Header from "./components/Header";
