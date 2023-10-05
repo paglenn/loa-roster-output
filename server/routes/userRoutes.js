@@ -5,6 +5,7 @@ const {
   authUser,
   checkAdmin,
 } = require("../controllers/userController");
+
 router.post("/signup", createUser, (req, res) => {
   res.json(res.locals.user);
 });

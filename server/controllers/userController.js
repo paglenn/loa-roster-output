@@ -8,24 +8,32 @@ userController.createUser = async (req, res, next) => {
   const { email, username, password } = req.body;
 
   // check if user already exists
-  if (await User.findOne({ email: email })) {
-    // then user already exists -  return error
+  if (
+    (await User.findOne({ email: email })) ||
+    (username && (await User.findOne({ username: username })))
+  ) {
+    // then user already exists
+    res.locals.user = { auth: false };
+    return next();
+  }
+
+  // if user doesn't exist create them \o/
+  try {
+    const user = await User.create({
+      email: email,
+      username: username ?? email,
+      password: password,
+    });
+
+    res.locals.user = { username: user.username, auth: true };
+  } catch (err) {
     return next({
       ...authError,
       log: "Error occurred in createUser middleware",
       status: 409,
-      error: "user already exists",
+      error: err,
     });
   }
-
-  // if user doesn't exist create them \o/
-  const user = await User.create({
-    email: email,
-    username: username ?? email,
-    password: password,
-  });
-
-  res.locals.user = { username: user.username, auth: true };
 
   return next();
 };

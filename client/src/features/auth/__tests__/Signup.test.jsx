@@ -58,7 +58,7 @@ describe("Signup validation", () => {
     const user = userEvent.setup();
     await user.click(screen.getByRole("signup"));
     expect(
-      screen.getByText("Must enter both username and password!")
+      screen.getByText("Must enter both email and password!")
     ).toBeInTheDocument();
   });
 
