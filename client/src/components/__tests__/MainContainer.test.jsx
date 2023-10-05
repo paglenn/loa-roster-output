@@ -7,9 +7,9 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import MainContainer from "../MainContainer";
 
-xdescribe("Main Page", () => {
+describe("Main Page", () => {
   it("renders Total Display", async () => {
-    render(<MainContainer />);
+    render(<MainContainer user="test" />);
     expect(screen.getByText("Total Weekly Output")).toBeInTheDocument();
   });
 });

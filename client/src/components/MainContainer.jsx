@@ -6,8 +6,9 @@ import { handleDelete } from "../features/delete/index.js";
 import { updateGold } from "../features/goldEarningStatus/index.js";
 import { toggleRestedOnly } from "../features/restBonus/index.js";
 import axios from "axios";
-import { vercelPrefix } from "../utils/vercel";
+import { vercelPrefix } from "../utils/api/vercel.js";
 import { updatePrices } from "../utils/reference";
+import { getRoster } from "../utils/api";
 // this needs to handle state to pass down  the roster.
 const MainContainer = ({ user }) => {
   // state for roster array
@@ -20,8 +21,7 @@ const MainContainer = ({ user }) => {
   // state for updated character
   const [updatedCharacter, updateCharacter] = useState({});
 
-  const [goldEarnerCount, updateGoldEarners] = useState(0);
-
+  const goldEarners = useRef(0);
   const handleNewCharSubmit = (event, characterInfo) => {
     event.preventDefault();
     const copyCharacter = { ...characterInfo };
@@ -34,7 +34,7 @@ const MainContainer = ({ user }) => {
       return;
     }
 
-    if (copyCharacter.isGoldEarner && goldEarnerCount === 6) {
+    if (copyCharacter.isGoldEarner && goldEarners.current === 6) {
       alert("Nice try - but you can only have up to six gold earners!");
       return;
     }
@@ -55,27 +55,19 @@ const MainContainer = ({ user }) => {
         ...character,
         ilvl,
       })
-      .then(({ data }) => updateCharacter(data));
+      .then(({ data }) => updateCharacter(data))
+      .catch((err) => console.log(err));
     event.target[0].value = "";
   };
 
   // effect hook to update prices
-  useEffect(updatePrices, []);
+  useEffect(() => {
+    updatePrices();
+  }, []);
+
   // effect hook to get changes to character list. we will want to run this on page load, but also on submission of forms or  deletion of a character
   useEffect(() => {
-    // axios conversion
-    axios
-      .get(`${vercelPrefix}/api/character/characters?user=${user}`)
-      .then((response) => response.data)
-      .then((characters) => {
-        updateRoster(characters);
-        updateGoldEarners(
-          characters.reduce(
-            (sum, character) => sum + (character.isGoldEarner ? 1 : 0),
-            0
-          )
-        );
-      });
+    getRoster(user, updateRoster, goldEarners);
   }, [updatedCharacter]);
 
   return (
@@ -91,13 +83,7 @@ const MainContainer = ({ user }) => {
         handleDelete={(e) => handleDelete(e, updateCharacter)}
         handleLevelUpdate={handleItemLevelUpdate}
         handleGoldUpdate={(e, character) =>
-          updateGold(
-            e,
-            character,
-            updateCharacter,
-            updateGoldEarners,
-            goldEarnerCount
-          )
+          updateGold(e, character, updateCharacter, goldEarners)
         }
         updateCharacter={updateCharacter}
         handleRestedUpdate={(e, character) =>

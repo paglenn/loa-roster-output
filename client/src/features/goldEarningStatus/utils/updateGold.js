@@ -1,16 +1,10 @@
 import axios from "axios";
-import { vercelPrefix } from "../../../utils/vercel";
-const updateGold = (
-  event,
-  character,
-  updateCharacter,
-  updateGoldEarners,
-  goldEarnerCount
-) => {
+import { vercelPrefix } from "../../../utils/api/vercel";
+const updateGold = (event, character, updateCharacter, goldEarners) => {
   // let { name, ilvl, restedOnly } = character;
   let isGoldEarner = event.target.checked;
   /* If we already have six gold earners, can't add another one  */
-  if (isGoldEarner && goldEarnerCount === 6) {
+  if (isGoldEarner && goldEarners.current === 6) {
     event.target.checked = !event.target.checked;
     alert("Nice try - but you can only have up to six gold earners!");
     return;
@@ -25,7 +19,7 @@ const updateGold = (
     },
   }).then(({ data: updatedCharacter }) => {
     updateCharacter(updatedCharacter);
-    updateGoldEarners(goldEarnerCount + (isGoldEarner ? 1 : -1));
+    goldEarners.current += isGoldEarner ? 1 : -1;
   });
 };
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { vercelPrefix } from "../../../utils/vercel";
+import { vercelPrefix } from "../../../utils/api/vercel";
 export const handleDelete = async (event, updateCharacter) => {
   // send a fetch request to delete the character
   // then use updateDeletedCharacter to update state
