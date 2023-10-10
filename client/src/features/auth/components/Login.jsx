@@ -4,13 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { handleLogin } from "../utils/handleLogin";
 import { BackDoorButton } from "./Backdoor";
 import { PasswordField } from "./PasswordField";
+import { usePasswordShown } from "../hooks/usePasswordShown";
 export const Login = ({ setUser }) => {
   const emailAddress = useRef();
   const password = useRef();
   const navigate = useNavigate();
   const [incorrect, setIncorrect] = useState(false); // used to display message for incorrect login credentials
   const user = localStorage.getItem("user");
-  const [isPasswordShown, setPasswordShown] = useState(false);
+  //const [isPasswordShown, setPasswordShown] = useState(false);
+  const [isPasswordShown, flipPassword] = usePasswordShown(false);
   // if there is already a user, just navigate to the app
   useEffect(() => {
     if (user && user !== "test") {
@@ -53,10 +55,11 @@ export const Login = ({ setUser }) => {
         <PasswordField
           isShown={isPasswordShown}
           passwordRef={password}
-          description="password"
-          showHandler={() => {
-            setPasswordShown(!isPasswordShown);
-          }}
+          description="Password"
+          showHandler={flipPassword}
+          // showHandler={() => {
+          //   setPasswordShown(!isPasswordShown);
+          // }}
         />
 
         {incorrect ? (

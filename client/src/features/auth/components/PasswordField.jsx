@@ -12,7 +12,7 @@ export const PasswordField = ({
       <input
         type={type}
         className="rounded text-white bg-transparent"
-        placeholder="Password"
+        placeholder={description}
         onChange={(e) => (passwordRef.current = e.target.value)}
       />
       <ShowHideButton isShown={isShown} clickHandler={showHandler} />
