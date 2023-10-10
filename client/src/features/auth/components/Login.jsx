@@ -3,12 +3,14 @@ import React, { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleLogin } from "../utils/handleLogin";
 import { BackDoorButton } from "./Backdoor";
+import { PasswordField } from "./PasswordField";
 export const Login = ({ setUser }) => {
   const emailAddress = useRef();
   const password = useRef();
   const navigate = useNavigate();
   const [incorrect, setIncorrect] = useState(false); // used to display message for incorrect login credentials
   const user = localStorage.getItem("user");
+  const [isPasswordShown, setPasswordShown] = useState(false);
   // if there is already a user, just navigate to the app
   useEffect(() => {
     if (user && user !== "test") {
@@ -45,16 +47,18 @@ export const Login = ({ setUser }) => {
         <input
           type="text"
           placeholder="Email Address"
-          className="rounded text-black"
+          className="rounded text-white grow-0 bg-transparent border-b-2 border-white self-stretch pl-5"
           onChange={(e) => (emailAddress.current = e.target.value)}
         />
-
-        <input
-          type="password"
-          className="rounded text-black"
-          placeholder="Password"
-          onChange={(e) => (password.current = e.target.value)}
+        <PasswordField
+          isShown={isPasswordShown}
+          passwordRef={password}
+          description="password"
+          showHandler={() => {
+            setPasswordShown(!isPasswordShown);
+          }}
         />
+
         {incorrect ? (
           <p className="text-red-600 bg-white">
             {" "}
@@ -67,6 +71,7 @@ export const Login = ({ setUser }) => {
         </button>
       </form>
       <button
+        type="button"
         className="bg-cyan-600 rounded"
         role="reroute-signup"
         onClick={() => navigate("/signup")}
@@ -74,7 +79,6 @@ export const Login = ({ setUser }) => {
         First time here? Sign up!
       </button>
 
-      {/* Backdoor is commented out  */}
       {user === "test" ? (
         <BackDoorButton setUser={setUser} navigate={navigate} />
       ) : null}

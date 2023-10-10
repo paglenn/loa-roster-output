@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleSignup } from "../utils/handleSignup";
 import { BackDoorButton } from "./Backdoor";
+import { PasswordField } from "./PasswordField";
 export const Signup = ({ setUser }) => {
   const emailAddress = useRef();
   const username = useRef();
@@ -12,6 +13,8 @@ export const Signup = ({ setUser }) => {
   const [incorrect, setIncorrect] = useState(false); // used to display message for incorrect login credentials
   const [taken, setTaken] = useState(false); // used to display message for incorrect login credentials
   const [passwordMisMatch, setPasswordMisMatch] = useState(false);
+  const [isPassword1Shown, setPassword1Shown] = useState(false);
+  const [isPassword2Shown, setPassword2Shown] = useState(false);
 
   const user = localStorage.getItem("user");
   // the submit handler at this level willuse the reference values to set whether the user is authenticated and navigate.
