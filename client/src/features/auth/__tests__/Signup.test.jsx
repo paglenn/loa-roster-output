@@ -53,12 +53,12 @@ describe("Signup validation", () => {
   test("validates that all fields are filled", async () => {
     renderComponent();
     expect(
-      screen.queryByText("Must enter both username and password!")
+      screen.queryByText("You must enter both email and password 😊")
     ).not.toBeInTheDocument();
     const user = userEvent.setup();
     await user.click(screen.getByRole("signup"));
     expect(
-      screen.getByText("Must enter both email and password!")
+      screen.getByText("You must enter both email and password 😊")
     ).toBeInTheDocument();
   });
 
@@ -82,7 +82,7 @@ describe("Signup validation", () => {
     // click sign up
     await user.click(screen.getByRole("signup"));
     expect(
-      screen.getByText("Entered passwords must match!")
+      screen.getByText("Entered passwords must match 😮")
     ).toBeInTheDocument();
   });
 });

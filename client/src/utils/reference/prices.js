@@ -1,5 +1,5 @@
 import axios from "axios";
-const level7GemPrice = 10500;
+const level7GemPrice = 12000;
 const radiantLeapstonePrice = 100;
 const refineObliterationStackPrice = 45;
 const refinedProtectionStackPrice = 6;
@@ -83,6 +83,10 @@ const updatePrices = async () => {
   // store in local storage
   localStorage.setItem("prices", JSON.stringify(prices));
   localStorage.setItem("prices-updated", `${Date.now()}`);
+  localStorage.setItem(
+    "Prices Last Updated",
+    `${Date(Date.now()).toLocaleString()}`
+  );
   return prices; // will auto-resolve into a promise
 };
 

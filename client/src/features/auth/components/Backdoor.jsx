@@ -5,6 +5,7 @@ export const BackDoorButton = ({ setUser, navigate }) => (
   <button
     className="bg-red-600 rounded"
     role="backdoor"
+    type="button"
     onClick={async () => {
       // validate route
       const secret = localStorage.getItem("secret");
