@@ -22,8 +22,8 @@
 | Character Item Level Updates    | ✅     |
 | Rested-only designation         | ✅     |
 | User specificity                | ✅     |
+| Show/Hide Password              | ✅     |
 | Gold Earning Content display    | ⌛️     |
-| Show/Hide Password              | ⌛️     |
 | Google OAuth                    | 🙏🏾     |
 | Typescript conversion           | 🙏🏾     |
 
