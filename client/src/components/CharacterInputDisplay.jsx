@@ -1,16 +1,20 @@
 import React, { useRef } from "react";
 import { charPropLabels } from "../utils/reference";
-const CharacterInputDisplay = ({ handleSubmit, user }) => {
-  // const { handleSubmit } = props;
-  const character = useRef({
-    name: "",
-    ilvl: "",
-    _class: "",
-    isGoldEarner: false,
-    restedOnly: false,
-    user: user,
-  });
-  const charProps = Object.keys(character.current)
+const CharacterInputDisplay = ({
+  handleSubmit,
+  character,
+  handleChange: handleChange,
+}) => {
+  // const characterTemplate = {
+  //   name: "",
+  //   ilvl: "",
+  //   _class: "",
+  //   isGoldEarner: false,
+  //   restedOnly: false,
+  //   user: user,
+  // };
+  // const character = useRef({ ...characterTemplate });
+  const charProps = Object.keys(character)
     .filter((prop) => prop !== "user")
     .map((prop) => {
       return (
@@ -19,6 +23,7 @@ const CharacterInputDisplay = ({ handleSubmit, user }) => {
           charPropName={prop}
           charPropVal={character[prop]}
           character={character}
+          handleChange={handleChange}
         />
       );
     });
@@ -30,7 +35,7 @@ const CharacterInputDisplay = ({ handleSubmit, user }) => {
         Add New Character{" "}
       </h2>
       <form
-        onSubmit={(e) => handleSubmit(e, character.current)}
+        onSubmit={(e) => handleSubmit(e, character)}
         className="flex justify-around"
       >
         {charProps}
@@ -45,23 +50,25 @@ const CharacterInputDisplay = ({ handleSubmit, user }) => {
   );
 };
 
-const InputLabel = ({ charPropVal, charPropName, character }) => {
+const InputLabel = ({ charPropVal, charPropName, character, handleChange }) => {
   return charPropLabels[charPropName].type === "checkbox" ? (
     <CheckboxInput
       charPropVal={charPropVal}
       charPropName={charPropName}
       character={character}
+      handleChange={handleChange}
     />
   ) : (
     <TextInput
       charPropVal={charPropVal}
       charPropName={charPropName}
       character={character}
+      handleChange={handleChange}
     />
   );
 };
 
-const TextInput = ({ charPropVal, charPropName, character }) => {
+const TextInput = ({ charPropVal, charPropName, character, handleChange }) => {
   return (
     <label className="inline-flex flex-col align-middle">
       <span className="text-xl"> {charPropLabels[charPropName].label}: </span>
@@ -71,14 +78,14 @@ const TextInput = ({ charPropVal, charPropName, character }) => {
         name={charPropName}
         className="rounded-2xl"
         onChange={(e) => {
-          character.current[charPropName] = e.target.value;
+          handleChange(e, charPropName, e.target.value);
         }}
       />
     </label>
   );
 };
 
-const CheckboxInput = ({ charPropVal, charPropName, character }) => {
+const CheckboxInput = ({ charPropVal, charPropName, handleChange }) => {
   return (
     <label className="inline-flex flex-col items-center">
       <span className="text-xl"> {charPropLabels[charPropName].label}? </span>
@@ -88,7 +95,7 @@ const CheckboxInput = ({ charPropVal, charPropName, character }) => {
         value={charPropVal}
         name={charPropName}
         onChange={(e) => {
-          character.current[charPropName] = e.target.checked;
+          handleChange(e, charPropName, e.target.checked);
         }}
       />
     </label>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Routes, Route, BrowserRouter, HashRouter } from "react-router-dom";
-import MainContainer from "./components/MainContainer";
+import MainPage from "./displays/MainPage";
 import { Login, Signup } from "./features/auth";
 import Header from "./components/Header";
 const App = () => {
@@ -15,7 +15,7 @@ const App = () => {
             <Route path="/" element={<Login setUser={setUser} />} />
             <Route path="/signup" element={<Signup setUser={setUser} />} />
             {/* Main Application Page */}
-            <Route path="/app" element={<MainContainer user={user} />} />
+            <Route path="/app" element={<MainPage user={user} />} />
           </Routes>
         </HashRouter>
       </div>

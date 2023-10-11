@@ -1,19 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
-import TotalsDisplay from "./TotalsDisplay.jsx";
-import Roster from "./RosterContainer.jsx";
-import CharacterInputDisplay from "./CharacterInputDisplay.jsx";
-import { handleDelete } from "../features/delete";
-import { updateGold } from "../features/goldUpdate";
-import { toggleRestedOnly } from "../features/restBonus";
+import TotalsDisplay from "../components/TotalsDisplay.jsx";
+import Roster from "../components/RosterContainer.jsx";
+import CharacterInputDisplay from "../components/CharacterInputDisplay.jsx";
+import { handleDelete } from "../features/delete/index.js";
+import { updateGold } from "../features/goldUpdate/index.js";
+import { toggleRestedOnly } from "../features/restBonus/index.js";
 import axios from "axios";
 import { vercelPrefix } from "../utils/api/vercel.js";
 import { updatePrices } from "../utils/reference";
 import { getRoster, createNewCharacter } from "../utils/api";
+import { useCharacter } from "../hooks/useCharacters.js";
 // this needs to handle state to pass down  the roster.
-const MainContainer = ({ user }) => {
-  // state for roster array
+const MainPage = ({ user }) => {
+  // state for roster array-  a change in this does need to cause a re-render of the roster container
   const [roster, updateRoster] = useState([]);
-
+  // custom hook for new character. we are going to retool new character inputs to use this hook so the form properly clears after submission
+  const [newCharacter, updateNewCharacter] = useCharacter(user);
   // state for updated character
   const [updatedCharacter, updateCharacter] = useState({});
   // ref hook for gold earner count - it does not need to trigger re-render
@@ -34,9 +36,9 @@ const MainContainer = ({ user }) => {
     if (copyCharacter.isGoldEarner && goldEarners.current === 6) {
       alert("Nice try - but you can only have up to six gold earners!");
     } else {
-      createNewCharacter(user, copyCharacter, updateCharacter);
+      createNewCharacter(copyCharacter, updateCharacter);
+      updateNewCharacter();
     }
-    
   };
 
   const handleItemLevelUpdate = (event, character) => {
@@ -60,15 +62,21 @@ const MainContainer = ({ user }) => {
   // effect hook to get changes to character list. we will want to run this on page load, but also on submission of forms or  deletion of a character
   useEffect(() => {
     getRoster(user, updateRoster, goldEarners);
-  }, [updatedCharacter]);
+  }, [updatedCharacter, newCharacter]);
 
+  const newCharChangeHandler = (e, charPropName, value) => {
+    const characterSlice = {};
+    characterSlice[charPropName] = value;
+    updateNewCharacter({ ...newCharacter, ...characterSlice });
+  };
   return (
     <div className={`bg-slate-800 max-h-full flex flex-col grow`}>
       <TotalsDisplay user={user} roster={roster} />
       <CharacterInputDisplay
         handleSubmit={handleNewCharSubmit}
         user={user}
-        character={updatedCharacter}
+        character={newCharacter}
+        handleChange={newCharChangeHandler}
       />
       <Roster
         roster={roster}
@@ -86,4 +94,4 @@ const MainContainer = ({ user }) => {
   );
 };
 
-export default MainContainer;
+export default MainPage;

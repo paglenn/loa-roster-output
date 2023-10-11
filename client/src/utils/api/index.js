@@ -1,3 +1,4 @@
 import { getRoster } from "./getRoster";
 import { createNewCharacter } from "./createNewCharacter";
-export { getRoster, createNewCharacter };
+import { checkAdmin } from "./checkAdmin";
+export { getRoster, createNewCharacter, checkAdmin };

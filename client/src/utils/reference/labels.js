@@ -25,3 +25,4 @@ export const charPropLabels = {
   _class: { label: "Class", type: "text" },
   restedOnly: { label: "Rested Only", type: "checkbox" },
 };
+

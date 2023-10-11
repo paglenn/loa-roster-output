@@ -5,11 +5,11 @@
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import MainContainer from "../MainContainer";
+import MainPage from "../MainPage";
 
 describe("Main Page", () => {
   it("renders Total Display", async () => {
-    render(<MainContainer user="test" />);
+    render(<MainPage user="test" />);
     expect(screen.getByText("Total Weekly Output")).toBeInTheDocument();
   });
 });
