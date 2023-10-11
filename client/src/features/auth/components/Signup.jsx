@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleSignup } from "../utils/handleSignup";
-import { BackDoorButton } from "./Backdoor";
+import { BackDoorButton } from "./BackdoorButton";
 import { PasswordField } from "./PasswordField";
 import { usePasswordShown } from "../hooks/usePasswordShown";
 import { ProblemMessage } from "./ProblemMessage";

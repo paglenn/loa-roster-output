@@ -2,7 +2,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleLogin } from "../utils/handleLogin";
-import { BackDoorButton } from "./Backdoor";
+import { BackDoorButton } from "./BackdoorButton";
 import { PasswordField } from "./PasswordField";
 import { usePasswordShown } from "../hooks/usePasswordShown";
 export const Login = ({ setUser }) => {
