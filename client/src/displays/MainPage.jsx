@@ -68,7 +68,6 @@ const MainPage = ({ user }) => {
     const characterSlice = {};
     characterSlice[charPropName] = value;
     updateNewCharacter({ ...newCharacter, ...characterSlice });
-    console.log(newCharacter);
   };
   return (
     <div className={`bg-slate-800 max-h-full flex flex-col grow`}>
