@@ -1,8 +1,8 @@
 import axios from "axios";
-const level7GemPrice = 12000;
-const radiantLeapstonePrice = 100;
+const level7GemPrice = 11500;
+const radiantLeapstonePrice = 110;
 const refineObliterationStackPrice = 45;
-const refinedProtectionStackPrice = 6;
+const refinedProtectionStackPrice = 5;
 const prices = {
   gold: 1,
   gems: level7GemPrice,
