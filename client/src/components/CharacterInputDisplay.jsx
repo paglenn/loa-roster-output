@@ -1,19 +1,10 @@
-import React, { useRef } from "react";
+import React from "react";
 import { charPropLabels } from "../utils/reference";
 const CharacterInputDisplay = ({
   handleSubmit,
   character,
   handleChange: handleChange,
 }) => {
-  // const characterTemplate = {
-  //   name: "",
-  //   ilvl: "",
-  //   _class: "",
-  //   isGoldEarner: false,
-  //   restedOnly: false,
-  //   user: user,
-  // };
-  // const character = useRef({ ...characterTemplate });
   const charProps = Object.keys(character)
     .filter((prop) => prop !== "user")
     .map((prop) => {
@@ -92,7 +83,7 @@ const CheckboxInput = ({ charPropVal, charPropName, handleChange }) => {
       <input
         type="checkbox"
         className="w-4 h-4"
-        value={charPropVal}
+        checked={charPropVal}
         name={charPropName}
         onChange={(e) => {
           handleChange(e, charPropName, e.target.checked);

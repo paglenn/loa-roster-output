@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Routes, Route, BrowserRouter, HashRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import MainPage from "./displays/MainPage";
 import { Login, Signup } from "./features/auth";
 import Header from "./components/Header";
@@ -9,7 +9,7 @@ const App = () => {
     <div className=" bg-slate-800 flex flex-col h-screen">
       <Header />
       <div className="flex flex-col justify-center grow">
-        <HashRouter basename="">
+        <BrowserRouter basename="/">
           <Routes>
             {/* Authentication Routes */}
             <Route path="/" element={<Login setUser={setUser} />} />
@@ -17,7 +17,7 @@ const App = () => {
             {/* Main Application Page */}
             <Route path="/app" element={<MainPage user={user} />} />
           </Routes>
-        </HashRouter>
+        </BrowserRouter>
       </div>
     </div>
   );

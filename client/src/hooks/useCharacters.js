@@ -11,11 +11,11 @@ export const useCharacter = (user) => {
   };
   const [character, updateCharacter] = useState({ ...characterTemplate });
   // customizing the setter method to reset to default in the event of no arguments provided.
-  const updateNewCharacter = (inputChar) => {
-    if (inputChar === undefined) {
+  const updateNewCharacter = (inputCharacter) => {
+    if (inputCharacter === undefined) {
       updateCharacter(characterTemplate);
     } else {
-      updateCharacter(inputChar);
+      updateCharacter(inputCharacter);
     }
   };
   return [character, updateNewCharacter];
