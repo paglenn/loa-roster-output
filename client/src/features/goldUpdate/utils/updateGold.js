@@ -11,7 +11,7 @@ const updateGold = (event, character, updateCharacter, goldEarners) => {
   }
   // fetch request
   axios({
-    method: "patch",
+    method: "PUT",
     url: `${vercelPrefix}/api/character`,
     data: {
       ...character,
