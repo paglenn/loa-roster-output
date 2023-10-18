@@ -1,5 +1,5 @@
 const { describe, expect, it } = require("@jest/globals");
-const findBestContent = require("../findContent");
+const { findBestContent, selectGoldContent } = require("../findContent");
 
 // import {describe, expect} from ''
 describe("content lookup tester", () => {
@@ -29,5 +29,16 @@ describe("content lookup tester", () => {
       expect(content[1].ilvl).toEqual(1580); // kayangel HM
       expect(content[2].ilvl).toEqual(1560);
     });
+  });
+
+  test("specific content can be selected and the right content is retrieved ", async () => {
+    const content = await selectGoldContent({
+      akkan: "hard",
+      brelshaza: "hard_1_4",
+      kayangel: "hard",
+    });
+    expect(content.length).toEqual(3);
+    const totalGold = content.reduce((sum, c) => sum + c.gold, 0);
+    expect(totalGold).toEqual(25750);
   });
 });

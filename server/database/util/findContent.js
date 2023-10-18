@@ -5,6 +5,40 @@ const { MongoClient } = require("mongodb");
 const { MONGO_URI } = require("..");
 //mongoose.connect(uri);
 
+// getContentList with client and contentType
+async function getContentList(client, contentType) {
+  return client
+    .db("dungeon_and_character_data")
+    .collection(contentType)
+    .find()
+    .sort("ilvl")
+    .toArray();
+}
+
+// selectedContent:
+// {"akkan": "hard", "brelshaza" :  "ha"}
+async function selectGoldContent(selectedContent) {
+  const client = new MongoClient(MONGO_URI);
+  try {
+    await client.connect();
+    // store gold earning content in array
+    const contentList = await getContentList(client, "gold_earning_content");
+
+    // console.log("content list: ", contentList);
+    // select content that is in the object containing selected content and matches the level selected
+    const selectedContentDetails = contentList.filter(
+      (content) =>
+        Object.hasOwn(selectedContent, content.name) &&
+        content.level === selectedContent[content.name]
+    );
+
+    return selectedContentDetails;
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await client.close();
+  }
+}
 async function findBestContent(ilvl, contentType) {
   const client = new MongoClient(MONGO_URI);
   try {
@@ -13,12 +47,7 @@ async function findBestContent(ilvl, contentType) {
     await client.connect();
 
     // query data collection for content , sort by ilvl so it's easy to find the best one for the item level
-    const contentList = await client
-      .db("dungeon_and_character_data")
-      .collection(contentType)
-      .find()
-      .sort("ilvl")
-      .toArray();
+    const contentList = await getContentList(client, contentType);
 
     if (
       contentType === "chaos_dungeons" ||
@@ -58,4 +87,4 @@ async function findBestContent(ilvl, contentType) {
 // }
 // const ilvl = 1560 ;
 // findBestContent(ilvl, 'gold_earning_content').then(result => console.log(result));
-module.exports = findBestContent;
+module.exports = { findBestContent, selectGoldContent };

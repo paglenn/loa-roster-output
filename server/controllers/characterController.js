@@ -1,5 +1,5 @@
 const Character = require("../database/models/characterModel");
-const findBestContent = require("../database/util/findContent");
+const { findBestContent } = require("../database/util/findContent");
 // we will export character controller object
 const characterController = {};
 
