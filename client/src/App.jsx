@@ -4,7 +4,7 @@ import MainPage from "./displays/MainPage";
 import { Login, Signup } from "./features/auth";
 import Header from "./components/Header";
 const App = () => {
-  const [user, setUser] = useState("test");
+  const [user, setUser] = useState("");
   return (
     <div className=" bg-slate-800 flex flex-col h-screen">
       <Header />
