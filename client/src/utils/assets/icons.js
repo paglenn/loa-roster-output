@@ -19,15 +19,21 @@ import artist from "../../assets/class_icons/artist.png";
 import artillerist from "../../assets/class_icons/artillerist.png";
 import bard from "../../assets/class_icons/bard.png";
 import berserker from "../../assets/class_icons/berserker.png";
+import deadeye from "../../assets/class_icons/deadeye.png";
 import deathblade from "../../assets/class_icons/deathblade.png";
+import destroyer from "../../assets/class_icons/destroyer.png";
 import gunslinger from "../../assets/class_icons/gunslinger.png";
 import gunlancer from "../../assets/class_icons/gunlancer.png";
+import glaivier from "../../assets/class_icons/glaivier.png";
 import slayer from "../../assets/class_icons/slayer.png";
 import paladin from "../../assets/class_icons/paladin.png";
 import scouter from "../../assets/class_icons/scouter.png";
+import scrapper from "../../assets/class_icons/scrapper.png";
 import sorceress from "../../assets/class_icons/sorceress.png";
 import summoner from "../../assets/class_icons/summoner.png";
 import soulfist from "../../assets/class_icons/soulfist.png";
+import wardancer from "../../assets/class_icons/wardancer.png";
+import souleater from "../../assets/class_icons/souleater.png";
 
 export default {
   gold: gold,
@@ -50,15 +56,28 @@ export default {
   arcana: arcana,
   artist: artist,
   artillerist: artillerist,
+  blaster: artillerist,
   bard: bard,
+  battlemaster: wardancer,
   berserker: berserker,
+  deadeye: deadeye,
   deathblade: deathblade,
+  destroyer: destroyer,
+  devilhunter: deadeye,
+  glaivier: glaivier,
   gunslinger: gunslinger,
   gunlancer: gunlancer,
+  lancemaster: glaivier,
   slayer: slayer,
   paladin: paladin,
+  holyknight: paladin,
   scouter: scouter,
+  scrapper: scrapper,
+  souleater: souleater,
+  machinist: scouter,
   sorceress: sorceress,
   summoner: summoner,
   soulfist: soulfist,
+  wardancer: wardancer,
+  warlord: gunlancer,
 };
