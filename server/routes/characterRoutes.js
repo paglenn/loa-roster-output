@@ -16,7 +16,7 @@ router.post("/", characterController.createCharacter, (req, res) => {
 });
 
 // character info in request body
-router.patch("/", characterController.updateCharacter, (req, res) => {
+router.put("/", characterController.updateCharacter, (req, res) => {
   res.status(200).json(res.locals.character);
 });
 

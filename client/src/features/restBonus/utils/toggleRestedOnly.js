@@ -4,7 +4,7 @@ export const toggleRestedOnly = (event, character, updateCharacter) => {
   const restedOnly = event.target.checked;
   // send fetch request ot update character with checked status of checkbox
   fetch(`${vercelPrefix}/api/character`, {
-    method: "PATCH",
+    method: "PUT",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({
       ...character,

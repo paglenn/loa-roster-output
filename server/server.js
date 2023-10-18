@@ -27,6 +27,11 @@ if (process.env.NODE_ENV === "production") {
     res.send("ready to serve");
   });
 }
+
+app.get("/app", (req, res) => {
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
+});
+
 app.use((req, res) => {
   res.status(404).send("Not found");
 });
