@@ -32,7 +32,7 @@ const CharacterInputDisplay = ({
         {charProps}
 
         <input
-          className="border-black border-2 rounded bg-green-400 p-1"
+          className="border-black border-2 rounded-sm bg-green-400 p-1"
           type="submit"
           value="Submit"
         />
@@ -67,7 +67,7 @@ const TextInput = ({ charPropVal, charPropName, character, handleChange }) => {
         value={charPropVal}
         type="text"
         name={charPropName}
-        className="rounded-2xl"
+        className="rounded-md"
         onChange={(e) => {
           handleChange(e, charPropName, e.target.value);
         }}
