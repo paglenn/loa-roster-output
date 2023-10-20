@@ -2,6 +2,7 @@ node_modules
 server/database_helpers/mongo.js
 build
 .env
+.DS_Store
 coverage
 Dockerfile
 dist
