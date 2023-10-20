@@ -10,10 +10,10 @@ export const Resource = ({ type, qty, imHeight, classProps, goldValue }) => {
       <img
         src={icons[iconName]}
         alt={iconName}
-        className={`h-${imHeight} aspect-square rounded-md`}
+        className={`h-${imHeight} aspect-square rounded-md drop-shadow`}
       />
 
-      <div>
+      <div className="">
         {" "}
         {Math.round(qty).toLocaleString()}{" "}
         {type === "gold" && goldValue ? `(${goldValue})` : null}
