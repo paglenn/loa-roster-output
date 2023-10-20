@@ -8,8 +8,12 @@ import { toggleRestedOnly } from "../features/restBonus/index.js";
 import { updatePrices } from "../utils/reference";
 import { getRoster, createNewCharacter, updateCharacter } from "../utils/api";
 import { useCharacter } from "../hooks/useCharacters.js";
+import { useNavigate } from "react-router-dom";
 // this needs to handle state to pass down  the roster.
 const MainPage = ({ user }) => {
+  // protection: if no user , navigate to root
+  const navigate = useNavigate();
+  if (user === "") navigate("/");
   // state for roster array-  a change in this does need to cause a re-render of the roster container
   const [roster, updateRoster] = useState([]);
   // custom hook for new character. we are going to retool new character inputs to use this hook so the form properly clears after submission
