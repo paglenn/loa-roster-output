@@ -15,14 +15,15 @@ const characterController = {};
 // create character using model - from mongoose
 // add to database using database schema
 
-const genResources = async (ilvl, isGoldEarner, restedOnly) => {
+const genResources = async ({ ilvl, isGoldEarner, restedOnly }) => {
   const restedModifier = restedOnly ? 2 / 3 : 1;
+
   const chaosDungeon = await findBestContent(ilvl, "chaos_dungeons");
   const guardianRaid = await findBestContent(ilvl, "guardian_raids");
   const cube = await findBestContent(ilvl, "cubes");
   const cubesPerWeek = restedOnly ? 1 : 2;
 
-  const goldSources = isGoldEarner
+  const goldContents = isGoldEarner
     ? await findBestContent(ilvl, "gold_earning_content")
     : [];
 
@@ -53,15 +54,19 @@ const genResources = async (ilvl, isGoldEarner, restedOnly) => {
         restedModifier,
     },
     gems: gems,
-    gold: goldSources.reduce((sum, source) => sum + source.gold, 0),
+    gold: goldContents.reduce((sum, source) => sum + source.gold, 0),
   };
-  return resourceObject;
+  return { resourceObject, goldContents };
 };
 characterController.createCharacter = async (req, res, next) => {
   const { name, _class, ilvl, isGoldEarner, restedOnly, user } = req.body;
 
   try {
-    const resources = await genResources(ilvl, isGoldEarner, restedOnly);
+    const { resourceObject: resources, goldContents } = await genResources({
+      ilvl,
+      isGoldEarner,
+      restedOnly,
+    });
     const character = {
       name,
       _class,
@@ -69,6 +74,7 @@ characterController.createCharacter = async (req, res, next) => {
       isGoldEarner: isGoldEarner,
       restedOnly: restedOnly ?? false,
       resources,
+      goldContents,
     };
     if (user) character.user = user;
     res.locals.character = await Character.create(character);
@@ -91,7 +97,11 @@ characterController.updateCharacter = async (req, res, next) => {
   // updating item level means updating production
   // updating gold means ... updating gold
   try {
-    const resources = await genResources(ilvl, isGoldEarner, restedOnly);
+    const { resourceObject: resources, goldContents } = await genResources({
+      ilvl,
+      isGoldEarner,
+      restedOnly,
+    });
     res.locals.character = await Character.findOneAndUpdate(
       { name },
       {
@@ -99,6 +109,7 @@ characterController.updateCharacter = async (req, res, next) => {
         isGoldEarner,
         restedOnly: restedOnly ?? false,
         resources,
+        goldContents,
       },
       { returnDocument: "after" }
     );

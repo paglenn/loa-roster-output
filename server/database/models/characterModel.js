@@ -13,6 +13,7 @@ const charSchema = new Schema({
   resources: { type: Object, required: true },
   user: { type: String, default: "test" }, // character's owner
   restedOnly: { type: Boolean, default: false },
+  goldContents: {type: Array}
 });
 
 module.exports = mongoose.model("Characters", charSchema);
