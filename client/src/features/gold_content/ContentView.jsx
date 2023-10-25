@@ -1,6 +1,6 @@
 import React from "react";
 import Content from "./Content";
-export default contentView = ({ goldContent }) => {
+export default ({ goldContent }) => {
   const contentList = goldContent.map((el, index) => (
     <Content key={index} content={el} />
   ));

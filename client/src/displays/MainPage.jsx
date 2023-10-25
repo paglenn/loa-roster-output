@@ -13,7 +13,10 @@ import { useNavigate } from "react-router-dom";
 const MainPage = ({ user }) => {
   // protection: if no user , navigate to root
   const navigate = useNavigate();
-  if (user === "") navigate("/");
+  useEffect(() => {
+    if (user === "") navigate("/");
+  }, []);
+
   // state for roster array-  a change in this does need to cause a re-render of the roster container
   const [roster, updateRoster] = useState([]);
   // custom hook for new character. we are going to retool new character inputs to use this hook so the form properly clears after submission
