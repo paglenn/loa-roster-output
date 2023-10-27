@@ -1,5 +1,5 @@
 import React from "react";
-import Character from "./Character.jsx";
+import CharacterView from "../displays/CharacterView.jsx";
 
 // container for roster's character cards
 // must be passed down character array in props
@@ -22,7 +22,7 @@ const Roster = ({
   // create array of character card components to be rendered to the view
   roster.forEach((character) =>
     characterCards.push(
-      <Character
+      <CharacterView
         key={character.name}
         character={character}
         handleDelete={handleDelete}

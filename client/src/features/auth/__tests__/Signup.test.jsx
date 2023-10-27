@@ -5,7 +5,7 @@ import * as React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
-import { Signup } from "../components/Signup";
+import Signup from "../components/Signup";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import axios from "axios";
 

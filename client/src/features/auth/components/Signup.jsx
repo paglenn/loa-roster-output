@@ -1,12 +1,12 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { handleSignup } from "../utils/handleSignup";
+import { handleSignup } from "../events/handleSignup";
 import { BackDoorButton } from "./BackdoorButton";
 import { PasswordField } from "./PasswordField";
 import { usePasswordShown } from "../hooks/usePasswordShown";
 import { ProblemMessage } from "./ProblemMessage";
 
-export const Signup = ({ setUser }) => {
+const Signup = ({ setUser }) => {
   const emailAddress = useRef();
   const username = useRef();
   const password = useRef();
@@ -103,3 +103,5 @@ export const Signup = ({ setUser }) => {
     </div>
   );
 };
+
+export default Signup;

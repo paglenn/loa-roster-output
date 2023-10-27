@@ -9,11 +9,15 @@ import { updatePrices } from "../utils/reference";
 import { getRoster, createNewCharacter, updateCharacter } from "../utils/api";
 import { useCharacter } from "../hooks/useCharacters.js";
 import { useNavigate } from "react-router-dom";
+import { handleLogout } from "../features/auth/index.js";
 // this needs to handle state to pass down  the roster.
-const MainPage = ({ user }) => {
+const MainPage = ({ user, setUser }) => {
   // protection: if no user , navigate to root
   const navigate = useNavigate();
-  if (user === "") navigate("/");
+  useEffect(() => {
+    if (user === "") navigate("/");
+  }, []);
+
   // state for roster array-  a change in this does need to cause a re-render of the roster container
   const [roster, updateRoster] = useState([]);
   // custom hook for new character. we are going to retool new character inputs to use this hook so the form properly clears after submission
@@ -72,7 +76,13 @@ const MainPage = ({ user }) => {
 
   return (
     <div className={`bg-slate-800 max-h-full flex flex-col grow`}>
-      <TotalsDisplay user={user} roster={roster} />
+      <TotalsDisplay
+        user={user}
+        roster={roster}
+        handleLogout={() => {
+          handleLogout(navigate, setUser);
+        }}
+      />
       <CharacterInputDisplay
         handleSubmit={handleNewCharSubmit}
         user={user}

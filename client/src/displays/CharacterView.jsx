@@ -1,21 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import icons from "../utils/assets/icons";
-import { Resource } from "./Resource.jsx";
+import { Resource } from "../components/Resource.jsx";
 import { resourceTypes, hasSubtype } from "../utils/reference";
 import { getCharValue } from "../utils/sums";
 import { DeleteButton } from "../features/delete";
 import { GoldStatusBox } from "../features/goldUpdate";
 import { RestedStatusBox } from "../features/restBonus";
-const CharPortrait = React.lazy(() => import("./CharPortrait"));
-// render character cards
-const Character = ({
+import { ContentView, ShowContentButton } from "../features/gold_content";
+import ResourceView from "../components/ResourceView";
+const CharPortrait = React.lazy(() => import("../components/CharPortrait"));
+
+const CharacterView = ({
   character,
   handleDelete,
   handleGoldUpdate,
   handleLevelUpdate,
   handleRestedUpdate,
 }) => {
-  const { name, _class, ilvl, resources, isGoldEarner, restedOnly } = character;
+  const {
+    name,
+    _class,
+    ilvl,
+    resources,
+    isGoldEarner,
+    restedOnly,
+    goldContents,
+  } = character;
   const classLower = _class.toLowerCase();
   const charGoldValue = getCharValue({ resources }).toLocaleString();
   // create components for resource types
@@ -31,7 +41,9 @@ const Character = ({
       />
     );
   });
-  const cardColor = isGoldEarner ? "bg-[#d4af37]" : "bg-slate-300";
+  // const cardColor = isGoldEarner ? "bg-[#d4af37]" : "bg-slate-300";
+  const cardColor = "bg-slate-300";
+  const [isContentShown, toggleContentShown] = useState(false);
   return (
     <div
       className={`lg:basis-1/5 grow lg:grow-0  ${cardColor} shrink items-start rounded p-1 m-2`}
@@ -84,11 +96,22 @@ const Character = ({
       </div>
 
       {/* list of resources  */}
-      <ul className="list-none"> {resourceComponents}</ul>
+      {isContentShown ? (
+        <ContentView goldContent={goldContents} />
+      ) : (
+        <ResourceView resources={resources} />
+      )}
+      {/* <ul className="list-none"> {resourceComponents}</ul> */}
       {/* Delete button  */}
-      <DeleteButton name={name} handleDelete={handleDelete} />
+      <div className="flex flex-row justify-between">
+        <ShowContentButton
+          isContentShown={isContentShown}
+          clickHandler={() => toggleContentShown(!isContentShown)}
+        />
+        <DeleteButton name={name} handleDelete={handleDelete} />
+      </div>
     </div>
   );
 };
 
-export default Character;
+export default CharacterView;
