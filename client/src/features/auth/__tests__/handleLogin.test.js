@@ -1,7 +1,7 @@
 // unit test for login handler
-import { handleLogin } from "../utils/handleLogin";
+import { handleLogin } from "../events/handleLogin";
 import axios from "axios";
-import { describe, expect, test, jest, it } from "@jest/globals";
+import { describe, expect, test, jest } from "@jest/globals";
 // to avoid actually making the fetch call we will mock axios
 jest.mock("axios");
 const mUser = { username: "test", password: "test" };

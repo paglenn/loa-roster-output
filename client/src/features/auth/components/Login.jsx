@@ -1,11 +1,12 @@
 // Login Component
 import React, { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { handleLogin } from "../utils/handleLogin";
+import { handleLogin } from "../events/handleLogin";
 import { BackDoorButton } from "./BackdoorButton";
 import { PasswordField } from "./PasswordField";
 import { usePasswordShown } from "../hooks/usePasswordShown";
-export const Login = ({ setUser }) => {
+import { checkAdmin } from "../../../utils/api";
+const Login = ({ setUser }) => {
   const emailAddress = useRef();
   const password = useRef();
   const navigate = useNavigate();
@@ -16,6 +17,9 @@ export const Login = ({ setUser }) => {
   // if there is already a user, just navigate to the app
   useEffect(() => {
     if (user && user !== "test") {
+      setUser(user);
+      navigate("/app");
+    } else if (user && checkAdmin()) {
       setUser(user);
       navigate("/app");
     }
@@ -88,3 +92,5 @@ export const Login = ({ setUser }) => {
     </div>
   );
 };
+
+export default Login;

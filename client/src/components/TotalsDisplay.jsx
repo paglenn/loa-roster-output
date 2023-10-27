@@ -4,11 +4,12 @@ import icons from "../utils/assets/icons";
 import { sumRosterOutput } from "../utils/sums";
 import { Resource } from "./Resource";
 import { resourceTypes, hasSubtype, highestSubtypes } from "../utils/reference";
+import { Logout } from "../features/auth";
 // should contain total roster gold income , silver, gems , leapstones, reds, blues
 
 // stetch feature-  images!
 
-const TotalsDisplay = ({ user, roster }) => {
+const TotalsDisplay = ({ user, roster, handleLogout }) => {
   const rosterResources = sumRosterOutput(roster);
 
   const resourceComponents = resourceTypes.map((el, index) => (
@@ -22,7 +23,11 @@ const TotalsDisplay = ({ user, roster }) => {
   ));
 
   return (
-    <div className="bg-slate-800 border-black border-2 text-white">
+    <div className="bg-slate-800 text-white">
+      <div className="float-right">
+        {" "}
+        <Logout clickHandler={handleLogout} />{" "}
+      </div>
       <h1 className="capitalize text-4xl font-extrabold text-center">
         Total Weekly Output
       </h1>
@@ -30,6 +35,7 @@ const TotalsDisplay = ({ user, roster }) => {
         {" "}
         {user ? user : "TestUser"}{" "}
       </h2>
+
       <ul className="text-3xl flex flex-row list-none list-inside justify-around">
         {resourceComponents}
       </ul>
