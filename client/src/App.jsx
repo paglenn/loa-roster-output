@@ -21,7 +21,10 @@ const App = () => {
             <Route path="/" element={<Login setUser={setUser} />} />
             <Route path="/signup" element={<Signup setUser={setUser} />} />
             {/* Main Application Page */}
-            <Route path="/app" element={<MainPage user={user} />} />
+            <Route
+              path="/app"
+              element={<MainPage user={user} setUser={setUser} />}
+            />
           </Routes>
         </HashRouter>
       </div>

@@ -1,3 +1,5 @@
-import { Signup } from "./components/Signup";
-import { Login } from "./components/Login";
-export { Signup, Login };
+import Signup from "./components/Signup";
+import Login from "./components/Login";
+import Logout from "./components/Logout";
+import handleLogout from "./events/handleLogout";
+export { Signup, Login, Logout, handleLogout };

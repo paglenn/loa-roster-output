@@ -5,5 +5,7 @@ export default ({ goldContent }) => {
     <Content key={index} content={el} />
   ));
   console.log(contentList);
-  return <ul className="list-none flex flex-col "> {contentList} </ul>;
+  return (
+    <ul className="list-none flex flex-col items-stretch"> {contentList} </ul>
+  );
 };

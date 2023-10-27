@@ -104,11 +104,11 @@ const CharacterView = ({
       {/* <ul className="list-none"> {resourceComponents}</ul> */}
       {/* Delete button  */}
       <div className="flex flex-row justify-between">
-        <DeleteButton name={name} handleDelete={handleDelete} />
         <ShowContentButton
           isContentShown={isContentShown}
           clickHandler={() => toggleContentShown(!isContentShown)}
         />
+        <DeleteButton name={name} handleDelete={handleDelete} />
       </div>
     </div>
   );

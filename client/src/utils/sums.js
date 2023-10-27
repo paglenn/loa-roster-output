@@ -1,9 +1,4 @@
-import {
-  prices as oldPrices,
-  updatePrices,
-  hasSubtype,
-  stoneConvert,
-} from "./reference";
+import { prices as oldPrices, hasSubtype, convertStones } from "./reference";
 
 const prices = JSON.parse(localStorage.getItem("prices")) ?? oldPrices;
 
@@ -51,7 +46,7 @@ export const sumRosterOutput = (characterArray) => {
   sumObj.leapstones = characterArray.reduce(
     (sum, char) =>
       sum +
-      stoneConvert(
+      convertStones(
         char.resources.leapstones.type,
         char.resources.leapstones.qty
       ),
@@ -67,7 +62,10 @@ export const sumRosterOutput = (characterArray) => {
   sumObj.redStones = characterArray.reduce(
     (sum, char) =>
       sum +
-      stoneConvert(char.resources.redStones.type, char.resources.redStones.qty),
+      convertStones(
+        char.resources.redStones.type,
+        char.resources.redStones.qty
+      ),
 
     0
   );
@@ -75,7 +73,7 @@ export const sumRosterOutput = (characterArray) => {
   sumObj.blueStones = characterArray.reduce(
     (sum, char) =>
       sum +
-      stoneConvert(
+      convertStones(
         char.resources.blueStones.type,
         char.resources.blueStones.qty
       ),

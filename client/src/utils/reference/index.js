@@ -1,4 +1,4 @@
-import { stoneConvert } from "./conversion";
+import { convertStones } from "./conversion";
 import { prices, updatePrices } from "./prices";
 
 import {
@@ -10,7 +10,7 @@ import {
 
 export {
   prices,
-  stoneConvert,
+  convertStones,
   updatePrices,
   hasSubtype,
   resourceTypes,
