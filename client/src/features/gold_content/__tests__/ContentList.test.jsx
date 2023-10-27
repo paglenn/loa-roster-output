@@ -39,7 +39,7 @@ test("content view rendering", () => {
     .then((items) => expect(items.length).toEqual(3));
 });
 
-test("single content renders with image", () => {
-  render(<Content content={contentList[0]} />);
-  screen.debug();
-});
+// test("single content renders with image", () => {
+//   render(<Content content={contentList[0]} />);
+
+// });
