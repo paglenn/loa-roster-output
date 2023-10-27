@@ -75,7 +75,7 @@ const MainPage = ({ user, setUser }) => {
   };
 
   return (
-    <div className={`bg-slate-800 max-h-full flex flex-col grow`}>
+    <main className={`bg-slate-800 max-h-full flex flex-col grow`}>
       <TotalsDisplay
         user={user}
         roster={roster}
@@ -101,7 +101,7 @@ const MainPage = ({ user, setUser }) => {
           toggleRestedOnly(e, character, updateWorkingChar)
         }
       />
-    </div>
+    </main>
   );
 };
 

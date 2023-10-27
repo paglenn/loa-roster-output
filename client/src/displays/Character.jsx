@@ -10,7 +10,7 @@ import { ContentView, ShowContentButton } from "../features/gold_content";
 import ResourceView from "../components/ResourceView";
 const CharPortrait = React.lazy(() => import("../components/CharPortrait"));
 
-const CharacterView = ({
+const Character = ({
   character,
   handleDelete,
   handleGoldUpdate,
@@ -91,9 +91,9 @@ const CharacterView = ({
       </form>
 
       {/* Class Picture  */}
-      <div className="mb-1 rounded flex flex-row">
+      <figure className="mb-1 rounded flex flex-row">
         <CharPortrait classLower={classLower} />
-      </div>
+      </figure>
 
       {/* list of resources  */}
       {isContentShown ? (
@@ -101,17 +101,19 @@ const CharacterView = ({
       ) : (
         <ResourceView resources={resources} />
       )}
-      {/* <ul className="list-none"> {resourceComponents}</ul> */}
-      {/* Delete button  */}
-      <div className="flex flex-row justify-between">
+
+      <section className="flex flex-row justify-between items-center grow-0">
         <ShowContentButton
           isContentShown={isContentShown}
           clickHandler={() => toggleContentShown(!isContentShown)}
         />
-        <DeleteButton name={name} handleDelete={handleDelete} />
-      </div>
+        <details>
+          <summary> Delete Character </summary>
+          <DeleteButton name={name} handleDelete={handleDelete} />
+        </details>
+      </section>
     </div>
   );
 };
 
-export default CharacterView;
+export default Character;
