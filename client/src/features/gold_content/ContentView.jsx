@@ -11,7 +11,10 @@ export default ({ ilvl, goldContent }) => {
   });
   console.log(contentList);
   return (
-    <ul className="list-none flex flex-col items-stretch"> {contentList} </ul>
+    <ul className="list-none flex flex-col items-stretch overflow-auto max-h-48">
+      {" "}
+      {contentList}{" "}
+    </ul>
   );
 };
 

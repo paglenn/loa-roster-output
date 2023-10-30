@@ -46,7 +46,7 @@ const Character = ({
   const [isContentShown, toggleContentShown] = useState(false);
   return (
     <section
-      className={`lg:basis-1/6 grow lg:grow-0  ${cardColor} shrink items-start rounded p-1 m-2`}
+      className={`lg:basis-1/6 ${cardColor} shrink rounded p-1 m-2 flex flex-col items-stretch`}
     >
       {/* Character Name  and class icon container  */}
       <header className="flex flex-row justify-between content-center items-start">
@@ -96,11 +96,13 @@ const Character = ({
       </figure>
 
       {/* list of resources  */}
-      {isContentShown ? (
-        <ContentView ilvl={ilvl} goldContent={goldContents} />
-      ) : (
-        <ResourceView resources={resources} />
-      )}
+      <section className="basis-5/12 grow-0 shrink-0">
+        {isContentShown ? (
+          <ContentView ilvl={ilvl} goldContent={goldContents} />
+        ) : (
+          <ResourceView resources={resources} />
+        )}
+      </section>
 
       <section className="flex flex-row justify-between items-center grow-0">
         <ShowContentButton
