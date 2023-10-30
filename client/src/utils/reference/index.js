@@ -6,6 +6,7 @@ import {
   resourceTypes,
   highestSubtypes,
   charPropLabels,
+  classes,
 } from "./labels";
 
 export {
@@ -16,4 +17,5 @@ export {
   resourceTypes,
   highestSubtypes,
   charPropLabels,
+  classes,
 };

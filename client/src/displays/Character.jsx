@@ -10,7 +10,7 @@ import { ContentView, ShowContentButton } from "../features/gold_content";
 import ResourceView from "../components/ResourceView";
 const CharPortrait = React.lazy(() => import("../components/CharPortrait"));
 
-const CharacterView = ({
+const Character = ({
   character,
   handleDelete,
   handleGoldUpdate,
@@ -45,11 +45,11 @@ const CharacterView = ({
   const cardColor = "bg-slate-300";
   const [isContentShown, toggleContentShown] = useState(false);
   return (
-    <div
-      className={`lg:basis-1/5 grow lg:grow-0  ${cardColor} shrink items-start rounded p-1 m-2`}
+    <section
+      className={`lg:basis-1/6 grow lg:grow-0  ${cardColor} shrink items-start rounded p-1 m-2`}
     >
       {/* Character Name  and class icon container  */}
-      <div className="flex flex-row justify-between content-center items-start">
+      <header className="flex flex-row justify-between content-center items-start">
         <span className="text-lg font-bold mb-2 mr-1"> {name} </span>
         <span className="text-lg">{ilvl} </span>
         <GoldStatusBox
@@ -60,14 +60,14 @@ const CharacterView = ({
           restedOnly={restedOnly}
           handleClick={(e) => handleRestedUpdate(e, character)}
         />
-        <div className="basis-1/8 grow-0 self-center">
+        <figure className="basis-1/12 grow-0 self-center">
           <img
-            className="bg-black max-w-8 max-h-8 rounded"
+            className="bg-black rounded"
             alt={`${classLower} class icon`}
             src={icons[classLower]}
           />
-        </div>
-      </div>
+        </figure>
+      </header>
 
       {/* Form to update item level  */}
       <form
@@ -91,9 +91,9 @@ const CharacterView = ({
       </form>
 
       {/* Class Picture  */}
-      <div className="mb-1 rounded flex flex-row">
+      <figure className="mb-1 rounded flex flex-row">
         <CharPortrait classLower={classLower} />
-      </div>
+      </figure>
 
       {/* list of resources  */}
       {isContentShown ? (
@@ -101,17 +101,19 @@ const CharacterView = ({
       ) : (
         <ResourceView resources={resources} />
       )}
-      {/* <ul className="list-none"> {resourceComponents}</ul> */}
-      {/* Delete button  */}
-      <div className="flex flex-row justify-between">
+
+      <section className="flex flex-row justify-between items-center grow-0">
         <ShowContentButton
           isContentShown={isContentShown}
           clickHandler={() => toggleContentShown(!isContentShown)}
         />
-        <DeleteButton name={name} handleDelete={handleDelete} />
-      </div>
-    </div>
+        <details>
+          <summary> Delete Character </summary>
+          <DeleteButton name={name} handleDelete={handleDelete} />
+        </details>
+      </section>
+    </section>
   );
 };
 
-export default CharacterView;
+export default Character;

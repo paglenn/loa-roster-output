@@ -6,7 +6,7 @@ import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { resourceTypes, hasSubtype } from "../../utils/reference";
-import Character from "../CharacterView";
+import Character from "../Character";
 import { act } from "react-dom/test-utils";
 import { prices } from "../../utils/reference";
 
