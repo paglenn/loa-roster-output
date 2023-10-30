@@ -15,6 +15,24 @@ async function getContentList(client, contentType) {
     .toArray();
 }
 
+async function getGoldContent(ilvl) {
+  const client = new MongoClient(MONGO_URI);
+  try {
+    await client.connect();
+    let contentList = await getContentList(client, "gold_earning_content");
+    if (ilvl)
+      contentList = contentList.filter((el) => {
+        if (el.ilvl > ilvl) return false;
+        else if (el.max_ilvl <= ilvl) return false;
+        return true;
+      });
+    return contentList;
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await client.close();
+  }
+}
 // selectedContent:
 // {"akkan": "hard", "brelshaza" :  "ha"}
 async function selectGoldContent(selectedContent) {
@@ -87,4 +105,4 @@ async function findBestContent(ilvl, contentType) {
 // }
 // const ilvl = 1560 ;
 // findBestContent(ilvl, 'gold_earning_content').then(result => console.log(result));
-module.exports = { findBestContent, selectGoldContent };
+module.exports = { findBestContent, selectGoldContent, getGoldContent };

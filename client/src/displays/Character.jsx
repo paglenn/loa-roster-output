@@ -97,7 +97,7 @@ const Character = ({
 
       {/* list of resources  */}
       {isContentShown ? (
-        <ContentView goldContent={goldContents} />
+        <ContentView ilvl={ilvl} goldContent={goldContents} />
       ) : (
         <ResourceView resources={resources} />
       )}
