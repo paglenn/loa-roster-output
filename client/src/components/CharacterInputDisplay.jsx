@@ -1,5 +1,5 @@
 import React from "react";
-import { charPropLabels } from "../utils/reference";
+import { charPropLabels, classes } from "../utils/reference";
 const CharacterInputDisplay = ({
   handleSubmit,
   character,
@@ -42,15 +42,14 @@ const CharacterInputDisplay = ({
 };
 
 const InputLabel = ({ charPropVal, charPropName, character, handleChange }) => {
-  return charPropLabels[charPropName].type === "checkbox" ? (
-    <CheckboxInput
-      charPropVal={charPropVal}
-      charPropName={charPropName}
-      character={character}
-      handleChange={handleChange}
-    />
-  ) : (
-    <TextInput
+  const nameComponentMap = {
+    checkbox: CheckboxInput,
+    text: TextInput,
+    select: SelectInput,
+  };
+  const Component = nameComponentMap[charPropLabels[charPropName].type];
+  return (
+    <Component
       charPropVal={charPropVal}
       charPropName={charPropName}
       character={character}
@@ -59,7 +58,7 @@ const InputLabel = ({ charPropVal, charPropName, character, handleChange }) => {
   );
 };
 
-const TextInput = ({ charPropVal, charPropName, character, handleChange }) => {
+const TextInput = ({ charPropVal, charPropName, handleChange }) => {
   return (
     <label className="inline-flex flex-col align-middle">
       <span className="text-xl"> {charPropLabels[charPropName].label}: </span>
@@ -89,6 +88,27 @@ const CheckboxInput = ({ charPropVal, charPropName, handleChange }) => {
           handleChange(e, charPropName, e.target.checked);
         }}
       />
+    </label>
+  );
+};
+
+const ClassOption = ({ className }) => {
+  return <option value={className}> {className} </option>;
+};
+
+const SelectInput = ({ charPropVal, charPropName, handleChange }) => {
+  const classOptions = classes.map((className) => (
+    <ClassOption className={className} />
+  ));
+  return (
+    <label className="inline-flex flex-col">
+      <span>{charPropLabels[charPropName].label}:</span>
+      <select
+        name={charPropName}
+        onChange={(e) => handleChange(e, charPropName, e.target.value)}
+      >
+        {classOptions}
+      </select>
     </label>
   );
 };

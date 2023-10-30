@@ -1,5 +1,5 @@
 import React from "react";
-import CharacterView from "../displays/CharacterView.jsx";
+import CharacterView from "../displays/Character.jsx";
 
 // container for roster's character cards
 // must be passed down character array in props
