@@ -7,7 +7,6 @@ router.get("/characters", characterController.getCharacters, (req, res) => {
   res.status(200).json(res.locals.characters);
 });
 
-
 router.post("/", characterController.createCharacter, (req, res) => {
   res.status(200).json(res.locals.character);
 });
@@ -22,4 +21,7 @@ router.delete("/", characterController.deleteCharacter, (req, res) => {
   res.status(200).json(res.locals.character);
 });
 
+router.get("/content/:ilvl", characterController.getContentList, (req, res) => {
+  res.status(200).json(res.locals.content);
+});
 module.exports = router;
