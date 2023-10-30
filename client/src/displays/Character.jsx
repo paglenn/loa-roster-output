@@ -45,11 +45,11 @@ const Character = ({
   const cardColor = "bg-slate-300";
   const [isContentShown, toggleContentShown] = useState(false);
   return (
-    <div
-      className={`lg:basis-1/5 grow lg:grow-0  ${cardColor} shrink items-start rounded p-1 m-2`}
+    <section
+      className={`lg:basis-1/6 grow lg:grow-0  ${cardColor} shrink items-start rounded p-1 m-2`}
     >
       {/* Character Name  and class icon container  */}
-      <div className="flex flex-row justify-between content-center items-start">
+      <header className="flex flex-row justify-between content-center items-start">
         <span className="text-lg font-bold mb-2 mr-1"> {name} </span>
         <span className="text-lg">{ilvl} </span>
         <GoldStatusBox
@@ -60,14 +60,14 @@ const Character = ({
           restedOnly={restedOnly}
           handleClick={(e) => handleRestedUpdate(e, character)}
         />
-        <div className="basis-1/8 grow-0 self-center">
+        <figure className="basis-1/12 grow-0 self-center">
           <img
-            className="bg-black max-w-8 max-h-8 rounded"
+            className="bg-black rounded"
             alt={`${classLower} class icon`}
             src={icons[classLower]}
           />
-        </div>
-      </div>
+        </figure>
+      </header>
 
       {/* Form to update item level  */}
       <form
@@ -112,7 +112,7 @@ const Character = ({
           <DeleteButton name={name} handleDelete={handleDelete} />
         </details>
       </section>
-    </div>
+    </section>
   );
 };
 
