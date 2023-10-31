@@ -7,8 +7,9 @@ const Roster = ({
   roster,
   handleLevelUpdate,
   handleDelete,
-  handleGoldUpdate,
+  handleGoldEarnerUpdate,
   handleRestedUpdate,
+  handleContentChange
 }) => {
   const characterCards = [];
 
@@ -27,8 +28,9 @@ const Roster = ({
         character={character}
         handleDelete={handleDelete}
         handleLevelUpdate={handleLevelUpdate}
-        handleGoldUpdate={handleGoldUpdate}
+        handleGoldEarnerUpdate={handleGoldEarnerUpdate}
         handleRestedUpdate={handleRestedUpdate}
+        handleContentChange={handleContentChange }
       />
     )
   );

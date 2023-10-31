@@ -1,6 +1,6 @@
 import axios from "axios";
 import { vercelPrefix } from "../../../utils/api/vercel";
-const updateGold = (event, character, updateCharacter, goldEarners) => {
+const updateGoldEarners = (event, character, updateCharacter, goldEarners) => {
   // let { name, ilvl, restedOnly } = character;
   let isGoldEarner = event.target.checked;
   /* If we already have six gold earners, can't add another one  */
@@ -23,4 +23,4 @@ const updateGold = (event, character, updateCharacter, goldEarners) => {
   });
 };
 
-export default updateGold;
+export default updateGoldEarners;

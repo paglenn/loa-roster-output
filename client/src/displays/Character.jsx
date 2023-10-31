@@ -4,7 +4,7 @@ import { Resource } from "../components/Resource.jsx";
 import { resourceTypes, hasSubtype } from "../utils/reference";
 import { getCharValue } from "../utils/sums";
 import { DeleteButton } from "../features/delete";
-import { GoldStatusBox } from "../features/goldUpdate";
+import { GoldStatusBox } from "../features/gold_earners";
 import { RestedStatusBox } from "../features/restBonus";
 import { ContentView, ShowContentButton } from "../features/gold_content";
 import ResourceView from "../components/ResourceView";
@@ -13,9 +13,10 @@ const CharPortrait = React.lazy(() => import("../components/CharPortrait"));
 const Character = ({
   character,
   handleDelete,
-  handleGoldUpdate,
+  handleGoldEarnerUpdate,
   handleLevelUpdate,
   handleRestedUpdate,
+  handleContentChange,
 }) => {
   const {
     name,
@@ -54,7 +55,7 @@ const Character = ({
         <span className="text-lg">{ilvl} </span>
         <GoldStatusBox
           isGoldEarner={isGoldEarner}
-          handleGoldUpdate={(e) => handleGoldUpdate(e, character)}
+          handleClick={(e) => handleGoldEarnerUpdate(e, character)}
         />
         <RestedStatusBox
           restedOnly={restedOnly}
@@ -91,14 +92,20 @@ const Character = ({
       </form>
 
       {/* Class Picture  */}
-      <figure className="mb-1 rounded flex flex-row">
+      <figure className="mb-1 rounded flex flex-row basis-1/3">
         <CharPortrait classLower={classLower} />
       </figure>
 
       {/* list of resources  */}
-      <section className="basis-5/12 grow-0 shrink-0">
+      <section className="basis-5/12">
         {isContentShown ? (
-          <ContentView ilvl={ilvl} goldContent={goldContents} />
+          <ContentView
+            ilvl={ilvl}
+            goldContent={goldContents}
+            handleContentChange={(e, content) =>
+              handleContentChange(e, character, content)
+            }
+          />
         ) : (
           <ResourceView resources={resources} />
         )}

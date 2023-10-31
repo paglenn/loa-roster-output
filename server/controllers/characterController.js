@@ -18,7 +18,13 @@ const characterController = {};
 // create character using model - from mongoose
 // add to database using database schema
 const contentErrorMsg = "Content error: see console for more details";
-const genResources = async ({ ilvl, isGoldEarner, restedOnly }) => {
+const genResources = async ({
+  ilvl,
+  isGoldEarner,
+  restedOnly,
+  goldContents,
+  goldContentDidUpdate,
+}) => {
   const restedModifier = restedOnly ? 2 / 3 : 1;
 
   const chaosDungeon = await findBestContent(ilvl, "chaos_dungeons");
@@ -26,9 +32,11 @@ const genResources = async ({ ilvl, isGoldEarner, restedOnly }) => {
   const cube = await findBestContent(ilvl, "cubes");
   const cubesPerWeek = restedOnly ? 1 : 2;
 
-  const goldContents = isGoldEarner
-    ? await findBestContent(ilvl, "gold_earning_content")
-    : [];
+  if (!goldContentDidUpdate) {
+    goldContents = isGoldEarner
+      ? await findBestContent(ilvl, "gold_earning_content")
+      : [];
+  }
 
   const silver =
     chaosDungeon.silver * 14 * restedModifier + cube.silver * cubesPerWeek;
@@ -95,7 +103,14 @@ characterController.createCharacter = async (req, res, next) => {
 // method: update a character
 // request body should contain name and item level (the only thing that should really be updated )
 characterController.updateCharacter = async (req, res, next) => {
-  const { name, ilvl, isGoldEarner, restedOnly } = req.body;
+  const {
+    name,
+    ilvl,
+    isGoldEarner,
+    restedOnly,
+    goldContents,
+    goldContentDidUpdate,
+  } = req.body;
 
   // updating item level means updating production
   // updating gold means ... updating gold
@@ -104,7 +119,10 @@ characterController.updateCharacter = async (req, res, next) => {
       ilvl,
       isGoldEarner,
       restedOnly,
+      goldContents: req.body.goldContents,
+      goldContentDidUpdate,
     });
+
     res.locals.character = await Character.findOneAndUpdate(
       { name },
       {
