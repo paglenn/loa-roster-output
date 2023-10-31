@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Content from "./Content";
-import { getContent } from "../../utils/api";
+import { getContent } from "../../../utils/api";
 export default ({ ilvl, goldContent }) => {
   const [content, setContent] = useState([]);
   useEffect(() => getContent(ilvl, setContent), []);

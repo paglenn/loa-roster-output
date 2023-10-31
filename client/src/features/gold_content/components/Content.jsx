@@ -1,5 +1,5 @@
 import React from "react";
-import images from "../../utils/assets/content";
+import images from "../../../utils/assets/content";
 
 export default ({ content, checked }) => {
   return (

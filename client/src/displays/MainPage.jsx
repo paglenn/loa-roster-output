@@ -2,14 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import TotalsDisplay from "../components/TotalsDisplay.jsx";
 import Roster from "../components/RosterContainer.jsx";
 import CharacterInputDisplay from "../components/CharacterInputDisplay.jsx";
-import { handleDelete } from "../features/delete/index.js";
-import { updateGold } from "../features/goldUpdate/index.js";
-import { toggleRestedOnly } from "../features/restBonus/index.js";
+import { handleDelete } from "../features/delete";
+import { updateGoldEarners } from "../features/gold_earners";
+import { toggleRestedOnly } from "../features/restBonus";
 import { updatePrices } from "../utils/reference";
 import { getRoster, createNewCharacter, updateCharacter } from "../utils/api";
-import { useCharacter } from "../hooks/useCharacters.js";
+import { useCharacter } from "../hooks/useCharacters";
 import { useNavigate } from "react-router-dom";
-import { handleLogout } from "../features/auth/index.js";
+import { handleLogout } from "../features/auth";
 // this needs to handle state to pass down  the roster.
 const MainPage = ({ user, setUser }) => {
   // protection: if no user , navigate to root
@@ -93,8 +93,8 @@ const MainPage = ({ user, setUser }) => {
         roster={roster}
         handleDelete={(e) => handleDelete(e, updateWorkingChar)}
         handleLevelUpdate={handleItemLevelUpdate}
-        handleGoldUpdate={(e, character) =>
-          updateGold(e, character, updateWorkingChar, goldEarners)
+        handleGoldEarnerUpdate={(e, character) =>
+          updateGoldEarners(e, character, updateWorkingChar, goldEarners)
         }
         updateCharacter={updateWorkingChar}
         handleRestedUpdate={(e, character) =>

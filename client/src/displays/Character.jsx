@@ -4,7 +4,7 @@ import { Resource } from "../components/Resource.jsx";
 import { resourceTypes, hasSubtype } from "../utils/reference";
 import { getCharValue } from "../utils/sums";
 import { DeleteButton } from "../features/delete";
-import { GoldStatusBox } from "../features/goldUpdate";
+import { GoldStatusBox } from "../features/gold_earners";
 import { RestedStatusBox } from "../features/restBonus";
 import { ContentView, ShowContentButton } from "../features/gold_content";
 import ResourceView from "../components/ResourceView";
@@ -13,7 +13,7 @@ const CharPortrait = React.lazy(() => import("../components/CharPortrait"));
 const Character = ({
   character,
   handleDelete,
-  handleGoldUpdate,
+  handleGoldEarnerUpdate,
   handleLevelUpdate,
   handleRestedUpdate,
 }) => {
@@ -54,7 +54,7 @@ const Character = ({
         <span className="text-lg">{ilvl} </span>
         <GoldStatusBox
           isGoldEarner={isGoldEarner}
-          handleGoldUpdate={(e) => handleGoldUpdate(e, character)}
+          handleClick={(e) => handleGoldEarnerUpdate(e, character)}
         />
         <RestedStatusBox
           restedOnly={restedOnly}
