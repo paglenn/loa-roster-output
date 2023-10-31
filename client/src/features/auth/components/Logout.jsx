@@ -4,8 +4,11 @@
 import React from "react";
 const LogoutButton = ({ clickHandler }) => {
   return (
-    <button className="rounded-sm bg-red-500 p-1" onClick={clickHandler}>
-      Log Out
+    <button
+      className="rounded-sm bg-red-500 p-1 border-2 border-black"
+      onClick={clickHandler}
+    >
+      LOG OUT
     </button>
   );
 };

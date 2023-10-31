@@ -2,14 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import TotalsDisplay from "../components/TotalsDisplay.jsx";
 import Roster from "../components/RosterContainer.jsx";
 import CharacterInputDisplay from "../components/CharacterInputDisplay.jsx";
-import { handleDelete } from "../features/delete/index.js";
-import { updateGold } from "../features/goldUpdate/index.js";
-import { toggleRestedOnly } from "../features/restBonus/index.js";
+import { handleDelete } from "../features/delete";
+import { updateGoldEarners } from "../features/gold_earners";
+import { toggleRestedOnly } from "../features/restBonus";
 import { updatePrices } from "../utils/reference";
 import { getRoster, createNewCharacter, updateCharacter } from "../utils/api";
-import { useCharacter } from "../hooks/useCharacters.js";
+import { useCharacter } from "../hooks/useCharacters";
 import { useNavigate } from "react-router-dom";
-import { handleLogout } from "../features/auth/index.js";
+import { handleLogout } from "../features/auth";
+import { handleContentChange } from "../features/gold_content";
 // this needs to handle state to pass down  the roster.
 const MainPage = ({ user, setUser }) => {
   // protection: if no user , navigate to root
@@ -68,12 +69,15 @@ const MainPage = ({ user, setUser }) => {
     getRoster(user, updateRoster, goldEarners);
   }, [workingChar]);
 
-  const newCharChangeHandler = (e, charPropName, value) => {
+  const handleNewCharChange = (e, charPropName, value) => {
     const characterSlice = {};
     characterSlice[charPropName] = value;
     updateNewCharacter({ ...newCharacter, ...characterSlice });
   };
 
+  const handleContent = (e, character, content) => {
+    handleContentChange(e, content, character, updateWorkingChar);
+  };
   return (
     <main className={`bg-slate-800 max-h-full flex flex-col grow`}>
       <TotalsDisplay
@@ -87,19 +91,20 @@ const MainPage = ({ user, setUser }) => {
         handleSubmit={handleNewCharSubmit}
         user={user}
         character={newCharacter}
-        handleChange={newCharChangeHandler}
+        handleChange={handleNewCharChange}
       />
       <Roster
         roster={roster}
         handleDelete={(e) => handleDelete(e, updateWorkingChar)}
         handleLevelUpdate={handleItemLevelUpdate}
-        handleGoldUpdate={(e, character) =>
-          updateGold(e, character, updateWorkingChar, goldEarners)
+        handleGoldEarnerUpdate={(e, character) =>
+          updateGoldEarners(e, character, updateWorkingChar, goldEarners)
         }
         updateCharacter={updateWorkingChar}
         handleRestedUpdate={(e, character) =>
           toggleRestedOnly(e, character, updateWorkingChar)
         }
+        handleContentChange={handleContent}
       />
     </main>
   );
