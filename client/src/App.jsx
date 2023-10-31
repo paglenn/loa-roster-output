@@ -15,7 +15,7 @@ const App = () => {
     <div className=" bg-slate-800 flex flex-col h-screen">
       <Header />
       <div className="flex flex-col justify-center grow">
-        <BrowserRouter basename="/">
+        <HashRouter basename="/">
           <Routes>
             {/* Authentication Routes */}
             <Route path="/" element={<Login setUser={setUser} />} />
@@ -26,7 +26,7 @@ const App = () => {
               element={<MainPage user={user} setUser={setUser} />}
             />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </div>
     </div>
   );
