@@ -1,24 +1,28 @@
-const { describe, expect, it } = require("@jest/globals");
-const { findBestContent, selectGoldContent } = require("../findContent");
+const { describe, expect, it, beforeEach } = require("@jest/globals");
+const {
+  findBestContent,
+  selectGoldContent,
+  getGoldContent,
+} = require("../findContent");
 
 // import {describe, expect} from ''
-describe("content lookup tester", () => {
-  const ilvl = 1580;
+describe("content lookup", () => {
+ const ilvl = 1580;
   it(" finds best chaos dungeon ", async () => {
     findBestContent(ilvl, "chaos_dungeons").then((content) =>
-      expect(content.ilvl).toBe(1580)
+      expect(content.ilvl).toEqual(ilvl)
     );
   });
 
   it(" finds best guardian raid", async () => {
     findBestContent(ilvl, "guardian_raids").then((content) =>
-      expect(content.ilvl).toBe(1580)
+      expect(content.ilvl).toEqual(ilvl)
     );
   });
 
   it("finds the best cubes", async () => {
     findBestContent(ilvl, "cubes").then((content) => {
-      expect(content.ilvl).toBe(1580);
+      expect(content.ilvl).toEqual(1580);
     });
   });
 
@@ -40,5 +44,10 @@ describe("content lookup tester", () => {
     expect(content.length).toEqual(3);
     const totalGold = content.reduce((sum, c) => sum + c.gold, 0);
     expect(totalGold).toEqual(25750);
+  });
+
+  test("all gold content relevant to ilvl can be retrieved", async () => {
+    const content = await getGoldContent(1400);
+    expect(content.length).toEqual(2);
   });
 });
