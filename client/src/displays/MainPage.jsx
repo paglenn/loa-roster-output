@@ -10,6 +10,7 @@ import { getRoster, createNewCharacter, updateCharacter } from "../utils/api";
 import { useCharacter } from "../hooks/useCharacters";
 import { useNavigate } from "react-router-dom";
 import { handleLogout } from "../features/auth";
+import { handleContentChange } from "../features/gold_content";
 // this needs to handle state to pass down  the roster.
 const MainPage = ({ user, setUser }) => {
   // protection: if no user , navigate to root
@@ -68,12 +69,15 @@ const MainPage = ({ user, setUser }) => {
     getRoster(user, updateRoster, goldEarners);
   }, [workingChar]);
 
-  const newCharChangeHandler = (e, charPropName, value) => {
+  const handleNewCharChange = (e, charPropName, value) => {
     const characterSlice = {};
     characterSlice[charPropName] = value;
     updateNewCharacter({ ...newCharacter, ...characterSlice });
   };
 
+  const handleContent = (e, character, content) => {
+    handleContentChange(e, content, character, updateWorkingChar);
+  };
   return (
     <main className={`bg-slate-800 max-h-full flex flex-col grow`}>
       <TotalsDisplay
@@ -87,7 +91,7 @@ const MainPage = ({ user, setUser }) => {
         handleSubmit={handleNewCharSubmit}
         user={user}
         character={newCharacter}
-        handleChange={newCharChangeHandler}
+        handleChange={handleNewCharChange}
       />
       <Roster
         roster={roster}
@@ -100,6 +104,7 @@ const MainPage = ({ user, setUser }) => {
         handleRestedUpdate={(e, character) =>
           toggleRestedOnly(e, character, updateWorkingChar)
         }
+        handleContentChange={handleContent}
       />
     </main>
   );

@@ -16,6 +16,7 @@ const Character = ({
   handleGoldEarnerUpdate,
   handleLevelUpdate,
   handleRestedUpdate,
+  handleContentChange,
 }) => {
   const {
     name,
@@ -98,7 +99,13 @@ const Character = ({
       {/* list of resources  */}
       <section className="basis-5/12 grow-0 shrink-0">
         {isContentShown ? (
-          <ContentView ilvl={ilvl} goldContent={goldContents} />
+          <ContentView
+            ilvl={ilvl}
+            goldContent={goldContents}
+            handleContentChange={(e, content) =>
+              handleContentChange(e, character, content)
+            }
+          />
         ) : (
           <ResourceView resources={resources} />
         )}

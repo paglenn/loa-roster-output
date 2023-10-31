@@ -1,12 +1,12 @@
 import React from "react";
 import images from "../../../utils/assets/content";
 
-export default ({ content, checked }) => {
+export default ({ content, checked , handleChange}) => {
   return (
     <li role="content" className="text-sm py-2">
       <ul className="flex flex-row list-none justify-around">
         <li className="basis-1/4">
-          <input type="checkbox" checked={checked} />
+          <input type="checkbox" checked={checked} onChange={(e) => handleChange(e, content)}/>
         </li>
         {/*We were rendering the images here, but it's taking up too much space right now */}
         {/* {checked ? (

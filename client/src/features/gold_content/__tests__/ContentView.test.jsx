@@ -1,11 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-import ContentView from "../ContentView";
+import ContentView from "../components/ContentView";
 import React from "react";
 import { test, expect } from "@jest/globals";
 import { render, screen } from "@testing-library/react";
-import Content from "../Content";
+import Content from "../components/Content";
 const contentList = [
   {
     _id: "6536cbe623c43fa229317e23",

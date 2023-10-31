@@ -97,8 +97,8 @@ const ClassOption = ({ className }) => {
 };
 
 const SelectInput = ({ charPropVal, charPropName, handleChange }) => {
-  const classOptions = classes.map((className) => (
-    <ClassOption className={className} />
+  const classOptions = classes.map((className, index) => (
+    <ClassOption key={index} className={className} />
   ));
   return (
     <label className="inline-flex flex-col">

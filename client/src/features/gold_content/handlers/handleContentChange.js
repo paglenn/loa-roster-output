@@ -1,7 +1,7 @@
 import { updateCharacter } from "../../../utils/api";
 const handleContentChange = (e, content, character, updateState) => {
   const isDoing = e.target.checked;
-  let copyCharacter;
+  const copyCharacter = { ...character };
   if (isDoing) {
     // if you're already doing 3 gold contents, can't add more
     if (character.goldContents.length === 3) {
@@ -14,20 +14,20 @@ const handleContentChange = (e, content, character, updateState) => {
       return { error: "already doing content of same name" };
     } else {
       // add content to list
-      copyCharacter = {
-        ...character,
-        goldContents: [...character.goldContents, content],
-      };
+      copyCharacter.goldContents = [...character.goldContents, content];
     }
   } else {
     // remove content from list
-    copyCharacter = {
-      ...character,
-      goldContents: character.goldContents.filter((c) => c._id !== content._id),
-    };
+    copyCharacter.goldContents = character.goldContents.filter(
+      (c) => c._id !== content._id
+    );
   }
-  updateState(copyCharacter);
-  updateCharacter(copyCharacter);
+
+  updateCharacter({ ...copyCharacter, goldContentDidUpdate: true }).then(
+    (updatedChar) => {
+      updateState(updatedChar);
+    }
+  );
 
   return;
 };
