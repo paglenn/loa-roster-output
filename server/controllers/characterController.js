@@ -1,5 +1,8 @@
 const Character = require("../database/models/characterModel");
-const { findBestContent } = require("../database/util/findContent");
+const {
+  findBestContent,
+  getGoldContent,
+} = require("../database/util/findContent");
 // we will export character controller object
 const characterController = {};
 
@@ -14,7 +17,7 @@ const characterController = {};
 // feature updates -- gold earning status, rested only
 // create character using model - from mongoose
 // add to database using database schema
-
+const contentErrorMsg = "Content error: see console for more details";
 const genResources = async ({ ilvl, isGoldEarner, restedOnly }) => {
   const restedModifier = restedOnly ? 2 / 3 : 1;
 
@@ -163,6 +166,24 @@ characterController.getCharacters = (req, res, next) => {
         message: { err: "an error occured: see console for more details" },
         status: 400,
         log: "error occurred in getCharacters middleware",
+      });
+    });
+};
+
+characterController.getContentList = (req, res, next) => {
+  const ilvl = req.params.ilvl;
+  console.log("captured ilvl: ", ilvl);
+  getGoldContent(ilvl)
+    .then((content) => {
+      res.locals.content = content;
+      return next();
+    })
+    .catch((error) => {
+      return next({
+        error: error,
+        message: contentErrorMsg,
+        status: 500,
+        log: "error occured in getContentList middleware",
       });
     });
 };

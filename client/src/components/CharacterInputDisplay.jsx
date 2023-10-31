@@ -104,9 +104,11 @@ const SelectInput = ({ charPropVal, charPropName, handleChange }) => {
     <label className="inline-flex flex-col">
       <span>{charPropLabels[charPropName].label}:</span>
       <select
+        className="overflow-auto max-h-20"
         name={charPropName}
         onChange={(e) => handleChange(e, charPropName, e.target.value)}
       >
+        <option value=""> -- Select Class-- </option>
         {classOptions}
       </select>
     </label>
