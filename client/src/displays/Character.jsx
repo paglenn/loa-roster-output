@@ -92,12 +92,12 @@ const Character = ({
       </form>
 
       {/* Class Picture  */}
-      <figure className="mb-1 rounded flex flex-row">
+      <figure className="mb-1 rounded flex flex-row basis-1/3">
         <CharPortrait classLower={classLower} />
       </figure>
 
       {/* list of resources  */}
-      <section className="basis-5/12 grow-0 shrink-0">
+      <section className="basis-5/12">
         {isContentShown ? (
           <ContentView
             ilvl={ilvl}

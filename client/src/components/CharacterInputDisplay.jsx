@@ -21,18 +21,18 @@ const CharacterInputDisplay = ({
 
   return (
     <div className="text-xl bg-slate-300 p-5">
-      <h2 className="text-center text-2xl underline pb-2">
+      <h2 className="text-center text-2xl uppercase pb-2">
         {" "}
         Add New Character{" "}
       </h2>
       <form
         onSubmit={(e) => handleSubmit(e, character)}
-        className="flex justify-around"
+        className="flex flex-col lg:flex-row justify-around"
       >
         {charProps}
 
         <input
-          className="border-black border-2 rounded-sm bg-green-400 p-1"
+          className="border-black border-2 rounded-sm bg-green-400 p-1 h-1/2 self-center my-1"
           type="submit"
           value="Submit"
         />
