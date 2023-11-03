@@ -54,7 +54,7 @@ const apiMap = {
   leapstones: "radiant-honor-leapstone-3",
 };
 
-const updatePrices = async (user) => {
+const updatePrices = async (region) => {
   // if we already have prices stored, no need to retrieve
   // update once every 6 hours
   if (localStorage.getItem("prices")) {
@@ -63,7 +63,7 @@ const updatePrices = async (user) => {
     if (currentTime - updatedTime < 1000 * 60 * 60 * 6)
       return JSON.parse(localStorage.getItem("prices"));
   }
-  const userRegion = user.region ?? "North America East";
+  const userRegion = region ?? "North America East";
 
   const apiPrices = await axios
     .get(

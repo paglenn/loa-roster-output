@@ -1,2 +1,3 @@
 import RefreshButton from "./components/RefreshButton";
-export { RefreshButton };
+import usePrices from "./hooks/usePrices";
+export { RefreshButton, usePrices };

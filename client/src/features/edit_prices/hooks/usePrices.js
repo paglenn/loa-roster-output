@@ -22,3 +22,5 @@ const usePrices = () => {
 
   return [priceState, priceUpdater];
 };
+
+export default usePrices;

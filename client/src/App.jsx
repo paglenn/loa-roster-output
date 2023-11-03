@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, BrowserRouter, HashRouter } from "react-router-dom";
 import MainPage from "./displays/main";
-import { Login, Signup } from "./features/auth";
+import { Login, Signup, autoLogin } from "./features/auth";
 import Header from "./components/Header";
-import { checkAdmin } from "./utils/api";
+
 import PricesPage from "./displays/prices";
+import { usePrices } from "./features/edit_prices";
 const App = () => {
-  const currentUser = localStorage.getItem("user") ?? "";
   const [user, setUser] = useState("");
-  // const [prices, updatePrices] = useState(localStorage.getItem("prices")); // string of prices
+  const [prices, updatePrices] = usePrices();
+
+  // on mount, try to automatically log in the user
   useEffect(() => {
-    if (currentUser !== "test") setUser(currentUser);
-    else if (checkAdmin()) setUser(currentUser);
+    autoLogin(setUser);
   }, []);
+
   return (
     <div className=" bg-slate-800 flex flex-col h-screen">
       <Header />
@@ -25,11 +27,15 @@ const App = () => {
             {/* Main Application Page */}
             <Route
               path="/app"
-              element={<MainPage user={user} setUser={setUser} />}
+              element={
+                <MainPage user={user} setUser={setUser} prices={prices} />
+              }
             />
             <Route
               path="/prices"
-              element={<PricesPage user={user} setUser={setUser} />}
+              element={
+                <PricesPage user={user} setUser={setUser} prices={prices} />
+              }
             />
           </Routes>
         </HashRouter>
