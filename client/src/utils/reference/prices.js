@@ -1,5 +1,5 @@
 import axios from "axios";
-const level7GemPrice = 11500;
+const level7GemPrice = 12000;
 const radiantLeapstonePrice = 110;
 const refineObliterationStackPrice = 45;
 const refinedProtectionStackPrice = 5;
@@ -54,7 +54,7 @@ const apiMap = {
   leapstones: "radiant-honor-leapstone-3",
 };
 
-const updatePrices = async () => {
+const updatePrices = async (user) => {
   // if we already have prices stored, no need to retrieve
   // update once every 6 hours
   if (localStorage.getItem("prices")) {
@@ -63,10 +63,11 @@ const updatePrices = async () => {
     if (currentTime - updatedTime < 1000 * 60 * 60 * 6)
       return JSON.parse(localStorage.getItem("prices"));
   }
+  const userRegion = user.region ?? "North America East";
 
   const apiPrices = await axios
     .get(
-      "https://www.lostarkmarket.online/api/export-market-live/North America East?category=Enhancement Material&subcategory=Honing Materials&tier=Tier 3"
+      `https://www.lostarkmarket.online/api/export-market-live/${userRegion}?category=Enhancement Material&subcategory=Honing Materials&tier=Tier 3`
     )
     .then((response) => response.data);
   const apiPriceObj = {};

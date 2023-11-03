@@ -1,21 +1,26 @@
 import React, { useState, useEffect, useRef } from "react";
-import TotalsDisplay from "../components/TotalsDisplay.jsx";
-import Roster from "../components/RosterContainer.jsx";
-import CharacterInputDisplay from "../components/CharacterInputDisplay.jsx";
-import { handleDelete } from "../features/delete";
-import { updateGoldEarners } from "../features/gold_earners";
-import { toggleRestedOnly } from "../features/restBonus";
-import { updatePrices } from "../utils/reference";
-import { getRoster, createNewCharacter, updateCharacter } from "../utils/api";
-import { useCharacter } from "../hooks/useCharacters";
+import TotalsDisplay from "../../components/TotalsDisplay.jsx";
+import Roster from "../../components/RosterContainer.jsx";
+import CharacterInputDisplay from "../../components/CharacterInputDisplay.jsx";
+import { handleDelete } from "../../features/delete/index.js";
+import { updateGoldEarners } from "../../features/gold_earners/index.js";
+import { toggleRestedOnly } from "../../features/restBonus/index.js";
+import { updatePrices } from "../../utils/reference/index.js";
+import {
+  getRoster,
+  createNewCharacter,
+  updateCharacter,
+} from "../../utils/api/index.js";
+import { useCharacter } from "../../hooks/useCharacters.js";
 import { useNavigate } from "react-router-dom";
-import { handleLogout } from "../features/auth";
-import { handleContentChange } from "../features/gold_content";
+import { handleLogout } from "../../features/auth/index.js";
+import { handleContentChange } from "../../features/gold_content/index.js";
 // this needs to handle state to pass down  the roster.
 const MainPage = ({ user, setUser }) => {
   // protection: if no user , navigate to root
   const navigate = useNavigate();
   useEffect(() => {
+    //protect route
     if (user === "") navigate("/");
   }, []);
 
@@ -61,7 +66,7 @@ const MainPage = ({ user, setUser }) => {
 
   // effect hook to update prices
   useEffect(() => {
-    updatePrices();
+    updatePrices(user);
   }, []);
 
   // effect hook to get changes to character list. we will want to run this on page load, but also on submission of forms or  deletion of a character

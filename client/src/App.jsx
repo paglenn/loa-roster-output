@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, BrowserRouter, HashRouter } from "react-router-dom";
-import MainPage from "./displays/MainPage";
+import MainPage from "./displays/main";
 import { Login, Signup } from "./features/auth";
 import Header from "./components/Header";
 import { checkAdmin } from "./utils/api";
+import PricesPage from "./displays/prices";
 const App = () => {
   const currentUser = localStorage.getItem("user") ?? "";
   const [user, setUser] = useState("");
@@ -24,6 +25,10 @@ const App = () => {
             <Route
               path="/app"
               element={<MainPage user={user} setUser={setUser} />}
+            />
+            <Route
+              path="/prices"
+              element={<PricesPage user={user} setUser={setUser} />}
             />
           </Routes>
         </HashRouter>

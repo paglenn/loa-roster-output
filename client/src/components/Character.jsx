@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import icons from "../utils/assets/icons";
-import { Resource } from "../components/Resource.jsx";
+import { Resource } from "./Resource.jsx";
 import { resourceTypes, hasSubtype } from "../utils/reference";
 import { getCharValue } from "../utils/sums";
 import { DeleteButton } from "../features/delete";
 import { GoldStatusBox } from "../features/gold_earners";
 import { RestedStatusBox } from "../features/restBonus";
 import { ContentView, ShowContentButton } from "../features/gold_content";
-import ResourceView from "../components/ResourceView";
-const CharPortrait = React.lazy(() => import("../components/CharPortrait"));
+import ResourceView from "./ResourceView";
+const CharPortrait = React.lazy(() => import("./CharPortrait"));
 
 const Character = ({
   character,
