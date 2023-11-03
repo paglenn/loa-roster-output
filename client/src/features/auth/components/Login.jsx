@@ -39,6 +39,7 @@ const Login = ({ setUser }) => {
     if (auth.auth) {
       setUser(auth.username);
       localStorage.setItem("user", auth.username);
+      localStorage.setItem("region", auth.region);
       navigate("/app");
     } else setIncorrect(true);
   };

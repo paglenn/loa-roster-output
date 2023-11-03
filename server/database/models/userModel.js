@@ -9,6 +9,7 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
   username: { type: String, unique: true },
   password: { type: String, required: true },
+  region: { type: String, default: "North America East" },
 });
 
 // pre-save hook

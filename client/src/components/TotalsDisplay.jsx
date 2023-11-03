@@ -28,12 +28,12 @@ const TotalsDisplay = ({ user, roster, handleLogout }) => {
         {" "}
         <Logout clickHandler={handleLogout} />{" "}
       </div>
-      <h1 className="capitalize text-4xl font-extrabold text-center">
-        Total Weekly Output
-      </h1>
+
       <h2 className="capitalize text-3xl font-extrabold text-center">
-        {" "}
-        {user ? user : "TestUser"}{" "}
+        {user ?? null}
+      </h2>
+      <h2 className="capitalize text-3xl font-extrabold text-center">
+        Total Weekly Output
       </h2>
 
       <ul className="text-3xl flex flex-row list-none list-inside justify-around">

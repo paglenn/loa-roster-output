@@ -8,6 +8,7 @@ import PricesPage from "./displays/prices";
 const App = () => {
   const currentUser = localStorage.getItem("user") ?? "";
   const [user, setUser] = useState("");
+  // const [prices, updatePrices] = useState(localStorage.getItem("prices")); // string of prices
   useEffect(() => {
     if (currentUser !== "test") setUser(currentUser);
     else if (checkAdmin()) setUser(currentUser);
