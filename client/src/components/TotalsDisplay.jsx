@@ -5,11 +5,12 @@ import { sumRosterOutput } from "../utils/sums";
 import { Resource } from "./Resource";
 import { resourceTypes, hasSubtype, highestSubtypes } from "../utils/reference";
 import { Logout } from "../features/auth";
+import Redirect from "./RedirectButton";
 // should contain total roster gold income , silver, gems , leapstones, reds, blues
 
 // stetch feature-  images!
 
-const TotalsDisplay = ({ user, roster, handleLogout }) => {
+const TotalsDisplay = ({ user, roster, handleLogout, priceRedirect }) => {
   const rosterResources = sumRosterOutput(roster);
 
   const resourceComponents = resourceTypes.map((el, index) => (
@@ -36,7 +37,7 @@ const TotalsDisplay = ({ user, roster, handleLogout }) => {
         Total Weekly Output
       </h2>
 
-      <ul className="text-3xl flex flex-row list-none list-inside justify-around">
+      <ul className="text-3xl flex flex-col md:flex-row lg:flex-row list-none list-inside justify-around">
         {resourceComponents}
       </ul>
 
@@ -56,6 +57,13 @@ const TotalsDisplay = ({ user, roster, handleLogout }) => {
           </span>
         </div>
       </h1>
+      <section className="flex flex-col items-center my-2">
+        {" "}
+        <Redirect
+          handleClick={priceRedirect}
+          label="Income Breakdown & Changes"
+        />
+      </section>
     </div>
   );
 };

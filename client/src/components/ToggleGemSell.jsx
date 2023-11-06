@@ -1,4 +1,4 @@
-import { prices } from "../../../utils/reference";
+import { prices } from "../utils/reference";
 import React, { useState, useEffect } from "react";
 // checkbox
 // set localStorage gem value to zero and trigger updatePrices

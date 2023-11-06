@@ -1,20 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
-import TotalsDisplay from "../../components/TotalsDisplay.jsx";
-import Roster from "../../components/RosterContainer.jsx";
-import CharacterInputDisplay from "../../components/CharacterInputDisplay.jsx";
-import { handleDelete } from "../../features/delete/index.js";
-import { updateGoldEarners } from "../../features/gold_earners/index.js";
-import { toggleRestedOnly } from "../../features/restBonus/index.js";
-import { updatePrices } from "../../utils/reference/index.js";
+import TotalsDisplay from "../components/TotalsDisplay.jsx";
+import Roster from "../components/RosterContainer.jsx";
+import CharacterInputDisplay from "../components/CharacterInputDisplay.jsx";
+import { handleDelete } from "../features/delete/index.js";
+import { updateGoldEarners } from "../features/gold_earners/index.js";
+import { toggleRestedOnly } from "../features/restBonus/index.js";
+import { updatePrices } from "../utils/reference/index.js";
 import {
   getRoster,
   createNewCharacter,
   updateCharacter,
-} from "../../utils/api/index.js";
-import { useCharacter } from "../../hooks/useCharacters.js";
+} from "../utils/api/index.js";
+import { useCharacter } from "../hooks/useCharacters.js";
 import { useNavigate } from "react-router-dom";
-import { handleLogout } from "../../features/auth/index.js";
-import { handleContentChange } from "../../features/gold_content/index.js";
+import { handleLogout } from "../features/auth/index.js";
+import { handleContentChange } from "../features/gold_content/index.js";
 // this needs to handle state to pass down  the roster.
 const MainPage = ({ user, setUser }) => {
   // protection: if no user , navigate to root
@@ -91,6 +91,7 @@ const MainPage = ({ user, setUser }) => {
         handleLogout={() => {
           handleLogout(navigate, setUser);
         }}
+        priceRedirect={() => navigate("/prices")}
       />
       <CharacterInputDisplay
         handleSubmit={handleNewCharSubmit}

@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, BrowserRouter, HashRouter } from "react-router-dom";
-import MainPage from "./displays/main";
+import MainPage from "./displays/MainPage";
 import { Login, Signup, autoLogin } from "./features/auth";
 import Header from "./components/Header";
-
-import PricesPage from "./displays/prices";
+import PricesPage from "./displays/PricesPage";
 import { usePrices } from "./features/edit_prices";
 const App = () => {
   const [user, setUser] = useState("");
-  const [prices, updatePrices] = usePrices();
+  const [region, setRegion] = useState(
+    localStorage.getItem("region") ?? "North America East"
+  );
+  const [prices, updatePrices] = usePrices(region);
 
   // on mount, try to automatically log in the user
   useEffect(() => {
