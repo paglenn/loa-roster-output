@@ -7,10 +7,7 @@ import PricesPage from "./displays/PricesPage";
 import { usePrices } from "./features/edit_prices";
 const App = () => {
   const [user, setUser] = useState("");
-  const [region, setRegion] = useState(
-    localStorage.getItem("region") ?? "North America East"
-  );
-  const [prices, updatePrices] = usePrices(region);
+  const [prices, updatePrices] = usePrices();
 
   // on mount, try to automatically log in the user
   useEffect(() => {
@@ -36,7 +33,12 @@ const App = () => {
             <Route
               path="/prices"
               element={
-                <PricesPage user={user} setUser={setUser} prices={prices} />
+                <PricesPage
+                  user={user}
+                  setUser={setUser}
+                  prices={prices}
+                  update={updatePrices}
+                />
               }
             />
           </Routes>

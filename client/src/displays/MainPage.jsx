@@ -16,7 +16,8 @@ import { useNavigate } from "react-router-dom";
 import { handleLogout } from "../features/auth/index.js";
 import { handleContentChange } from "../features/gold_content/index.js";
 // this needs to handle state to pass down  the roster.
-const MainPage = ({ user, setUser }) => {
+
+const MainPage = ({ user, setUser, prices }) => {
   // protection: if no user , navigate to root
   const navigate = useNavigate();
   useEffect(() => {
@@ -64,11 +65,6 @@ const MainPage = ({ user, setUser }) => {
     event.target[0].value = ""; // clear the form field
   };
 
-  // effect hook to update prices
-  useEffect(() => {
-    updatePrices(user);
-  }, []);
-
   // effect hook to get changes to character list. we will want to run this on page load, but also on submission of forms or  deletion of a character
   useEffect(() => {
     getRoster(user, updateRoster, goldEarners);
@@ -92,6 +88,7 @@ const MainPage = ({ user, setUser }) => {
           handleLogout(navigate, setUser);
         }}
         priceRedirect={() => navigate("/prices")}
+        prices={prices}
       />
       <CharacterInputDisplay
         handleSubmit={handleNewCharSubmit}

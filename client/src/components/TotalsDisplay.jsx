@@ -10,8 +10,14 @@ import Redirect from "./RedirectButton";
 
 // stetch feature-  images!
 
-const TotalsDisplay = ({ user, roster, handleLogout, priceRedirect }) => {
-  const rosterResources = sumRosterOutput(roster);
+const TotalsDisplay = ({
+  user,
+  roster,
+  handleLogout,
+  priceRedirect,
+  prices,
+}) => {
+  const rosterResources = sumRosterOutput(roster, prices);
 
   const resourceComponents = resourceTypes.map((el, index) => (
     <Resource

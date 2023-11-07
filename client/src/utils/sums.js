@@ -3,7 +3,7 @@ import { prices as oldPrices, hasSubtype, convertStones } from "./reference";
 const prices = JSON.parse(localStorage.getItem("prices")) ?? oldPrices;
 
 // console.log("prices in sums file: ", prices);
-const calcTotalGoldValue = (materials) => {
+const calcTotalGoldValue = (materials, prices) => {
   const value = Object.keys(materials).reduce(
     (sum, name) => sum + materials[name] * prices[name],
     0
@@ -32,7 +32,7 @@ export const getCharValue = ({ resources }) => {
   return Math.round(value);
 };
 
-export const sumRosterOutput = (characterArray) => {
+export const sumRosterOutput = (characterArray, prices) => {
   const sumObj = {};
 
   sumObj.gold = characterArray.reduce(
@@ -81,6 +81,6 @@ export const sumRosterOutput = (characterArray) => {
   );
   sumObj.blueStones = Math.round(sumObj.blueStones);
 
-  sumObj.totalGoldValue = calcTotalGoldValue(sumObj);
+  sumObj.totalGoldValue = calcTotalGoldValue(sumObj, prices);
   return sumObj;
 };

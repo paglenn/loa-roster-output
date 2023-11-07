@@ -4,10 +4,10 @@ const RefreshButton = ({ clickHandler }) => {
   return (
     <button
       onClick={clickHandler}
-      className="bg-cyan-600 flex flex-row rounded items-center"
+      className="bg-cyan-600 flex flex-row rounded items-center p-1 justify-between"
     >
       {" "}
-      <div> Refresh Prices</div>
+      <div className="mr-2"> Refresh Prices</div>
       <div>
         <FaArrowsRotate />{" "}
       </div>

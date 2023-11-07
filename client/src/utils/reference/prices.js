@@ -57,12 +57,12 @@ const apiMap = {
 const updatePrices = async (region) => {
   // if we already have prices stored, no need to retrieve
   // update once every 6 hours
-  if (localStorage.getItem("prices")) {
-    const currentTime = Date.now();
-    const updatedTime = localStorage.getItem("prices-updated");
-    if (currentTime - updatedTime < 1000 * 60 * 60 * 6)
-      return JSON.parse(localStorage.getItem("prices"));
-  }
+  // if (localStorage.getItem("prices")) {
+  //   const currentTime = Date.now();
+  //   const updatedTime = localStorage.getItem("prices-updated");
+  //   if (currentTime - updatedTime < 1000 * 60 * 60 * 6)
+  //     return JSON.parse(localStorage.getItem("prices"));
+  // }
   const userRegion = region ?? "North America East";
 
   const apiPrices = await axios
