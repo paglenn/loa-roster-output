@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import icons from "../utils/assets/icons";
-import { Resource } from "./Resource.jsx";
-import { resourceTypes, hasSubtype } from "../utils/reference";
 import { getCharValue } from "../utils/sums";
 import { DeleteButton } from "../features/delete";
 import { GoldStatusBox } from "../features/gold_earners";
 import { RestedStatusBox } from "../features/restBonus";
 import { ContentView, ShowContentButton } from "../features/gold_content";
+import { useSelector } from "react-redux";
 import ResourceView from "./ResourceView";
+import { selectPrices } from "../state/pricesSlice";
 const CharPortrait = React.lazy(() => import("./CharPortrait"));
 
 const Character = ({
@@ -28,20 +28,9 @@ const Character = ({
     goldContents,
   } = character;
   const classLower = _class.toLowerCase();
-  const charGoldValue = getCharValue({ resources }).toLocaleString();
-  // create components for resource types
-  const resourceComponents = resourceTypes.map((el, index) => {
-    return (
-      <Resource
-        key={index}
-        type={hasSubtype[el] ? resources[el].type : el}
-        qty={hasSubtype[el] ? resources[el].qty : resources[el]}
-        imHeight={8}
-        goldValue={charGoldValue}
-        showGoldValue={true}
-      />
-    );
-  });
+  const prices = useSelector(selectPrices);
+  const charGoldValue = getCharValue({ resources }, prices).toLocaleString();
+
   // const cardColor = isGoldEarner ? "bg-[#d4af37]" : "bg-slate-300";
   const cardColor = "bg-slate-300";
   const [isContentShown, toggleContentShown] = useState(false);

@@ -9,7 +9,7 @@ import { resourceTypes, hasSubtype } from "../../utils/reference";
 import Character from "../Character";
 import { act } from "react-dom/test-utils";
 import { prices } from "../../utils/reference";
-
+import { reduxWrap } from "../../../__mocks__/reduxWrap";
 const testChar = {
   name: "Technosaint",
   _class: "Scouter",
@@ -62,7 +62,7 @@ describe("Character card components", () => {
 
   it("renders images for class", async () => {
     act(() => {
-      render(<Character character={testChar} />);
+      render(reduxWrap(<Character character={testChar} />));
     });
     expect(screen.getByAltText(/class icon/)).toBeInTheDocument();
     expect(await screen.findByAltText(/class image/)).toBeInTheDocument();
@@ -76,7 +76,7 @@ describe("Character card components", () => {
 
   it("renders amounts for character properties", async () => {
     act(() => {
-      render(<Character character={testChar} />);
+      render(reduxWrap(<Character character={testChar} />));
     });
     charResources.forEach((resource) => {
       if (resource !== "0")

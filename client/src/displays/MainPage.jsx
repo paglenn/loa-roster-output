@@ -5,7 +5,7 @@ import CharacterInputDisplay from "../components/CharacterInputDisplay.jsx";
 import { handleDelete } from "../features/delete/index.js";
 import { updateGoldEarners } from "../features/gold_earners/index.js";
 import { toggleRestedOnly } from "../features/restBonus/index.js";
-import { updatePrices } from "../utils/reference/index.js";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getRoster,
   createNewCharacter,
@@ -13,17 +13,26 @@ import {
 } from "../utils/api/index.js";
 import { useCharacter } from "../hooks/useCharacters.js";
 import { useNavigate } from "react-router-dom";
-import { handleLogout } from "../features/auth/index.js";
+import { handleLogout } from "../features/auth";
 import { handleContentChange } from "../features/gold_content/index.js";
+import { region_change } from "../features/region_change/regionSlice.js";
+
+import { selectUser } from "../state/userSlice.js";
 // this needs to handle state to pass down  the roster.
 
-const MainPage = ({ user, setUser, prices }) => {
+const MainPage = () => {
   // protection: if no user , navigate to root
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
   useEffect(() => {
     //protect route
-    if (user === "") navigate("/");
-  }, []);
+    if (!user) navigate("/");
+    else {
+      // if there is a user stored region then change the region to that one
+      if (user.region) dispatch(region_change(user.region));
+    }
+  }, [user]);
 
   // state for roster array-  a change in this does need to cause a re-render of the roster container
   const [roster, updateRoster] = useState([]);
@@ -82,17 +91,14 @@ const MainPage = ({ user, setUser, prices }) => {
   return (
     <main className={`bg-slate-800 max-h-full flex flex-col grow`}>
       <TotalsDisplay
-        user={user}
         roster={roster}
         handleLogout={() => {
-          handleLogout(navigate, setUser);
+          handleLogout(navigate);
         }}
         priceRedirect={() => navigate("/prices")}
-        prices={prices}
       />
       <CharacterInputDisplay
         handleSubmit={handleNewCharSubmit}
-        user={user}
         character={newCharacter}
         handleChange={handleNewCharChange}
       />

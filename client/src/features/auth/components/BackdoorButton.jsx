@@ -1,10 +1,13 @@
 import React from "react";
 import { checkAdmin } from "../../../utils/api";
-export const BackDoorButton = ({ setUser, navigate }) => {
+import { useDispatch } from "react-redux";
+import { login } from "../../../state/userSlice";
+export const BackDoorButton = ({ navigate }) => {
+  const dispatch = useDispatch();
   const submitHandler = async () => {
     const auth = checkAdmin();
     if (auth) {
-      setUser("test");
+      dispatch(login("test"));
       navigate("/app");
     }
   };

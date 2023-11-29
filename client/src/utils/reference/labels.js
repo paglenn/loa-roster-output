@@ -3,13 +3,30 @@ export const hasSubtype = {
   redStones: true,
   blueStones: true,
 };
+export const archetype = {
+  radiant_honor_leapstone: "leapstones",
+  refined_obliteration_stone: "redStones",
+  refined_protection_stone: "blueStones",
+  marvelous_honor_leapstone: "leapstones",
+  obliteration_stone: "redStones",
+  protection_stone: "blueStones",
+  greater_honor_leapstone: "leapstones",
+  crystallized_destruction_stone: "redStones",
+  crystallized_guardian_stone: "blueStones",
+};
 export const resourceTypes = [
   "gold",
   "silver",
   "gems",
-  "leapstones",
-  "redStones",
-  "blueStones",
+  "radiant_honor_leapstone",
+  "refined_obliteration_stone",
+  "refined_protection_stone",
+  "marvelous_honor_leapstone",
+  "obliteration_stone",
+  "protection_stone",
+  "greater_honor_leapstone",
+  "crystallized_destruction_stone",
+  "crystallized_guardian_stone",
 ];
 
 export const highestSubtypes = {

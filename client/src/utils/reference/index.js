@@ -7,6 +7,7 @@ import {
   highestSubtypes,
   charPropLabels,
   classes,
+  archetype,
 } from "./labels";
 
 export {
@@ -18,4 +19,5 @@ export {
   highestSubtypes,
   charPropLabels,
   classes,
+  archetype,
 };

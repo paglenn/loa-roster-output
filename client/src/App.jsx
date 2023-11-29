@@ -5,13 +5,16 @@ import { Login, Signup, autoLogin } from "./features/auth";
 import Header from "./components/Header";
 import PricesPage from "./displays/PricesPage";
 import { usePrices } from "./features/edit_prices";
+import { updatePrices } from "./utils/reference";
+import { update_prices } from "./state/pricesSlice";
+import { useDispatch } from "react-redux";
 const App = () => {
   const [user, setUser] = useState("");
-  const [prices, updatePrices] = usePrices();
-
+  //const [prices, updatePrices] = usePrices();
+  const dispatch = useDispatch();
   // on mount, try to automatically log in the user
   useEffect(() => {
-    autoLogin(setUser);
+    updatePrices().then((prices) => dispatch(update_prices(prices)));
   }, []);
 
   return (
@@ -26,9 +29,7 @@ const App = () => {
             {/* Main Application Page */}
             <Route
               path="/app"
-              element={
-                <MainPage user={user} setUser={setUser} prices={prices} />
-              }
+              element={<MainPage user={user} setUser={setUser} />}
             />
             <Route
               path="/prices"
@@ -36,7 +37,6 @@ const App = () => {
                 <PricesPage
                   user={user}
                   setUser={setUser}
-                  prices={prices}
                   update={updatePrices}
                 />
               }

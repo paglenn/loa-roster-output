@@ -5,12 +5,15 @@ import { BackDoorButton } from "./BackdoorButton";
 import { PasswordField } from "./PasswordField";
 import { usePasswordShown } from "../hooks/usePasswordShown";
 import { ProblemMessage } from "./ProblemMessage";
+import { useDispatch } from "react-redux";
+import { login } from "../../../state/userSlice";
 
 const Signup = ({ setUser }) => {
   const emailAddress = useRef();
   const username = useRef();
   const password = useRef();
   const password2 = useRef();
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const [incorrect, setIncorrect] = useState(false); // used to display message for incorrect login credentials
@@ -20,6 +23,11 @@ const Signup = ({ setUser }) => {
   const [isPassword2Shown, flipPassword2] = usePasswordShown(false);
 
   const user = localStorage.getItem("user");
+  const onSuccess = () => {
+    dispatch(login(auth.username));
+    localStorage.setItem("user", auth.username);
+    navigate("/app");
+  };
   // the submit handler at this level willuse the reference values to set whether the user is authenticated and navigate.
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,9 +46,7 @@ const Signup = ({ setUser }) => {
       password: password.current,
     });
     if (auth.auth) {
-      setUser(auth.username);
-      localStorage.setItem("user", auth.username);
-      navigate("/app");
+      onSuccess();
     } else setTaken(true);
   };
 

@@ -1,8 +1,6 @@
 import { prices as oldPrices, hasSubtype, convertStones } from "./reference";
+import combineRosterResources from "./combineRosterResources";
 
-const prices = JSON.parse(localStorage.getItem("prices")) ?? oldPrices;
-
-// console.log("prices in sums file: ", prices);
 const calcTotalGoldValue = (materials, prices) => {
   const value = Object.keys(materials).reduce(
     (sum, name) => sum + materials[name] * prices[name],
@@ -10,77 +8,28 @@ const calcTotalGoldValue = (materials, prices) => {
   );
   return Math.round(value);
 };
-// const getResourceType = (resourceName, resource) => {
-//   if (hasSubtype[resourceName]) return resource.type;
-//   return resource;
-// };
+
 const getQty = (resourceName, resource) => {
   if (hasSubtype[resourceName]) return resource.qty;
   return resource;
 };
 
-const getResourceValue = (resourceName, resource) =>
+const getResourceValue = (resourceName, resource, prices) =>
   getQty(resourceName, resource) * prices[resource.type ?? resourceName];
 
-export const getCharValue = ({ resources }) => {
+export const getCharValue = ({ resources }, prices) => {
   // for each item in character resources add price of item * quantity
   const value = Object.keys(resources).reduce(
     (sum, resourceName) =>
-      sum + getResourceValue(resourceName, resources[resourceName]),
+      sum + getResourceValue(resourceName, resources[resourceName], prices),
     0
   );
   return Math.round(value);
 };
 
 export const sumRosterOutput = (characterArray, prices) => {
-  const sumObj = {};
+  const rosterSum = combineRosterResources(characterArray);
 
-  sumObj.gold = characterArray.reduce(
-    (sum, char) => sum + char.resources.gold,
-    0
-  );
-  sumObj.silver = characterArray.reduce(
-    (sum, char) => sum + char.resources.silver,
-    0
-  );
-  sumObj.leapstones = characterArray.reduce(
-    (sum, char) =>
-      sum +
-      convertStones(
-        char.resources.leapstones.type,
-        char.resources.leapstones.qty
-      ),
-    0
-  );
-  sumObj.leapstones = Math.round(sumObj.leapstones);
-
-  sumObj.gems = characterArray.reduce(
-    (sum, char) => sum + char.resources.gems,
-    0
-  );
-  sumObj.gems = Math.round(sumObj.gems);
-  sumObj.redStones = characterArray.reduce(
-    (sum, char) =>
-      sum +
-      convertStones(
-        char.resources.redStones.type,
-        char.resources.redStones.qty
-      ),
-
-    0
-  );
-  sumObj.redStones = Math.round(sumObj.redStones);
-  sumObj.blueStones = characterArray.reduce(
-    (sum, char) =>
-      sum +
-      convertStones(
-        char.resources.blueStones.type,
-        char.resources.blueStones.qty
-      ),
-    0
-  );
-  sumObj.blueStones = Math.round(sumObj.blueStones);
-
-  sumObj.totalGoldValue = calcTotalGoldValue(sumObj, prices);
-  return sumObj;
+  rosterSum.totalGoldValue = calcTotalGoldValue(rosterSum, prices);
+  return rosterSum;
 };

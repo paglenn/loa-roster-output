@@ -40,10 +40,12 @@ const priceModifiers = {
 };
 
 Object.keys(prices).forEach((item) => (prices[item] *= priceModifiers[item]));
+
 const apiMap = {
   marvelous_honor_leapstone: "marvelous-honor-leapstone-3",
   greater_honor_leapstone: "great-honor-leapstone-2",
-  crystallized_guardian_stone: "crystallized-destruction-stone-0",
+  crystallized_guardian_stone: "crystallized-guardian-stone-0",
+  crystallized_destruction_stone: "crystallized-destruction-stone-0",
   obliteration_stone: "obliteration-stone-1",
   protection_stone: "protection-stone-1",
   refined_obliteration_stone: "refined-obliteration-stone-0",
@@ -74,11 +76,11 @@ const updatePrices = async (region) => {
   apiPrices.forEach((item) => {
     apiPriceObj[item.id] = item.recentPrice;
   });
-
-  Object.keys(prices).forEach((item) => {
+  const newPrices = { ...prices };
+  Object.keys(newPrices).forEach((item) => {
     if (apiMap[item] in apiPriceObj) {
       const unitPrice = apiPriceObj[apiMap[item]] * priceModifiers[item];
-      prices[item] = unitPrice;
+      newPrices[item] = unitPrice;
     }
   });
   // store in local storage
@@ -88,7 +90,7 @@ const updatePrices = async (region) => {
     "Prices Last Updated",
     `${Date(Date.now()).toLocaleString()}`
   );
-  return prices; // will auto-resolve into a promise
+  return newPrices; // will auto-resolve into a promise
 };
 
 export { prices, updatePrices };

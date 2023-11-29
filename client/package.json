@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

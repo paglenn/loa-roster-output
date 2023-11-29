@@ -1,5 +1,6 @@
 import React from "react";
 import { charPropLabels, classes } from "../utils/reference";
+
 const CharacterInputDisplay = ({
   handleSubmit,
   character,
