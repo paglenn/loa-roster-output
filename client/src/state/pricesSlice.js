@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { prices } from "../utils/reference";
 export const pricesSlice = createSlice({
   name: "prices",
-  initialState: { ...prices },
+  initialState: { value: { ...prices } },
   reducers: {
     update_prices: (state, action) => {
       state.value = action.payload;
