@@ -48,10 +48,12 @@ userController.authUser = async (req, res, next) => {
       return next();
     }
     const username = user.username;
+    const region = user.region;
     const auth = await user.matchPassword(password);
     res.locals.auth = { auth: auth };
     res.locals.user = {
       username: username,
+      region: region,
       ...res.locals.auth,
     };
   } catch (err) {

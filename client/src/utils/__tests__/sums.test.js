@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import { getCharValue } from "../sums";
-import { it, test, expect } from "@jest/globals";
+import { it, expect } from "@jest/globals";
 const testChar = {
   name: "Technosaint",
   _class: "Scouter",

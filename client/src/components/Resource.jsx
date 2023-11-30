@@ -6,16 +6,15 @@ export const Resource = ({ type, qty, imHeight, classProps, goldValue }) => {
 
   if (type[type.length - 1] === "s") iconName = iconName.slice(0, -1);
   return (
-    <li className={`flex flex-row py-1 justify-between ${classProps}`}>
+    <li className={`mx-3 flex flex-row my-1 justify-between ${classProps}`}>
       <img
         src={icons[iconName]}
         alt={iconName}
-        className={`h-${imHeight} aspect-square rounded-md`}
+        className={`h-${imHeight} aspect-square rounded-sm`}
       />
 
       <div className="">
-        {" "}
-        {Math.round(qty).toLocaleString()}{" "}
+        {Math.round(qty).toLocaleString()}
         {type === "gold" && goldValue ? `(${goldValue})` : null}
       </div>
     </li>

@@ -6,24 +6,32 @@ import { BackDoorButton } from "./BackdoorButton";
 import { PasswordField } from "./PasswordField";
 import { usePasswordShown } from "../hooks/usePasswordShown";
 import { checkAdmin } from "../../../utils/api";
-const Login = ({ setUser }) => {
+import { useDispatch } from "react-redux";
+import { login } from "../../../state/userSlice";
+import { region_change } from "../../region_change/regionSlice";
+import autoLogin from "../events/autoLogin";
+const Login = () => {
   const emailAddress = useRef();
   const password = useRef();
   const navigate = useNavigate();
+
   const [incorrect, setIncorrect] = useState(false); // used to display message for incorrect login credentials
   const user = localStorage.getItem("user");
   //const [isPasswordShown, setPasswordShown] = useState(false);
   const [isPasswordShown, flipPassword] = usePasswordShown(false);
+
+  const dispatch = useDispatch();
   // if there is already a user, just navigate to the app
   useEffect(() => {
-    if (user && user !== "test") {
-      setUser(user);
-      navigate("/app");
-    } else if (user && checkAdmin()) {
-      setUser(user);
-      navigate("/app");
-    }
+    autoLogin(navigate, dispatch);
   }, []);
+
+  const onSuccess = (auth) => {
+    localStorage.setItem("user", auth.username);
+    dispatch(login(auth.username));
+    if (auth.region) dispatch(region_change(auth.region));
+    navigate("/app");
+  };
   // the submit handler at this level willuse the reference values to set whether the user is authenticated and navigate.
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,9 +45,7 @@ const Login = ({ setUser }) => {
       password: password.current,
     });
     if (auth.auth) {
-      setUser(auth.username);
-      localStorage.setItem("user", auth.username);
-      navigate("/app");
+      onSuccess(auth);
     } else setIncorrect(true);
   };
 
@@ -86,9 +92,7 @@ const Login = ({ setUser }) => {
         First time here? Sign up!
       </button>
 
-      {user === "test" ? (
-        <BackDoorButton setUser={setUser} navigate={navigate} />
-      ) : null}
+      {user === "test" ? <BackDoorButton navigate={navigate} /> : null}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import CharacterView from "../displays/Character.jsx";
+import CharacterView from "./Character.jsx";
 
 // container for roster's character cards
 // must be passed down character array in props
@@ -9,7 +9,7 @@ const Roster = ({
   handleDelete,
   handleGoldEarnerUpdate,
   handleRestedUpdate,
-  handleContentChange
+  handleContentChange,
 }) => {
   const characterCards = [];
 
@@ -30,7 +30,7 @@ const Roster = ({
         handleLevelUpdate={handleLevelUpdate}
         handleGoldEarnerUpdate={handleGoldEarnerUpdate}
         handleRestedUpdate={handleRestedUpdate}
-        handleContentChange={handleContentChange }
+        handleContentChange={handleContentChange}
       />
     )
   );

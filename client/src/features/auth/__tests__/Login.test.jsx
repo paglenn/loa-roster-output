@@ -8,6 +8,7 @@ import "@testing-library/jest-dom";
 import Login from "../components/Login";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import axios from "axios";
+import { reduxWrap } from "../../../../__mocks__/reduxWrap";
 
 //login component should be the default when app is rendered (i.e. is the main page)
 
@@ -16,11 +17,14 @@ jest.mock("axios");
 
 const renderComponent = () => {
   render(
-    <BrowserRouter>
-      <Routes>
-        <Route element={<Login setUser={mockHook} />} path="/" />
-      </Routes>
-    </BrowserRouter>
+    reduxWrap(
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Login  />} path="/" />
+          <Route element={<Login />} path="/app" />
+        </Routes>
+      </BrowserRouter>
+    )
   );
 };
 // login component should have username and password fields

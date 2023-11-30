@@ -1,5 +1,5 @@
 import axios from "axios";
-const level7GemPrice = 11500;
+const level7GemPrice = 12000;
 const radiantLeapstonePrice = 110;
 const refineObliterationStackPrice = 45;
 const refinedProtectionStackPrice = 5;
@@ -40,10 +40,12 @@ const priceModifiers = {
 };
 
 Object.keys(prices).forEach((item) => (prices[item] *= priceModifiers[item]));
+
 const apiMap = {
   marvelous_honor_leapstone: "marvelous-honor-leapstone-3",
   greater_honor_leapstone: "great-honor-leapstone-2",
-  crystallized_guardian_stone: "crystallized-destruction-stone-0",
+  crystallized_guardian_stone: "crystallized-guardian-stone-0",
+  crystallized_destruction_stone: "crystallized-destruction-stone-0",
   obliteration_stone: "obliteration-stone-1",
   protection_stone: "protection-stone-1",
   refined_obliteration_stone: "refined-obliteration-stone-0",
@@ -54,30 +56,31 @@ const apiMap = {
   leapstones: "radiant-honor-leapstone-3",
 };
 
-const updatePrices = async () => {
+const updatePrices = async (region) => {
   // if we already have prices stored, no need to retrieve
   // update once every 6 hours
-  if (localStorage.getItem("prices")) {
-    const currentTime = Date.now();
-    const updatedTime = localStorage.getItem("prices-updated");
-    if (currentTime - updatedTime < 1000 * 60 * 60 * 6)
-      return JSON.parse(localStorage.getItem("prices"));
-  }
+  // if (localStorage.getItem("prices")) {
+  //   const currentTime = Date.now();
+  //   const updatedTime = localStorage.getItem("prices-updated");
+  //   if (currentTime - updatedTime < 1000 * 60 * 60 * 6)
+  //     return JSON.parse(localStorage.getItem("prices"));
+  // }
+  const userRegion = region ?? "North America East";
 
   const apiPrices = await axios
     .get(
-      "https://www.lostarkmarket.online/api/export-market-live/North America East?category=Enhancement Material&subcategory=Honing Materials&tier=Tier 3"
+      `https://www.lostarkmarket.online/api/export-market-live/${userRegion}?category=Enhancement Material&subcategory=Honing Materials&tier=Tier 3`
     )
     .then((response) => response.data);
   const apiPriceObj = {};
   apiPrices.forEach((item) => {
     apiPriceObj[item.id] = item.recentPrice;
   });
-
-  Object.keys(prices).forEach((item) => {
+  const newPrices = { ...prices };
+  Object.keys(newPrices).forEach((item) => {
     if (apiMap[item] in apiPriceObj) {
       const unitPrice = apiPriceObj[apiMap[item]] * priceModifiers[item];
-      prices[item] = unitPrice;
+      newPrices[item] = unitPrice;
     }
   });
   // store in local storage
@@ -87,7 +90,7 @@ const updatePrices = async () => {
     "Prices Last Updated",
     `${Date(Date.now()).toLocaleString()}`
   );
-  return prices; // will auto-resolve into a promise
+  return newPrices; // will auto-resolve into a promise
 };
 
 export { prices, updatePrices };

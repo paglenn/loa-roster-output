@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, BrowserRouter, HashRouter } from "react-router-dom";
 import MainPage from "./displays/MainPage";
-import { Login, Signup } from "./features/auth";
+import { Login, Signup, autoLogin } from "./features/auth";
 import Header from "./components/Header";
-import { checkAdmin } from "./utils/api";
+import PricesPage from "./displays/PricesPage";
+import { usePrices } from "./features/edit_prices";
+import { updatePrices } from "./utils/reference";
+import { update_prices } from "./state/pricesSlice";
+import { useDispatch } from "react-redux";
 const App = () => {
-  const currentUser = localStorage.getItem("user") ?? "";
-  const [user, setUser] = useState("");
+  //const [prices, updatePrices] = usePrices();
+  const dispatch = useDispatch();
+  // on mount, try to automatically log in the user
   useEffect(() => {
-    if (currentUser !== "test") setUser(currentUser);
-    else if (checkAdmin()) setUser(currentUser);
+    updatePrices().then((prices) => dispatch(update_prices(prices)));
   }, []);
+
   return (
     <div className=" bg-slate-800 flex flex-col h-screen">
       <Header />
@@ -18,12 +23,13 @@ const App = () => {
         <HashRouter basename="/">
           <Routes>
             {/* Authentication Routes */}
-            <Route path="/" element={<Login setUser={setUser} />} />
-            <Route path="/signup" element={<Signup setUser={setUser} />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
             {/* Main Application Page */}
+            <Route path="/app" element={<MainPage />} />
             <Route
-              path="/app"
-              element={<MainPage user={user} setUser={setUser} />}
+              path="/prices"
+              element={<PricesPage update={updatePrices} />}
             />
           </Routes>
         </HashRouter>

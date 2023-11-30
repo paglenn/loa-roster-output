@@ -1,5 +1,6 @@
 import React from "react";
 import { charPropLabels, classes } from "../utils/reference";
+
 const CharacterInputDisplay = ({
   handleSubmit,
   character,
@@ -96,7 +97,7 @@ const ClassOption = ({ className }) => {
   return <option value={className}> {className} </option>;
 };
 
-const SelectInput = ({ charPropVal, charPropName, handleChange }) => {
+const SelectInput = ({ charPropName, handleChange }) => {
   const classOptions = classes.map((className, index) => (
     <ClassOption key={index} className={className} />
   ));
