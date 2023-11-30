@@ -8,7 +8,7 @@ import { ProblemMessage } from "./ProblemMessage";
 import { useDispatch } from "react-redux";
 import { login } from "../../../state/userSlice";
 
-const Signup = ({ setUser }) => {
+const Signup = () => {
   const emailAddress = useRef();
   const username = useRef();
   const password = useRef();
@@ -23,7 +23,7 @@ const Signup = ({ setUser }) => {
   const [isPassword2Shown, flipPassword2] = usePasswordShown(false);
 
   const user = localStorage.getItem("user");
-  const onSuccess = () => {
+  const onSuccess = (auth) => {
     dispatch(login(auth.username));
     localStorage.setItem("user", auth.username);
     navigate("/app");
@@ -46,7 +46,7 @@ const Signup = ({ setUser }) => {
       password: password.current,
     });
     if (auth.auth) {
-      onSuccess();
+      onSuccess(auth);
     } else setTaken(true);
   };
 
@@ -103,9 +103,7 @@ const Signup = ({ setUser }) => {
       >
         Have an account? Log In!
       </button>
-      {user === "test" ? (
-        <BackDoorButton setUser={setUser} navigate={navigate} />
-      ) : null}
+      {user === "test" ? <BackDoorButton navigate={navigate} /> : null}
     </div>
   );
 };

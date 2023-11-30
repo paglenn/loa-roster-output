@@ -21,7 +21,12 @@ export const getCharValue = ({ resources }, prices) => {
   // for each item in character resources add price of item * quantity
   const value = Object.keys(resources).reduce(
     (sum, resourceName) =>
-      sum + getResourceValue(resourceName, resources[resourceName], prices),
+      sum +
+      getResourceValue(
+        resourceName,
+        resources[resourceName],
+        prices ?? oldPrices
+      ),
     0
   );
   return Math.round(value);

@@ -20,8 +20,8 @@ const renderComponent = () => {
     reduxWrap(
       <BrowserRouter>
         <Routes>
-          <Route element={<Login setUser={mockHook} />} path="/" />
-          <Route element={<Login setUser={mockHook} />} path="/app" />
+          <Route element={<Login  />} path="/" />
+          <Route element={<Login />} path="/app" />
         </Routes>
       </BrowserRouter>
     )

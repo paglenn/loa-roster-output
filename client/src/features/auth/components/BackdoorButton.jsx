@@ -5,7 +5,7 @@ import { login } from "../../../state/userSlice";
 export const BackDoorButton = ({ navigate }) => {
   const dispatch = useDispatch();
   const submitHandler = async () => {
-    const auth = checkAdmin();
+    const auth = await checkAdmin();
     if (auth) {
       dispatch(login("test"));
       navigate("/app");

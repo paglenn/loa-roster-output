@@ -13,7 +13,7 @@ import { selectUser } from "../state/userSlice";
 
 // stetch feature-  images!
 
-const TotalsDisplay = ({ roster, handleLogout, priceRedirect }) => {
+const TotalsDisplay = ({ roster, priceRedirect }) => {
   const prices =
     useSelector(selectPrices) ?? JSON.parse(localStorage.getItem("prices"));
   const user = useSelector(selectUser);
@@ -33,7 +33,7 @@ const TotalsDisplay = ({ roster, handleLogout, priceRedirect }) => {
     <div className="bg-slate-800 text-white">
       <div className="float-right">
         {" "}
-        <Logout clickHandler={handleLogout} />{" "}
+        <Logout />{" "}
       </div>
 
       <h2 className="capitalize text-3xl font-extrabold text-center">{user}</h2>

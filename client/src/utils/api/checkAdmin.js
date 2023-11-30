@@ -6,5 +6,8 @@ export const checkAdmin = () => {
   else
     return axios
       .post(`${vercelPrefix}/api/user/admin`, { secret })
-      .then((res) => res.data.isAdmin);
+      .then((res) => {
+        console.log("admin check result: ", res.data.isAdmin);
+        return res.data.isAdmin;
+      });
 };

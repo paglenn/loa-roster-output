@@ -9,7 +9,6 @@ import { updatePrices } from "./utils/reference";
 import { update_prices } from "./state/pricesSlice";
 import { useDispatch } from "react-redux";
 const App = () => {
-  const [user, setUser] = useState("");
   //const [prices, updatePrices] = usePrices();
   const dispatch = useDispatch();
   // on mount, try to automatically log in the user
@@ -24,22 +23,13 @@ const App = () => {
         <HashRouter basename="/">
           <Routes>
             {/* Authentication Routes */}
-            <Route path="/" element={<Login setUser={setUser} />} />
-            <Route path="/signup" element={<Signup setUser={setUser} />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
             {/* Main Application Page */}
-            <Route
-              path="/app"
-              element={<MainPage user={user} setUser={setUser} />}
-            />
+            <Route path="/app" element={<MainPage />} />
             <Route
               path="/prices"
-              element={
-                <PricesPage
-                  user={user}
-                  setUser={setUser}
-                  update={updatePrices}
-                />
-              }
+              element={<PricesPage update={updatePrices} />}
             />
           </Routes>
         </HashRouter>

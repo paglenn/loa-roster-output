@@ -13,7 +13,7 @@ import {
 } from "../utils/api/index.js";
 import { useCharacter } from "../hooks/useCharacters.js";
 import { useNavigate } from "react-router-dom";
-import { handleLogout } from "../features/auth";
+
 import { handleContentChange } from "../features/gold_content/index.js";
 import { region_change } from "../features/region_change/regionSlice.js";
 
@@ -92,9 +92,6 @@ const MainPage = () => {
     <main className={`bg-slate-800 max-h-full flex flex-col grow`}>
       <TotalsDisplay
         roster={roster}
-        handleLogout={() => {
-          handleLogout(navigate);
-        }}
         priceRedirect={() => navigate("/prices")}
       />
       <CharacterInputDisplay

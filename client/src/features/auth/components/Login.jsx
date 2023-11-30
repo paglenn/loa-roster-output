@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../../../state/userSlice";
 import { region_change } from "../../region_change/regionSlice";
 import autoLogin from "../events/autoLogin";
-const Login = ({ setUser }) => {
+const Login = () => {
   const emailAddress = useRef();
   const password = useRef();
   const navigate = useNavigate();
@@ -22,9 +22,11 @@ const Login = ({ setUser }) => {
 
   const dispatch = useDispatch();
   // if there is already a user, just navigate to the app
-  autoLogin(setUser, navigate, dispatch);
+  useEffect(() => {
+    autoLogin(navigate, dispatch);
+  }, []);
 
-  const onSuccess = () => {
+  const onSuccess = (auth) => {
     localStorage.setItem("user", auth.username);
     dispatch(login(auth.username));
     if (auth.region) dispatch(region_change(auth.region));
@@ -43,7 +45,7 @@ const Login = ({ setUser }) => {
       password: password.current,
     });
     if (auth.auth) {
-      onSuccess();
+      onSuccess(auth);
     } else setIncorrect(true);
   };
 
@@ -90,9 +92,7 @@ const Login = ({ setUser }) => {
         First time here? Sign up!
       </button>
 
-      {user === "test" ? (
-        <BackDoorButton setUser={setUser} navigate={navigate} />
-      ) : null}
+      {user === "test" ? <BackDoorButton navigate={navigate} /> : null}
     </div>
   );
 };
