@@ -5,7 +5,7 @@
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { resourceTypes, hasSubtype } from "../../utils/reference";
+import { resourceTypes } from "../../utils/reference";
 import Character from "../Character";
 import { act } from "react-dom/test-utils";
 import { prices } from "../../utils/reference";
@@ -34,19 +34,29 @@ const testChar = {
   isGoldEarner: true,
   restedOnly: true,
 };
-const resourceList = resourceTypes.map((resource) =>
-  hasSubtype[resource] ? testChar.resources[resource].type : resource
+
+const charResources = resourceTypes.map(
+  (resource) => {
+    let amount;
+    if (testChar.resources.hasOwnProperty(resource))
+      amount = testChar.resources[resource];
+    else if (testChar.resources.blueStones.type === resource)
+      amount = testChar.resources.blueStones.qty;
+    else if (testChar.resources.redStones.type === resource)
+      amount = testChar.resources.redStones.qty;
+    else if (testChar.resources.leapstones.type === resource)
+      amount = testChar.resources.leapstones.qty;
+    else return undefined;
+    return Math.round(amount).toLocaleString();
+  }
+  // Math.round(
+  //   hasSubtype[resource]
+  //     ? testChar.resources[resource].qty
+  //     : testChar.resources[resource]
+  // ).toLocaleString()
 );
 
-const charResources = resourceTypes.map((resource) =>
-  Math.round(
-    hasSubtype[resource]
-      ? testChar.resources[resource].qty
-      : testChar.resources[resource]
-  ).toLocaleString()
-);
-
-console.log(resourceList, charResources);
+console.log(resourceTypes, charResources);
 
 describe("Character card components", () => {
   beforeEach(async () => {
@@ -74,13 +84,13 @@ describe("Character card components", () => {
     // });
   });
 
-  //   it("renders amounts for character properties", async () => {
-  //     act(() => {
-  //       render(reduxWrap(<Character character={testChar} />));
-  //     });
-  //     charResources.forEach((resource) => {
-  //       if (resource !== "0")
-  //         expect(screen.getByText(resource)).toBeInTheDocument();
-  //     });
-  //   });
+  it("renders amounts for character properties", async () => {
+    act(() => {
+      render(reduxWrap(<Character character={testChar} />));
+    });
+    charResources.forEach((resource, index) => {
+      if (resource !== undefined && index > 0)
+        expect(screen.getByText(resource)).toBeInTheDocument();
+    });
+  });
 });

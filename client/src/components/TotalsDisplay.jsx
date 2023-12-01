@@ -9,6 +9,9 @@ import Redirect from "./RedirectButton";
 import { useSelector } from "react-redux";
 import { selectPrices } from "../state/pricesSlice";
 import { selectUser } from "../state/userSlice";
+import { selectSales } from "../features/edit_prices/salesSlice";
+import { selectBuses } from "../features/bussing/busSlice";
+import { calcBusValue } from "../features/bussing";
 // should contain total roster gold income , silver, gems , leapstones, reds, blues
 
 // stetch feature-  images!
@@ -16,8 +19,10 @@ import { selectUser } from "../state/userSlice";
 const TotalsDisplay = ({ roster, priceRedirect }) => {
   const prices =
     useSelector(selectPrices) ?? JSON.parse(localStorage.getItem("prices"));
+  const sales = useSelector(selectSales);
   const user = useSelector(selectUser);
-  const rosterResources = sumRosterOutput(roster, prices);
+  const buses = useSelector(selectBuses);
+  const rosterResources = sumRosterOutput(roster, prices, sales);
 
   const resourceComponents = resourceTypes.map((el, index) => (
     <Resource
@@ -59,7 +64,9 @@ const TotalsDisplay = ({ roster, priceRedirect }) => {
             Value :{" "}
             <span className="italic">
               {" "}
-              {rosterResources.totalGoldValue.toLocaleString()}{" "}
+              {(
+                rosterResources.totalGoldValue + calcBusValue(buses)
+              ).toLocaleString()}{" "}
             </span>
           </div>
         </h1>
