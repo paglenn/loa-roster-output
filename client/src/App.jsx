@@ -27,10 +27,7 @@ const App = () => {
             <Route path="/signup" element={<Signup />} />
             {/* Main Application Page */}
             <Route path="/app" element={<MainPage />} />
-            <Route
-              path="/prices"
-              element={<PricesPage update={updatePrices} />}
-            />
+            <Route path="/prices" element={<PricesPage />} />
           </Routes>
         </HashRouter>
       </div>

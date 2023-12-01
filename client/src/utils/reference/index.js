@@ -1,5 +1,5 @@
 import { convertStones } from "./conversion";
-import { prices, updatePrices } from "./prices";
+import { prices, updatePrices,priceModifiers } from "./prices";
 
 import {
   hasSubtype,
@@ -14,6 +14,7 @@ export {
   prices,
   convertStones,
   updatePrices,
+  priceModifiers,
   hasSubtype,
   resourceTypes,
   highestSubtypes,
