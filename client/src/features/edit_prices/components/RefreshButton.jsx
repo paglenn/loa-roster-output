@@ -9,7 +9,6 @@ const RefreshButton = () => {
   const region = useSelector(selectRegion);
   const dispatch = useDispatch();
   const handleClick = () => {
-    console.log("handling refresh");
     updatePrices(region).then((prices) => dispatch(update_prices(prices)));
   };
 

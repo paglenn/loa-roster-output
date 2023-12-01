@@ -1,5 +1,5 @@
-import { convertStones } from "./conversion";
-import { prices, updatePrices,priceModifiers } from "./prices";
+// import { convertStones } from "./conversion";
+import { prices, updatePrices, priceModifiers } from "./prices";
 
 import {
   hasSubtype,
@@ -12,7 +12,7 @@ import {
 
 export {
   prices,
-  convertStones,
+  //convertStones
   updatePrices,
   priceModifiers,
   hasSubtype,

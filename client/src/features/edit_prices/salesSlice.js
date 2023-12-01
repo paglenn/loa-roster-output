@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { prices } from "../utils/reference";
+import { prices } from "../../utils/reference";
 const storedSalesString = localStorage.getItem("sales");
 const storedSales = storedSalesString ? JSON.parse(storedSalesString) : null;
 

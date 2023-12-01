@@ -10,6 +10,7 @@ import { updatePrices } from "../utils/reference";
 import { update_prices, selectPrices } from "../state/pricesSlice";
 import { selectUser } from "../state/userSlice";
 import { PricesContainer } from "../features/edit_prices";
+import { BusContainer } from "../features/bussing";
 // prices page should consist of :
 // stateful prices object
 // list of prices for each item
@@ -41,7 +42,10 @@ const PricesPage = () => {
       </section>
 
       {/* contain prices list and breakdown flex-row  */}
-      <PricesContainer />
+      <section className="flex flex-row">
+        <PricesContainer />
+        <BusContainer />
+      </section>
     </section>
   );
 };

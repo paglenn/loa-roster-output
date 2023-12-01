@@ -8,7 +8,7 @@ import { ContentView, ShowContentButton } from "../features/gold_content";
 import { useSelector } from "react-redux";
 import ResourceView from "./ResourceView";
 import { selectPrices } from "../state/pricesSlice";
-import { selectSales } from "../state/salesSlice";
+import { selectSales } from "../features/edit_prices/salesSlice";
 const CharPortrait = React.lazy(() => import("./CharPortrait"));
 
 const Character = ({

@@ -5,9 +5,9 @@ import { region_change } from "./regionSlice";
 import { updatePrices } from "../../utils/reference";
 import { update_prices } from "../../state/pricesSlice";
 const regions = [
+  "Europe Central",
   "North America East",
   "North America West",
-  "Europe Central",
   "South America",
 ];
 const Region = () => {
@@ -41,3 +41,4 @@ const Region = () => {
   );
 };
 export default Region;
+export { regions };

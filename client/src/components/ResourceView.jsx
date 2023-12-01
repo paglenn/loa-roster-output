@@ -4,7 +4,7 @@ import { getCharValue } from "../utils/sums";
 import { Resource } from "./Resource";
 import { useSelector } from "react-redux";
 import { selectPrices } from "../state/pricesSlice";
-import { selectSales } from "../state/salesSlice";
+import { selectSales } from "../features/edit_prices/salesSlice";
 const ResourceView = ({ resources }) => {
   const prices = useSelector(selectPrices);
   const sales = useSelector(selectSales);

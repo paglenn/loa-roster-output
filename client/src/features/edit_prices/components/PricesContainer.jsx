@@ -2,14 +2,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectPrices } from "../../../state/pricesSlice";
-import { selectSales } from "../../../state/salesSlice";
+import { selectSales } from "../salesSlice";
 import Price from "./Price";
 const PricesContainer = () => {
   const prices = useSelector(selectPrices);
   const sales = useSelector(selectSales);
   // turn prices into react components
   const priceComponents = Object.keys(prices)
-    .map((name) => {
+    .map((name, index) => {
       if (name === "gold" || name === "silver") return null;
       else if (
         name === "redStones" ||
@@ -17,11 +17,24 @@ const PricesContainer = () => {
         name === "leapstones"
       )
         return null;
-      return <Price name={name} value={prices[name]} selling={sales[name]} />;
+      return (
+        <Price
+          name={name}
+          key={index}
+          value={prices[name]}
+          selling={sales[name]}
+        />
+      );
     })
     .filter((el) => el !== null);
   console.log("prices", prices);
   console.log(priceComponents);
-  return <section className="flex flex-col"> {priceComponents} </section>;
+  return (
+    <section className="flex flex-col">
+      {" "}
+      <h2 className="underline text-white text-xl text-center"> Prices</h2>
+      {priceComponents}{" "}
+    </section>
+  );
 };
 export default PricesContainer;

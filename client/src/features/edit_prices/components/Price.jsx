@@ -1,15 +1,15 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { resourceDisplayNames } from "../../../utils/reference/labels";
 import { priceModifiers } from "../../../utils/reference";
 import { edit_price } from "../../../state/pricesSlice";
-import { update_sale } from "../../../state/salesSlice";
+import { update_sale } from "../salesSlice";
 const Price = ({ name, value, selling }) => {
   // display name of item and price
   const dispatch = useDispatch();
   return (
     <div className="flex flex-row justify-between text-white font-bold border-2 border-slate-400">
-      <div className="grow-0 text-sm basis-2/5">
+      <div className="grow-0 text-xs lg:text-sm basis-2/5">
         {" "}
         {resourceDisplayNames[name]}{" "}
       </div>{" "}
@@ -18,7 +18,7 @@ const Price = ({ name, value, selling }) => {
         <input
           className="text-black"
           type="text"
-          value={value / priceModifiers[name]}
+          value={Math.round(value / priceModifiers[name])}
           onChange={(e) => {
             const priceObj = {};
             priceObj[name] = e.target.value * priceModifiers[name];
