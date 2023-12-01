@@ -9,6 +9,7 @@ import Redirect from "./RedirectButton";
 import { useSelector } from "react-redux";
 import { selectPrices } from "../state/pricesSlice";
 import { selectUser } from "../state/userSlice";
+import { selectSales } from "../state/salesSlice";
 // should contain total roster gold income , silver, gems , leapstones, reds, blues
 
 // stetch feature-  images!
@@ -16,8 +17,9 @@ import { selectUser } from "../state/userSlice";
 const TotalsDisplay = ({ roster, priceRedirect }) => {
   const prices =
     useSelector(selectPrices) ?? JSON.parse(localStorage.getItem("prices"));
+  const sales = useSelector(selectSales);
   const user = useSelector(selectUser);
-  const rosterResources = sumRosterOutput(roster, prices);
+  const rosterResources = sumRosterOutput(roster, prices, sales);
 
   const resourceComponents = resourceTypes.map((el, index) => (
     <Resource

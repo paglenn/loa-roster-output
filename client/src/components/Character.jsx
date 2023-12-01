@@ -8,6 +8,7 @@ import { ContentView, ShowContentButton } from "../features/gold_content";
 import { useSelector } from "react-redux";
 import ResourceView from "./ResourceView";
 import { selectPrices } from "../state/pricesSlice";
+import { selectSales } from "../state/salesSlice";
 const CharPortrait = React.lazy(() => import("./CharPortrait"));
 
 const Character = ({
@@ -28,8 +29,6 @@ const Character = ({
     goldContents,
   } = character;
   const classLower = _class.toLowerCase();
-  const prices = useSelector(selectPrices);
-  const charGoldValue = getCharValue({ resources }, prices).toLocaleString();
 
   // const cardColor = isGoldEarner ? "bg-[#d4af37]" : "bg-slate-300";
   const cardColor = "bg-slate-300";

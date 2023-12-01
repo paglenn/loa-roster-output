@@ -1,9 +1,10 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resourceDisplayNames } from "../../../utils/reference/labels";
 import { priceModifiers } from "../../../utils/reference";
 import { edit_price } from "../../../state/pricesSlice";
-const Price = ({ name, value }) => {
+import { update_sale } from "../../../state/salesSlice";
+const Price = ({ name, value, selling }) => {
   // display name of item and price
   const dispatch = useDispatch();
   return (
@@ -28,7 +29,15 @@ const Price = ({ name, value }) => {
       {/* Section to indicate whether or not you're selling the items  */}
       <div className="flex flex-col justify-self-end">
         <p> Selling? </p>
-        <input type="checkbox" checked={true} />
+        <input
+          type="checkbox"
+          checked={selling}
+          onChange={(e) => {
+            const saleObj = {};
+            saleObj[name] = !selling;
+            dispatch(update_sale(saleObj));
+          }}
+        />
       </div>
     </div>
   );
