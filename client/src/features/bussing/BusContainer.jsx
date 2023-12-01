@@ -1,0 +1,26 @@
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectBuses } from "./busSlice";
+import Bus from "./Bus";
+const BusContainer = () => {
+  const buses = useSelector(selectBuses);
+  const busComponents = Object.keys(buses).map((name, index) => {
+    return (
+      <Bus
+        name={name}
+        key={index}
+        num={buses[name].num}
+        price={buses[name].price}
+      />
+    );
+  });
+
+  return (
+    <section className="flex flex-col overflow-scroll text-white justify-between">
+      <h2 className="underline text-center"> Bussing </h2>
+      {busComponents}
+    </section>
+  );
+};
+
+export default BusContainer;

@@ -4,10 +4,12 @@ import { getCharValue } from "../utils/sums";
 import { Resource } from "./Resource";
 import { useSelector } from "react-redux";
 import { selectPrices } from "../state/pricesSlice";
+import { selectSales } from "../features/edit_prices/salesSlice";
 const ResourceView = ({ resources }) => {
   const prices = useSelector(selectPrices);
-  const charGoldValue = getCharValue({ resources }, prices).toLocaleString();
-
+  const sales = useSelector(selectSales);
+  const charGoldValue = getCharValue({ resources }, prices, sales);
+  const charGoldValueString = charGoldValue.toLocaleString();
   const resourceComponents = resourceTypes
     .filter(
       (resourceType) =>
@@ -26,7 +28,7 @@ const ResourceView = ({ resources }) => {
             : resources[el]
         }
         imHeight={8}
-        goldValue={charGoldValue}
+        goldValue={charGoldValueString}
         showGoldValue={true}
       />
     ));

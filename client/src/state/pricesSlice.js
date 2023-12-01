@@ -7,9 +7,14 @@ export const pricesSlice = createSlice({
     update_prices: (state, action) => {
       state.value = action.payload;
     },
+    edit_price: (state, action) => {
+      // action payload is a single key value pair
+      state.value = { ...state.value, ...action.payload };
+      localStorage.setItem("prices", JSON.stringify(state.value));
+    },
   },
 });
 
 export const selectPrices = (state) => state.prices.value;
-export const { update_prices } = pricesSlice.actions;
+export const { update_prices, edit_price } = pricesSlice.actions;
 export default pricesSlice.reducer;
