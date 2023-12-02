@@ -4,6 +4,7 @@ import priceReducer from "./pricesSlice";
 import userReducer from "./userSlice";
 import { salesReducer } from "../features/edit_prices";
 import { busReducer } from "../features/bussing";
+import rosterReducer from "./rosterSlice";
 export default configureStore({
   reducer: {
     region: regionReducer,
@@ -11,5 +12,6 @@ export default configureStore({
     user: userReducer,
     sales: salesReducer,
     buses: busReducer,
+    roster: rosterReducer,
   },
 });

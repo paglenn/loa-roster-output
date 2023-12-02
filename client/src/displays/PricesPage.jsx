@@ -18,7 +18,6 @@ import { BusContainer } from "../features/bussing";
 const PricesPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const prices = useSelector(selectPrices);
   const user = useSelector(selectUser);
   useEffect(() => {
     //protect route

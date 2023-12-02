@@ -12,16 +12,18 @@ import { selectUser } from "../state/userSlice";
 import { selectSales } from "../features/edit_prices/salesSlice";
 import { selectBuses } from "../features/bussing/busSlice";
 import { calcBusValue } from "../features/bussing";
+import { selectRoster } from "../state/rosterSlice";
 // should contain total roster gold income , silver, gems , leapstones, reds, blues
 
 // stetch feature-  images!
 
-const TotalsDisplay = ({ roster, priceRedirect }) => {
+const TotalsDisplay = ({ priceRedirect }) => {
   const prices =
     useSelector(selectPrices) ?? JSON.parse(localStorage.getItem("prices"));
   const sales = useSelector(selectSales);
   const user = useSelector(selectUser);
   const buses = useSelector(selectBuses);
+  const roster = useSelector(selectRoster);
   const rosterResources = sumRosterOutput(roster, prices, sales);
 
   const resourceComponents = resourceTypes.map((el, index) => (
