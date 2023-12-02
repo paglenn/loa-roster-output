@@ -18,6 +18,7 @@ import { handleContentChange } from "../features/gold_content/index.js";
 import { region_change } from "../features/region_change/regionSlice.js";
 
 import { selectUser } from "../state/userSlice.js";
+import { selectRoster, update_roster } from "../state/rosterSlice.js";
 // this needs to handle state to pass down  the roster.
 
 const MainPage = () => {
@@ -35,7 +36,9 @@ const MainPage = () => {
   }, [user]);
 
   // state for roster array-  a change in this does need to cause a re-render of the roster container
-  const [roster, updateRoster] = useState([]);
+  // const [roster, updateRoster] = useState([]);
+  const roster = useSelector(selectRoster);
+  const updateRoster = (characters) => dispatch(update_roster(characters));
   // custom hook for new character. we are going to retool new character inputs to use this hook so the form properly clears after submission
   const [newCharacter, updateNewCharacter] = useCharacter(user);
   // state for updated character
@@ -100,7 +103,6 @@ const MainPage = () => {
         handleChange={handleNewCharChange}
       />
       <Roster
-        roster={roster}
         handleDelete={(e) => handleDelete(e, updateWorkingChar)}
         handleLevelUpdate={handleItemLevelUpdate}
         handleGoldEarnerUpdate={(e, character) =>

@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import icons from "../utils/assets/icons";
-import { getCharValue } from "../utils/sums";
+import { FaSpinner } from "react-icons/fa6";
+
 import { DeleteButton } from "../features/delete";
 import { GoldStatusBox } from "../features/gold_earners";
 import { RestedStatusBox } from "../features/restBonus";
 import { ContentView, ShowContentButton } from "../features/gold_content";
-import { useSelector } from "react-redux";
+
 import ResourceView from "./ResourceView";
-import { selectPrices } from "../state/pricesSlice";
-import { selectSales } from "../features/edit_prices/salesSlice";
-const CharPortrait = React.lazy(() => import("./CharPortrait"));
+import CharPortrait from "./CharPortrait";
+// const CharPortrait = React.lazy(() => import("./CharPortrait"));
 
 const Character = ({
   character,
@@ -80,9 +80,11 @@ const Character = ({
       </form>
 
       {/* Class Picture  */}
-      <figure className="mb-1 rounded flex flex-row basis-1/3">
-        <CharPortrait classLower={classLower} />
-      </figure>
+      <Suspense fallback={<FaSpinner />}>
+        <figure className="mb-1 rounded flex flex-row basis-1/3">
+          <CharPortrait className={classLower} />
+        </figure>
+      </Suspense>
 
       {/* list of resources  */}
       <section className="basis-5/12">

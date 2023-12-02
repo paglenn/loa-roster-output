@@ -85,4 +85,4 @@ const updatePrices = async (region) => {
   return newPrices; // will auto-resolve into a promise
 };
 
-export { prices, updatePrices , priceModifiers};
+export { prices, updatePrices, priceModifiers };

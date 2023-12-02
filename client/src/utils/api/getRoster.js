@@ -5,6 +5,11 @@ export const getRoster = (user, updateRoster, goldEarners) => {
     .get(`${vercelPrefix}/api/character/characters?user=${user}`)
     .then((response) => response.data)
     .then((characters) => {
+      characters.sort((a, b) => {
+        if (a.isGoldEarner && !b.isGoldEarner) return -1;
+        if (!a.isGoldEarner && b.isGoldEarner) return 1;
+        return b.ilvl - a.ilvl;
+      })
       updateRoster(characters);
       goldEarners.current = characters.reduce(
         (sum, character) => sum + (character.isGoldEarner ? 1 : 0),
