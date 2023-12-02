@@ -6,8 +6,8 @@ const rosterSlice = createSlice({
     characters: [],
   },
   reducers: {
-    update_roster: (state, payload) => {
-      state.characters = payload;
+    update_roster: (state, action) => {
+      state.characters = action.payload;
     },
   },
 });

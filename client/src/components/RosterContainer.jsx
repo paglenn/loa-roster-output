@@ -1,10 +1,10 @@
 import React from "react";
 import CharacterView from "./Character.jsx";
-
+import { useSelector } from "react-redux";
+import { selectRoster } from "../state/rosterSlice.js";
 // container for roster's character cards
 // must be passed down character array in props
 const Roster = ({
-  roster,
   handleLevelUpdate,
   handleDelete,
   handleGoldEarnerUpdate,
@@ -14,11 +14,7 @@ const Roster = ({
   const characterCards = [];
 
   // sort roster by item level
-  roster.sort((a, b) => {
-    if (a.isGoldEarner && !b.isGoldEarner) return -1;
-    if (!a.isGoldEarner && b.isGoldEarner) return 1;
-    return b.ilvl - a.ilvl;
-  });
+  const roster = useSelector(selectRoster);
 
   // create array of character card components to be rendered to the view
   roster.forEach((character) =>
