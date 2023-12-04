@@ -6,7 +6,7 @@ export const Resource = ({ type, qty, imHeight, classProps, goldValue }) => {
 
   if (type[type.length - 1] === "s") iconName = iconName.slice(0, -1);
   return (
-    <li className={`mx-3 flex flex-row my-1 justify-between ${classProps}`}>
+    <li className={`flex flex-row my-1 ${classProps}`}>
       <img
         src={icons[iconName]}
         alt={iconName}

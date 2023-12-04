@@ -18,7 +18,7 @@ const Bus = ({ name, price, num }) => {
 
       {/* label and input field for number and price of bus */}
 
-      <div className="flex-col basis-1/4 px-1">
+      <div className="flex-col basis-1/4 my-2 px-1">
         <p> Quantity: </p>
         <input
           className="text-black"

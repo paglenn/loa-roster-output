@@ -32,7 +32,7 @@ const TotalsDisplay = ({ priceRedirect }) => {
       type={el}
       qty={rosterResources[el]}
       imHeight={8}
-      classProps="basis-1/6"
+      classProps="basis-1/6 shrink"
     />
   ));
 
@@ -49,7 +49,7 @@ const TotalsDisplay = ({ priceRedirect }) => {
       </h2>
 
       {/* resource components in flex container  */}
-      <ul className="text-3xl flex flex-col lg:flex-row list-none list-inside justify-around">
+      <ul className="text-xl flex flex-col lg:flex-row list-none justify-between flex-wrap">
         {resourceComponents}
       </ul>
 

@@ -1,11 +1,7 @@
 import React from "react";
 import { charPropLabels, classes } from "../utils/reference";
 
-const CharacterInputDisplay = ({
-  handleSubmit,
-  character,
-  handleChange: handleChange,
-}) => {
+const CharacterInputDisplay = ({ handleSubmit, character, handleChange }) => {
   const charProps = Object.keys(character)
     .filter((prop) => prop !== "user")
     .map((prop) => {

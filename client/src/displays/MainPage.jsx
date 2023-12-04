@@ -3,8 +3,8 @@ import TotalsDisplay from "../components/TotalsDisplay.jsx";
 import Roster from "../components/RosterContainer.jsx";
 import CharacterInputDisplay from "../components/CharacterInputDisplay.jsx";
 import { handleDelete } from "../features/delete/index.js";
-import { updateGoldEarners } from "../features/gold_earners/index.js";
-import { toggleRestedOnly } from "../features/restBonus/index.js";
+import { updateGoldEarners } from "../features/gold_earners";
+import { toggleRestedOnly } from "../features/rest_bonus";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getRoster,
