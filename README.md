@@ -27,8 +27,8 @@
 | User specificity                | ✅     |
 | Show/Hide Password              | ✅     |
 | Gold Earning Content display    | ✅     |
+| Income Breakdown Charts         | ⏳     |
 | Google OAuth                    | 🙏🏾     |
-| Typescript conversion           | 🙏🏾     |
 
 ### Feature Status Key
 
