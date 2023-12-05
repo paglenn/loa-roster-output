@@ -4,7 +4,7 @@ import { FaSpinner } from "react-icons/fa6";
 
 import { DeleteButton } from "../features/delete";
 import { GoldStatusBox } from "../features/gold_earners";
-import { RestedStatusBox } from "../features/restBonus";
+import { RestedStatusBox } from "../features/rest_bonus";
 import { ContentView, ShowContentButton } from "../features/gold_content";
 
 import ResourceView from "./ResourceView";
@@ -101,7 +101,7 @@ const Character = ({
         )}
       </section>
 
-      <section className="flex flex-row justify-between items-center grow-0">
+      <section className="flex flex-row justify-between items-center basis-1/12">
         <ShowContentButton
           isContentShown={isContentShown}
           clickHandler={() => toggleContentShown(!isContentShown)}

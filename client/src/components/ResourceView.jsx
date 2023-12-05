@@ -1,3 +1,4 @@
+// character card resources view
 import React from "react";
 import { resourceTypes, hasSubtype, archetype } from "../utils/reference";
 import { getCharValue } from "../utils/sums";
@@ -30,6 +31,7 @@ const ResourceView = ({ resources }) => {
         imHeight={8}
         goldValue={charGoldValueString}
         showGoldValue={true}
+        classProps={"justify-between"}
       />
     ));
 
