@@ -8,6 +8,7 @@ import {
   charPropLabels,
   classes,
   archetype,
+  resourceDisplayNames,
 } from "./labels";
 
 export {
@@ -21,4 +22,5 @@ export {
   charPropLabels,
   classes,
   archetype,
+  resourceDisplayNames,
 };

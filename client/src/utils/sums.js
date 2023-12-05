@@ -14,7 +14,7 @@ const getQty = (resourceName, resource) => {
   return resource;
 };
 
-const getResourceValue = (resourceName, resource, prices) =>
+export const getResourceValue = (resourceName, resource, prices) =>
   getQty(resourceName, resource) * prices[resource.type ?? resourceName];
 
 export const getCharValue = ({ resources }, prices, sales) => {
