@@ -30,7 +30,7 @@ const PricesContainer = () => {
   // console.log("prices", prices);
   // console.log(priceComponents);
   return (
-    <section className="flex flex-col basis-1/2">
+    <section className="flex flex-col basis-1/2 overflow-y-scroll ">
       {" "}
       <h2 className="underline text-white text-xl text-center"> Prices</h2>
       {priceComponents}{" "}

@@ -56,8 +56,6 @@ const charResources = resourceTypes.map(
   // ).toLocaleString()
 );
 
-console.log(resourceTypes, charResources);
-
 describe("Character card components", () => {
   beforeEach(async () => {
     localStorage.setItem("prices", JSON.stringify(prices));

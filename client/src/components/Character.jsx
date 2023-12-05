@@ -101,7 +101,7 @@ const Character = ({
         )}
       </section>
 
-      <section className="flex flex-row justify-between items-center grow-0">
+      <section className="flex flex-row justify-between items-center basis-1/12">
         <ShowContentButton
           isContentShown={isContentShown}
           clickHandler={() => toggleContentShown(!isContentShown)}

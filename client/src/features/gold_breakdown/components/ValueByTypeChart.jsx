@@ -1,5 +1,5 @@
-import React, { useMemo } from "react";
-import { Chart } from "react-google-charts";
+import React, { useMemo, Suspense, useEffect } from "react";
+import PieChart from "./PieChart";
 import goldValueByTradeable from "../utils/goldValueByTradeable";
 // redux imports
 import { useSelector } from "react-redux";
@@ -24,15 +24,9 @@ const ValueByTypeChart = () => {
   };
 
   return (
-    <div className="border-red border-2 text-white ">
+    <div className=" text-white ">
       <span>Tradeable Weekly Output Value </span>
-      <Chart
-        chartType="PieChart"
-        options={options}
-        data={chartData}
-        width={"100%"}
-        height={"100%"}
-      />
+      <PieChart chartData={chartData} options={options} />
     </div>
   );
 };

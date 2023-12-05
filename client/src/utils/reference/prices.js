@@ -40,7 +40,10 @@ const priceModifiers = {
 };
 
 Object.keys(prices).forEach((item) => (prices[item] *= priceModifiers[item]));
-
+if (localStorage.getItem("prices")) {
+  const storedPrices = JSON.parse(localStorage.getItem("prices"));
+  if (storedPrices.gems) prices.gems = storedPrices.gems;
+}
 const apiMap = {
   marvelous_honor_leapstone: "marvelous-honor-leapstone-3",
   greater_honor_leapstone: "great-honor-leapstone-2",

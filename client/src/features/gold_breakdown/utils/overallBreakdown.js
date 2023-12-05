@@ -8,7 +8,7 @@ const calcIncomeBreakdown = (roster, price, sales, buses) => {
   const totalNonTradeablesGold = Object.keys(rosterResources).reduce(
     (sum, resource) => {
       if (sales[resource] && resource !== "gold")
-        return sum + price[resource] * rosterResources[resource];
+        return sum + Math.round(price[resource] * rosterResources[resource]);
       else return sum;
     },
     0
