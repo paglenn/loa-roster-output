@@ -71,8 +71,8 @@ const MainPage = () => {
     const ilvl = event.target[0].value;
     let characterInfo = { ...character, ilvl };
     console.log(characterInfo);
-    updateCharacter(characterInfo).then((updatedChar) =>
-      updateWorkingChar(updatedChar)
+    updateCharacter({ ...characterInfo, itemLevelDidUpdate: true }).then(
+      (updatedChar) => updateWorkingChar(updatedChar)
     );
     event.target[0].value = ""; // clear the form field
   };

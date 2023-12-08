@@ -8,8 +8,8 @@ const Price = ({ name, value, selling }) => {
   // display name of item and price
   const dispatch = useDispatch();
   return (
-    <div className="flex flex-row justify-between text-white font-bold border-2 border-slate-400">
-      <div className="grow-0 text-xs lg:text-sm basis-2/5">
+    <div className="flex flex-row justify-between text-white my-1 justify-items-center">
+      <div className="grow-0 text-xs lg:text-sm basis-2/5 justify-self-center self-center  font-bold">
         {" "}
         {resourceDisplayNames[name]}{" "}
       </div>{" "}
@@ -27,7 +27,7 @@ const Price = ({ name, value, selling }) => {
         />
       </div>
       {/* Section to indicate whether or not you're selling the items  */}
-      <div className="flex flex-col justify-self-end">
+      <div className="flex flex-col justify-self-end ">
         <p> Selling? </p>
         <input
           type="checkbox"

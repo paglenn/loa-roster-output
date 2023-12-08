@@ -27,8 +27,8 @@ const PricesPage = () => {
   }, [user]);
 
   return (
-    <section className="flex flex-col justify-start">
-      <section className="border-2 border-white flex flex-col lg:flex-row items-center justify-evenly text-xl">
+    <section className="flex flex-col justify-start overflow-scroll bg-transparent max-h-full grow">
+      <section className="flex flex-col lg:flex-row items-center justify-evenly text-xl">
         <Region
           handleChange={(e) => {
             dispatch(region_change(e.target.value));
@@ -42,7 +42,7 @@ const PricesPage = () => {
         <ToMain handleClick={() => navigate("/app")} label="Roster & Summary" />
       </section>
 
-      <section className=" border-2  border-red-900 basis-1/3 flex flex-col md:flex-row justify-around ">
+      <section className=" basis-2/5 flex flex-col md:flex-row justify-around ">
         <ValueByTypeChart />
         <ValueByActivity />
       </section>
