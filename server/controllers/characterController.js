@@ -23,7 +23,7 @@ const genResources = async ({
   isGoldEarner,
   restedOnly,
   goldContents,
-  goldContentDidUpdate,
+  itemLevelDidUpdate,
 }) => {
   const restedModifier = restedOnly ? 2 / 3 : 1;
 
@@ -32,7 +32,7 @@ const genResources = async ({
   const cube = await findBestContent(ilvl, "cubes");
   const cubesPerWeek = restedOnly ? 1 : 2;
 
-  if (!goldContentDidUpdate) {
+  if (itemLevelDidUpdate) {
     goldContents = isGoldEarner
       ? await findBestContent(ilvl, "gold_earning_content")
       : [];
@@ -109,19 +109,21 @@ characterController.updateCharacter = async (req, res, next) => {
     isGoldEarner,
     restedOnly,
     goldContents,
-    goldContentDidUpdate,
+
+    itemLevelDidUpdate,
   } = req.body;
 
   // updating item level means updating production
   // updating gold means ... updating gold
   try {
-    const { resourceObject: resources, goldContents } = await genResources({
-      ilvl,
-      isGoldEarner,
-      restedOnly,
-      goldContents: req.body.goldContents,
-      goldContentDidUpdate,
-    });
+    const { resourceObject: resources, goldContents: newGoldContents } =
+      await genResources({
+        ilvl,
+        isGoldEarner,
+        restedOnly,
+        goldContents,
+        itemLevelDidUpdate,
+      });
 
     res.locals.character = await Character.findOneAndUpdate(
       { name },
@@ -130,7 +132,7 @@ characterController.updateCharacter = async (req, res, next) => {
         isGoldEarner,
         restedOnly: restedOnly ?? false,
         resources,
-        goldContents,
+        goldContents: newGoldContents,
       },
       { returnDocument: "after" }
     );
@@ -190,7 +192,6 @@ characterController.getCharacters = (req, res, next) => {
 
 characterController.getContentList = (req, res, next) => {
   const ilvl = req.params.ilvl;
-  console.log("captured ilvl: ", ilvl);
   getGoldContent(ilvl)
     .then((content) => {
       res.locals.content = content;
