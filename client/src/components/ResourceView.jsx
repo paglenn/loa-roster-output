@@ -29,7 +29,6 @@ const ResourceView = ({ resources }) => {
             : resources[el]
         }
         imHeight={8}
-        goldValue={charGoldValueString}
         showGoldValue={true}
         classProps={"justify-between"}
       />

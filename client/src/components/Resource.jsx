@@ -1,6 +1,6 @@
 import React from "react";
 import icons from "../utils/assets/icons";
-export const Resource = ({ type, qty, imHeight, classProps, goldValue }) => {
+export const Resource = ({ type, qty, imHeight, classProps }) => {
   // guarantee type singular for gems
   let iconName = type;
 

@@ -1,12 +1,12 @@
 import { getCharValue } from "../../../utils/sums";
-const iLvlBrackets = {
-  1250: 0,
-  1490: 0,
-  1580: 0,
-};
 
 // for each character in roster, get gold value and add to ilvl bracket
 const getGoldValueByIlvl = (roster, prices, sales) => {
+  const iLvlBrackets = {
+    1250: 0,
+    1490: 0,
+    1580: 0,
+  };
   roster.forEach((character) => {
     console.log("character ", character);
     const charValue = getCharValue(character, prices, sales);
