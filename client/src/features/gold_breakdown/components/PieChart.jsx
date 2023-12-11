@@ -11,7 +11,7 @@ const PieChart = ({ chartData, options }) => {
         options={options}
         data={chartData}
         width={"100%"}
-        height={"100%"}
+        height={"400px"}
       />
     </Suspense>
   );

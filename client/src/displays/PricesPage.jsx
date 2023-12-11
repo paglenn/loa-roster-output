@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import ToggleGemSell from "../components/ToggleGemSell";
+
 import RefreshButton from "../features/edit_prices/components/RefreshButton";
 import { Region } from "../features/region_change";
 import ToMain from "../components/RedirectButton";
@@ -11,8 +11,12 @@ import { update_prices, selectPrices } from "../state/pricesSlice";
 import { selectUser } from "../state/userSlice";
 import { PricesContainer } from "../features/edit_prices";
 import { BusContainer } from "../features/bussing";
-import { ValueByTypeChart, ValueByActivity } from "../features/gold_breakdown";
-import { Value } from "sass";
+import {
+  ValueByTypeChart,
+  ValueByActivity,
+  ValueByItemLevel,
+} from "../features/gold_breakdown";
+
 // prices page should consist of :
 // stateful prices object
 // list of prices for each item
@@ -45,6 +49,7 @@ const PricesPage = () => {
       <section className=" basis-2/5 flex flex-col md:flex-row justify-around ">
         <ValueByTypeChart />
         <ValueByActivity />
+        <ValueByItemLevel />
       </section>
 
       {/* contain prices list and breakdown flex-row  */}
