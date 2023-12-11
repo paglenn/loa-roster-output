@@ -32,7 +32,7 @@ const genResources = async ({
   const cube = await findBestContent(ilvl, "cubes");
   const cubesPerWeek = restedOnly ? 1 : 2;
 
-  if (itemLevelDidUpdate) {
+  if (itemLevelDidUpdate || !goldContents) {
     goldContents = isGoldEarner
       ? await findBestContent(ilvl, "gold_earning_content")
       : [];
