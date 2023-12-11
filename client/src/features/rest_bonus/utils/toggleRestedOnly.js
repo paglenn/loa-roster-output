@@ -1,17 +1,14 @@
-import { vercelPrefix } from "../../../utils/api/vercel";
-export const toggleRestedOnly = (event, character, updateCharacter) => {
+import { updateCharacter } from "../../../utils/api";
+export const toggleRestedOnly = (event, character, updateCharState) => {
   // get name and ilvl of character
   const restedOnly = event.target.checked;
   // send fetch request ot update character with checked status of checkbox
-  fetch(`${vercelPrefix}/api/character`, {
-    method: "PUT",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({
-      ...character,
-      restedOnly: restedOnly,
-    }),
+  updateCharacter({
+    ...character,
+    restedOnly: restedOnly,
+    restedStatusDidUpdate: true,
   }).then((updatedCharacter) => {
-    updateCharacter(updatedCharacter);
+    updateCharState(updatedCharacter);
   });
   // return updated character and invoke updateCharacter with updated character
 };

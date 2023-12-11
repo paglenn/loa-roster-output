@@ -35,6 +35,14 @@ const ResourceView = ({ resources }) => {
       />
     ));
 
-  return <ul className="list-none"> {resourceComponents}</ul>;
+  return (
+    <ul className="list-none">
+      <li className="flex flex-row justify-between">
+        <p> Total Gold Value: </p>
+        <p className="font-bold"> {charGoldValueString}</p>
+      </li>
+      {resourceComponents}
+    </ul>
+  );
 };
 export default ResourceView;

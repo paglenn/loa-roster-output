@@ -14,7 +14,7 @@ const Bus = ({ name, price, num }) => {
   };
   return (
     <section className="flex flex-col md:flex-row items-center">
-      <div className="basis-1/4">{name} </div>
+      <div className="basis-1/4 text-xs font-bold lg:text-sm">{name} </div>
 
       {/* label and input field for number and price of bus */}
 

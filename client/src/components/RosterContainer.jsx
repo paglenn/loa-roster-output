@@ -31,7 +31,7 @@ const Roster = ({
     )
   );
   return (
-    <div className="flex flex-row flex-wrap justify-start px-10 pb-10">
+    <div className="flex flex-row flex-wrap justify-between px-10 pb-10">
       {characterCards}
     </div>
   );

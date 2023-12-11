@@ -59,11 +59,11 @@ const TotalsDisplay = ({ priceRedirect }) => {
           <div className=" border-yellow-500 border-4 rounded px-2">
             Total
             <img
-              className="inline-flex h-8 w-8"
+              className="inline-flex h-8 w-8 mx-1"
               src={icons.gold}
               alt="roster gold"
             />
-            Value :{" "}
+            Output :{" "}
             <span className="italic">
               {" "}
               {(

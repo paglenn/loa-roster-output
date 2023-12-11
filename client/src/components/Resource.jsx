@@ -13,10 +13,7 @@ export const Resource = ({ type, qty, imHeight, classProps, goldValue }) => {
         className={`h-${imHeight} aspect-square rounded-sm`}
       />
 
-      <div className="">
-        {Math.round(qty).toLocaleString()}
-        {type === "gold" && goldValue ? `(${goldValue})` : null}
-      </div>
+      <div className="">{Math.round(qty).toLocaleString()}</div>
     </li>
   );
 };

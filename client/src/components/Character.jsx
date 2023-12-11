@@ -88,7 +88,7 @@ const Character = ({
 
       {/* list of resources  */}
       <section className="basis-5/12">
-        {isContentShown ? (
+        {isContentShown && isGoldEarner ? (
           <ContentView
             ilvl={ilvl}
             goldContent={goldContents}
@@ -102,10 +102,12 @@ const Character = ({
       </section>
 
       <section className="flex flex-row justify-between items-center basis-1/12">
-        <ShowContentButton
-          isContentShown={isContentShown}
-          clickHandler={() => toggleContentShown(!isContentShown)}
-        />
+        {isGoldEarner ? (
+          <ShowContentButton
+            isContentShown={isContentShown}
+            clickHandler={() => toggleContentShown(!isContentShown)}
+          />
+        ) : null}
         <details>
           <summary> Delete Character </summary>
           <DeleteButton name={name} handleDelete={handleDelete} />
