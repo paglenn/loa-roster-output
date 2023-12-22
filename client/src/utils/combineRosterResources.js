@@ -5,8 +5,10 @@
 const combineRosterResources = (characterArray) => {
   return characterArray.reduce((sum, char) => {
     // sum over char properties
-    if (sum.gold) sum.gold += char.resources.gold;
-    else sum.gold = char.resources.gold;
+    if (char.isGoldEarner) {
+      if (sum.gold) sum.gold += char.resources.gold;
+      else sum.gold = char.resources.gold;
+    }
 
     if (sum.silver) sum.silver += char.resources.silver;
     else sum.silver = char.resources.silver;

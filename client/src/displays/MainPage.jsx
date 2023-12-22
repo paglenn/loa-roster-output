@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { handleContentChange } from "../features/gold_content/index.js";
 import { region_change } from "../features/region_change/regionSlice.js";
 
-import { selectUser } from "../state/userSlice.js";
+import { selectUser } from "../state/userSlice";
 import { selectRoster, update_roster } from "../state/rosterSlice.js";
 // this needs to handle state to pass down  the roster.
 
