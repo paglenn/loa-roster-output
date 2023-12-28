@@ -36,7 +36,7 @@ const ResourceView = ({ resources }) => {
 
   return (
     <ul className="list-none">
-      <li className="flex flex-row justify-between">
+      <li className="flex flex-row justify-between border-b-2 border-black border-dashed">
         <p> Total Gold Value: </p>
         <p className="font-bold"> {charGoldValueString}</p>
       </li>

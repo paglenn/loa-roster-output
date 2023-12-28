@@ -35,7 +35,7 @@ const Character = ({
   const [isContentShown, toggleContentShown] = useState(false);
   return (
     <section
-      className={`lg:basis-1/6 ${cardColor} shrink rounded p-1 m-2 flex flex-col items-stretch`}
+      className={`lg:basis-9 ${cardColor} shrink rounded p-1 m-2 flex flex-col items-stretch`}
     >
       {/* Character Name  and class icon container  */}
       <header className="flex flex-row justify-between content-center items-start">
@@ -90,8 +90,8 @@ const Character = ({
       <section className="basis-5/12">
         {isContentShown && isGoldEarner ? (
           <ContentView
-            ilvl={ilvl}
-            goldContent={goldContents}
+            character={character}
+           
             handleContentChange={(e, content) =>
               handleContentChange(e, character, content)
             }
