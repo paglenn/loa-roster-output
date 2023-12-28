@@ -17,7 +17,7 @@ const getQty = (resourceName, resource) => {
 export const getResourceValue = (resourceName, resource, prices) =>
   getQty(resourceName, resource) * prices[resource.type ?? resourceName];
 
-export const getCharValue = ({ resources }, prices, sales) => {
+export const getCharValue = ({ isGoldEarner, resources }, prices, sales) => {
   // for each item in character resources add price of item * quantity
   const value = Object.keys(resources).reduce((sum, resourceName) => {
     const resource = resources[resourceName].type ?? resourceName;
@@ -32,6 +32,7 @@ export const getCharValue = ({ resources }, prices, sales) => {
       )
     );
   }, 0);
+
   return Math.round(value);
 };
 

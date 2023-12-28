@@ -17,8 +17,9 @@ import { useNavigate } from "react-router-dom";
 import { handleContentChange } from "../features/gold_content/index.js";
 import { region_change } from "../features/region_change/regionSlice.js";
 
-import { selectUser } from "../state/userSlice.js";
+import { selectUser } from "../state/userSlice";
 import { selectRoster, update_roster } from "../state/rosterSlice.js";
+import { selectCharacter } from "../state/characterSlice.js";
 // this needs to handle state to pass down  the roster.
 
 const MainPage = () => {
@@ -38,6 +39,7 @@ const MainPage = () => {
   // state for roster array-  a change in this does need to cause a re-render of the roster container
   // const [roster, updateRoster] = useState([]);
   const roster = useSelector(selectRoster);
+
   const updateRoster = (characters) => dispatch(update_roster(characters));
   // custom hook for new character. we are going to retool new character inputs to use this hook so the form properly clears after submission
   const [newCharacter, updateNewCharacter] = useCharacter(user);

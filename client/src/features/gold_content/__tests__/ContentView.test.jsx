@@ -33,7 +33,7 @@ const contentList = [
 ];
 
 test("content view rendering", () => {
-  render(<ContentView goldContent={contentList} />);
+  render(<ContentView character={{ ilvl: 1600, goldContents: contentList }} />);
   screen
     .findAllByRole("content")
     .then((items) => expect(items.length).toEqual(3));

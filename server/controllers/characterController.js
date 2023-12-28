@@ -65,7 +65,9 @@ const genResources = async ({
         restedModifier,
     },
     gems: gems,
-    gold: goldContents.reduce((sum, source) => sum + source.gold, 0),
+    gold: isGoldEarner
+      ? goldContents.reduce((sum, source) => sum + source.gold, 0)
+      : 0,
   };
   return { resourceObject, goldContents };
 };
@@ -113,6 +115,7 @@ characterController.updateCharacter = async (req, res, next) => {
     itemLevelDidUpdate,
   } = req.body;
 
+  console.log("updating character");
   // updating item level means updating production
   // updating gold means ... updating gold
   try {
@@ -136,6 +139,7 @@ characterController.updateCharacter = async (req, res, next) => {
       },
       { returnDocument: "after" }
     );
+    console.log("updated character: ", res.locals.character);
     return next();
   } catch (err) {
     return next({
