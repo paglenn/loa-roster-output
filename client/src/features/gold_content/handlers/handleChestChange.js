@@ -15,7 +15,10 @@ const handleChestChange = (e, content, character, updateState) => {
     // need to find correct content
     let contentIndex = -1;
     copyCharacter.goldContent.forEach((c, index) => {
-      if (c._id === content._id) contentIndex = index;
+      if (c._id === content._id) {
+        console.log("content", content);
+        contentIndex = index;
+      }
     });
     copyCharacter.goldContent[contentIndex] = content;
 

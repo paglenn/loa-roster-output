@@ -90,8 +90,8 @@ const Character = ({
       <section className="basis-5/12">
         {isContentShown && isGoldEarner ? (
           <ContentView
-            ilvl={ilvl}
-            goldContent={goldContents}
+            character={character}
+           
             handleContentChange={(e, content) =>
               handleContentChange(e, character, content)
             }

@@ -2,22 +2,25 @@ import React, { useState, useEffect } from "react";
 import Content from "./Content";
 import { getContent } from "../../../utils/api";
 import isDoingContent from "../isDoingContent";
-export default ({ ilvl, goldContent, handleContentChange }) => {
+export default ({ handleContentChange, character }) => {
+  const { ilvl, goldContents } = character;
   // available content
   const [content, setContent] = useState([]);
   useEffect(() => getContent(ilvl, setContent), []);
 
-  const contentList = content.map((el, index) => {
-    const isDoing = isDoingContent(el, goldContent);
-    return (
-      <Content
-        key={index}
-        content={el}
-        checked={isDoing}
-        handleChange={handleContentChange}
-      />
-    );
-  });
+  const contentList = content
+    .toSorted((a, b) => b.ilvl - a.ilvl)
+    .map((el, index) => {
+      const isDoing = isDoingContent(el, goldContents);
+      return (
+        <Content
+          key={index}
+          content={el}
+          checked={isDoing}
+          handleChange={handleContentChange}
+        />
+      );
+    });
 
   return (
     <ul className="list-none flex flex-col items-stretch overflow-auto max-h-48">
