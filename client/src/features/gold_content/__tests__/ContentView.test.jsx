@@ -5,7 +5,7 @@ import ContentView from "../components/ContentView";
 import React from "react";
 import { test, expect } from "@jest/globals";
 import { render, screen } from "@testing-library/react";
-import Content from "../components/Content";
+import { reduxWrap } from "../../../../__mocks__/reduxWrap";
 const contentList = [
   {
     _id: "6536cbe623c43fa229317e23",
@@ -33,7 +33,11 @@ const contentList = [
 ];
 
 test("content view rendering", () => {
-  render(<ContentView character={{ ilvl: 1600, goldContents: contentList }} />);
+  render(
+    reduxWrap(
+      <ContentView character={{ ilvl: 1600, goldContents: contentList }} />
+    )
+  );
   screen
     .findAllByRole("content")
     .then((items) => expect(items.length).toEqual(3));
