@@ -17,7 +17,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className=" bg-slate-800 flex flex-col h-screen">
+    <div className=" bg-slate-800 flex flex-col h-screen overflow-scroll">
       <Header />
       <div className="flex flex-col justify-center grow">
         <HashRouter basename="/">

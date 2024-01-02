@@ -20,6 +20,7 @@ import { region_change } from "../features/region_change/regionSlice.js";
 import { selectUser } from "../state/userSlice";
 import { selectRoster, update_roster } from "../state/rosterSlice.js";
 import { selectCharacter } from "../state/characterSlice.js";
+import { selectGoldEarners, setGoldEarners } from "../state/goldEarnerSlice.js";
 // this needs to handle state to pass down  the roster.
 
 const MainPage = () => {
@@ -37,7 +38,7 @@ const MainPage = () => {
   }, [user]);
 
   // state for roster array-  a change in this does need to cause a re-render of the roster container
-  // const [roster, updateRoster] = useState([]);
+
   const roster = useSelector(selectRoster);
 
   const updateRoster = (characters) => dispatch(update_roster(characters));
@@ -46,8 +47,8 @@ const MainPage = () => {
   // state for updated character
   const [workingChar, updateWorkingChar] = useState({});
   // ref hook for gold earner count - it does not need to trigger re-render
-  const goldEarners = useRef(0);
-
+  const goldEarners = useSelector(selectGoldEarners);
+  const countGoldEarners = (n) => dispatch(setGoldEarners(n));
   const handleNewCharSubmit = (event, characterInfo) => {
     event.preventDefault();
     const copyCharacter = { ...characterInfo };
@@ -60,7 +61,7 @@ const MainPage = () => {
       return;
     }
 
-    if (copyCharacter.isGoldEarner && goldEarners.current === 6) {
+    if (copyCharacter.isGoldEarner && goldEarners >= 6) {
       alert("Nice try - but you can only have up to six gold earners!");
     } else {
       createNewCharacter(copyCharacter, updateWorkingChar);
@@ -81,7 +82,15 @@ const MainPage = () => {
 
   // effect hook to get changes to character list. we will want to run this on page load, but also on submission of forms or  deletion of a character
   useEffect(() => {
-    getRoster(user, updateRoster, goldEarners);
+    getRoster(user).then((characters) => {
+      updateRoster(characters);
+      countGoldEarners(
+        characters.reduce(
+          (sum, character) => sum + (character.isGoldEarner ? 1 : 0),
+          0
+        )
+      );
+    });
   }, [workingChar]);
 
   const handleNewCharChange = (e, charPropName, value) => {
@@ -107,9 +116,6 @@ const MainPage = () => {
       <Roster
         handleDelete={(e) => handleDelete(e, updateWorkingChar)}
         handleLevelUpdate={handleItemLevelUpdate}
-        handleGoldEarnerUpdate={(e, character) =>
-          updateGoldEarners(e, character, updateWorkingChar, goldEarners)
-        }
         updateCharacter={updateWorkingChar}
         handleRestedUpdate={(e, character) =>
           toggleRestedOnly(e, character, updateWorkingChar)

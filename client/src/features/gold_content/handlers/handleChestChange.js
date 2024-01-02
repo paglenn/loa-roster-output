@@ -8,25 +8,23 @@ const handleChestChange = (e, content, character, updateState) => {
 
   // check that content is actively being done
 
-  if (!isDoingContent(content, character.goldContent)) {
+  if (!isDoingContent(content, character.goldContents)) {
     return { error: "content not marked as being done " };
   } else {
-    const copyCharacter = { ...character };
+    const copyCharacter = JSON.parse(JSON.stringify(character));
     // need to find correct content
     let contentIndex = -1;
-    copyCharacter.goldContent.forEach((c, index) => {
+    copyCharacter.goldContents.forEach((c, index) => {
       if (c._id === content._id) {
         console.log("content", content);
         contentIndex = index;
       }
     });
-    copyCharacter.goldContent[contentIndex] = content;
+    copyCharacter.goldContents[contentIndex] = content;
 
-    updateCharacter({ ...copyCharacter, goldContentDidUpdate: true }).then(
-      (updatedChar) => {
-        updateState(updatedChar);
-      }
-    );
+    updateCharacter({ ...copyCharacter }).then(() => {
+      updateState();
+    });
   }
 };
 

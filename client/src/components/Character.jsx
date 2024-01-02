@@ -3,18 +3,23 @@ import icons from "../utils/assets/icons";
 import { FaSpinner } from "react-icons/fa6";
 
 import { DeleteButton } from "../features/delete";
-import { GoldStatusBox } from "../features/gold_earners";
+import { GoldStatusBox, updateGoldEarners } from "../features/gold_earners";
 import { RestedStatusBox } from "../features/rest_bonus";
 import { ContentView, ShowContentButton } from "../features/gold_content";
 
 import ResourceView from "./ResourceView";
 import CharPortrait from "./CharPortrait";
+import {
+  selectGoldEarners,
+  increment,
+  decrement,
+} from "../state/goldEarnerSlice";
 // const CharPortrait = React.lazy(() => import("./CharPortrait"));
 
 const Character = ({
   character,
   handleDelete,
-  handleGoldEarnerUpdate,
+
   handleLevelUpdate,
   handleRestedUpdate,
   handleContentChange,
@@ -30,9 +35,9 @@ const Character = ({
   } = character;
   const classLower = _class.toLowerCase();
 
-  // const cardColor = isGoldEarner ? "bg-[#d4af37]" : "bg-slate-300";
   const cardColor = "bg-slate-300";
   const [isContentShown, toggleContentShown] = useState(false);
+
   return (
     <section
       className={`lg:basis-9 ${cardColor} shrink rounded p-1 m-2 flex flex-col items-stretch`}
@@ -41,10 +46,7 @@ const Character = ({
       <header className="flex flex-row justify-between content-center items-start">
         <span className="text-lg font-bold mb-2 mr-1"> {name} </span>
         <span className="text-lg">{ilvl} </span>
-        <GoldStatusBox
-          isGoldEarner={isGoldEarner}
-          handleClick={(e) => handleGoldEarnerUpdate(e, character)}
-        />
+        <GoldStatusBox isGoldEarner={isGoldEarner} character={character} />
         <RestedStatusBox
           restedOnly={restedOnly}
           handleClick={(e) => handleRestedUpdate(e, character)}
@@ -91,7 +93,6 @@ const Character = ({
         {isContentShown && isGoldEarner ? (
           <ContentView
             character={character}
-           
             handleContentChange={(e, content) =>
               handleContentChange(e, character, content)
             }

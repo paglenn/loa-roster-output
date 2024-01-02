@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Content from "./Content";
 import { getContent } from "../../../utils/api";
 import isDoingContent from "../isDoingContent";
+import isBuyingChest from "../isBuyingChest";
 export default ({ handleContentChange, character }) => {
   const { ilvl, goldContents } = character;
   // available content
@@ -12,12 +13,14 @@ export default ({ handleContentChange, character }) => {
     .toSorted((a, b) => b.ilvl - a.ilvl)
     .map((el, index) => {
       const isDoing = isDoingContent(el, goldContents);
+      const chest = isBuyingChest(el, goldContents);
       return (
         <Content
           key={index}
           content={el}
           checked={isDoing}
-          handleChange={handleContentChange}
+          isBuyingChest={chest}
+          character={character}
         />
       );
     });
