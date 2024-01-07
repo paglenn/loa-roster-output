@@ -7,7 +7,7 @@ import { selectRoster } from "../state/rosterSlice.js";
 const Roster = ({
   handleLevelUpdate,
   handleDelete,
-  handleGoldEarnerUpdate,
+
   handleRestedUpdate,
   handleContentChange,
 }) => {
@@ -24,7 +24,6 @@ const Roster = ({
         character={character}
         handleDelete={handleDelete}
         handleLevelUpdate={handleLevelUpdate}
-        handleGoldEarnerUpdate={handleGoldEarnerUpdate}
         handleRestedUpdate={handleRestedUpdate}
         handleContentChange={handleContentChange}
       />

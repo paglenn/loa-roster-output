@@ -53,7 +53,7 @@ const PricesPage = () => {
       </section>
 
       {/* contain prices list and breakdown flex-row  */}
-      <section className="flex flex-col lg:flex-row justify-between basis-1/2 bg-transparent overflow-scroll ">
+      <section className="flex flex-col lg:flex-row justify-between basis-1/2 bg-transparent overflow-y-scroll ">
         <PricesContainer />
         <BusContainer />
       </section>

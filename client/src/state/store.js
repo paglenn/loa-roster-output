@@ -6,6 +6,7 @@ import { salesReducer } from "../features/edit_prices";
 import { busReducer } from "../features/bussing";
 import charReducer from "./characterSlice";
 import rosterReducer from "./rosterSlice";
+import goldEarnersReducer from "./goldEarnerSlice";
 export default configureStore({
   reducer: {
     region: regionReducer,
@@ -15,5 +16,6 @@ export default configureStore({
     buses: busReducer,
     roster: rosterReducer,
     character: charReducer,
+    goldEarners: goldEarnersReducer,
   },
 });

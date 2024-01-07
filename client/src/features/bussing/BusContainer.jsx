@@ -16,7 +16,7 @@ const BusContainer = () => {
   });
 
   return (
-    <section className="flex flex-col overflow-scroll text-white justify-between basis-1/2">
+    <section className="flex flex-col overflow-scroll text-white justify-between basis-1/2 pb-1">
       <h2 className="underline text-center text-xl"> Buses </h2>
       {busComponents}
     </section>
