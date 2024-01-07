@@ -8,7 +8,7 @@ jest.mock("axios");
 import updateGold from "../events/updateGoldEarner";
 const alertMock = jest.spyOn(window, "alert").mockImplementation();
 const mockUpdateChar = jest.fn();
-const mockGoldEarnerRef = { current: 0 };
+
 const mockEvent = {
   target: {
     checked: true,
@@ -17,8 +17,7 @@ const mockEvent = {
 
 describe("Gold Earner count updates", () => {
   it("raises an alert when there are 6 gold earners already", async () => {
-    mockGoldEarnerRef.current = 6;
-    updateGold(mockEvent, {}, mockUpdateChar, mockGoldEarnerRef);
+    updateGold(mockEvent, {}, 6, mockUpdateChar);
     expect(alertMock).toBeCalled();
   });
 });
