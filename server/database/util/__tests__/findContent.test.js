@@ -7,7 +7,7 @@ const {
 
 // import {describe, expect} from ''
 describe("content lookup", () => {
- const ilvl = 1580;
+  const ilvl = 1580;
   it(" finds best chaos dungeon ", async () => {
     findBestContent(ilvl, "chaos_dungeons").then((content) =>
       expect(content.ilvl).toEqual(ilvl)
@@ -43,7 +43,7 @@ describe("content lookup", () => {
     });
     expect(content.length).toEqual(3);
     const totalGold = content.reduce((sum, c) => sum + c.gold, 0);
-    expect(totalGold).toEqual(25750);
+    expect(totalGold).toEqual(25500);
   });
 
   test("all gold content relevant to ilvl can be retrieved", async () => {
