@@ -1,5 +1,5 @@
 import React from "react";
-import CharacterView from "./Character.jsx";
+import Character from "./Character.jsx";
 import { useSelector } from "react-redux";
 import { selectRoster } from "../state/rosterSlice.js";
 // container for roster's character cards
@@ -7,7 +7,6 @@ import { selectRoster } from "../state/rosterSlice.js";
 const Roster = ({
   handleLevelUpdate,
   handleDelete,
-
   handleRestedUpdate,
   handleContentChange,
 }) => {
@@ -17,10 +16,10 @@ const Roster = ({
   const roster = useSelector(selectRoster);
 
   // create array of character card components to be rendered to the view
-  roster.forEach((character) =>
+  roster.forEach((character, index) =>
     characterCards.push(
-      <CharacterView
-        key={character.name}
+      <Character
+        key={index}
         character={character}
         handleDelete={handleDelete}
         handleLevelUpdate={handleLevelUpdate}
