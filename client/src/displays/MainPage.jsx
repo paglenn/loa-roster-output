@@ -114,9 +114,7 @@ const MainPage = () => {
         handleChange={handleNewCharChange}
       />
       <Roster
-        handleDelete={(e) => handleDelete(e, updateWorkingChar)}
         handleLevelUpdate={handleItemLevelUpdate}
-        updateCharacter={updateWorkingChar}
         handleRestedUpdate={(e, character) =>
           toggleRestedOnly(e, character, updateWorkingChar)
         }

@@ -1,3 +1,5 @@
+// DeleteButton.jsx
+// Button , when clicked , sends request to delete character with name of card in which  button is placed
 import React from "react";
 import handleDelete from "../utils/handleDelete";
 export const DeleteButton = ({ name, refresh }) => {

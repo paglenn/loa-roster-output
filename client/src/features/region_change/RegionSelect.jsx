@@ -10,7 +10,7 @@ const regions = [
   "North America West",
   "South America",
 ];
-const Region = () => {
+const RegionSelect = () => {
   const currRegion = useSelector(selectRegion);
 
   const dispatch = useDispatch();
@@ -40,5 +40,5 @@ const Region = () => {
     </section>
   );
 };
-export default Region;
+export default RegionSelect;
 export { regions };

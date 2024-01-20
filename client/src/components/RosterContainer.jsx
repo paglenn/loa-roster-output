@@ -6,7 +6,6 @@ import { selectRoster } from "../state/rosterSlice.js";
 // must be passed down character array in props
 const Roster = ({
   handleLevelUpdate,
-  handleDelete,
   handleRestedUpdate,
   handleContentChange,
 }) => {
@@ -21,7 +20,6 @@ const Roster = ({
       <Character
         key={index}
         character={character}
-        handleDelete={handleDelete}
         handleLevelUpdate={handleLevelUpdate}
         handleRestedUpdate={handleRestedUpdate}
         handleContentChange={handleContentChange}
