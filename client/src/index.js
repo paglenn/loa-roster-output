@@ -1,3 +1,5 @@
+// index.js
+// Entry point into application and connnection to redux store.
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";

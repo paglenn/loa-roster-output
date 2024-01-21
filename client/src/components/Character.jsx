@@ -1,46 +1,46 @@
+// Character card component
+// component imports
 import React, { useState, Suspense } from "react";
+
 import icons from "../utils/assets/icons";
 import { FaSpinner } from "react-icons/fa6";
 
 import { DeleteButton } from "../features/delete";
-import { GoldStatusBox, updateGoldEarners } from "../features/gold_earners";
+import { GoldStatusBox } from "../features/gold_earners";
 import { RestedStatusBox } from "../features/rest_bonus";
 import { ContentView, ShowContentButton } from "../features/gold_content";
 
 import ResourceView from "./ResourceView";
 import CharPortrait from "./CharPortrait";
-import {
-  selectGoldEarners,
-  increment,
-  decrement,
-} from "../state/goldEarnerSlice";
-// const CharPortrait = React.lazy(() => import("./CharPortrait"));
+
+// redux imports
+import { useDispatch, useSelector } from "react-redux";
+import { update_roster } from "../state/rosterSlice";
+import { selectUser } from "../state/userSlice";
 
 const Character = ({
   character,
-  handleDelete,
-
   handleLevelUpdate,
   handleRestedUpdate,
   handleContentChange,
 }) => {
-  const {
-    name,
-    _class,
-    ilvl,
-    resources,
-    isGoldEarner,
-    restedOnly,
-    goldContents,
-  } = character;
+  const { name, _class, ilvl, resources, isGoldEarner, restedOnly } = character;
   const classLower = _class.toLowerCase();
 
-  const cardColor = "bg-slate-300";
+  const CHAR_CARD_COLOR = "bg-slate-300";
   const [isContentShown, toggleContentShown] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const user = useSelector(selectUser);
+
+  const refreshRoster = async () => {
+    getRoster(user).then((characters) => dispatch(update_roster(characters)));
+  };
 
   return (
     <section
-      className={`lg:basis-9 ${cardColor} shrink rounded p-1 m-2 flex flex-col items-stretch`}
+      className={`lg:basis-9 ${CHAR_CARD_COLOR} shrink rounded p-1 m-2 flex flex-col items-stretch`}
     >
       {/* Character Name  and class icon container  */}
       <header className="flex flex-row justify-between content-center items-start">
@@ -111,7 +111,10 @@ const Character = ({
         ) : null}
         <details>
           <summary> Delete Character </summary>
-          <DeleteButton name={name} handleDelete={handleDelete} />
+          <DeleteButton
+            name={name}
+            refresh={refreshRoster}
+          />
         </details>
       </section>
     </section>

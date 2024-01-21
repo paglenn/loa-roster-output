@@ -1,4 +1,4 @@
-import { handleDelete } from "../utils/handleDelete";
+import handleDelete from "../utils/handleDelete";
 import { describe, expect, test, jest } from "@jest/globals";
 import axios from "axios";
 let fakeChar = { name: "fakeChar" };

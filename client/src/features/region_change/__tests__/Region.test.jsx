@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import Region, { regions } from "../Region";
+import Region, { regions } from "../RegionSelect";
 import React from "react";
 import { test, expect } from "@jest/globals";
 import { render, screen } from "@testing-library/react";

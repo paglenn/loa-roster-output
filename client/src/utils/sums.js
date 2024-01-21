@@ -1,4 +1,4 @@
-import { prices as oldPrices, hasSubtype, convertStones } from "./reference";
+import { prices as oldPrices, hasSubtype } from "./reference";
 import combineRosterResources from "./combineRosterResources";
 
 const calcTotalGoldValue = (materials, prices, sales) => {
@@ -28,7 +28,7 @@ export const getCharValue = ({ isGoldEarner, resources }, prices, sales) => {
       getResourceValue(
         resourceName,
         resources[resourceName],
-        prices ?? oldPrice
+        prices ?? oldPrices
       )
     );
   }, 0);

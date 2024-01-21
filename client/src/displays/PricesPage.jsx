@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import RefreshButton from "../features/edit_prices/components/RefreshButton";
-import { Region } from "../features/region_change";
+import { RegionSelect } from "../features/region_change";
 import ToMain from "../components/RedirectButton";
 import { useDispatch, useSelector } from "react-redux";
 import { region_change } from "../features/region_change/regionSlice";
 import { updatePrices } from "../utils/reference";
-import { update_prices, selectPrices } from "../state/pricesSlice";
+import { update_prices } from "../state/pricesSlice";
 import { selectUser } from "../state/userSlice";
 import { PricesContainer } from "../features/edit_prices";
 import { BusContainer } from "../features/bussing";

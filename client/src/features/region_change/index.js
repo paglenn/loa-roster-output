@@ -1,3 +1,3 @@
-import Region from "./Region";
+import RegionSelect from "./RegionSelect";
 import regionReducer from "./regionSlice";
-export { Region, regionReducer };
+export { RegionSelect, regionReducer };

@@ -1,3 +1,5 @@
+// getRoster.js
+// retrieve user's roster from database via api call
 import { vercelPrefix } from "./vercel";
 import axios from "axios";
 export const getRoster = async (user) => {
