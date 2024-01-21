@@ -33,7 +33,7 @@ const PricesPage = () => {
   return (
     <section className="flex flex-col justify-start overflow-scroll bg-transparent max-h-full grow">
       <section className="flex flex-col lg:flex-row items-center justify-evenly text-xl">
-        <Region
+        <RegionSelect
           handleChange={(e) => {
             dispatch(region_change(e.target.value));
 
