@@ -14,7 +14,7 @@ export default ({ content, checked, character, isBuyingChest }) => {
   const updateState = async () => {
     getRoster(user).then((characters) => dispatch(update_roster(characters)));
   };
-
+  const gold = content.gold - (isBuyingChest ? content.chest.cost : 0);
   return (
     <li role="content" className="text-sm py-2">
       <ul className="flex flex-row list-none justify-around">
@@ -22,7 +22,7 @@ export default ({ content, checked, character, isBuyingChest }) => {
           {content.display_name ?? `${content.name} ${content.level ?? ""}`}
         </li>
 
-        <li className="basis-1/4 grow"> {content.gold.toLocaleString()} </li>
+        <li className="basis-1/4 grow"> {gold.toLocaleString()} </li>
         {/* Doing Content */}
         <li className="basis-1/4">
           <input

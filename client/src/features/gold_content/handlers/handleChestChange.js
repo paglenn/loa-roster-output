@@ -5,7 +5,7 @@ const handleChestChange = (e, content, character, updateState) => {
   const isBuying = e.target.checked;
 
   if (isBuying) content.gold -= content.chest.cost;
-  else content.gold += content.chest.cost;
+  else if (content.chest.buy) content.gold += content.chest.cost;
   content.chest.buy = isBuying;
   // check that content is actively being done
 
@@ -17,9 +17,7 @@ const handleChestChange = (e, content, character, updateState) => {
 
     copyCharacter.goldContents.forEach((c, index) => {
       if (c._id === content._id) {
-        console.log("content", content);
-
-        copyCharacter.goldContents[index] = content;
+        copyCharacter.goldContents[index] = { ...content };
       }
     });
 
