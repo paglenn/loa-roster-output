@@ -26,15 +26,17 @@ const TotalsDisplay = ({ priceRedirect }) => {
   const roster = useSelector(selectRoster);
   const rosterResources = sumRosterOutput(roster, prices, sales);
 
-  const resourceComponents = resourceTypes.map((el, index) => (
-    <Resource
-      key={index}
-      type={el}
-      qty={rosterResources[el]}
-      imHeight={8}
-      classProps="basis-1/6 shrink"
-    />
-  ));
+  const resourceComponents = resourceTypes.map((el, index) =>
+    rosterResources[el] > 0 ? (
+      <Resource
+        key={index}
+        type={el}
+        qty={rosterResources[el]}
+        imHeight={8}
+        classProps="basis-1/6 shrink"
+      />
+    ) : null
+  );
 
   return (
     <div className="bg-slate-800 text-white">
