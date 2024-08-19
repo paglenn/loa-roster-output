@@ -30,7 +30,8 @@ const genResources = async ({
   const chaosDungeon = await findBestContent(ilvl, "chaos_dungeons");
   const guardianRaid = await findBestContent(ilvl, "guardian_raids");
   const cube = await findBestContent(ilvl, "cubes");
-  const cubesPerWeek = restedOnly ? 1 : 2;
+  const isSavingCubes = ilvl >= 1630 && new Date().getMonth > 8;
+  const cubesPerWeek = isSavingCubes ? 0 : 1; // restedOnly ? 1 : 2;
 
   if (itemLevelDidUpdate || !goldContents) {
     goldContents = isGoldEarner
