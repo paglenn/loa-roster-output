@@ -111,10 +111,7 @@ const Character = ({
         ) : null}
         <details>
           <summary> Delete Character </summary>
-          <DeleteButton
-            name={name}
-            refresh={refreshRoster}
-          />
+          <DeleteButton name={name} refresh={refreshRoster} />
         </details>
       </section>
     </section>
