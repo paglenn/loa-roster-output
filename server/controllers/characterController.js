@@ -38,8 +38,12 @@ const genResources = async ({
       : [];
   }
 
-  const silver =
+  let silver =
     chaosDungeon.silver * 14 * restedModifier + cube.silver * cubesPerWeek;
+  // factor in lopang?
+  const lopangSilver = 2 * 34500 + 39000;
+  silver += isGoldEarner ? 0 : lopangSilver * restedModifier * 7;
+
   const gems =
     restedModifier * (chaosDungeon.gems * 14) + cube.gems * cubesPerWeek;
 

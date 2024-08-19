@@ -12,13 +12,14 @@ const GoldStatusBox = ({ isGoldEarner, character }) => {
   const dispatch = useDispatch();
   const goldEarners = useSelector(selectGoldEarners);
   const user = useSelector(selectUser);
-  const setGoldEarners = (earnerCount) => dispatch(setGoldEarners(earnerCount));
+  const updateGoldEarners = (earnerCount) =>
+    dispatch(setGoldEarners(earnerCount));
   const updateRoster = (characters) => dispatch(update_roster(characters));
   const handleClick = (e) => {
     // call updateGoldEarner
-    updateGoldEarner(e, character, goldEarners, setGoldEarners).then(
-      getRoster(user, updateRoster, setGoldEarners)
-    );
+    updateGoldEarner(e, character, goldEarners, updateGoldEarners)
+      .then(() => getRoster(user))
+      .then((roster) => updateRoster(roster));
   };
   return (
     <div className="flex flex-col">
