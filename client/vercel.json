@@ -4,5 +4,9 @@
       "source": "/api/(.*)",
       "destination": "https://loa-roster-output-server.vercel.app/api"
     }
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
