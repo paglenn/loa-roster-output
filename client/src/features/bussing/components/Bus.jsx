@@ -1,5 +1,5 @@
 import React from "react";
-import { update_bus } from "./busSlice";
+import { update_bus } from "../state/busSlice";
 import { useDispatch } from "react-redux";
 
 const Bus = ({ name, price, num }) => {
