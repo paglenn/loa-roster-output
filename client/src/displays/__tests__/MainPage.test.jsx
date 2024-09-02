@@ -15,7 +15,7 @@ describe("Main Page", () => {
       <Provider store={store}>
         <BrowserRouter basename="">
           <Routes>
-            <Route path="/" element={<MainPage user="test" />} />
+            <Route path="/" element={<MainPage />} />
           </Routes>
         </BrowserRouter>
       </Provider>

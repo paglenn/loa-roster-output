@@ -5,7 +5,7 @@ import ContentView from "../components/ContentView";
 import React from "react";
 import { test, expect } from "@jest/globals";
 import { render, screen } from "@testing-library/react";
-import { reduxWrap } from "../../../../__mocks__/reduxWrap";
+import  reduxWrap from "../../../../__mocks__/reduxWrap";
 const contentList = [
   {
     _id: "6536cbe623c43fa229317e23",

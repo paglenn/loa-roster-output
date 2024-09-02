@@ -1,8 +1,8 @@
-const calculateBusValue = (buses) => {
+const calcBusVal = (buses) => {
   return Object.keys(buses).reduce(
     (sum, name) => sum + buses[name].num * buses[name].price,
     0
   );
 };
 
-export default calculateBusValue;
+export default calcBusVal;

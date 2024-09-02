@@ -30,7 +30,8 @@ const genResources = async ({
   const chaosDungeon = await findBestContent(ilvl, "chaos_dungeons");
   const guardianRaid = await findBestContent(ilvl, "guardian_raids");
   const cube = await findBestContent(ilvl, "cubes");
-  const cubesPerWeek = restedOnly ? 1 : 2;
+  const isSavingCubes = ilvl >= 1630 && new Date().getMonth > 8;
+  const cubesPerWeek = isSavingCubes ? 0 : 1; // restedOnly ? 1 : 2;
 
   if (itemLevelDidUpdate || !goldContents) {
     goldContents = isGoldEarner
@@ -38,8 +39,12 @@ const genResources = async ({
       : [];
   }
 
-  const silver =
+  let silver =
     chaosDungeon.silver * 14 * restedModifier + cube.silver * cubesPerWeek;
+  // factor in lopang?
+  const lopangSilver = 2 * 34500 + 39000;
+  silver += isGoldEarner ? 0 : (lopangSilver - 4000) * restedModifier * 7;
+
   const gems =
     restedModifier * (chaosDungeon.gems * 14) + cube.gems * cubesPerWeek;
 

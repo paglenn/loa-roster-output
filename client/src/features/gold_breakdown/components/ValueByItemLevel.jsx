@@ -8,6 +8,13 @@ import { selectSales } from "../../edit_prices/salesSlice";
 import { selectRoster } from "../../../state/rosterSlice";
 
 import PieChart from "./PieChart";
+
+/**
+ * A React functional component that displays a pie chart representing the weekly output by item level.
+ *
+ * @return {JSX.Element} The JSX element representing the pie chart.
+ */
+
 const ValueByItemLevel = () => {
   const prices = useSelector(selectPrices);
   const sales = useSelector(selectSales);

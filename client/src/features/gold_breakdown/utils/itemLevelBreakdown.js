@@ -1,32 +1,39 @@
 import { getCharValue } from "../../../utils/sums";
 
 // for each character in roster, get gold value and add to ilvl bracket
+
+const cutLines = [1250, 1490, 1540, 1580, 1610, 1620, 1630];
 const getGoldValueByIlvl = (roster, prices, sales) => {
-  const iLvlBrackets = {
-    1250: 0,
-    1490: 0,
-    1540: 0,
-    1580: 0,
-    1600: 0,
-  };
+  const iLvlBrackets = cutLines.reduce((obj, ilvl) => {
+    obj[ilvl] = 0;
+    return obj;
+  }, {});
+
   roster.forEach((character) => {
     console.log("character ", character);
     const charValue = getCharValue(character, prices, sales);
-    if (character.ilvl >= 1600) iLvlBrackets[1600] += charValue;
-    else if (character.ilvl >= 1580) iLvlBrackets[1580] += charValue;
-    else if (character.ilvl >= 1540) iLvlBrackets[1540] += charValue;
-    else if (character.ilvl >= 1490) iLvlBrackets[1490] += charValue;
-    else if (character.ilvl >= 1250) iLvlBrackets[1250] += charValue;
+    const charCutLine = getCutLine(character.ilvl);
+    iLvlBrackets[charCutLine] += charValue;
   });
 
-  const iLvlBreakdown = [["Item Level", "Value"]];
-  iLvlBreakdown.push(["1250-1490", Math.round(iLvlBrackets[1250])]);
-  iLvlBreakdown.push(["1490-1540", Math.round(iLvlBrackets[1490])]);
-  iLvlBreakdown.push(["1540-1580", Math.round(iLvlBrackets[1540])]);
-  iLvlBreakdown.push(["1580-1600", Math.round(iLvlBrackets[1580])]);
-  iLvlBreakdown.push(["1600+", Math.round(iLvlBrackets[1600])]);
+  const iLvlBreakdown = [["Item Level Cutoff", "Value"]];
+  cutLines.forEach((ilvl) => {
+    if (iLvlBrackets[ilvl] > 0)
+      iLvlBreakdown.push([ilvl.toString(), Math.round(iLvlBrackets[ilvl])]);
+  });
+
   console.log("breakdown by ilvl: ", iLvlBreakdown);
   return iLvlBreakdown;
 };
 
+const getCutLine = (iLvl) => {
+  for (let i = 0; i < cutLines.length; i++) {
+    if (iLvl < cutLines[i]) {
+      return cutLines[i - 1];
+    }
+  }
+  return cutLines[cutLines.length - 1];
+};
+
+export { cutLines };
 export default getGoldValueByIlvl;

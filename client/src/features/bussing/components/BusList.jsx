@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectBuses } from "./busSlice";
+import { selectBuses } from "../state/busSlice";
 import Bus from "./Bus";
-const BusContainer = () => {
+const BusList = () => {
   const buses = useSelector(selectBuses);
   const busComponents = Object.keys(buses).map((name, index) => {
     return (
@@ -23,4 +23,4 @@ const BusContainer = () => {
   );
 };
 
-export default BusContainer;
+export default BusList;

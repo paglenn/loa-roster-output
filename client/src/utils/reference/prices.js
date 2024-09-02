@@ -1,6 +1,6 @@
-import axios from "axios";
-const level7GemPrice = 12000;
-const radiantLeapstonePrice = 110;
+// import axios from "axios";
+const level7GemPrice = 8000;
+const radiantLeapstonePrice = 55;
 const refineObliterationStackPrice = 45;
 const refinedProtectionStackPrice = 5;
 const prices = {
@@ -61,24 +61,11 @@ const apiMap = {
 
 const updatePrices = async (region) => {
   const userRegion = region ?? "North America East";
+  if (localStorage.getItem("prices"))
+    return JSON.parse(localStorage.getItem("prices"));
 
-  const apiPrices = await axios
-    .get(
-      `https://www.lostarkmarket.online/api/export-market-live/${userRegion}?category=Enhancement Material&subcategory=Honing Materials&tier=Tier 3`
-    )
-    .then((response) => response.data);
-  const apiPriceObj = {};
-  apiPrices.forEach((item) => {
-    apiPriceObj[item.id] = item.recentPrice;
-  });
   const newPrices = { ...prices };
-  Object.keys(newPrices).forEach((item) => {
-    if (apiMap[item] in apiPriceObj) {
-      const unitPrice = apiPriceObj[apiMap[item]] * priceModifiers[item];
-      newPrices[item] = unitPrice;
-    }
-  });
-  // store in local storage
+
   localStorage.setItem("prices", JSON.stringify(prices));
   // localStorage.setItem("prices-updated", `${Date.now()}`);
   localStorage.setItem(
