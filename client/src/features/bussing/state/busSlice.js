@@ -6,6 +6,9 @@ const raids = [
   "Brelshaza",
   "Kayangel",
   "Akkan",
+  "Voldis",
+  "Thaemine",
+  "Echidna",
 ];
 const storedBuses = JSON.parse(localStorage.getItem("buses"));
 

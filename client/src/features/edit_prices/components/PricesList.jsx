@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { selectPrices } from "../../../state/pricesSlice";
 import { selectSales } from "../salesSlice";
 import Price from "./Price";
-const PricesContainer = () => {
+const PricesList = () => {
   const prices = useSelector(selectPrices);
   const sales = useSelector(selectSales);
   // turn prices into react components
@@ -40,4 +40,4 @@ const PricesContainer = () => {
     </section>
   );
 };
-export default PricesContainer;
+export default PricesList;

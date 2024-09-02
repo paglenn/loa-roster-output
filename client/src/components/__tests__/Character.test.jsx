@@ -5,11 +5,10 @@
 import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { resourceTypes } from "../../utils/reference";
+import { resourceTypes, prices } from "../../utils/reference";
 import Character from "../Character";
 import { act } from "react-dom/test-utils";
-import { prices } from "../../utils/reference";
-import { reduxWrap } from "../../../__mocks__/reduxWrap";
+import reduxWrap from "../../../__mocks__/reduxWrap";
 const testChar = {
   name: "Technosaint",
   _class: "Scouter",
@@ -74,12 +73,7 @@ describe("Character card components", () => {
     });
     expect(screen.getByAltText(/class icon/)).toBeInTheDocument();
     expect(await screen.findByAltText(/class image/)).toBeInTheDocument();
-    // iterate over resource types
-    // an image with that alt text should be in the document
-    // resourceList.forEach((resource) => {
-    //   const resourceRegex = new RegExp(resource.slice(0, -1));
-    //   expect(screen.getByAltText(resourceRegex)).toBeInTheDocument();
-    // });
+    
   });
 
   it("renders amounts for character properties", async () => {

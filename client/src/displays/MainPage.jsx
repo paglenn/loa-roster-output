@@ -19,7 +19,7 @@ import { region_change } from "../features/region_change/regionSlice.js";
 
 import { selectUser } from "../state/userSlice";
 import { selectRoster, update_roster } from "../state/rosterSlice.js";
-import { selectCharacter } from "../state/characterSlice.js";
+
 import { selectGoldEarners, setGoldEarners } from "../state/goldEarnerSlice.js";
 // this needs to handle state to pass down  the roster.
 
@@ -102,6 +102,7 @@ const MainPage = () => {
   const handleContent = (e, character, content) => {
     handleContentChange(e, content, character, updateWorkingChar);
   };
+
   return (
     <main className={`bg-slate-800 max-h-full flex flex-col grow`}>
       <TotalsDisplay

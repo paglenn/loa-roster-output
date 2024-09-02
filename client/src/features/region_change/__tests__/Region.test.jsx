@@ -5,7 +5,7 @@ import Region, { regions } from "../RegionSelect";
 import React from "react";
 import { test, expect } from "@jest/globals";
 import { render, screen } from "@testing-library/react";
-import { reduxWrap } from "../../../../__mocks__/reduxWrap";
+import  reduxWrap  from "../../../../__mocks__/reduxWrap";
 import "@testing-library/jest-dom";
 test("the region list renders in order", () => {
   render(reduxWrap(<Region />));

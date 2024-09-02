@@ -6,8 +6,13 @@ import { useSelector } from "react-redux";
 import { selectPrices } from "../../../state/pricesSlice";
 import { selectSales } from "../../edit_prices/salesSlice";
 import { selectRoster } from "../../../state/rosterSlice";
-import { selectBuses } from "../../bussing/busSlice";
+import { selectBuses } from "../../bussing/state/busSlice";
 import PieChart from "./PieChart";
+/**
+ * A React functional component that displays a pie chart representing the weekly output by activity.
+ *
+ * @return {JSX.Element} A JSX element containing the pie chart.
+ */
 const ValueByActivity = () => {
   const prices = useSelector(selectPrices);
   const sales = useSelector(selectSales);

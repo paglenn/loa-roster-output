@@ -24,10 +24,10 @@
 | Character addition and deletion | ✅     |
 | Character Item Level Updates    | ✅     |
 | Rested-only designation         | ✅     |
-| User specificity                | ✅     |
 | Show/Hide Password              | ✅     |
 | Gold Earning Content display    | ✅     |
-| Income Breakdown Charts         | ⏳     |
+| Income Breakdown Charts         | ✅     |
+| Lopang Silver Toggle            | 🙏🏾     |
 | Google OAuth                    | 🙏🏾     |
 
 ### Feature Status Key

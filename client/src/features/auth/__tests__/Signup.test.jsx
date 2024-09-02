@@ -8,7 +8,7 @@ import "@testing-library/jest-dom";
 import Signup from "../components/Signup";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import axios from "axios";
-import { reduxWrap } from "../../../../__mocks__/reduxWrap";
+import reduxWrap  from "../../../../__mocks__/reduxWrap";
 
 //login component should be the default when app is rendered (i.e. is the main page)
 

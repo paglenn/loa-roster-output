@@ -1,4 +1,4 @@
 import RefreshButton from "./components/RefreshButton";
-import PricesContainer from "./components/PricesContainer";
+import PricesList from "./components/PricesList";
 import salesReducer from "./salesSlice";
-export { RefreshButton, PricesContainer, salesReducer };
+export { RefreshButton, PricesList as PricesContainer, salesReducer };
