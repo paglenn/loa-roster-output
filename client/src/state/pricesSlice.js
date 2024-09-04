@@ -6,6 +6,7 @@ export const pricesSlice = createSlice({
   reducers: {
     update_prices: (state, action) => {
       state.value = { ...state.value, ...action.payload };
+      localStorage.setItem("prices", JSON.stringify(state.value));
     },
     edit_price: (state, action) => {
       // action payload is a single key value pair

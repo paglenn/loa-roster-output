@@ -91,7 +91,7 @@ const MainPage = () => {
     // get prices from api/database if saved for user
     console.log("user: ", user);
     getPrices(user).then((prices) => {
-      if (prices) dispatch(update_prices(transformPrices(prices)));
+      if (prices) dispatch(update_prices(prices));
     });
   }, [workingChar]);
 

@@ -3,7 +3,7 @@ import { vercelPrefix } from "./vercel";
 
 const putPrices = async (username, prices) => {
   return axios
-    .put(`${vercelPrefix}/api/prices`, { username: username, ...prices })
+    .put(`${vercelPrefix}/api/prices`, { username: username, prices: prices })
     .then((res) => res.data)
     .catch((err) => console.log(err));
 };
