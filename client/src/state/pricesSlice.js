@@ -5,7 +5,7 @@ export const pricesSlice = createSlice({
   initialState: { value: { ...prices } },
   reducers: {
     update_prices: (state, action) => {
-      state.value = action.payload;
+      state.value = { ...state.value, ...action.payload };
     },
     edit_price: (state, action) => {
       // action payload is a single key value pair

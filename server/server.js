@@ -3,6 +3,7 @@ const path = require("path");
 const cors = require("cors");
 const characterRouter = require("./routes/characterRoutes");
 const userRouter = require("./routes/userRoutes");
+const pricesRouter = require("./routes/pricesRoutes");
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.use(express.json());
 app.use(cors());
 app.use("/api/character", characterRouter);
 app.use("/api/user", userRouter);
+app.use("/api/prices", pricesRouter);
 // 404 error for unrecognized route
 
 // in production mode, serve the html

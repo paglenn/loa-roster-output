@@ -44,6 +44,20 @@ if (localStorage.getItem("prices")) {
   const storedPrices = JSON.parse(localStorage.getItem("prices"));
   if (storedPrices.gems) prices.gems = storedPrices.gems;
 }
+
+/**
+ * Transforms a given set of prices by applying price modifiers.
+ *
+ * @param {Object} prices - An object containing prices to be transformed
+ * @return {Object} An object containing the transformed prices
+ */
+const transformPrices = (prices) => {
+  return Object.keys(prices).reduce((obj, item) => {
+    obj[item] = prices[item] * priceModifiers[item];
+    return obj;
+  }, {});
+};
+
 const apiMap = {
   marvelous_honor_leapstone: "marvelous-honor-leapstone-3",
   greater_honor_leapstone: "great-honor-leapstone-2",
@@ -75,4 +89,4 @@ const updatePrices = async (region) => {
   return newPrices; // will auto-resolve into a promise
 };
 
-export { prices, updatePrices, priceModifiers };
+export { prices, updatePrices, transformPrices, priceModifiers };

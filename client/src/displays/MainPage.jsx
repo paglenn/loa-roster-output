@@ -2,25 +2,26 @@ import React, { useState, useEffect, useRef } from "react";
 import TotalsDisplay from "../components/TotalsDisplay.jsx";
 import Roster from "../components/RosterContainer.jsx";
 import CharacterInputDisplay from "../components/CharacterInputDisplay.jsx";
-import { handleDelete } from "../features/delete/index.js";
-import { updateGoldEarners } from "../features/gold_earners";
+
 import { toggleRestedOnly } from "../features/rest_bonus";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getRoster,
   createNewCharacter,
   updateCharacter,
+  getPrices,
 } from "../utils/api/index.js";
 import { useCharacter } from "../hooks/useCharacters.js";
 import { useNavigate } from "react-router-dom";
 
 import { handleContentChange } from "../features/gold_content/index.js";
-import { region_change } from "../features/region_change/regionSlice.js";
 
 import { selectUser } from "../state/userSlice";
 import { selectRoster, update_roster } from "../state/rosterSlice.js";
 
 import { selectGoldEarners, setGoldEarners } from "../state/goldEarnerSlice.js";
+import { update_prices } from "../state/pricesSlice.js";
+import { transformPrices } from "../utils/reference/prices.js";
 // this needs to handle state to pass down  the roster.
 
 const MainPage = () => {
@@ -31,10 +32,6 @@ const MainPage = () => {
   useEffect(() => {
     //protect route
     if (!user) navigate("/");
-    else {
-      // if there is a user stored region then change the region to that one
-      if (user.region) dispatch(region_change(user.region));
-    }
   }, [user]);
 
   // state for roster array-  a change in this does need to cause a re-render of the roster container
@@ -90,6 +87,11 @@ const MainPage = () => {
           0
         )
       );
+    });
+    // get prices from api/database if saved for user
+    console.log("user: ", user);
+    getPrices(user).then((prices) => {
+      if (prices) dispatch(update_prices(transformPrices(prices)));
     });
   }, [workingChar]);
 
