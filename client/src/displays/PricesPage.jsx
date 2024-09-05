@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import ToMain from "../components/RedirectButton";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { selectUser } from "../state/userSlice";
 import { PricesContainer } from "../features/edit_prices";
@@ -15,7 +15,7 @@ import SummaryChartContainer from "../components/SummaryChartContainer";
 //
 const PricesPage = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
   const user = useSelector(selectUser);
   useEffect(() => {
     //protect route

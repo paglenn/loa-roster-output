@@ -4,9 +4,16 @@ import { resourceDisplayNames } from "../../../utils/reference/labels";
 import { priceModifiers } from "../../../utils/reference";
 import { edit_price } from "../../../state/pricesSlice";
 import { update_sale } from "../salesSlice";
+
 const Price = ({ name, value, selling }) => {
   // display name of item and price
   const dispatch = useDispatch();
+
+  const handlePriceChange = (e) => {
+    const priceObj = {};
+    priceObj[name] = e.target.value * priceModifiers[name];
+    dispatch(edit_price(priceObj));
+  };
   return (
     <div className="flex flex-row justify-between text-white my-1 justify-items-center">
       <div className="grow-0 text-xs lg:text-sm basis-2/5 justify-self-center self-center  font-bold">
@@ -19,11 +26,7 @@ const Price = ({ name, value, selling }) => {
           className="text-black"
           type="text"
           value={Math.round(value / priceModifiers[name])}
-          onChange={(e) => {
-            const priceObj = {};
-            priceObj[name] = e.target.value * priceModifiers[name];
-            dispatch(edit_price(priceObj));
-          }}
+          onChange={handlePriceChange}
         />
       </div>
       {/* Section to indicate whether or not you're selling the items  */}

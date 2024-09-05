@@ -1,6 +1,6 @@
 // character card resources view
 import React from "react";
-import { resourceTypes, hasSubtype, archetype } from "../utils/reference";
+import { resourceTypes, archetype } from "../utils/reference";
 import { getCharValue } from "../utils/sums";
 import { Resource } from "./Resource";
 import { useSelector } from "react-redux";

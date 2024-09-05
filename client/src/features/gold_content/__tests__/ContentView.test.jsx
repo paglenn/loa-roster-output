@@ -5,7 +5,11 @@ import ContentView from "../components/ContentView";
 import React from "react";
 import { test, expect } from "@jest/globals";
 import { render, screen } from "@testing-library/react";
-import  reduxWrap from "../../../../__mocks__/reduxWrap";
+import reduxWrap from "../../../../__mocks__/reduxWrap";
+import "@testing-library/jest-dom";
+import * as api from "../../../utils/api";
+// jest.mock("../../../utils/api");
+
 const contentList = [
   {
     _id: "6536cbe623c43fa229317e23",
@@ -42,8 +46,3 @@ test("content view rendering", () => {
     .findAllByRole("content")
     .then((items) => expect(items.length).toEqual(3));
 });
-
-// test("single content renders with image", () => {
-//   render(<Content content={contentList[0]} />);
-
-// });

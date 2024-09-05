@@ -1,12 +1,16 @@
 // container for prices
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectPrices } from "../../../state/pricesSlice";
 import { selectSales } from "../salesSlice";
+import { selectUser } from "../../../state/userSlice";
 import Price from "./Price";
+import { postPrices, putPrices, getPrices } from "../../../utils/api";
+
 const PricesList = () => {
   const prices = useSelector(selectPrices);
   const sales = useSelector(selectSales);
+  const user = useSelector(selectUser);
   // turn prices into react components
   const priceComponents = Object.keys(prices)
     .map((name, index) => {
@@ -27,8 +31,18 @@ const PricesList = () => {
       );
     })
     .filter((el) => el !== null);
-  // console.log("prices", prices);
-  // console.log(priceComponents);
+
+  // update prices in database
+  const persistPrices = async () => {
+    const existingPrices = await getPrices(user);
+    if (!existingPrices) postPrices(user, prices);
+    else putPrices(user, prices);
+  };
+  
+  useEffect(() => {
+    persistPrices();
+  }, [prices]);
+
   return (
     <section className="flex flex-col basis-2/5 overflow-scroll mr-1 pb-1 ">
       {" "}
