@@ -3,9 +3,9 @@ const Prices = require("../database/models/pricesModel");
 const pricesController = {
   getPrices: async (req, res, next) => {
     const username = req.query.user;
-    console.log("username in controller:  ", username);
+
     const prices = await Prices.findOne({ username: username });
-    console.log("prices in controller:  ", prices);
+
     res.locals.prices = prices;
     return next();
   },
