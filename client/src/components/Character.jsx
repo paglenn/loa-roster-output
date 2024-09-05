@@ -51,13 +51,13 @@ const Character = ({
           restedOnly={restedOnly}
           handleClick={(e) => handleRestedUpdate(e, character)}
         />
-        <figure className="basis-1/12 grow-0 self-center">
+        {/* <figure className="basis-1/12 grow-0 self-center">
           <img
             className="bg-black rounded"
             alt={`${classLower} class icon`}
             src={icons[classLower]}
           />
-        </figure>
+        </figure> */}
       </header>
 
       {/* Form to update item level  */}

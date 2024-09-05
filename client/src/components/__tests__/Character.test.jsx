@@ -67,13 +67,12 @@ describe("Character card components", () => {
     // screen.debug();
   });
 
-  it("renders images for class", async () => {
+  it("renders image for class", async () => {
     act(() => {
       render(reduxWrap(<Character character={testChar} />));
     });
-    expect(screen.getByAltText(/class icon/)).toBeInTheDocument();
+    // expect(screen.getByAltText(/class icon/)).toBeInTheDocument();
     expect(await screen.findByAltText(/class image/)).toBeInTheDocument();
-    
   });
 
   it("renders amounts for character properties", async () => {
