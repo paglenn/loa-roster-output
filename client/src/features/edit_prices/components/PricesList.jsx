@@ -5,7 +5,8 @@ import { selectPrices } from "../../../state/pricesSlice";
 import { selectSales } from "../salesSlice";
 import { selectUser } from "../../../state/userSlice";
 import Price from "./Price";
-import { putPrices } from "../../../utils/api";
+import { postPrices, putPrices, getPrices } from "../../../utils/api";
+
 const PricesList = () => {
   const prices = useSelector(selectPrices);
   const sales = useSelector(selectSales);
@@ -30,10 +31,18 @@ const PricesList = () => {
       );
     })
     .filter((el) => el !== null);
+
+  // update prices in database
+  const persistPrices = async () => {
+    const existingPrices = await getPrices(user);
+    if (!existingPrices) postPrices(user, prices);
+    else putPrices(user, prices);
+  };
   
-    useEffect(() => {
-      putPrices(user,prices);
-    },[prices]);
+  useEffect(() => {
+    persistPrices();
+  }, [prices]);
+
   return (
     <section className="flex flex-col basis-2/5 overflow-scroll mr-1 pb-1 ">
       {" "}

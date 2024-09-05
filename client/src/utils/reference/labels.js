@@ -32,14 +32,14 @@ export const resourceTypes = [
 export const resourceDisplayNames = {
   gems: "Gem (Level 7)",
   radiant_honor_leapstone: "Radiant Honor Leapstone",
-  refined_obliteration_stone: "Refined Obliteration Stones (10) ",
-  refined_protection_stone: "Refined Protection Stones (10) ",
+  refined_obliteration_stone: "Refined Obliteration Stones (10)",
+  refined_protection_stone: "Refined Protection Stones (10)",
   marvelous_honor_leapstone: "Marvelous Honor Leapstone",
-  obliteration_stone: "Obliteration Stone (10) ",
-  protection_stone: "Protection Stone (10) ",
-  greater_honor_leapstone: " Greater Honor Leapstone",
-  crystallized_destruction_stone: "Crystallized Destruction Stone (10) ",
-  crystallized_guardian_stone: " Crystallized Guardian Stone (10) ",
+  obliteration_stone: "Obliteration Stone (10)",
+  protection_stone: "Protection Stone (10)",
+  greater_honor_leapstone: "Greater Honor Leapstone",
+  crystallized_destruction_stone: "Crystallized Destruction Stone (10)",
+  crystallized_guardian_stone: "Crystallized Guardian Stone (10)",
 };
 export const highestSubtypes = {
   leapstones: "radiant_honor_leapstone",

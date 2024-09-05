@@ -7,8 +7,16 @@ export default ({ character }) => {
   const { ilvl, goldContents } = character;
   // available content
   const [content, setContent] = useState([]);
-  useEffect(() => getContent(ilvl, setContent), []);
-  
+  const getContentOptions = async () => {
+    const contentOptionsList = await getContent(ilvl);
+    console.log(contentOptionsList);
+    setContent(contentOptionsList);
+  };
+
+  useEffect(() => {
+    getContentOptions();
+  }, []);
+
   const contentList = [...content]
     .sort((a, b) => b.ilvl - a.ilvl)
     .map((el, index) => {

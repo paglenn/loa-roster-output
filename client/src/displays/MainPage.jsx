@@ -21,7 +21,7 @@ import { selectRoster, update_roster } from "../state/rosterSlice.js";
 
 import { selectGoldEarners, setGoldEarners } from "../state/goldEarnerSlice.js";
 import { update_prices } from "../state/pricesSlice.js";
-import { transformPrices } from "../utils/reference/prices.js";
+
 // this needs to handle state to pass down  the roster.
 
 const MainPage = () => {
