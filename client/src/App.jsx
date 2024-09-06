@@ -4,13 +4,15 @@ import MainPage from "./displays/MainPage";
 import { Login, Signup } from "./features/auth";
 import Header from "./components/Header";
 import PricesPage from "./displays/PricesPage";
-
+import PricesService from "./services/PricesService";
 import { updatePrices } from "./utils/reference";
 import { update_prices } from "./state/pricesSlice";
 import { useDispatch } from "react-redux";
 const App = () => {
   const dispatch = useDispatch();
-  // on mount, try to automatically log in the user
+  const pricesService = new PricesService();
+
+  // on mount, update prices
   useEffect(() => {
     updatePrices().then((prices) => dispatch(update_prices(prices)));
   }, []);
@@ -25,9 +27,15 @@ const App = () => {
             <Route path="/" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             {/* Main Application Page */}
-            <Route path="/app" element={<MainPage />} />
+            <Route
+              path="/app"
+              element={<MainPage pricesService={pricesService} />}
+            />
             {/* Page for price edits  */}
-            <Route path="/prices" element={<PricesPage />} />
+            <Route
+              path="/prices"
+              element={<PricesPage pricesService={pricesService} />}
+            />
           </Routes>
         </BrowserRouter>
       </div>

@@ -5,9 +5,8 @@ import { selectPrices } from "../../../state/pricesSlice";
 import { selectSales } from "../salesSlice";
 import { selectUser } from "../../../state/userSlice";
 import Price from "./Price";
-import { PricesService } from "../../../services";
 
-const PricesList = () => {
+const PricesList = ({ pricesService }) => {
   const prices = useSelector(selectPrices);
   const sales = useSelector(selectSales);
   const user = useSelector(selectUser);
@@ -34,9 +33,9 @@ const PricesList = () => {
 
   // update prices in database
   const persistPrices = async () => {
-    const existingPrices = await PricesService.GetAll(user);
-    if (!existingPrices) PricesService.Create(user, prices);
-    else PricesService.Update(user, prices);
+    const existingUserPrices = await pricesService.GetAll(user);
+    if (!existingUserPrices) pricesService.Create(user, prices);
+    else pricesService.Update(user, prices);
   };
 
   useEffect(() => {

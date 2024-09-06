@@ -19,11 +19,12 @@ import { update_prices } from "../state/pricesSlice.js";
 
 // this needs to handle state to pass down  the roster.
 
-const MainPage = () => {
+const MainPage = ({ pricesService }) => {
   // protection: if no user , navigate to root
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const characterService = new CharacterService();
+
   const user = useSelector(selectUser);
   useEffect(() => {
     //protect route
@@ -86,7 +87,7 @@ const MainPage = () => {
     UpdateRoster();
     // get prices from api/database if saved for user
     // if prices are not saved for user, getPrices will return null
-    PricesService.GetAll(user).then((prices) => {
+    pricesService.GetAll(user).then((prices) => {
       if (prices) dispatch(update_prices(prices));
     });
   }, [workingChar]);

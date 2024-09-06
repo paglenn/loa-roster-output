@@ -9,13 +9,17 @@ import "@testing-library/jest-dom";
 import MainPage from "../MainPage";
 import { Provider } from "react-redux";
 import store from "../../state/store";
+import { PricesService } from "../../services";
 describe("Main Page", () => {
   it("renders Total Display", async () => {
     render(
       <Provider store={store}>
         <BrowserRouter basename="">
           <Routes>
-            <Route path="/" element={<MainPage />} />
+            <Route
+              path="/"
+              element={<MainPage pricesService={new PricesService()} />}
+            />
           </Routes>
         </BrowserRouter>
       </Provider>
