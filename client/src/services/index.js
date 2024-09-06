@@ -1,3 +1,3 @@
 import CharacterService from "./characterService";
-
-export { CharacterService };
+import PricesService from "./PricesService";
+export { CharacterService, PricesService };

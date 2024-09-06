@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import TotalsDisplay from "../components/TotalsDisplay.jsx";
 import Roster from "../components/RosterContainer.jsx";
 import CharacterInputDisplay from "../components/CharacterInputDisplay.jsx";
-import { CharacterService } from "../services";
+import { CharacterService, PricesService } from "../services";
 import { toggleRestedOnly } from "../features/rest_bonus";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCharacter, getPrices } from "../utils/api/index.js";
+
 import { useCharacter } from "../hooks/useCharacters.js";
 import { useNavigate } from "react-router-dom";
 
@@ -40,7 +40,7 @@ const MainPage = () => {
   // state for updated character
   const [workingChar, updateWorkingChar] = useState({});
   // ref hook for gold earner count - it does not need to trigger re-render
-  const goldEarners = useSelector(selectGoldEarners);
+  const numGoldEarners = useSelector(selectGoldEarners);
   const countGoldEarners = (n) => dispatch(setGoldEarners(n));
   const handleNewCharSubmit = async (event, characterInfo) => {
     event.preventDefault();
@@ -48,10 +48,10 @@ const MainPage = () => {
     // convert item level to number
     copyCharacter.ilvl = Number(copyCharacter.ilvl);
     // assert that destructuring of character info produces all necessary properties
-    const { name, ilvl, isGoldEarner, _class, restedOnly } = characterInfo;
+    //const { name, ilvl, isGoldEarner, _class, restedOnly } = characterInfo;
     const newCharacter = await characterService.create(
       copyCharacter,
-      goldEarners
+      numGoldEarners
     );
 
     if (newCharacter) {
@@ -65,7 +65,6 @@ const MainPage = () => {
     event.preventDefault();
     const ilvl = event.target[0].value;
     let characterInfo = { ...character, ilvl };
-    console.log(characterInfo);
     characterService
       .update({ ...characterInfo, itemLevelDidUpdate: true })
       .then((updatedChar) => updateWorkingChar(updatedChar));
@@ -87,7 +86,7 @@ const MainPage = () => {
     UpdateRoster();
     // get prices from api/database if saved for user
     // if prices are not saved for user, getPrices will return null
-    getPrices(user).then((prices) => {
+    PricesService.GetAll(user).then((prices) => {
       if (prices) dispatch(update_prices(prices));
     });
   }, [workingChar]);

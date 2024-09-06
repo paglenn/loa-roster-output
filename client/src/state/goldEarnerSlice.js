@@ -9,11 +9,12 @@ export const goldEarnersSlice = createSlice({
     decrement: (state) => {
       state.value -= 1;
     },
-    setGoldEarners: (state, payload) => {
-      state.value = payload;
+    setGoldEarners: (state, action) => {
+      state.value = action.payload;
     },
   },
 });
 export const selectGoldEarners = (state) => state.goldEarners.value;
-export const { increment, decrement , setGoldEarners} = goldEarnersSlice.actions;
+export const { increment, decrement, setGoldEarners } =
+  goldEarnersSlice.actions;
 export default goldEarnersSlice.reducer;

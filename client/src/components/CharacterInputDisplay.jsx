@@ -90,11 +90,12 @@ const CheckboxInput = ({ charPropVal, charPropName, handleChange }) => {
 };
 
 const ClassOption = ({ className }) => {
+  if (className === "") return <option value=""> -- Select Class-- </option>;
   return <option value={className}> {className} </option>;
 };
 
 const SelectInput = ({ charPropName, handleChange }) => {
-  const classOptions = classes.map((className, index) => (
+  const classOptions = ["", ...classes].map((className, index) => (
     <ClassOption key={index} className={className} />
   ));
   return (
@@ -105,7 +106,7 @@ const SelectInput = ({ charPropName, handleChange }) => {
         name={charPropName}
         onChange={(e) => handleChange(e, charPropName, e.target.value)}
       >
-        <option value=""> -- Select Class-- </option>
+        {/* <option value=""> -- Select Class-- </option> */}
         {classOptions}
       </select>
     </label>
