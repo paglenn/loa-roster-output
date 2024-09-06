@@ -8,6 +8,7 @@ const Roster = ({
   handleLevelUpdate,
   handleRestedUpdate,
   handleContentChange,
+  characterService,
 }) => {
   const characterCards = [];
 
@@ -20,6 +21,7 @@ const Roster = ({
       <Character
         key={index}
         character={character}
+        characterService={characterService}
         handleLevelUpdate={handleLevelUpdate}
         handleRestedUpdate={handleRestedUpdate}
         handleContentChange={handleContentChange}

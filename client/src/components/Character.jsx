@@ -20,6 +20,7 @@ import { selectUser } from "../state/userSlice";
 
 const Character = ({
   character,
+  characterService,
   handleLevelUpdate,
   handleRestedUpdate,
   handleContentChange,
@@ -35,7 +36,9 @@ const Character = ({
   const user = useSelector(selectUser);
 
   const refreshRoster = async () => {
-    getRoster(user).then((characters) => dispatch(update_roster(characters)));
+    characterService
+      .GetAll(user)
+      .then((characters) => dispatch(update_roster(characters)));
   };
 
   return (
