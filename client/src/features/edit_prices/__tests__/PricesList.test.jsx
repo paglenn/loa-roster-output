@@ -7,15 +7,19 @@ import { test, expect, describe } from "@jest/globals";
 import { render, screen } from "@testing-library/react";
 import reduxWrap from "../../../../__mocks__/reduxWrap";
 
-import { prices, resourceDisplayNames } from "../../../utils/reference";
+import { resourceDisplayNames } from "../../../utils/reference";
 import PricesList from "../components/PricesList";
-import * as api from "../../../utils/api";
-jest.mock("../../../utils/api");
+
+import { PricesService } from "../../../services";
 
 describe("PricesList", () => {
   test("renders with prices for each item", () => {
-    render(reduxWrap(<PricesList />));
-
+    const pricesService = new PricesService();
+    const mockGetPrices = jest.spyOn(pricesService, "GetAll");
+    mockGetPrices.mockResolvedValue(null);
+    const mockCreatePrices = jest.spyOn(pricesService, "Create");
+    //mockCreatePrices.mockResolvedValue(undefined);
+    render(reduxWrap(<PricesList pricesService={pricesService} />));
     Object.keys(mockPriceObj).forEach((name) => {
       if (
         name !== "redStones" &&

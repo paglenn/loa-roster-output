@@ -13,7 +13,7 @@ import SummaryChartContainer from "../components/SummaryChartContainer";
 // stateful prices object
 // list of prices for each item
 //
-const PricesPage = () => {
+const PricesPage = ({ pricesService }) => {
   const navigate = useNavigate();
 
   const user = useSelector(selectUser);
@@ -32,7 +32,7 @@ const PricesPage = () => {
 
       {/* contain prices list and breakdown flex-row  */}
       <section className="flex flex-col lg:flex-row justify-between basis-1/2 bg-transparent overflow-y-scroll ">
-        <PricesContainer />
+        <PricesContainer pricesService={pricesService} />
         <BusContainer />
       </section>
     </section>
