@@ -20,6 +20,9 @@ const priceSchema = new Schema({
   refined_protection_stone: { type: Number },
   refined_obliteration_stone: { type: Number },
   radiant_honor_leapstone: { type: Number },
+  destiny_leapstone: { type: Number },
+  destiny_guardian_stone: { type: Number },
+  destiny_destruction_stone: { type: Number },
 });
 
 module.exports = mongoose.model("Prices", priceSchema);

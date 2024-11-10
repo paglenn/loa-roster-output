@@ -30,9 +30,9 @@ const genResources = async ({
   const chaosDungeon = await findBestContent(ilvl, "chaos_dungeons");
   const guardianRaid = await findBestContent(ilvl, "guardian_raids");
   const cube = await findBestContent(ilvl, "cubes");
-  const isSavingCubes = ilvl >= 1630 && new Date().getMonth > 8;
+  const isSavingCubes = false; //ilvl >= 1630 && new Date().getMonth > 8;
   const cubesPerWeek = isSavingCubes ? 0 : 1; // restedOnly ? 1 : 2;
-
+  const weeklyChaosQty = chaosDungeon.ilvl >= 1640 ? 7 : 14;
   if (itemLevelDidUpdate || !goldContents) {
     goldContents = isGoldEarner
       ? await findBestContent(ilvl, "gold_earning_content")
@@ -40,13 +40,15 @@ const genResources = async ({
   }
 
   let silver =
-    chaosDungeon.silver * 14 * restedModifier + cube.silver * cubesPerWeek;
+    chaosDungeon.silver * weeklyChaosQty * restedModifier +
+    cube.silver * cubesPerWeek;
   // factor in lopang?
   const lopangSilver = 2 * 34500 + 39000;
   silver += isGoldEarner ? 0 : (lopangSilver - 4000) * restedModifier * 7;
 
   const gems =
-    restedModifier * (chaosDungeon.gems * 14) + cube.gems * cubesPerWeek;
+    restedModifier * (chaosDungeon.gems * weeklyChaosQty) +
+    cube.gems * cubesPerWeek;
 
   // generate resource object
   const resourceObject = {
@@ -58,15 +60,15 @@ const genResources = async ({
     blueStones: {
       type: chaosDungeon.blue_stones.type,
       qty:
-        (chaosDungeon.blue_stones.qty + guardianRaid.blue_stones.qty) *
-        14 *
+        (chaosDungeon.blue_stones.qty * weeklyChaosQty +
+          guardianRaid.blue_stones.qty * 14) *
         restedModifier,
     },
     redStones: {
       type: chaosDungeon.red_stones.type,
       qty:
-        (chaosDungeon.red_stones.qty + guardianRaid.red_stones.qty) *
-        14 *
+        (chaosDungeon.red_stones.qty * weeklyChaosQty +
+          guardianRaid.red_stones.qty * 14) *
         restedModifier,
     },
     gems: gems,
