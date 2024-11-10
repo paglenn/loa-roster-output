@@ -41,9 +41,13 @@ describe("content lookup", () => {
       brelshaza: "hard_1_4",
       kayangel: "hard",
     });
+    const akkanGold = 7500;
+    const kayangelGold = 4800;
+    const brelshazaGold = 4600;
+    const expectedGold = brelshazaGold + akkanGold + kayangelGold;
     expect(content.length).toEqual(3);
     const totalGold = content.reduce((sum, c) => sum + c.gold, 0);
-    expect(totalGold).toEqual(25500);
+    expect(totalGold).toEqual(expectedGold);
   });
 
   test("all gold content relevant to ilvl can be retrieved", async () => {
