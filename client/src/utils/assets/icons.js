@@ -11,6 +11,9 @@ import greaterHonorLeapstone from "../../assets/icons/greater_honor_leapstone.pn
 import radiantHonorLeapstone from "../../assets/icons/Radiant_Honor_Leapstone_icon.webp";
 import rObliterationStone from "../../assets/icons/Refined_Obliteration_Stone_icon.webp";
 import rProtectionStone from "../../assets/icons/Refined_Protection_Stone_icon.webp";
+import destinyDestructionStone from "../../assets/icons/destiny_destruction_stone.webp";
+import destinyGuardianStone from "../../assets/icons/destiny_guardian_stone.webp";
+import destinyLeapstone from "../../assets/icons/destiny_leapstone.webp";
 
 // class icon imports
 import aeromancer from "../../assets/class_icons/aeromancer.png";
@@ -50,6 +53,9 @@ export default {
   refined_protection_stone: rProtectionStone,
   refined_obliteration_stone: rObliterationStone,
   radiant_honor_leapstone: radiantHonorLeapstone,
+  destiny_destruction_stone: destinyDestructionStone,
+  destiny_guardian_stone: destinyGuardianStone,
+  destiny_leapstone: destinyLeapstone,
 
   /// class icons
   aeromancer: aeromancer,

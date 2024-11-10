@@ -2,7 +2,7 @@ import { getCharValue } from "../../../utils/sums";
 
 // for each character in roster, get gold value and add to ilvl bracket
 
-const cutLines = [1250, 1490, 1540, 1580, 1610, 1620, 1630];
+const cutLines = [1250, 1490, 1540, 1580, 1640];
 const getGoldValueByIlvl = (roster, prices, sales) => {
   const iLvlBrackets = cutLines.reduce((obj, ilvl) => {
     obj[ilvl] = 0;

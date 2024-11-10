@@ -1,24 +1,27 @@
-// import axios from "axios";
 const level7GemPrice = 8000;
-const radiantLeapstonePrice = 55;
-const refineObliterationStackPrice = 45;
-const refinedProtectionStackPrice = 5;
+const destinyGuardianStoneStackPrice = 15;
+const destinyDestructionStoneStackPrice = 20;
+const destinyLeapstonePrice = 25;
+
 const prices = {
   gold: 1,
   gems: level7GemPrice,
-  leapstones: radiantLeapstonePrice,
-  redStones: refineObliterationStackPrice,
-  blueStones: refinedProtectionStackPrice,
+  leapstones: destinyLeapstonePrice,
+  redStones: destinyDestructionStoneStackPrice,
+  blueStones: destinyGuardianStoneStackPrice,
   silver: 0,
   marvelous_honor_leapstone: 30,
-  greater_honor_leapstone: 9,
-  obliteration_stone: 7,
-  protection_stone: 1,
+  greater_honor_leapstone: destinyLeapstonePrice / 625,
+  obliteration_stone: destinyDestructionStoneStackPrice / 25,
+  protection_stone: destinyGuardianStoneStackPrice / 25,
   crystallized_guardian_stone: 1,
   crystallized_destruction_stone: 1,
-  refined_protection_stone: refinedProtectionStackPrice,
-  refined_obliteration_stone: refineObliterationStackPrice,
-  radiant_honor_leapstone: radiantLeapstonePrice,
+  refined_protection_stone: destinyGuardianStoneStackPrice / 5,
+  refined_obliteration_stone: destinyDestructionStoneStackPrice / 5,
+  radiant_honor_leapstone: destinyLeapstonePrice / 5,
+  destiny_leapstone: destinyLeapstonePrice,
+  destiny_destruction_stone: destinyDestructionStoneStackPrice,
+  destiny_guardian_stone: destinyGuardianStoneStackPrice,
 };
 
 const priceModifiers = {
@@ -37,6 +40,9 @@ const priceModifiers = {
   refined_protection_stone: 1 / 10,
   refined_obliteration_stone: 1 / 10,
   radiant_honor_leapstone: 1,
+  destiny_leapstone: 1,
+  destiny_destruction_stone: 1 / 10,
+  destiny_guardian_stone: 1 / 10,
 };
 
 Object.keys(prices).forEach((item) => (prices[item] *= priceModifiers[item]));
@@ -56,21 +62,6 @@ const transformPrices = (prices) => {
     obj[item] = prices[item] * priceModifiers[item];
     return obj;
   }, {});
-};
-
-const apiMap = {
-  marvelous_honor_leapstone: "marvelous-honor-leapstone-3",
-  greater_honor_leapstone: "great-honor-leapstone-2",
-  crystallized_guardian_stone: "crystallized-guardian-stone-0",
-  crystallized_destruction_stone: "crystallized-destruction-stone-0",
-  obliteration_stone: "obliteration-stone-1",
-  protection_stone: "protection-stone-1",
-  refined_obliteration_stone: "refined-obliteration-stone-0",
-  refined_protection_stone: "refined-protection-stone-0",
-  radiant_honor_leapstone: "radiant-honor-leapstone-3",
-  redStones: "refined-obliteration-stone-0",
-  blueStones: "refined-protection-stone-0",
-  leapstones: "radiant-honor-leapstone-3",
 };
 
 const updatePrices = async (region) => {

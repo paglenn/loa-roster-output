@@ -13,6 +13,9 @@ export const archetype = {
   greater_honor_leapstone: "leapstones",
   crystallized_destruction_stone: "redStones",
   crystallized_guardian_stone: "blueStones",
+  destiny_leapstone: "leapstones",
+  destiny_guardian_stone: "blueStones",
+  destiny_destruction_stone: "redStones",
 };
 export const resourceTypes = [
   "gold",
@@ -27,6 +30,9 @@ export const resourceTypes = [
   "greater_honor_leapstone",
   "crystallized_destruction_stone",
   "crystallized_guardian_stone",
+  "destiny_leapstone",
+  "destiny_guardian_stone",
+  "destiny_destruction_stone",
 ];
 
 export const resourceDisplayNames = {
@@ -40,11 +46,14 @@ export const resourceDisplayNames = {
   greater_honor_leapstone: "Greater Honor Leapstone",
   crystallized_destruction_stone: "Crystallized Destruction Stone (10)",
   crystallized_guardian_stone: "Crystallized Guardian Stone (10)",
+  destiny_leapstone: "Destiny Leapstone",
+  destiny_guardian_stone: "Destiny Guardian Stone (10)",
+  destiny_destruction_stone: "Destiny Destruction Stone (10)",
 };
 export const highestSubtypes = {
-  leapstones: "radiant_honor_leapstone",
-  redStones: "refined_obliteration_stones",
-  blueStones: "refined_protection_stones",
+  leapstones: "destiny_leapstone",
+  redStones: "destiny_destruction_stone",
+  blueStones: "destiny_guardian_stone",
 };
 
 export const charPropLabels = {

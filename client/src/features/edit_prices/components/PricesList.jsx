@@ -34,6 +34,7 @@ const PricesList = ({ pricesService }) => {
   // update prices in database
   const persistPrices = async () => {
     const existingUserPrices = await pricesService.GetAll(user);
+    console.log("existing: ", existingUserPrices);
     if (!existingUserPrices) pricesService.Create(user, prices);
     else pricesService.Update(user, prices);
   };
