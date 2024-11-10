@@ -1,8 +1,9 @@
 import { getPrices, postPrices, putPrices } from "../utils/api";
+import _ from "lodash";
 class PricesService {
   async GetAll(user) {
     const prices = await getPrices(user);
-    return prices;
+    return _.isEmpty(prices) ? null : prices;
   }
 
   async Update(user, updates) {

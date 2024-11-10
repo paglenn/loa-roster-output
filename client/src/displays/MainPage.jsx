@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import TotalsDisplay from "../components/TotalsDisplay.jsx";
 import Roster from "../components/RosterContainer.jsx";
 import CharacterInputDisplay from "../components/CharacterInputDisplay.jsx";
-import { CharacterService, PricesService } from "../services";
+import { CharacterService } from "../services";
 import { toggleRestedOnly } from "../features/rest_bonus";
 import { useDispatch, useSelector } from "react-redux";
 
