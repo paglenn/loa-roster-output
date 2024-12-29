@@ -76,6 +76,7 @@ async function findBestContent(ilvl, contentType) {
         ilvl >= content.ilvl ? content : best
       );
     } else if (contentType === "gold_earning_content") {
+      contentList.sort((a, b) => a.gold - b.gold);
       // gold earning content is diff because it should be an array of 3 items
       const bestContent = [];
       for (let i = contentList.length - 1; i >= 0; i--) {
@@ -97,12 +98,4 @@ async function findBestContent(ilvl, contentType) {
   }
 }
 
-// async function listDatabases(client) {
-//   let databasesList = await client.db().admin().listDatabases();
-//   console.log("Databases: ")
-
-//   databasesList.databases.forEach(db => console.log(`- ${db.name}`));
-// }
-// const ilvl = 1560 ;
-// findBestContent(ilvl, 'gold_earning_content').then(result => console.log(result));
 module.exports = { findBestContent, selectGoldContent, getGoldContent };

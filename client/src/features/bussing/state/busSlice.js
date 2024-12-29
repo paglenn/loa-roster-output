@@ -12,14 +12,16 @@ const raids = [
   "Behemoth",
   "Aegir",
 ];
+
 const storedBuses = JSON.parse(localStorage.getItem("buses"));
 
-const buses =
-  storedBuses ??
-  raids.reduce((obj, raid) => {
+const buses = {
+  ...raids.reduce((obj, raid) => {
     obj[raid] = { price: 1000, num: 0 };
     return obj;
-  }, {});
+  }, {}),
+  ...storedBuses,
+};
 
 const busSlice = createSlice({
   name: "buses",
