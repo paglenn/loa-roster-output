@@ -31,7 +31,7 @@ const TotalsDisplay = ({ priceRedirect }) => {
       <Resource
         key={index}
         type={el}
-        qty={rosterResources[el]}
+        qty={rosterResources[el] + ((el == "gold") ? calcBusValue(buses) : 0)}
         imHeight={8}
         classProps="basis-1/6 shrink"
       />
