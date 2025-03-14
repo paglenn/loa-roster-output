@@ -3,7 +3,7 @@ const raids = [
   "Valtan",
   "Vykas",
   "Kakul-Saydon",
-  "Brelshaza",
+  "Brelshaza (Legion Raid)",
   "Kayangel",
   "Akkan",
   "Voldis",
@@ -11,6 +11,8 @@ const raids = [
   "Echidna",
   "Behemoth",
   "Aegir",
+  "Brelshaza (Kazeros Raid)",
+  "Mordrum",
 ];
 
 const storedBuses = JSON.parse(localStorage.getItem("buses"));
