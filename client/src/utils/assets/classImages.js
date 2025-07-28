@@ -20,6 +20,7 @@ import soulfist from "../../assets/class_images/soulfist.png";
 import scrapper from "../../assets/class_images/scrapper.png";
 import wardancer from "../../assets/class_images/wardancer.png";
 import souleater from "../../assets/class_images/souleater.png";
+import shadowhunter from "../../assets/class_images/shadowhunter.png";
 
 export default {
   aeromancer: aeromancer,
@@ -51,4 +52,5 @@ export default {
   soulfist: soulfist,
   wardancer: wardancer,
   warlord: gunlancer,
+  shadowhunter: shadowhunter,
 };

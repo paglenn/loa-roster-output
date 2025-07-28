@@ -12,6 +12,6 @@ import Bus from "../components/Bus";
 describe("Bus price and quantity edits", () => {
   test("bus price edit calls dispatcher ", () => {
     // arrange
-    render(reduxWrap(<Bus name={"Valtan"} price={1000} num={0} />));
+    render(reduxWrap(<Bus name={"Brelshaza"} price={1000} num={0} />));
   });
 });

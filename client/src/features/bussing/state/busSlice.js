@@ -1,18 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 const raids = [
-  "Valtan",
-  "Vykas",
-  "Kakul-Saydon",
-  "Brelshaza (Legion Raid)",
-  "Kayangel",
-  "Akkan",
-  "Voldis",
   "Thaemine",
   "Echidna",
   "Behemoth",
   "Aegir",
-  "Brelshaza (Kazeros Raid)",
-  "Mordrum",
+  "Brelshaza",
+  "Mordum",
 ];
 
 const storedBuses = JSON.parse(localStorage.getItem("buses"));

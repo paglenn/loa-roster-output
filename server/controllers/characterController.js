@@ -26,7 +26,7 @@ const genResources = async ({
   itemLevelDidUpdate,
 }) => {
   const restedModifier = restedOnly ? 2 / 3 : 1;
-
+  const isT4 = ilvl >= 1620;
   const chaosDungeon = await findBestContent(ilvl, "chaos_dungeons");
   const guardianRaid = await findBestContent(ilvl, "guardian_raids");
   const cube = await findBestContent(ilvl, "cubes");
@@ -47,8 +47,9 @@ const genResources = async ({
   silver += isGoldEarner ? 0 : (lopangSilver - 4000) * restedModifier * 7;
 
   const gems =
-    restedModifier * (chaosDungeon.gems * weeklyChaosQty) +
-    cube.gems * cubesPerWeek;
+    (restedModifier * (chaosDungeon.gems * weeklyChaosQty) +
+      cube.gems * cubesPerWeek) *
+    (isT4 ? 1 : 0.5);
 
   // generate resource object
   const resourceObject = {
