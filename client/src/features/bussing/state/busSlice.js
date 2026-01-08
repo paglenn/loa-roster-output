@@ -1,12 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-const raids = [
-  "Thaemine",
-  "Echidna",
-  "Behemoth",
-  "Aegir",
-  "Brelshaza",
-  "Mordum",
-];
+const raids = ["Aegir", "Brelshaza", "Mordum", "Act 4", "Kazeros"];
 
 const storedBuses = JSON.parse(localStorage.getItem("buses"));
 
